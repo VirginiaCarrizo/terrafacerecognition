@@ -10,7 +10,7 @@ import pickle
 from datetime import datetime
 import re
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', template_folder='templates')
 socketio = SocketIO(app)  # Inicializar Flask-SocketIO
 cuil_value = ""  # Variable global para almacenar el cuil
 
