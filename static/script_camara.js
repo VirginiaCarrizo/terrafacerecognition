@@ -1,4 +1,4 @@
-var socket = io.connect('http://127.0.0.1:5000');
+var socket = io.connect('http://10.0.3.234/terrarrhh');
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const captureButton = document.getElementById('capture');
