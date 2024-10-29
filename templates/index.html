@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Base de Datos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1><img src="{{ url_for('static', filename='logo.png') }}" alt="Icono" class="icono-header">TerraRRHH</h1>
+    </header>
+
+    <main>
+        <div class="button-container">
+            <button class="main-btn" id="btn-agregar">Agregar Registro</button>
+            <button class="main-btn" id="btn-buscar">Buscar Registro</button>
+            <button class="main-btn" id="btn-analytics">BI Analytics</button>
+        </div>
+    
+        <!-- Contenedor para el formulario -->
+        <div class="form-container hidden" id="form-container">
+            <span class="close-btn" id="close-form">X</span> <!-- Botón de cerrar -->
+            <h4>Agregar Nuevo Registro</h4>
+            <div class="input-group-grid">
+                <div class="input-group">
+                    <label for="legajo">Legajo:</label> <!-- Nuevo campo Legajo -->
+                    <input type="text" id="legajo" placeholder="Ingrese el legajo">
+                </div>
+                <div class="input-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" placeholder="Ingrese el nombre">
+                </div>
+                <div class="input-group">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" placeholder="Ingrese el apellido">
+                </div>
+                <div class="input-group">
+                    <label for="cuil">CUIL:</label>
+                    <input type="text" id="cuil" placeholder="Ingrese el CUIL">
+                </div>
+                <div class="input-group">
+                    <label for="empresa">Empresa:</label>
+                    <input type="text" id="empresa" placeholder="Ingrese la empresa">
+                </div>
+                <div class="input-group">
+                    <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+                    <input type="date" id="fecha-nacimiento" placeholder="Ingrese la fecha de nacimiento">
+                </div>
+                <div class="input-group full-width">
+                    <label for="rol">Rol:</label>
+                    <input type="text" id="rol" placeholder="Ingrese el rol">
+                </div>
+                <div class="input-group full-width">
+                    <label for="sector">Sector:</label>
+                    <input type="text" id="sector" placeholder="Ingrese el sector">
+                </div>
+                <div class="input-group">
+                    <label for="foto">Foto:</label>
+                    <label for="foto" class="custom-file-label">Seleccionar foto</label>
+                    <input type="file" id="foto" class="custom-file-input" style="display: none;">
+                </div>
+            </div>
+            <button class="btn" id="agregar-btn">Agregar</button>
+        </div>
+        <div id="spinner-container" class="spinner hidden">
+            <!-- Aquí va el diseño de tu spinner -->
+            <div class="spinner"></div>
+        </div>
+        <!-- Contenedor para mostrar los datos del registro encontrado -->
+        <div id="vista-registro-agregado" class="hidden">
+            <div class="form-container registro-detalles">
+                <span class="close-btn" id="close-agregado">X</span> <!-- Botón de cerrar -->
+                <div class="datos">
+                    <h4>Registro Agregado</h4>
+                    <p><strong>Legajo:</strong> <span id="agregado-legajo"></span></p>
+                    <p><strong>Nombre:</strong> <span id="agregado-nombre"></span></p>
+                    <p><strong>CUIL:</strong> <span id="agregado-cuil"></span></p>
+                    <p><strong>Fecha de nacimiento:</strong> <span id="agregado-fecha-nacimiento"></span></p>
+                    <p><strong>Empresa:</strong> <span id="agregado-empresa"></span></p>
+                    <p><strong>Rol:</strong> <span id="agregado-rol"></span></p>
+                    <p><strong>Sector:</strong> <span id="agregado-sector"></span></p>
+                </div>
+                <div class="foto">
+                    <img id="foto-agregado" src="" alt="Foto del registro" style="width: 150px; height: 150px;" />
+                </div>
+            </div>
+        </div> <!-- Este será el contenedor donde se mostrará el registro -->
+        <!-- Contenedor de búsqueda -->
+        <div id="buscar-registro" class="hidden">
+            <span class="close-btn" id="close-buscar">X</span>
+            <h4>Buscar Registro</h4>
+            <div class="input-group">
+                <label for="buscar-nombre">Buscar por Nombre:</label>
+                <input type="text" id="buscar-nombre" placeholder="Ingrese el nombre">
+            </div>
+            <div id="sugerencias" class="hidden"></div> <!-- Agregamos el contenedor de sugerencias aquí -->
+            <button class="btn" id="buscar">Buscar</button>
+        </div>
+        
+        <!-- Contenedor para mostrar los datos del registro encontrado -->
+        <div id="resultado-registro" class="hidden">
+            <div class="form-container registro-detalles">
+                <div class="datos">
+                    <h4>Registro Encontrado</h4>
+                    <p><strong>Legajo:</strong> <input type="text" id="modificar-legajo"></p>
+                    <p><strong>Nombre:</strong> <input type="text" id="modificar-nombre"></p>
+                    <p><strong>CUIL:</strong> <input type="text" id="modificar-cuil" readonly></p>
+                    <p><strong>Fecha de nacimiento:</strong> <input type="date" id="modificar-fecha-nacimiento"></p>
+                    <p><strong>Empresa:</strong> <input type="text" id="modificar-empresa"></p>
+                    <p><strong>Rol:</strong> <input type="text" id="modificar-rol"></p>
+                    <p><strong>Sector:</strong> <input type="text" id="modificar-sector"></p>
+                    <button id="modificar-registro" class="btn">Modificar</button>
+                    <button id="eliminar-registro" class="btn btn-danger">Eliminar</button>
+                    <button id="volver-buscar" class="btn">Volver a Buscar</button>
+                </div>
+                <div class="foto">
+                    <img id="foto-busqueda" src="" alt="Foto del registro" style="width: 150px; height: 150px;" />
+                </div>
+            </div>
+        </div> <!-- Este será el contenedor donde se mostrará el registro -->
+
+        <!-- Contenedor para mostrar registros -->
+        <div id="lista-registros" class="hidden"></div>
+    </main>
+    
+    <footer>
+        <p>© 2024 Gestión de Base de Datos</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
