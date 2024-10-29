@@ -19,36 +19,6 @@ document.getElementById('btn-buscar').addEventListener('click', function() {
     buttonContainer.classList.add('hidden');  // Ocultar los botones principales
 });
 
-// let timeout = null;
-// document.getElementById('buscar-nombre').addEventListener('input', function() {
-//     const searchTerm = this.value.toLowerCase().trim();  // Convertimos el valor a minúsculas
-//     const sugerencias = document.getElementById('sugerencias');
-    
-//     // Ajustar el ancho del contenedor de sugerencias al ancho del input
-//     sugerencias.style.width = this.offsetWidth + 'px';
-//     clearTimeout(timeout);  // Limpiar el timeout anterior
-//     timeout = setTimeout(() => {
-//     if (searchTerm.length >= 2) {  // Verificamos si hay texto después de eliminar espacios en blanco
-//         fetch('/terrarrhh/buscar_registro', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({ search_term: searchTerm })
-//         })
-//         .then(response => response.json())
-//         .then(data => {
-//             mostrarSugerencias(data);  // Mostramos las sugerencias
-//         })
-//         .catch(error => {
-//             console.error('Error:', error);
-//         });
-//     } else {
-//         limpiarSugerencias();  // Limpiar las sugerencias si no hay texto
-//     }
-//     }, 300);
-// });
-
 // Función para mostrar las sugerencias
 function mostrarSugerencias(registros) {
     const sugerencias = document.getElementById('sugerencias');
