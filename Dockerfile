@@ -30,11 +30,10 @@ WORKDIR /app
 
 # Instalamos las dependencias del sistema
 RUN apt-get update && apt-get install -y \
+    cmake \
+    libgl1-mesa-glx \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-# Etapa 2: Instalación de dependencias de Python
-FROM base AS builder
 
 # Copiamos el archivo de requerimientos
 COPY requirements.txt .
@@ -42,14 +41,11 @@ COPY requirements.txt .
 # Instalamos las dependencias de Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Etapa final: Construcción de la imagen final
-FROM base
-
-# Copiamos las dependencias de Python desde la etapa de construcción
-COPY --from=builder /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
-
 # Copiamos el resto de los archivos de la aplicación
 COPY . .
+
+# Exponemos el puerto en el contenedor (ajústalo al puerto que espera Nginx, por ejemplo, 8081)
+EXPOSE 8081
 
 # Definimos el comando de inicio de la aplicación
 CMD ["python", "app.py"]
