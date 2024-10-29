@@ -22,7 +22,7 @@ firebase_admin.initialize_app(cred, {
 })
 bucket = storage.bucket()
 
-@app.route('/')
+@app.route('/terrarrhh')
 def index():
     return render_template('index.html')
 
