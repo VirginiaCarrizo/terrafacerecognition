@@ -1,0 +1,7 @@
+services:
+  rrhh_proyecto:
+    container_name: rrhh_proyecto
+    build:
+      context: .  # Se asume que el Dockerfile está en la carpeta del segundo proyecto
+    ports:
+      - "8080:80"  # Ajusta el puerto si es necesario
