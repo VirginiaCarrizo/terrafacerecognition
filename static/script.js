@@ -18,35 +18,35 @@ document.getElementById('btn-buscar').addEventListener('click', function() {
     buttonContainer.classList.add('hidden');  // Ocultar los botones principales
 });
 
-let timeout = null;
-document.getElementById('buscar-nombre').addEventListener('input', function() {
-    const searchTerm = this.value.toLowerCase().trim();  // Convertimos el valor a minúsculas
-    const sugerencias = document.getElementById('sugerencias');
+// let timeout = null;
+// document.getElementById('buscar-nombre').addEventListener('input', function() {
+//     const searchTerm = this.value.toLowerCase().trim();  // Convertimos el valor a minúsculas
+//     const sugerencias = document.getElementById('sugerencias');
     
-    // Ajustar el ancho del contenedor de sugerencias al ancho del input
-    sugerencias.style.width = this.offsetWidth + 'px';
-    clearTimeout(timeout);  // Limpiar el timeout anterior
-    timeout = setTimeout(() => {
-    if (searchTerm.length >= 2) {  // Verificamos si hay texto después de eliminar espacios en blanco
-        fetch('/buscar_registro', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ search_term: searchTerm })
-        })
-        .then(response => response.json())
-        .then(data => {
-            mostrarSugerencias(data);  // Mostramos las sugerencias
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    } else {
-        limpiarSugerencias();  // Limpiar las sugerencias si no hay texto
-    }
-    }, 300);
-});
+//     // Ajustar el ancho del contenedor de sugerencias al ancho del input
+//     sugerencias.style.width = this.offsetWidth + 'px';
+//     clearTimeout(timeout);  // Limpiar el timeout anterior
+//     timeout = setTimeout(() => {
+//     if (searchTerm.length >= 2) {  // Verificamos si hay texto después de eliminar espacios en blanco
+//         fetch('/terrarrhh/buscar_registro', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({ search_term: searchTerm })
+//         })
+//         .then(response => response.json())
+//         .then(data => {
+//             mostrarSugerencias(data);  // Mostramos las sugerencias
+//         })
+//         .catch(error => {
+//             console.error('Error:', error);
+//         });
+//     } else {
+//         limpiarSugerencias();  // Limpiar las sugerencias si no hay texto
+//     }
+//     }, 300);
+// });
 
 // Función para mostrar las sugerencias
 function mostrarSugerencias(registros) {
@@ -95,7 +95,7 @@ document.getElementById('buscar').addEventListener('click', function() {
     const searchTerm = document.getElementById('buscar-nombre').value.toLowerCase();  // Obtenemos el valor del input
 
     if (searchTerm) {
-        fetch('/buscar_registro', {
+        fetch('/terrarrhh/buscar_registro', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -240,7 +240,7 @@ function modificarRegistro() {
 // Función para eliminar un registro utilizando la key
 function eliminarRegistro() {
     const cuil = document.getElementById('modificar-cuil').value;
-    fetch('/eliminar_registro', {
+    fetch('/terrarrhh/eliminar_registro', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -327,7 +327,7 @@ document.getElementById('agregar-btn').addEventListener('click', function() {
         };
         reader.readAsDataURL(foto); // Convertir la imagen a base64
 
-        fetch('/agregar_registro', {
+        fetch('/terrarrhh/agregar_registro', {
             method: 'POST',
             body: formData
         })
