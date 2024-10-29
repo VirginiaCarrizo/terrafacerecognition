@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Reconocimiento facial</title>
+        <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script> <!-- Cliente Socket.IO -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles_camara.css') }}"> <!-- Enlace al archivo de estilos -->
+    </head>
+    <body>
+
+        <header>
+            <h1>Reconocimiento facial</h1>
+        </header>
+
+        <main>
+            <div class="form-container">
+                <div class="camera-container">
+                    <video id="video" width="640" height="480" autoplay></video>
+                    <button id="capture">Capturar</button>
+                    <!-- Canvas para mostrar la imagen capturada -->
+                    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            © 2024, Mi Aplicación
+        </footer>
+
+        <script src="{{ url_for('static', filename='script_camara.js') }}"></script> <!-- Enlace al archivo de JavaScript -->
+    </body>
+</html>
