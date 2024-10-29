@@ -31,7 +31,7 @@ def handle_connect():
     print("Cliente conectado")
 
 # Ruta para agregar un registro a Firebase
-@app.route('/agregar_registro', methods=['POST'])
+@app.route('/terrarrhh/agregar_registro', methods=['POST'])
 def agregar_registro():
     try:
         data = request.form  # Mantén request.form, ya que estamos usando FormData
@@ -70,7 +70,7 @@ def agregar_registro():
         print(f"Error al agregar registro: {str(e)}")
         return jsonify({'status': 'error', 'message': 'Ocurrió un error en el servidor'}), 500
 
-@app.route('/buscar_registro', methods=['POST'])
+@app.route('/terrarrhh/buscar_registro', methods=['POST'])
 def buscar_registro():
     try:
         search_term = request.json.get('search_term', '').lower().strip()  # Obtenemos el término de búsqueda en minúsculas
@@ -116,7 +116,7 @@ def buscar_registro():
         return jsonify({'error': 'Ocurrió un error en el servidor'}), 500
     
 # Ruta para modificar un registro existente en Firebase
-@app.route('/modificar_registro/<cuil>', methods=['POST'])
+@app.route('/terrarrhh/modificar_registro/<cuil>', methods=['POST'])
 def modificar_registro(cuil):
     data = request.json
     ref = db.reference(f'Employees/{cuil}')  # Usamos el legajo como identificador
@@ -133,7 +133,7 @@ def modificar_registro(cuil):
 
     return jsonify({'status': 'success', 'message': 'Registro modificado correctamente'})
 
-@app.route('/eliminar_registro', methods=['POST'])
+@app.route('/terrarrhh/eliminar_registro', methods=['POST'])
 def eliminar_registro():
     try:
         data = request.get_json()  # Obtener el JSON enviado desde el cliente
