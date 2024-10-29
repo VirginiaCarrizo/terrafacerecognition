@@ -1,12 +1,13 @@
-// Función para mostrar el formulario de agregar registro y ocultar los botones
-document.getElementById('btn-agregar').addEventListener('click', function() {
-    const formularioRegistro = document.getElementById('form-container');
-    const buttonContainer = document.querySelector('.button-container');
+document.addEventListener("DOMContentLoaded", function() {
+    // Función para mostrar el formulario de agregar registro y ocultar los botones
+    document.getElementById('btn-agregar').addEventListener('click', function() {
+        const formularioRegistro = document.getElementById('form-container');
+        const buttonContainer = document.querySelector('.button-container');
 
-    formularioRegistro.classList.remove('hidden');  // Mostrar el contenedor del formulario
-    buttonContainer.classList.add('hidden');  // Ocultar los botones
+        formularioRegistro.classList.remove('hidden');  // Mostrar el contenedor del formulario
+        buttonContainer.classList.add('hidden');  // Ocultar los botones
+    });
 });
-
 
 
 // Mostrar el campo de búsqueda al presionar "Buscar Registro"
