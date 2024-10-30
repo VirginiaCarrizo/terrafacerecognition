@@ -1,8 +1,6 @@
 services:
   rrhh_proyecto:
     container_name: rrhh_proyecto
-    build:
-      context: .  # Se asume que el Dockerfile está en la carpeta del segundo proyecto
     ports:
       - "8082:8082"  # Ajusta el puerto si es necesario
     command: gunicorn --worker-class eventlet -w 1 -b 0.0.0.0:8082 app:app

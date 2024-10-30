@@ -45,7 +45,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Exponemos el puerto en el contenedor (ajústalo al puerto que espera Nginx, por ejemplo, 8081)
-EXPOSE 8081
+EXPOSE 8082
 
 # Definimos el comando de inicio de la aplicación
 CMD ["python", "app.py"]
