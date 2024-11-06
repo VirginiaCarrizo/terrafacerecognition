@@ -4,6 +4,7 @@ import pickle
 import os
 import firebase_admin
 from firebase_admin import credentials
+from firebase_admin import db
 from firebase_admin import  storage
 
 cred = credentials.Certificate("serviceAccountKey.json")
@@ -14,7 +15,7 @@ firebase_admin.initialize_app(cred, {
 
 
 # Importing student images
-folderPath = 'fotos_empleados/para_usar/para_usar'
+folderPath = r'C:\Users\virginia.carrizo\Desktop\face_recognition\generalfood-docker\fotos_empleados\acomodadas/'
 pathList = os.listdir(folderPath)
 
 imgList = []
@@ -22,9 +23,8 @@ studentIds = []
 
 # Bucle para cargar imágenes y generar encodings
 for path in pathList:
-    img = cv2.imread(os.path.join(folderPath, path))
+    img = cv2.imread(folderPath+path)
     img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    
     try:
         # Intentar generar el encoding de la imagen
         encode = face_recognition.face_encodings(img_rgb)[0]

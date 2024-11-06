@@ -9,8 +9,18 @@ import face_recognition
 import pickle
 from datetime import datetime
 import re
+import pyautogui
+import time
+import webbrowser
+# from tkinter import Tk, messagebox
+from pynput import keyboard
+import logging
 
-app = Flask(__name__, static_folder='static', template_folder='templates')
+# Configuración básica para el logger
+logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
+
+
+app = Flask(__name__)
 socketio = SocketIO(app)  # Inicializar Flask-SocketIO
 cuil_value = ""  # Variable global para almacenar el cuil
 
@@ -28,10 +38,10 @@ def index():
 
 @socketio.on('connect')
 def handle_connect():
-    print("Cliente conectado")
+    logging.info("Cliente conectado")
 
 # Ruta para agregar un registro a Firebase
-@app.route('/terrarrhh/agregar_registro', methods=['POST'])
+@app.route('/agregar_registro', methods=['POST'])
 def agregar_registro():
     try:
         data = request.form  # Mantén request.form, ya que estamos usando FormData
@@ -67,10 +77,10 @@ def agregar_registro():
         return jsonify({'status': 'success', 'message': 'Registro agregado correctamente', 'registro': data_dict, 'cuil': data['cuil']})
 
     except Exception as e:
-        print(f"Error al agregar registro: {str(e)}")
+        logging.info(f"Error al agregar registro: {str(e)}")
         return jsonify({'status': 'error', 'message': 'Ocurrió un error en el servidor'}), 500
 
-@app.route('/terrarrhh/buscar_registro', methods=['POST'])
+@app.route('/buscar_registro', methods=['POST'])
 def buscar_registro():
     try:
         search_term = request.json.get('search_term', '').lower().strip()  # Obtenemos el término de búsqueda en minúsculas
@@ -91,7 +101,7 @@ def buscar_registro():
             # Buscamos coincidencias en 'nombre_completo' o 'cuil'
             if search_term in nombre_completo or search_term in cuil:
                 # Obtener la imagen del storage usando el ID
-                # print(f'Images/{nombre_completo.upper()}.png')
+                # logging.info(f'Images/{nombre_completo.upper()}.png')
                 blob = bucket.blob(f'Images/{nombre_completo.upper()}.png')
                 if blob.exists():
                     # Descargar la imagen como un array y decodificarla
@@ -112,11 +122,11 @@ def buscar_registro():
 
         return jsonify(resultados)  # Devolvemos los registros que coinciden con la búsqueda
     except Exception as e:
-        print(f"Error en la búsqueda: {str(e)}")
+        logging.info(f"Error en la búsqueda: {str(e)}")
         return jsonify({'error': 'Ocurrió un error en el servidor'}), 500
     
 # Ruta para modificar un registro existente en Firebase
-@app.route('/terrarrhh/modificar_registro/<cuil>', methods=['POST'])
+@app.route('/modificar_registro/<cuil>', methods=['POST'])
 def modificar_registro(cuil):
     data = request.json
     ref = db.reference(f'Employees/{cuil}')  # Usamos el legajo como identificador
@@ -133,7 +143,7 @@ def modificar_registro(cuil):
 
     return jsonify({'status': 'success', 'message': 'Registro modificado correctamente'})
 
-@app.route('/terrarrhh/eliminar_registro', methods=['POST'])
+@app.route('/eliminar_registro', methods=['POST'])
 def eliminar_registro():
     try:
         data = request.get_json()  # Obtener el JSON enviado desde el cliente
@@ -150,7 +160,7 @@ def eliminar_registro():
         ref.delete()  # Eliminar el registro de la base de datos
         return jsonify({'status': 'success', 'message': 'Registro eliminado correctamente'})
     except Exception as e:
-        print(f"Error al eliminar registro y foto: {str(e)}")
+        logging.info(f"Error al eliminar registro y foto: {str(e)}")
         return jsonify({'status': 'error', 'message': 'Ocurrió un error en el servidor'}), 500
 
 
@@ -175,6 +185,23 @@ encodeListKnown, employeesIds = encodeListKnownWithIds
 def camara():
     return render_template('camara.html')
 
+def wait_for_enter_and_close():
+    """Espera a que se presione la tecla Enter y luego cierra la ventana."""
+    logging.info("Esperando que se presione 'Enter' para cerrar la página de GeneralFood.")
+
+    def on_press(key):
+        if key == keyboard.Key.enter:
+            time.sleep(3)
+            # Cerrar la ventana actual (Alt + F4)
+            pyautogui.hotkey('ctrl', 'w')
+            logging.info("Ventana de GeneralFood cerrada tras presionar Enter.")
+            return False  # Detiene el listener
+
+    # Iniciar un listener de teclado
+    with keyboard.Listener(on_press=on_press) as listener:
+        listener.join()  # Espera a que se presione 'Enter'
+
+
 @app.route('/submit_image', methods=['POST'])
 def submit_image():
     try:
@@ -190,7 +217,7 @@ def submit_image():
 
         faceCurFrame = face_recognition.face_locations(imgS)
         encodeCurFrame = face_recognition.face_encodings(imgS, faceCurFrame)
-
+        logging.info(faceCurFrame)
         if faceCurFrame:
             for encodeFace, faceLoc in zip(encodeCurFrame, faceCurFrame):
                 # Comparar con los "encodings" conocidos de Firebase
@@ -205,42 +232,82 @@ def submit_image():
                     for key, value in employeesRef.items():
                         if value['nombre_apellido'] == id:
                             employeeInfo = value
+                            logging.info(f'employeeInfo: {employeeInfo}')
                             break
-                    
-                    cuil=employeeInfo['cuil']
-                    # Actualizar la hora de asistencia
-                    ref = db.reference(f'Employees/{cuil}')
 
+                    dni = employeeInfo['cuil']  # Cambiado a enviar DNI en lugar de CUIL
+                    dni_str = str(dni)  # Cambiado a enviar DNI en lugar de CUIL
+                    ref = db.reference(f'Employees/{dni}')
+
+                    # Actualizar la hora de asistencia
                     ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
                     nro_orden = ref.child('order_general_food').get()
-                    ref.child('order_general_food').set(nro_orden+1)
+                    ref.child('order_general_food').set(nro_orden + 1)
 
-                    # Emitir el cuil a través de Socket.IO
-                    socketio.emit('cuil_received', {'cuil': cuil})
+                    # Emitir el evento de confirmación con el DNI detectado
+                    socketio.emit('confirm_dni', {'dni': dni, 'dni_modificado': dni_str[2:-1],  'nombre_apellido': employeeInfo['nombre_apellido']})
+                    
+                    return jsonify({"status": "confirmation_pending"})
 
-                    # Devolver el nombre y cuil del empleado
-                    return jsonify({"nombre_apellido": employeeInfo['nombre_apellido'], "cuil": cuil})
-
-        return jsonify({"error": "No se encontró una coincidencia"})
+        # Si no hay coincidencia
+        logging.info("No se encontró coincidencia, se solicita ingreso manual del DNI.")
+        return jsonify({"status": "no_match"})
 
     except Exception as e:
-        print(f"Error en el reconocimiento facial: {e}")
-        return jsonify({"error": "Ocurrió un error en el servidor"}), 500
+        logging.info(f"Error en el reconocimiento facial: {e}")
+        return jsonify({"status": "error", "message": "Ocurrió un error en el servidor"}), 500
 
+
+@socketio.on('confirm_dni_response')
+def confirm_dni_response(data):
+    dni_confirmed = data['confirmed']
+    dni = data['dni']  # Aquí se utiliza el DNI completo
+    dni = str(dni)
+    dni_confirmed = str(dni_confirmed)
+  
+    
+    if dni_confirmed:
+        # Si el usuario confirmó, actualiza el registro y responde al cliente
+        ref = db.reference(f'Employees/{dni}')
+        ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        nro_orden = ref.child('order_general_food').get()
+        ref.child('order_general_food').set(nro_orden + 1)
+        
+        # Emitir resultado positivo al cliente
+        emit('dni_confirmation_result', {'status': 'success', 'dni': dni})
+    else:
+        # Si el usuario no confirmó, solo abre la página sin modificar el registro
+        emit('dni_confirmation_result', {'status': 'denied', 'dni': dni})
+
+@socketio.on('open_page_and_enter_dni')
+def handle_open_page_and_enter_dni(data):
+    dni = data['dni']
+    open_page_and_enter_dni(dni)
+
+def open_page_and_enter_dni(dni):
+    """Abre la página en el navegador y completa el DNI en el campo de entrada."""
+    # Modificar el DNI: eliminar los 2 primeros y el último dígito
+    # dni_modificado = dni[2:-1]
+
+    url = "https://generalfoodargentina.movizen.com/pwa/inicio"
+    # Abre la página en el navegador predeterminado
+    webbrowser.open(url)
+    logging.info("Abriendo la página en el navegador...")
+    time.sleep(2)  # Espera a que la página cargue
+
+    x, y = (692, 710)  # Captura la posición actual del cursor (debe estar sobre el input)
+    logging.info(f"Posición del input obtenida: ({x}, {y})")
+
+    # Clic en la posición del input y escribe el DNI
+    pyautogui.click(x, y)
+    # logging.info(dni_modificado)
+    pyautogui.write(dni, interval=0.1)
+    pyautogui.press('enter')
+    logging.info("DNI ingresado correctamente.")
+    # Cerrar la ventana actual (presiona Alt + F4)
+    time.sleep(1)  # Espera un segundo después de presionar Enter
+    pyautogui.hotkey('ctrl', 'w')
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8082, debug=True)
-
-
-
-
-# if __name__ == '__main__':
-#     socketio.run(app, debug=True)
-
-
-
-
-
-# if __name__ == '__main__':
-#     app.run(debug=True)
+    socketio.run(app,host='0.0.0.0',allow_unsafe_werkzeug=True, port=5000, debug=True)

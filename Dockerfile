@@ -1,52 +1,22 @@
-# Etapa 1: Construcción para instalar las dependencias
-#FROM python:3.8.19
+# Usa una imagen base de Python
+FROM python:3.11
 
-# Establecemos el directorio de trabajo dentro del contenedor
-#WORKDIR /app
+# Instala CMake, build-essential, y libgl1
+RUN apt-get update && \
+    apt-get install -y cmake build-essential libgl1 xvfb && \
+    apt-get clean
 
-# Copiamos el archivo de requerimientos
-#COPY . .
-
-# Instalamos las dependencias en un directorio temporal
-# RUN apt-get update && apt-get install -y \
-#    libgl1-mesa-glx \
-#    texlive-xetex \
-#    texlive-fonts-recommended \
-#    texlive-plain-generic
-
-
-# RUN pip install -r requirements.txt
-
-
-
-# Definimos el comando de inicio de la aplicación
-# CMD ["python", "app.py"]
-
-# Etapa 1: Instalación de dependencias del sistema
-FROM python:3.11.9 AS base
-
-# Establecemos el directorio de trabajo dentro del contenedor
+# Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Instalamos las dependencias del sistema
-RUN apt-get update && apt-get install -y \
-    cmake \
-    libgl1-mesa-glx \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+# Copia el archivo de dependencias y lo instala
+COPY requirements.txt requirements.txt
+RUN pip install -v --no-cache-dir -r requirements.txt
 
-# Copiamos el archivo de requerimientos
-COPY requirements.txt .
-
-# Instalamos las dependencias de Python
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copiamos el resto de los archivos de la aplicación
+# Copia el resto del código de la aplicación al contenedor
 COPY . .
 
-# Exponemos el puerto en el contenedor (ajústalo al puerto que espera Nginx, por ejemplo, 8081)
-EXPOSE 8082
+# Expone el puerto de Flask (5000 por defecto)
+EXPOSE 5000
 
-# Definimos el comando de inicio de la aplicación
-CMD ["python", "app.py"]
-
+CMD Xvfb :0 -screen 0 1024x768x16 & python app.py

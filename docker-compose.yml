@@ -1,0 +1,8 @@
+services:
+  flask_app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - DISPLAY=:0  # Configura DISPLAY para usar Xvfb en :99
+      
