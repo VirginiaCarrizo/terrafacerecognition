@@ -1,10 +1,9 @@
 Flask
-Flask-Cors
-Flask-SocketIO
+flask-socketio
 firebase-admin
 opencv-python
 numpy
-face-recognition
-pandas
-pyautogui
-pynput
+face_recognition
+pickle-mixin
+selenium
+webdriver-manager
