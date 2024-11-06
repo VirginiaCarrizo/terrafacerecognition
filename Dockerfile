@@ -1,22 +1,56 @@
-# Usa una imagen base de Python
-FROM python:3.11
+# Usa una imagen base de Python con Debian Buster
+FROM python:3.11-buster
 
-# Instala CMake, build-essential, y libgl1
+# Instala dependencias del sistema
 RUN apt-get update && \
-    apt-get install -y cmake build-essential libgl1 xvfb && \
+    apt-get install -y \
+    cmake \
+    build-essential \
+    libgl1 \
+    libglib2.0-0 \
+    libnss3 \
+    libgconf-2-4 \
+    libxi6 \
+    libxcursor1 \
+    libxss1 \
+    libxcomposite1 \
+    libasound2 \
+    libxrandr2 \
+    libatk1.0-0 \
+    libgtk-3-0 \
+    libxdamage1 \
+    libxfixes3 \
+    wget \
+    gnupg2 \
+    unzip \
+    && apt-get clean
+
+# Instala Google Chrome
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && \
+    apt-get install -y google-chrome-stable && \
     apt-get clean
 
-# Establece el directorio de trabajo dentro del contenedor
+# Instala Chromedriver
+RUN CHROME_DRIVER_VERSION=$(wget -qO- https://chromedriver.storage.googleapis.com/LATEST_RELEASE) && \
+    wget -O /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/${CHROME_DRIVER_VERSION}/chromedriver_linux64.zip && \
+    unzip /tmp/chromedriver_linux64.zip -d /usr/local/bin/ && \
+    rm /tmp/chromedriver_linux64.zip && \
+    chmod +x /usr/local/bin/chromedriver
+
+# Establece el directorio de trabajo
 WORKDIR /app
 
-# Copia el archivo de dependencias y lo instala
+# Copia los archivos de requisitos e instálalos
 COPY requirements.txt requirements.txt
-RUN pip install -v --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia el resto del código de la aplicación al contenedor
+# Copia el resto del código de la aplicación
 COPY . .
 
-# Expone el puerto de Flask (5000 por defecto)
+# Expone el puerto de Flask
 EXPOSE 5000
 
-CMD Xvfb :0 -screen 0 1024x768x16 & python app.py
+# Ejecuta la aplicación
+CMD ["python", "app.py"]
