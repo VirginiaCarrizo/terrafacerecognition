@@ -23,7 +23,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(me
 
 app = Flask(__name__)
 app.config['APPLICATION_ROOT'] = '/terrarrhh'
-socketio = SocketIO(app, path='/terrarrhh/socket.io')
+socketio = SocketIO(app)
 cuil_value = ""  # Variable global para almacenar el cuil
 
 # Inicializar Firebase Admin

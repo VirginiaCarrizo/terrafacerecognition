@@ -28,7 +28,7 @@ document.getElementById('buscar-nombre').addEventListener('input', function() {
     clearTimeout(timeout);  // Limpiar el timeout anterior
     timeout = setTimeout(() => {
     if (searchTerm.length >= 2) {  // Verificamos si hay texto después de eliminar espacios en blanco
-        fetch('/buscar_registro', {
+        fetch('/terrarrhh/buscar_registro', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -95,7 +95,7 @@ document.getElementById('buscar').addEventListener('click', function() {
     const searchTerm = document.getElementById('buscar-nombre').value.toLowerCase();  // Obtenemos el valor del input
 
     if (searchTerm) {
-        fetch('/buscar_registro', {
+        fetch('/terrarrhh/buscar_registro', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -220,7 +220,7 @@ function modificarRegistro() {
     };
 
     // Hacer la llamada fetch con el cuerpo JSON
-    fetch(`/modificar_registro/${cuil}`, {
+    fetch(`/terrarrhh/modificar_registro/${cuil}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',  // Asegurar que el contenido es JSON
@@ -240,7 +240,7 @@ function modificarRegistro() {
 // Función para eliminar un registro utilizando la key
 function eliminarRegistro() {
     const cuil = document.getElementById('modificar-cuil').value;
-    fetch('/eliminar_registro', {
+    fetch('/terrarrhh/eliminar_registro', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -327,7 +327,7 @@ document.getElementById('agregar-btn').addEventListener('click', function() {
         };
         reader.readAsDataURL(foto); // Convertir la imagen a base64
 
-        fetch('/agregar_registro', {
+        fetch('/terrarrhh/agregar_registro', {
             method: 'POST',
             body: formData
         })

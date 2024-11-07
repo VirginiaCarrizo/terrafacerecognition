@@ -1,4 +1,4 @@
-var socket = io.connect('http://127.0.0.1:5000');
+var socket = io.connect();
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const captureButton = document.getElementById('capture');
@@ -37,7 +37,7 @@ captureButton.addEventListener('click', function() {
     const imageData = canvas.toDataURL('image/png');
 
     // Enviar la imagen al servidor para realizar el reconocimiento facial
-    fetch('/submit_image', {
+    fetch('/terrarrhh/submit_image', {
         method: 'POST',
         body: JSON.stringify({ image: imageData }),
         headers: { 'Content-Type': 'application/json' }
