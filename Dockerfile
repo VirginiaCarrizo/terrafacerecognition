@@ -58,4 +58,4 @@ COPY . .
 EXPOSE 5000
 
 # Ejecuta la aplicación en Xvfb para manejar la pantalla virtual
-CMD ["xvfb-run", "--server-args='-screen 0 1024x768x24'", "python", "app.py"]
+CMD rm -f /tmp/.X0-lock && Xvfb :0 -screen 0 1024x768x16 & python app.py
