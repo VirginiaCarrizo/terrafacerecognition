@@ -23,6 +23,7 @@ RUN apt-get update && \
     wget \
     gnupg2 \
     unzip \
+    xvfb \
     && apt-get clean
 
 # Instala Google Chrome
@@ -41,8 +42,7 @@ RUN CHROME_DRIVER_VERSION=$(wget -qO- https://chromedriver.storage.googleapis.co
 
 # Instala Playwright y sus navegadores
 RUN pip install --no-cache-dir playwright && \
-playwright install
-
+    playwright install
 
 # Establece el directorio de trabajo
 WORKDIR /app
@@ -57,5 +57,5 @@ COPY . .
 # Expone el puerto de Flask
 EXPOSE 5000
 
-# Ejecuta la aplicación
-CMD ["python", "app.py"]
+# Ejecuta la aplicación en Xvfb para manejar la pantalla virtual
+CMD ["xvfb-run", "--server-args='-screen 0 1024x768x24'", "python", "app.py"]
