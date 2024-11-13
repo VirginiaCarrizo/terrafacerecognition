@@ -10,7 +10,8 @@ import pickle
 from datetime import datetime
 import re
 import logging
-
+import asyncio
+from playwright.async_api import async_playwright
 # Importaciones adicionales para Selenium
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -210,7 +211,7 @@ def submit_image():
     except Exception as e:
         logging.info(f"Error en el reconocimiento facial: {e}")
         return jsonify({"status": "error", "message": "Ocurrió un error en el servidor"}), 500
-
+    
 @socketio.on('confirm_dni_response')
 def confirm_dni_response(data):
     dni_confirmed = data['confirmed']
@@ -228,39 +229,60 @@ def confirm_dni_response(data):
     else:
         emit('dni_confirmation_result', {'status': 'denied', 'dni': dni})
 
-@socketio.on('open_page_and_enter_dni')
-def handle_open_page_and_enter_dni(data):
-    dni = data['dni']
-    open_page_and_enter_dni(dni)
+# Función para ejecutar el evento de forma asincrónica en Flask-SocketIO
+# @socketio.on('open_page_and_enter_dni')
+# def handle_open_page_and_enter_dni(data):
+#     dni = data['dni']
+#     asyncio.run(open_page_and_enter_dni(dni))  # Ejecuta la función asincrónica
 
-def open_page_and_enter_dni(dni):
-    """Abre la página y completa el DNI en el campo de entrada usando Selenium."""
-    url = "https://generalfoodargentina.movizen.com/pwa/inicio"
+# # Función para abrir la página y completar el DNI utilizando Playwright
+# async def open_page_and_enter_dni(dni):
+#     url = "https://generalfoodargentina.movizen.com/pwa/inicio"
+#     async with async_playwright() as p:
+#         browser = await p.chromium.launch(headless=False)  # Ejecuta en modo headless
+#         page = await browser.new_page()
+#         await page.goto(url)
+#         logging.info("Página abierta en el navegador.")
+        
+#         try:
+#             # Ajusta el selector según el atributo del campo de entrada de DNI
+#             dni_input = await page.wait_for_selector("dni_input", timeout=30000)  # Cambia por el selector correcto
+#             await dni_input.fill(dni)
+#             await dni_input.press("Enter")
+#             logging.info("DNI ingresado correctamente.")
+#         except Exception as e:
+#             logging.error(f"Error al ingresar el DNI: {e}")
+#         finally:
+#             await browser.close()
 
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--disable-gpu")
+# def open_page_and_enter_dni(dni):
+#     """Abre la página y completa el DNI en el campo de entrada usando Selenium."""
+#     url = "https://generalfoodargentina.movizen.com/pwa/inicio"
 
-    # Utiliza ChromeDriverManager para manejar el driver
-    driver = webdriver.Chrome(options=chrome_options)
+#     chrome_options = Options()
+#     # chrome_options.add_argument("--headless")
+#     # chrome_options.add_argument("--no-sandbox")
+#     # chrome_options.add_argument("--disable-dev-shm-usage")
+#     # chrome_options.add_argument("--disable-gpu")
 
-    try:
-        driver.get(url)
-        logging.info("Página abierta en el navegador.")
+#     # Utiliza ChromeDriverManager para manejar el driver
+#     driver = webdriver.Chrome(options=chrome_options)
 
-        wait = WebDriverWait(driver, 10)
-        # Ajusta el selector según el atributo del campo de entrada de DNI
-        # Por ejemplo, si el campo tiene id="dni_input"
-        dni_input = wait.until(EC.presence_of_element_located((By.ID, "dni_input")))
-        dni_input.send_keys(dni)
-        dni_input.submit()
-        logging.info("DNI ingresado correctamente.")
-    except Exception as e:
-        logging.error(f"Error al ingresar el DNI: {e}")
-    finally:
-        driver.quit()
+#     try:
+#         driver.get(url)
+#         logging.info("Página abierta en el navegador.")
+
+#         wait = WebDriverWait(driver, 10)
+#         # Ajusta el selector según el atributo del campo de entrada de DNI
+#         # Por ejemplo, si el campo tiene id="dni_input"
+#         dni_input = wait.until(EC.presence_of_element_located((By.ID, "dni_input")))
+#         dni_input.send_keys(dni)
+#         dni_input.submit()
+#         logging.info("DNI ingresado correctamente.")
+#     except Exception as e:
+#         logging.error(f"Error al ingresar el DNI: {e}")
+#     finally:
+#         driver.quit()
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', allow_unsafe_werkzeug=True, port=5000, debug=True)

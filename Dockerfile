@@ -39,6 +39,11 @@ RUN CHROME_DRIVER_VERSION=$(wget -qO- https://chromedriver.storage.googleapis.co
     rm /tmp/chromedriver_linux64.zip && \
     chmod +x /usr/local/bin/chromedriver
 
+# Instala Playwright y sus navegadores
+RUN pip install --no-cache-dir playwright && \
+playwright install
+
+
 # Establece el directorio de trabajo
 WORKDIR /app
 
