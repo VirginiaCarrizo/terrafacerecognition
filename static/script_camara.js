@@ -83,7 +83,32 @@ captureButton.addEventListener('click', function() {
 // Recibir el resultado de la confirmación de DNI y abrir la web automáticamente si se confirma
 socket.on('dni_confirmation_result', function(data) {
     if (data.status === 'success') {
-        // Aquí se abre la página automáticamente y completa el DNI
-        socket.emit('open_page_and_enter_dni', { dni: data.dni });
+        // Abre la página y espera a que cargue para completar el DNI
+        const newWindow = window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
+
+        // Espera a que la nueva página cargue antes de ejecutar el script
+        newWindow.onload = function() {
+            const dniField = newWindow.document.querySelector("dni_input"); // Selecciona el input del DNI
+
+            if (dniField) {
+                dniField.value = data.dni; // Autocompleta el DNI
+                dniField.focus(); // Enfoca el campo para asegurarse de que esté activo
+
+                // Dispara el evento 'input' para asegurar que el valor sea reconocido
+                dniField.dispatchEvent(new Event('input'));
+
+                // Simula la tecla 'Enter' para enviar el formulario
+                dniField.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+            } else {
+                console.error("No se encontró el campo de DNI en la página.");
+            }
+        };
     }
 });
+// // Recibir el resultado de la confirmación de DNI y abrir la web automáticamente si se confirma
+// socket.on('dni_confirmation_result', function(data) {
+//     if (data.status === 'success') {
+//         // Aquí se abre la página automáticamente y completa el DNI
+//         socket.emit('open_page_and_enter_dni', { dni: data.dni });
+//     }
+// });
