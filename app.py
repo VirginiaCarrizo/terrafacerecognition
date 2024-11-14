@@ -35,7 +35,7 @@ firebase_admin.initialize_app(cred, {
 })
 bucket = storage.bucket()
 
-@app.route('/terrarrhh')
+@app.route('/terrarrhh', strict_slashes=False)
 def index():
     return render_template('index.html')
 
