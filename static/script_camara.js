@@ -1,8 +1,12 @@
-var socket = io.connect();
+var socket = io.connect('http://127.0.0.1:5000');
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const captureButton = document.getElementById('capture');
 const context = canvas.getContext('2d');
+
+socket.on('connect', function() {
+    console.log("Conectado al servidor Socket.IO");
+});
 
 // Función para activar una cámara específica
 function activateCamera(deviceId) {
