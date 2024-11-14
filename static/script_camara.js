@@ -1,11 +1,16 @@
-var socket = io.connect('http://127.0.0.1:5000');
+var socket = io({path: '/terrarrhh/socket.io'});
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const captureButton = document.getElementById('capture');
 const context = canvas.getContext('2d');
 
 socket.on('connect', function() {
-    console.log("Conectado al servidor Socket.IO");
+    console.log('Conectado al servidor');
+    socket.emit('mi_evento', {data: 'Hola servidor'});
+});
+
+socket.on('mi_respuesta', function(data) {
+    console.log('Respuesta del servidor:', data);
 });
 
 // Función para activar una cámara específica
