@@ -22,7 +22,7 @@ from selenium.webdriver.support import expected_conditions as EC
 # Configuración básica para el logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 
-app = Flask(__name__, static_url_path='/static', static_folder='static')
+app = Flask(__name__, static_url_path='/terrarrhh/static', static_folder='static')
 app.config['APPLICATION_ROOT'] = '/terrarrhh'
 socketio = SocketIO(app)
 cuil_value = ""  # Variable global para almacenar el cuil
