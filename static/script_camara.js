@@ -17,7 +17,7 @@ socket.on('mi_respuesta', function(data) {
 function activateCamera(deviceId) {
     const constraints = {
         video: {
-            deviceId: { exact: deviceId }
+            deviceId: { ideal: deviceId }
         }
     };
 
