@@ -33,7 +33,6 @@ function activateCamera(deviceId) {
 navigator.mediaDevices.enumerateDevices()
     .then(devices => {
         const videoDevices = devices.filter(device => device.kind === 'videoinput');
-        console.log(videoDevices)
         activateCamera(videoDevices[0].deviceId);
     })
     .catch(error => {
@@ -86,14 +85,12 @@ captureButton.addEventListener('click', function() {
             openAndHandlePrint("https://terragene.life/terrarrhh/camara/generalfood");
         } else if (data.status === 'confirmation_pending') {
             // El servidor indica que el DNI está pendiente de confirmación.
-            console.log('entro al elif')
+
             socket.once('confirm_dni', function(confirmData) {
-                console.log('entro socket once')
+
                 const dni = confirmData.dni;
                 const dni_modificado = confirmData.dni_modificado;
                 const nombre = confirmData.nombre_apellido;
-                console.log(confirmData.dni)
-                console.log(confirmData.nombre_apellido)
                 
                 // Mostrar mensaje de confirmación al usuario
                 const confirmed = window.confirm(`DNI detectado: ${dni_modificado} para ${nombre}\n¿Es correcto?`);
