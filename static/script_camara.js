@@ -40,6 +40,30 @@ navigator.mediaDevices.enumerateDevices()
         console.error("Error al enumerar dispositivos:", error);
     });
 
+    // Función para abrir una ventana y esperar al evento de impresión
+function openAndHandlePrint(url) {
+    const newWindow = window.open(url, "_blank");
+    console.log(url)
+    if (newWindow) {
+        // Asegurarte de que los eventos de impresión sean manejados en la ventana recién abierta
+        newWindow.addEventListener("beforeprint", function () {
+            console.log("Se inició la impresión en la nueva ventana.");
+        });
+
+        newWindow.addEventListener("afterprint", function () {
+            console.log("Se terminó la impresión. Cerrando la ventana.");
+            newWindow.close();
+        });
+
+        // Para manejar navegadores que no soporten los eventos de impresión
+        newWindow.onbeforeunload = function () {
+            console.log("La ventana ha sido cerrada.");
+        };
+    } else {
+        console.error("No se pudo abrir la nueva ventana.");
+    }
+}
+
 // Capturar la imagen
 captureButton.addEventListener('click', function() {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -58,7 +82,8 @@ captureButton.addEventListener('click', function() {
             alert("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
             
             // Abrir la página una vez que el usuario presione "Aceptar"
-            window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
+            // window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
+            openAndHandlePrint("https://terragene.life/terrarrhh/generalfood")
         } else if (data.status === 'confirmation_pending') {
             // El servidor indica que el DNI está pendiente de confirmación.
             console.log('entro al elif')
@@ -79,7 +104,8 @@ captureButton.addEventListener('click', function() {
                 } else {
                     // Si el usuario cancela, pide que ingrese el DNI manualmente y abre la web
                     alert("Por favor, ingrese el DNI manualmente.");
-                    window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
+                    // window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
+                    openAndHandlePrint("https://terragene.life/terrarrhh/generalfood")
                 }
             });
         }
