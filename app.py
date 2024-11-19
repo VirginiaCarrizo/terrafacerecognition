@@ -18,6 +18,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import os
+from dotenv import load_dotenv
 
 # Configuración básica para el logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
@@ -26,8 +28,25 @@ app = Flask(__name__, static_url_path='/terrarrhh/static', static_folder='static
 socketio = SocketIO(app, cors_allowed_origins="https://terragene.life", path='/terrarrhh/socket.io', transports=["websocket", "polling"])
 cuil_value = ""  # Variable global para almacenar el cuil
 
+# Cargar las variables de entorno desde el archivo .env
+load_dotenv()
+
+# Construir las credenciales directamente desde las variables de entorno
+cred_data = {
+    "type": os.getenv("TYPE"),
+    "project_id": os.getenv("PROJECT_ID"),
+    "private_key_id": os.getenv("PRIVATE_KEY_ID"),
+    "private_key": os.getenv("PRIVATE_KEY").replace("\\n", "\n"),  # Reemplazar saltos de línea
+    "client_email": os.getenv("CLIENT_EMAIL"),
+    "client_id": os.getenv("CLIENT_ID"),
+    "auth_uri": os.getenv("AUTH_URI"),
+    "token_uri": os.getenv("TOKEN_URI"),
+    "auth_provider_x509_cert_url": os.getenv("AUTH_PROVIDER_X509_CERT_URL"),
+    "client_x509_cert_url": os.getenv("CLIENT_X509_CERT_URL"),
+}
+
 # Inicializar Firebase Admin
-cred = credentials.Certificate("serviceAccountKey.json")
+cred = credentials.Certificate(cred_data)
 firebase_admin.initialize_app(cred, {
     'databaseURL': "https://terra-employees-default-rtdb.firebaseio.com/",
     'storageBucket': "terra-employees.appspot.com"
