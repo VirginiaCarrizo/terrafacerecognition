@@ -42,7 +42,7 @@ navigator.mediaDevices.enumerateDevices()
 // Función para abrir una ventana y esperar al evento de impresión
 function openAndHandlePrint(url) {
     const newWindow = window.open(url, "_blank");
-
+    console.log(url)
     if (newWindow) {
         // Asegurarte de que los eventos de impresión sean manejados en la ventana recién abierta
         newWindow.addEventListener("beforeprint", function () {
@@ -82,7 +82,7 @@ captureButton.addEventListener('click', function() {
             
             // Abrir la página una vez que el usuario presione "Aceptar"
             // window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
-            openAndHandlePrint("https://terragene.life/terrarrhh/camara/generalfood");
+            openAndHandlePrint("https://terragene.life/terrarrhh/generalfood");
         } else if (data.status === 'confirmation_pending') {
             // El servidor indica que el DNI está pendiente de confirmación.
 
@@ -102,7 +102,7 @@ captureButton.addEventListener('click', function() {
                     // Si el usuario cancela, pide que ingrese el DNI manualmente y abre la web
                     alert("Por favor, ingrese el DNI manualmente.");
                     // window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
-                    openAndHandlePrint("https://terragene.life/terrarrhh/camara/generalfood");
+                    openAndHandlePrint("https://terragene.life/terrarrhh/generalfood");
                 }
             });
         }
