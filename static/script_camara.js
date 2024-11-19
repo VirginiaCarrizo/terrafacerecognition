@@ -115,7 +115,8 @@ captureButton.addEventListener('click', function() {
 // Recibir el resultado de la confirmación de DNI y abrir la web automáticamente si se confirma
 socket.on('dni_confirmation_result', function(data) {
     if (data.status === 'success') {
-        // Abre la página y espera a que cargue para completar el DNI
+        // Abre la página y espera a que cargue para completar el DNIi
+
         // const newWindow = window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
         const newWindow = window.open("https://terragene.life/terrarrhh/generalfood", "_blank");
 
@@ -129,12 +130,13 @@ socket.on('dni_confirmation_result', function(data) {
                 dniField.focus(); // Enfoca el campo para asegurarse de que esté activo
 
                 // Dispara el evento 'input' para asegurar que el valor sea reconocido
-                dniField.dispatchEvent(new Event('input'));
+	                dniField.dispatchEvent(new Event('input'));
 
                 // Simula la tecla 'Enter' para enviar el formulario
                 dniField.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+
                 alert('ya se presiono el enter')
-            } else {
+	    } else {
                 console.error("No se encontró el campo de DNI en la página.");
             }
         };
