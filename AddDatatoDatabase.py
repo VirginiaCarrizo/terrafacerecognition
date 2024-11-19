@@ -32,10 +32,10 @@ for index, row in df.iterrows():
     }
     try:
         # Usa el LEGAJO como clave única para cada empleado
-        ref.child(str(row['CUIL'])).set(data)
+        ref.child(str(row['CUIL'])).update(data)
         contador+=1
-    except:
-        print('fallo:',row['NOMBRE COMPLETO'])
+    except Exception as e:
+        print(f'Fallo en {row["NOMBRE COMPLETO"]}: {e}')
 
 print("Datos subidos a Firebase exitosamente.")
 print('cantidad', contador)
