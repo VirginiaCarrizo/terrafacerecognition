@@ -46,12 +46,12 @@ function openAndHandlePrint(url) {
 
     if (newWindow) {
         // Escuchar la tecla Enter en la nueva ventana
-        newWindow.addEventListener("keydown", function (event) {
-            if (event.key === "Enter") {
-                console.log("Tecla Enter detectada. Mostrando opción de imprimir.");
-                newWindow.print();
-            }
-        });
+        // newWindow.addEventListener("keydown", function (event) {
+        //     if (event.key === "Enter") {
+        //         console.log("Tecla Enter detectada. Mostrando opción de imprimir.");
+        //         newWindow.print();
+        //     }
+        // });
 
         // Manejar evento antes de imprimir
         newWindow.addEventListener("beforeprint", function () {
@@ -91,8 +91,8 @@ captureButton.addEventListener('click', function() {
             alert("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
             
             // Abrir la página una vez que el usuario presione "Aceptar"
-            // window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
-            openAndHandlePrint("https://terragene.life/terrarrhh/generalfood");
+            openAndHandlePrint("https://generalfoodargentina.movizen.com/pwa/inicio");
+            // openAndHandlePrint("https://terragene.life/terrarrhh/generalfood");
         } else if (data.status === 'confirmation_pending') {
             // El servidor indica que el DNI está pendiente de confirmación.
 
@@ -111,8 +111,8 @@ captureButton.addEventListener('click', function() {
                 } else {
                     // Si el usuario cancela, pide que ingrese el DNI manualmente y abre la web
                     alert("Por favor, ingrese el DNI manualmente.");
-                    // window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
-                    openAndHandlePrint("https://terragene.life/terrarrhh/generalfood");
+                    openAndHandlePrint("https://generalfoodargentina.movizen.com/pwa/inicio");
+                    // openAndHandlePrint("https://terragene.life/terrarrhh/generalfood");
                 }
             });
         }
@@ -127,8 +127,8 @@ socket.on('dni_confirmation_result', function(data) {
     if (data.status === 'success') {
         // Abre la página y espera a que cargue para completar el DNIi
 
-        // const newWindow = window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
-        const newWindow = window.open("https://terragene.life/terrarrhh/generalfood", "_blank");
+        const newWindow = window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
+        // const newWindow = window.open("https://terragene.life/terrarrhh/generalfood", "_blank");
 
         // Espera a que la nueva página cargue antes de ejecutar el script
         newWindow.onload = function() {
@@ -162,12 +162,12 @@ socket.on('dni_confirmation_result', function(data) {
                 }, 100); // Tiempo para permitir que los cambios se procesen
             }
 
-            newWindow.addEventListener("keydown", function (event) {
-                if (event.key === "Enter") {
-                    console.log("Tecla Enter detectada. Mostrando opción de imprimir.");
-                    newWindow.print();
-                }
-            });
+            // newWindow.addEventListener("keydown", function (event) {
+            //     if (event.key === "Enter") {
+            //         console.log("Tecla Enter detectada. Mostrando opción de imprimir.");
+            //         newWindow.print();
+            //     }
+            // });
     
             // Manejar evento antes de imprimir
             newWindow.addEventListener("beforeprint", function () {
