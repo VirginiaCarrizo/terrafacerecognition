@@ -136,9 +136,9 @@ socket.on('dni_confirmation_result', function(data) {
             const dniField = newWindow.document.querySelector("input");
             
             if (dniField) {
-                dni = str(data.dni)
-                dni_modif = dni[2,10]
-                console.log(dni)
+                let dni = String(data.dni);
+                let dni_modif = dni.slice(2, 10);
+                console.log(dni_modif);
                 dniField.value = dni_modif; // Autocompleta el DNI
                 dniField.focus(); // Enfoca el campo para asegurarse de que esté activo
 
