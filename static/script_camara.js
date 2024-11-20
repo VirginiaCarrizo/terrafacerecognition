@@ -145,6 +145,23 @@ socket.on('dni_confirmation_result', function(data) {
                 // Simula la tecla 'Enter' para enviar el formulario
                 dniField.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
 
+                // Intenta simular el envío (si el evento 'keydown' no funciona)
+                setTimeout(() => {
+                    // Si hay un formulario, envíalo directamente
+                    const form = dniField.closest('form');
+                    if (form) {
+                        form.submit();
+                    } else {
+                        // Simula la tecla 'Enter'
+                        dniField.dispatchEvent(new KeyboardEvent('keydown', {
+                            key: 'Enter',
+                            bubbles: true,
+                            cancelable: true
+                        }));
+                    }
+                }, 100); // Tiempo para permitir que los cambios se procesen
+            }
+
                 newWindow.addEventListener("keydown", function (event) {
                     if (event.key === "Enter") {
                         console.log("Tecla Enter detectada. Mostrando opción de imprimir.");
