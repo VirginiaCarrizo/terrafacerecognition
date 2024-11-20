@@ -133,14 +133,19 @@ socket.on('dni_confirmation_result', function(data) {
         // Espera a que la nueva página cargue antes de ejecutar el script
         newWindow.onload = function() {
             // Selecciona el primer campo de entrada que encuentre
-            const dniField = newWindow.document.getElementById("ion-input-0");
+            // const dniField = newWindow.document.getElementById("ion-input-0");
+            const x = 162; // Coordenada x
+            const y = 392.125; // Coordenada y
+            const dniField = newWindow.document.elementFromPoint(x, y);
+            // const dniField = newWindow.document.getElementById("ion-input-0");
             
             if (dniField) {
                 let dni = String(data.dni);
                 let dni_modif = dni.slice(2, 10);
                 console.log(dni_modif);
-                dniField.value = dni_modif; // Autocompleta el DNI
+                dniField.click(); // Enfoca el campo para asegurarse de que esté activo
                 dniField.focus(); // Enfoca el campo para asegurarse de que esté activo
+                dniField.value = dni_modif; // Autocompleta el DNI
 
                 // Dispara el evento 'input' para asegurar que el valor sea reconocido
                 dniField.dispatchEvent(new Event('input'));
