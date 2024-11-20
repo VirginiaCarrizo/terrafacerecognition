@@ -39,22 +39,32 @@ navigator.mediaDevices.enumerateDevices()
         console.error("Error al enumerar dispositivos:", error);
     });
 
-// Función para abrir una ventana y esperar al evento de impresión
+// Función para abrir una ventana, escuchar Enter, manejar impresión y cerrar
 function openAndHandlePrint(url) {
     const newWindow = window.open(url, "_blank");
-    console.log(url)
+    console.log(url);
+
     if (newWindow) {
-        // Asegurarte de que los eventos de impresión sean manejados en la ventana recién abierta
+        // Escuchar la tecla Enter en la nueva ventana
+        newWindow.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                console.log("Tecla Enter detectada. Mostrando opción de imprimir.");
+                newWindow.print();
+            }
+        });
+
+        // Manejar evento antes de imprimir
         newWindow.addEventListener("beforeprint", function () {
             console.log("Se inició la impresión en la nueva ventana.");
         });
 
+        // Manejar evento después de imprimir
         newWindow.addEventListener("afterprint", function () {
             console.log("Se terminó la impresión. Cerrando la ventana.");
             newWindow.close();
         });
 
-        // Para manejar navegadores que no soporten los eventos de impresión
+        // Fallback para navegadores sin soporte de eventos de impresión
         newWindow.onbeforeunload = function () {
             console.log("La ventana ha sido cerrada.");
         };
