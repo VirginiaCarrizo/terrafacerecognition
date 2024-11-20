@@ -126,7 +126,7 @@ captureButton.addEventListener('click', function() {
 socket.on('dni_confirmation_result', function(data) {
     if (data.status === 'success') {
         // Abre la página y espera a que cargue para completar el DNIi
-
+        console.log('llegue hasta aca')
         const newWindow = window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
         // const newWindow = window.open("https://terragene.life/terrarrhh/generalfood", "_blank");
 
