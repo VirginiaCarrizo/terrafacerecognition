@@ -3,6 +3,7 @@ const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const captureButton = document.getElementById('capture');
 const context = canvas.getContext('2d');
+const { chromium } = require('playwright');
 
 socket.on('connect', function() {
     console.log('Conectado al servidor');
@@ -121,95 +122,134 @@ captureButton.addEventListener('click', function() {
         console.error("Error en el reconocimiento facial:", error);
     });
 });
-
-// Recibir el resultado de la confirmación de DNI y abrir la web automáticamente si se confirma
-socket.on('dni_confirmation_result', function(data) {
+socket.on('dni_confirmation_result', async function (data) {
     if (data.status === 'success') {
-        // Abre la página y espera a que cargue para completar el DNIi
-        console.log('llegue hasta aca')
-        const newWindow = window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
+        console.log('Llegué hasta acá');
 
-        // const newWindow = window.open("https://terragene.life/terrarrhh/generalfood", "_blank");
-        if (!newWindow) {
-            console.error("No se pudo abrir la nueva ventana. Asegúrate de permitir ventanas emergentes.");
-            return;
+        // Lanza el navegador con Playwright
+        const browser = await chromium.launch({ headless: false }); // Cambia a `true` si no necesitas ver el navegador
+        const context = await browser.newContext();
+        const page = await context.newPage();
+
+        // Navega a la página externa
+        await page.goto("https://generalfoodargentina.movizen.com/pwa/inicio");
+        console.log('Llegué hasta acá 2');
+        try {
+            console.log('entre')
+            // Espera a que el campo de DNI esté presente
+            await page.waitForSelector('#ion-input-0', { timeout: 10000 });
+
+            // Autocompleta el DNI
+            const dni = String(data.dni);
+            const dni_modif = dni.slice(2, 10); // Modificar el DNI como en tu código original
+            console.log('DNI modificado:', dni_modif);
+
+            // Rellena el campo de entrada
+            await page.fill('#ion-input-0', dni_modif);
+
+            // Simula la tecla "Enter"
+            await page.keyboard.press('Enter');
+
+            // Si es necesario, espera que el formulario se procese
+            await page.waitForTimeout(2000);
+
+            console.log("Formulario enviado correctamente.");
+        } catch (error) {
+            console.error("Error interactuando con la página:", error);
         }
-        // Espera a que la nueva página cargue antes de ejecutar el script
-        const checkWindowLoaded = setInterval(function() {
-            try {
-                // Verifica si el documento está completamente cargado
-                if (newWindow.document && newWindow.document.readyState === 'complete') {
-                    clearInterval(checkWindowLoaded);
 
-                    console.log("La nueva ventana cargó correctamente.");
-                // Selecciona el primer campo de entrada que encuentre
-                // const dniField = newWindow.document.getElementById("ion-input-0");
-                // const x = 162; // Coordenada x
-                // const y = 392.125; // Coordenada y
-                const x = 526.5; // Coordenada x
-                const y = 440.45001220; // Coordenada y
-                const dniField = newWindow.document.elementFromPoint(x, y);
-                console.log('dniField')
-                console.log(dniField)
-                // const dniField = newWindow.document.getElementById("ion-input-0");
-                
-                if (dniField) {
-                    let dni = String(data.dni);
-                    let dni_modif = dni.slice(2, 10);
-                    console.log(dni_modif);
-                    dniField.click(); // Enfoca el campo para asegurarse de que esté activo
-                    dniField.focus(); // Enfoca el campo para asegurarse de que esté activo
-                    dniField.value = dni_modif; // Autocompleta el DNI
-
-                    // Dispara el evento 'input' para asegurar que el valor sea reconocido
-                    dniField.dispatchEvent(new Event('input'));
-
-                    // Simula la tecla 'Enter' para enviar el formulario
-                    dniField.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
-
-                    // Intenta simular el envío (si el evento 'keydown' no funciona)
-                    setTimeout(() => {
-                        // Si hay un formulario, envíalo directamente
-                        const form = dniField.closest('form');
-                        if (form) {
-                            form.submit();
-                        } else {
-                            // Simula la tecla 'Enter'
-                            dniField.dispatchEvent(new KeyboardEvent('keydown', {
-                                key: 'Enter',
-                                bubbles: true,
-                                cancelable: true
-                            }));
-                        }
-                    }, 100); // Tiempo para permitir que los cambios se procesen
-                }
-                console.log('se presiono enter')
-                // newWindow.addEventListener("keydown", function (event) {
-                //     if (event.key === "Enter") {
-                //         console.log("Tecla Enter detectada. Mostrando opción de imprimir.");
-                //         newWindow.print();
-                //     }
-                // });
-        
-                // Manejar evento antes de imprimir
-                newWindow.addEventListener("beforeprint", function () {
-                    console.log("Se inició la impresión en la nueva ventana.");
-                });
-        
-                // Manejar evento después de imprimir
-                newWindow.addEventListener("afterprint", function () {
-                    console.log("Se terminó la impresión. Cerrando la ventana.");
-                    newWindow.close();
-                });
-        
-                // Fallback para navegadores sin soporte de eventos de impresión
-                newWindow.onbeforeunload = function () {
-                    console.log("La ventana ha sido cerrada.");
-                };
-            }
-            } catch (e) {
-                console.error("Error verificando el estado de la nueva ventana:", e);
-            }
-        }, 100);
+        // Cierra el navegador
+        await browser.close();
     }
 });
+// // Recibir el resultado de la confirmación de DNI y abrir la web automáticamente si se confirma
+// socket.on('dni_confirmation_result', function(data) {
+//     if (data.status === 'success') {
+//         // Abre la página y espera a que cargue para completar el DNIi
+//         console.log('llegue hasta aca')
+//         const newWindow = window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
+
+//         // const newWindow = window.open("https://terragene.life/terrarrhh/generalfood", "_blank");
+//         if (!newWindow) {
+//             console.error("No se pudo abrir la nueva ventana. Asegúrate de permitir ventanas emergentes.");
+//             return;
+//         }
+//         // Espera a que la nueva página cargue antes de ejecutar el script
+//         const checkWindowLoaded = setInterval(function() {
+//             try {
+//                 // Verifica si el documento está completamente cargado
+//                 if (newWindow.document && newWindow.document.readyState === 'complete') {
+//                     clearInterval(checkWindowLoaded);
+
+//                     console.log("La nueva ventana cargó correctamente.");
+//                 // Selecciona el primer campo de entrada que encuentre
+//                 // const dniField = newWindow.document.getElementById("ion-input-0");
+//                 // const x = 162; // Coordenada x
+//                 // const y = 392.125; // Coordenada y
+//                 const x = 526.5; // Coordenada x
+//                 const y = 440.45001220; // Coordenada y
+//                 const dniField = newWindow.document.elementFromPoint(x, y);
+//                 console.log('dniField')
+//                 console.log(dniField)
+//                 // const dniField = newWindow.document.getElementById("ion-input-0");
+                
+//                 if (dniField) {
+//                     let dni = String(data.dni);
+//                     let dni_modif = dni.slice(2, 10);
+//                     console.log(dni_modif);
+//                     dniField.click(); // Enfoca el campo para asegurarse de que esté activo
+//                     dniField.focus(); // Enfoca el campo para asegurarse de que esté activo
+//                     dniField.value = dni_modif; // Autocompleta el DNI
+
+//                     // Dispara el evento 'input' para asegurar que el valor sea reconocido
+//                     dniField.dispatchEvent(new Event('input'));
+
+//                     // Simula la tecla 'Enter' para enviar el formulario
+//                     dniField.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+
+//                     // Intenta simular el envío (si el evento 'keydown' no funciona)
+//                     setTimeout(() => {
+//                         // Si hay un formulario, envíalo directamente
+//                         const form = dniField.closest('form');
+//                         if (form) {
+//                             form.submit();
+//                         } else {
+//                             // Simula la tecla 'Enter'
+//                             dniField.dispatchEvent(new KeyboardEvent('keydown', {
+//                                 key: 'Enter',
+//                                 bubbles: true,
+//                                 cancelable: true
+//                             }));
+//                         }
+//                     }, 100); // Tiempo para permitir que los cambios se procesen
+//                 }
+//                 console.log('se presiono enter')
+//                 // newWindow.addEventListener("keydown", function (event) {
+//                 //     if (event.key === "Enter") {
+//                 //         console.log("Tecla Enter detectada. Mostrando opción de imprimir.");
+//                 //         newWindow.print();
+//                 //     }
+//                 // });
+        
+//                 // Manejar evento antes de imprimir
+//                 newWindow.addEventListener("beforeprint", function () {
+//                     console.log("Se inició la impresión en la nueva ventana.");
+//                 });
+        
+//                 // Manejar evento después de imprimir
+//                 newWindow.addEventListener("afterprint", function () {
+//                     console.log("Se terminó la impresión. Cerrando la ventana.");
+//                     newWindow.close();
+//                 });
+        
+//                 // Fallback para navegadores sin soporte de eventos de impresión
+//                 newWindow.onbeforeunload = function () {
+//                     console.log("La ventana ha sido cerrada.");
+//                 };
+//             }
+//             } catch (e) {
+//                 console.error("Error verificando el estado de la nueva ventana:", e);
+//             }
+//         }, 100);
+//     }
+// });
