@@ -162,29 +162,28 @@ socket.on('dni_confirmation_result', function(data) {
                 }, 100); // Tiempo para permitir que los cambios se procesen
             }
 
-                newWindow.addEventListener("keydown", function (event) {
-                    if (event.key === "Enter") {
-                        console.log("Tecla Enter detectada. Mostrando opción de imprimir.");
-                        newWindow.print();
-                    }
-                });
-        
-                // Manejar evento antes de imprimir
-                newWindow.addEventListener("beforeprint", function () {
-                    console.log("Se inició la impresión en la nueva ventana.");
-                });
-        
-                // Manejar evento después de imprimir
-                newWindow.addEventListener("afterprint", function () {
-                    console.log("Se terminó la impresión. Cerrando la ventana.");
-                    newWindow.close();
-                });
-        
-                // Fallback para navegadores sin soporte de eventos de impresión
-                newWindow.onbeforeunload = function () {
-                    console.log("La ventana ha sido cerrada.");
-            }    };
-        };
+            newWindow.addEventListener("keydown", function (event) {
+                if (event.key === "Enter") {
+                    console.log("Tecla Enter detectada. Mostrando opción de imprimir.");
+                    newWindow.print();
+                }
+            });
+    
+            // Manejar evento antes de imprimir
+            newWindow.addEventListener("beforeprint", function () {
+                console.log("Se inició la impresión en la nueva ventana.");
+            });
+    
+            // Manejar evento después de imprimir
+            newWindow.addEventListener("afterprint", function () {
+                console.log("Se terminó la impresión. Cerrando la ventana.");
+                newWindow.close();
+            });
+    
+            // Fallback para navegadores sin soporte de eventos de impresión
+            newWindow.onbeforeunload = function () {
+                console.log("La ventana ha sido cerrada.");
+        }    };
     }
 });
 // // Recibir el resultado de la confirmación de DNI y abrir la web automáticamente si se confirma
