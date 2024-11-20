@@ -127,13 +127,14 @@ socket.on('dni_confirmation_result', function(data) {
     if (data.status === 'success') {
         // Abre la página y espera a que cargue para completar el DNIi
 
-        const newWindow = window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
+        const newWindow = window.open("https://generalfoodargentina.movizen.com/pwa/configuracion-customer", "_blank");
+        // const newWindow = window.open("https://generalfoodargentina.movizen.com/pwa/inicio", "_blank");
         // const newWindow = window.open("https://terragene.life/terrarrhh/generalfood", "_blank");
 
         // Espera a que la nueva página cargue antes de ejecutar el script
         newWindow.onload = function() {
             // Selecciona el primer campo de entrada que encuentre
-            const dniField = newWindow.document.querySelector("input");
+            const dniField = newWindow.document.getElementById("ion-input-0");
             
             if (dniField) {
                 let dni = String(data.dni);
