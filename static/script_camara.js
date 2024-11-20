@@ -134,8 +134,10 @@ socket.on('dni_confirmation_result', function(data) {
         newWindow.onload = function() {
             // Selecciona el primer campo de entrada que encuentre
             // const dniField = newWindow.document.getElementById("ion-input-0");
-            const x = 162; // Coordenada x
-            const y = 392.125; // Coordenada y
+            // const x = 162; // Coordenada x
+            // const y = 392.125; // Coordenada y
+            const x = 526.5; // Coordenada x
+            const y = 440.45001220; // Coordenada y
             const dniField = newWindow.document.elementFromPoint(x, y);
             // const dniField = newWindow.document.getElementById("ion-input-0");
             
