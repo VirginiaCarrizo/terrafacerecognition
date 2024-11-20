@@ -164,7 +164,7 @@ socket.on('dni_confirmation_result', function(data) {
                     }
                 }, 100); // Tiempo para permitir que los cambios se procesen
             }
-
+            console.log('se presiono enter')
             // newWindow.addEventListener("keydown", function (event) {
             //     if (event.key === "Enter") {
             //         console.log("Tecla Enter detectada. Mostrando opción de imprimir.");
