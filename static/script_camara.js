@@ -145,10 +145,28 @@ socket.on('dni_confirmation_result', function(data) {
                 // Simula la tecla 'Enter' para enviar el formulario
                 dniField.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
 
-                alert('ya se presiono el enter')
-	    } else {
-                console.error("No se encontró el campo de DNI en la página.");
-            }
+                newWindow.addEventListener("keydown", function (event) {
+                    if (event.key === "Enter") {
+                        console.log("Tecla Enter detectada. Mostrando opción de imprimir.");
+                        newWindow.print();
+                    }
+                });
+        
+                // Manejar evento antes de imprimir
+                newWindow.addEventListener("beforeprint", function () {
+                    console.log("Se inició la impresión en la nueva ventana.");
+                });
+        
+                // Manejar evento después de imprimir
+                newWindow.addEventListener("afterprint", function () {
+                    console.log("Se terminó la impresión. Cerrando la ventana.");
+                    newWindow.close();
+                });
+        
+                // Fallback para navegadores sin soporte de eventos de impresión
+                newWindow.onbeforeunload = function () {
+                    console.log("La ventana ha sido cerrada.");
+            }    };
         };
     }
 });
