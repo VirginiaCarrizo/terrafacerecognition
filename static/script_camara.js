@@ -136,7 +136,7 @@ socket.on('dni_confirmation_result', function(data) {
             const dniField = newWindow.document.querySelector("input");
             
             if (dniField) {
-                dni = data.dni
+                dni = str(data.dni)
                 dni_modif = dni[2,10]
                 console.log(dni)
                 dniField.value = dni_modif; // Autocompleta el DNI
