@@ -254,7 +254,8 @@ def confirm_dni_response(data):
 
             logging.info("en el medio.")    
             # Navegar a la URL de terceros
-            page.goto('https://generalfoodargentina.movizen.com/pwa/inicio')
+            # page.goto('https://generalfoodargentina.movizen.com/pwa/inicio')
+            page.goto('www.google.com')
 
             # Esperar a que la página se cargue completamente
             page.wait_for_load_state('networkidle')
