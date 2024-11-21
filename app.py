@@ -18,7 +18,10 @@ from selenium.webdriver import Edge, EdgeOptions, ChromeOptions
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from playwright.sync_api import sync_playwright
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time
 import os
 from dotenv import load_dotenv
 import time
@@ -245,29 +248,32 @@ def confirm_dni_response(data):
         nro_orden = ref.child('order_general_food').get()
         ref.child('order_general_food').set(nro_orden + 1)
         logging.info("antes de entrar al with.")
-            # Utilizar Playwright para automatizar el navegador
-        with sync_playwright() as p:
-            # Puedes elegir entre 'chromium', 'firefox' o 'webkit'
-            browser = p.chromium.launch(headless=False)
-            page = browser.new_page()
+        
+        driver_path = "/usr/local/bin/chrome-linux64"  # Cambia esto por la ruta de tu controlador
+        url = "https://generalfoodargentina.movizen.com/pwa/inicio"
 
-            logging.info("en el medio.")    
-            # Navegar a la URL de terceros
-            page.goto('https://generalfoodargentina.movizen.com/pwa/inicio')
-            # page.goto('https://www.google.com')
+        # Inicializar el navegador
+        driver = webdriver.Chrome(executable_path=driver_path)
 
-            # Esperar a que la página se cargue completamente
-            page.wait_for_load_state('networkidle')
-            logging.info('esperando')
-            # Esperar a que el campo de entrada esté disponible
-            page.wait_for_selector('input#ion-input-1')
+        driver.get(url)
 
-            # Ingresar el DNI en el campo de entrada
-            page.fill('input#ion-input-1', dni)
+        # Esperar a que la página cargue completamente
+        time.sleep(3)
 
-            # Presionar Enter
-            page.press('input#ion-input-1', 'Enter')
-            logging.info("ya presione enter.")    
+        # Localizar el campo de texto (modifica según el DOM de la página)
+        campo_input = driver.find_element(By.ID, "ion-input-1")  # Usa el selector correcto (ID, NAME, CSS_SELECTOR, etc.)
+        logging.info('paso el input')
+        # Rellenar el campo con el valor
+        campo_input.clear()  # Limpia el campo si es necesario
+        campo_input.send_keys(dni)
+
+        # Opcional: Presionar Enter o enviar el formulario
+        campo_input.send_keys(Keys.RETURN)
+
+        # Esperar para observar el resultado (opcional)
+        time.sleep(5)
+
+
 
         emit('dni_confirmation_result', {'status': 'success', 'dni': dni})
     else:
