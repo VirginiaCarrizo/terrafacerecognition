@@ -249,8 +249,7 @@ def confirm_dni_response(data):
         with sync_playwright() as p:
             # Puedes elegir entre 'chromium', 'firefox' o 'webkit'
             browser = p.chromium.launch(headless=False)
-            context = browser.new_context()
-            page = context.new_page()
+            page = browser.new_page()
 
             logging.info("en el medio.")    
             # Navegar a la URL de terceros

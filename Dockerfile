@@ -37,8 +37,11 @@ RUN apt-get update && \
 # Instala Playwright y sus navegadores
 RUN pip install --no-cache-dir playwright==1.38.0
 
-# Instala los navegadores necesarios para Playwright
-RUN playwright install --with-deps
+# Instala Playwright y sus navegadores
+RUN pip install --no-cache-dir playwright==1.38.0 && playwright install --with-deps
+
+# Establece variables de entorno para Xvfb
+ENV DISPLAY=:0
 
 # Establece el directorio de trabajo
 WORKDIR /app

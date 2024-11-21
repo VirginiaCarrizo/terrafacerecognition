@@ -5,4 +5,5 @@ services:
     ports:
       - "5000:5000"
     shm_size: '1gb'  # Aumenta el tamaño de la memoria compartida
-    
+    environment:
+      DISPLAY: ":0"  # Variable de entorno para Xvfb
