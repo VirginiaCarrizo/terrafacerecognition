@@ -21,6 +21,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
 import time
 import os
 from dotenv import load_dotenv
@@ -252,8 +253,8 @@ def confirm_dni_response(data):
         driver_path = "/usr/local/bin/chrome-linux64"  # Cambia esto por la ruta de tu controlador
         url = "https://generalfoodargentina.movizen.com/pwa/inicio"
 
-        # Inicializar el navegador
-        driver = webdriver.Chrome(executable_path=driver_path)
+        service = Service(driver_path)
+        driver = webdriver.Chrome(service=service)
 
         driver.get(url)
 
