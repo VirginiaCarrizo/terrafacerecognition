@@ -11,31 +11,42 @@ RUN apt-get update && \
     libnss3 \
     libgconf-2-4 \
     libxi6 \
+    libx11-xcb1 \
+    libdrm2 \
     libxcursor1 \
     libxss1 \
+    libappindicator3-1 \
     libxcomposite1 \
     libasound2 \
+    libgbm1 \
     libxrandr2 \
     libatk1.0-0 \
+    libatk-bridge2.0-0 \
+    libpangocairo-1.0-0 \
+    libcurl3-gnutls \
+    fonts-liberation \
     libgtk-3-0 \
     libxdamage1 \
     libxfixes3 \
+    libxext6 \
+    libgl1-mesa-glx \
     wget \
     gnupg2 \
     unzip \
     xvfb \
-    && apt-get clean
+    && rm -rf /var/lib/apt/lists/*
+    
 
 # Instala Google Chrome
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
     echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
     apt-get update && \
     apt-get install -y google-chrome-stable && \
-    apt-get clean
+    rm -rf /var/lib/apt/lists/*
 
-# Instala Chromedriver
+# Instala ChromeDriver
 RUN CHROME_DRIVER_VERSION=$(wget -qO- https://chromedriver.storage.googleapis.com/LATEST_RELEASE) && \
-    wget -O /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/${CHROME_DRIVER_VERSION}/chromedriver_linux64.zip && \
+    wget -q -O /tmp/chromedriver_linux64.zip "https://chromedriver.storage.googleapis.com/${CHROME_DRIVER_VERSION}/chromedriver_linux64.zip" && \
     unzip /tmp/chromedriver_linux64.zip -d /usr/local/bin/ && \
     rm /tmp/chromedriver_linux64.zip && \
     chmod +x /usr/local/bin/chromedriver

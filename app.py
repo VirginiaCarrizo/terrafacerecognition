@@ -246,11 +246,16 @@ def confirm_dni_response(data):
 
         # options = EdgeOptions()
         options = webdriver.ChromeOptions()
-        options.add_argument('--headless')  # Ejecuta en modo sin cabeza
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
-        options.add_argument('--disable-gpu')  # Puede ser opcional
-        options.add_argument('--window-size=1920x1080')  # Opcional, define el tamaño de la ventana
+        options.add_argument('--headless')  # Ejecuta Chrome en modo sin cabeza
+        options.add_argument('--no-sandbox')  # Desactiva el sandbox de seguridad
+        options.add_argument('--disable-dev-shm-usage')  # Evita problemas con /dev/shm
+        options.add_argument('--disable-gpu')  # Desactiva la aceleración por GPU (opcional)
+        options.add_argument('--window-size=1920,1080')  # Define el tamaño de la ventana
+        options.add_argument('--disable-extensions')  # Desactiva extensiones
+        options.add_argument('--disable-infobars')  # Desactiva la barra de información
+        options.add_argument('--disable-features=VizDisplayCompositor')  # Evita errores de renderizado
+        options.add_argument('--remote-debugging-port=9222')  # Habilita depuración remota (opcional)
+
   
         
         driver = webdriver.Chrome(options=options)
