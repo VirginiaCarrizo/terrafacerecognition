@@ -22,6 +22,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 import time
 import os
 from dotenv import load_dotenv
@@ -252,6 +253,12 @@ def confirm_dni_response(data):
         
         driver_path = "/usr/local/bin/chrome-linux64"  # Cambia esto por la ruta de tu controlador
         url = "https://generalfoodargentina.movizen.com/pwa/inicio"
+
+        options = Options()
+        options.binary_location = driver_path  # Indicar la ubicación del binario de Chrome
+        options.add_argument("--headless")     # Modo sin interfaz gráfica
+        options.add_argument("--no-sandbox")   # Evita problemas en entornos sin permisos completos
+        options.add_argument("--disable-dev-shm-usage")  # Mejora el uso de memoria compartida
 
         service = Service(driver_path)
         driver = webdriver.Chrome(service=service)
