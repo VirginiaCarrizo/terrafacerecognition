@@ -18,6 +18,7 @@ from selenium.webdriver import Edge, EdgeOptions, ChromeOptions
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from playwright.sync_api import sync_playwright
 import os
 from dotenv import load_dotenv
 import time
@@ -243,34 +244,27 @@ def confirm_dni_response(data):
         ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         nro_orden = ref.child('order_general_food').get()
         ref.child('order_general_food').set(nro_orden + 1)
+        logging.info("antes de entrar al with.")
+            # Utilizar Playwright para automatizar el navegador
+        with sync_playwright() as p:
+            # Puedes elegir entre 'chromium', 'firefox' o 'webkit'
+            browser = p.chromium.launch(headless=True)
+            context = browser.new_context()
+            page = context.new_page()
 
-        # options = EdgeOptions()
-        options = webdriver.ChromeOptions()
-        options.add_argument('--headless')  # Ejecuta Chrome en modo sin cabeza
-        options.add_argument('--no-sandbox')  # Desactiva el sandbox de seguridad
-        options.add_argument('--disable-dev-shm-usage')  # Evita problemas con /dev/shm
-        options.add_argument('--disable-gpu')  # Desactiva la aceleración por GPU (opcional)
-        options.add_argument('--window-size=1920,1080')  # Define el tamaño de la ventana
-        options.add_argument('--disable-extensions')  # Desactiva extensiones
-        options.add_argument('--disable-infobars')  # Desactiva la barra de información
-        options.add_argument('--disable-features=VizDisplayCompositor')  # Evita errores de renderizado
-        options.add_argument('--remote-debugging-port=9222')  # Habilita depuración remota (opcional)
+            logging.info("en el medio.")    
+            # Navegar a la URL de terceros
+            page.goto('https://generalfoodargentina.movizen.com/pwa/inicio')
 
-  
-        
-        driver = webdriver.Chrome(options=options)
-        # driver = Edge(options=options)
-        
-        logging.info("llegue hasta aca.")
-        driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
-        time.sleep(3)
-         # Encuentra el único input de la página
-        input_element = driver.find_element(By.TAG_NAME, "input")
+            # Esperar a que el campo de entrada esté disponible
+            page.wait_for_selector('input#ion-input-1')
 
-        # Escribe el dato en el campo de entrada
-        input_element.clear()
-        input_element.send_keys(data)
-        input_element.send_keys(Keys.RETURN)  # Opcional: Simula un Enter
+            # Ingresar el DNI en el campo de entrada
+            page.fill('input#ion-input-1', dni)
+
+            # Presionar Enter
+            page.press('input#ion-input-1', 'Enter')
+            logging.info("ya presione enter.")    
 
         emit('dni_confirmation_result', {'status': 'success', 'dni': dni})
     else:
