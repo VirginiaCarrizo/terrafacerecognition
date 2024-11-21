@@ -1,5 +1,5 @@
 # Usa una imagen base de Python con Debian Buster
-FROM python:3.11-buster
+FROM python:3.11-bullseye
 
 # Instala dependencias del sistema
 RUN apt-get update && \
