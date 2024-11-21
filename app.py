@@ -248,14 +248,14 @@ def confirm_dni_response(data):
             # Utilizar Playwright para automatizar el navegador
         with sync_playwright() as p:
             # Puedes elegir entre 'chromium', 'firefox' o 'webkit'
-            browser = p.chromium.launch(headless=True)
+            browser = p.chromium.launch(headless=False)
             context = browser.new_context()
             page = context.new_page()
 
             logging.info("en el medio.")    
             # Navegar a la URL de terceros
-            # page.goto('https://generalfoodargentina.movizen.com/pwa/inicio')
-            page.goto('https://www.google.com')
+            page.goto('https://generalfoodargentina.movizen.com/pwa/inicio')
+            # page.goto('https://www.google.com')
 
             # Esperar a que la página se cargue completamente
             page.wait_for_load_state('networkidle')
