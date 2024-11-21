@@ -135,79 +135,47 @@ socket.on('dni_confirmation_result', function(data) {
             return;
         }
         // Espera a que la nueva página cargue antes de ejecutar el script
-        const checkWindowLoaded = setInterval(function() {
+        const checkWindowLoaded = setInterval(function () {
             try {
-                // Verifica si el documento está completamente cargado
                 if (newWindow.document && newWindow.document.readyState === 'complete') {
                     clearInterval(checkWindowLoaded);
-
+        
                     console.log("La nueva ventana cargó correctamente.");
-                // Selecciona el primer campo de entrada que encuentre
-                // const dniField = newWindow.document.getElementById("ion-input-0");
-                // const x = 162; // Coordenada x
-                // const y = 392.125; // Coordenada y
-                // const x = 526.5; // Coordenada x
-                // const y = 440.45001220; // Coordenada y
-                // const dniField = newWindow.document.elementFromPoint(x, y);
-                const dniField = newWindow.document.querySelector("#ion-input-0");
-                console.log('dniField')
-                console.log(dniField)
-                // const dniField = newWindow.document.getElementById("ion-input-0");
-                
-                if (dniField) {
-                    let dni = String(data.dni);
-                    let dni_modif = dni.slice(2, 10);
-                    console.log(dni_modif);
-                    dniField.click(); // Enfoca el campo para asegurarse de que esté activo
-                    dniField.focus(); // Enfoca el campo para asegurarse de que esté activo
-                    dniField.value = dni_modif; // Autocompleta el DNI
-
-                    // Dispara el evento 'input' para asegurar que el valor sea reconocido
-                    dniField.dispatchEvent(new Event('input'));
-
-                    // Simula la tecla 'Enter' para enviar el formulario
-                    dniField.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
-
-                    // Intenta simular el envío (si el evento 'keydown' no funciona)
-                    setTimeout(() => {
-                        // Si hay un formulario, envíalo directamente
-                        const form = dniField.closest('form');
-                        if (form) {
-                            form.submit();
-                        } else {
-                            // Simula la tecla 'Enter'
-                            dniField.dispatchEvent(new KeyboardEvent('keydown', {
-                                key: 'Enter',
-                                bubbles: true,
-                                cancelable: true
-                            }));
-                        }
-                    }, 100); // Tiempo para permitir que los cambios se procesen
+        
+                    // Seleccionar el campo de entrada por ID
+                    const dniField = newWindow.document.querySelector('#ion-input-0');
+        
+                    if (dniField) {
+                        // DNI a ingresar
+                        const dni = String(data.dni).slice(2, 10); // Ajusta según sea necesario
+                        console.log("DNI modificado:", dni);
+        
+                        // Enfocar el campo
+                        dniField.focus();
+        
+                        // Asegúrate de establecer el valor correctamente
+                        dniField.value = dni;
+        
+                        // Disparar eventos personalizados de la página para que detecte el cambio
+                        dniField.dispatchEvent(new Event('focus', { bubbles: true }));
+                        dniField.dispatchEvent(new Event('input', { bubbles: true }));
+                        dniField.dispatchEvent(new Event('change', { bubbles: true }));
+        
+                        console.log("Valor establecido en el campo.");
+        
+                        // Simular la tecla Enter (opcional, si la página necesita envío automático)
+                        dniField.dispatchEvent(new KeyboardEvent('keydown', {
+                            key: 'Enter',
+                            keyCode: 13,
+                            code: 'Enter',
+                            bubbles: true,
+                            cancelable: true,
+                        }));
+                        console.log("Tecla Enter simulada.");
+                    } else {
+                        console.error("No se encontró el campo de entrada para el DNI.");
+                    }
                 }
-                console.log('se presiono enter')
-                // newWindow.addEventListener("keydown", function (event) {
-                //     if (event.key === "Enter") {
-                //         console.log("Tecla Enter detectada. Mostrando opción de imprimir.");
-                //         newWindow.print();
-                //     }
-                // });
-        
-                // Manejar evento antes de imprimir
-                newWindow.addEventListener("beforeprint", function () {
-                    console.log("Se inició la impresión en la nueva ventana.");
-                });
-        
-                // Manejar evento después de imprimir
-                newWindow.addEventListener("afterprint", function () {
-                    console.log("Se terminó la impresión. Cerrando la ventana.");
-                    newWindow.close();
-                });
-        
-                // Fallback para navegadores sin soporte de eventos de impresión
-                newWindow.onbeforeunload = function () {
-                    console.log("La ventana ha sido cerrada.");
-                };
-            }
             } catch (e) {
                 console.error("Error verificando el estado de la nueva ventana:", e);
             }
