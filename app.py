@@ -246,7 +246,12 @@ def confirm_dni_response(data):
 
         # options = EdgeOptions()
         options = webdriver.ChromeOptions()
-        options.add_argument("--disable-gpu")   
+        options.add_argument('--headless')  # Ejecuta en modo sin cabeza
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument('--disable-gpu')  # Puede ser opcional
+        options.add_argument('--window-size=1920x1080')  # Opcional, define el tamaño de la ventana
+  
         
         driver = webdriver.Chrome(options=options)
         # driver = Edge(options=options)
