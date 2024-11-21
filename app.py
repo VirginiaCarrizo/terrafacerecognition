@@ -14,7 +14,7 @@ import asyncio
 from playwright.async_api import async_playwright
 # Importaciones adicionales para Selenium
 from selenium import webdriver
-from selenium.webdriver import Edge, EdgeOptions
+from selenium.webdriver import Edge, EdgeOptions, ChromeOptions
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -244,10 +244,14 @@ def confirm_dni_response(data):
         nro_orden = ref.child('order_general_food').get()
         ref.child('order_general_food').set(nro_orden + 1)
 
-        options = EdgeOptions()
-        options.add_argument("--disable-gpu")
-
-        driver = Edge(options=options)
+        # options = EdgeOptions()
+        options = webdriver.ChromeOptions()
+        options.add_argument("--disable-gpu")   
+        
+        driver = webdriver.Chrome(options=options)
+        # driver = Edge(options=options)
+        
+        logging.info("llegue hasta aca.")
         driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
         time.sleep(3)
          # Encuentra el único input de la página

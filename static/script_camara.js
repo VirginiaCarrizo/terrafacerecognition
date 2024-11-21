@@ -126,6 +126,7 @@ captureButton.addEventListener('click', function() {
 // Recibir el resultado de la confirmación de DNI y abrir la web automáticamente si se confirma
 socket.on('dni_confirmation_result', function(data) {
     if (data.status === 'success') {
+        console.log('llegue hasta aca')
         try {
             newWindow.addEventListener("beforeprint", function () {
                 console.log("Se inició la impresión en la nueva ventana.");
