@@ -256,6 +256,9 @@ def confirm_dni_response(data):
             # Navegar a la URL de terceros
             page.goto('https://generalfoodargentina.movizen.com/pwa/inicio')
 
+            # Esperar a que la página se cargue completamente
+            page.wait_for_load_state('networkidle')
+            logging.info('esperando')
             # Esperar a que el campo de entrada esté disponible
             page.wait_for_selector('input#ion-input-1')
 
