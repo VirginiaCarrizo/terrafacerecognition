@@ -247,6 +247,44 @@ def confirm_dni_response(data):
     else:
         emit('dni_confirmation_result', {'status': 'denied', 'dni': dni})
 
+
+@app.route('/escribir_dni', methods=['POST'])
+def escribir_dni():
+    try:
+        # Obtener DNI del cuerpo de la solicitud
+        dni = request.json.get('dni', None)
+        if not dni:
+            return jsonify({'error': 'DNI no proporcionado'}), 400
+
+        # Configurar Selenium
+        driver = webdriver.Chrome()  # Asegúrate de tener el driver de Chrome instalado
+        driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
+
+        # Buscar el campo del input y escribir el DNI
+        input_field = driver.find_element(By.CSS_SELECTOR, "#ion-input-0")
+        input_field.click()  # Activar el campo
+        input_field.clear()  # Limpiar contenido previo
+        input_field.send_keys(dni)  # Escribir el DNI
+        input_field.send_keys(Keys.ENTER)  # Enviar Enter para continuar
+
+        # Ejecutar un script para disparar el evento de confirmación en JS
+        driver.execute_script("""
+            const event = new CustomEvent('dni_written', { detail: { dni: arguments[0] } });
+            window.dispatchEvent(event);
+        """, dni)
+
+        # Esperar un tiempo para que las acciones se completen
+        time.sleep(5)
+
+        return jsonify({'status': 'success', 'message': 'DNI escrito y evento disparado'})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    finally:
+        # Cerrar el navegador después de la operación
+        driver.quit()
+
 # Función para ejecutar el evento de forma asincrónica en Flask-SocketIO
 # @socketio.on('open_page_and_enter_dni')
 # def handle_open_page_and_enter_dni(data):
