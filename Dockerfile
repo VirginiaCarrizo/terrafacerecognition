@@ -41,12 +41,14 @@ RUN pip install --no-cache-dir playwright==1.38.0
 RUN pip install --no-cache-dir playwright==1.38.0 && playwright install --with-deps
 
 # Install Google Chrome
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    dpkg -i google-chrome-stable_current_amd64.deb || apt-get -fy install && \
-    rm google-chrome-stable_current_amd64.deb
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /usr/share/keyrings/google-chrome.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && apt-get install -y google-chrome-stable && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install ChromeDriver (matching Chrome version)
-RUN wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/131.0.6778.85/linux64/chromedriver-linux64.zip && \
+RUN CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+') && \
+    wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/${CHROME_VERSION}/linux64/chromedriver-linux64.zip && \
     unzip chromedriver-linux64.zip && \
     mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver && \
     chmod +x /usr/local/bin/chromedriver && \
@@ -56,7 +58,7 @@ RUN wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/131.0.6778.
 ENV PATH="/usr/bin/google-chrome:${PATH}"
 
 # Establece variables de entorno para Xvfb
-ENV DISPLAY=:0
+ENV DISPLAY=:99
 
 # Establece el directorio de trabajo
 WORKDIR /app
@@ -72,4 +74,4 @@ COPY . .
 EXPOSE 5000
 
 # Ejecuta la aplicación en Xvfb para manejar la pantalla virtual
-CMD rm -f /tmp/.X0-lock && Xvfb :0 -screen 0 1024x768x16 & python app.py
+CMD rm -f /tmp/.X0-lock && Xvfb :99 -screen 0 1024x768x16 & python app.py

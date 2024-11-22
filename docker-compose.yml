@@ -4,6 +4,27 @@ services:
     build: .
     ports:
       - "5000:5000"
-    shm_size: '1gb'  # Aumenta el tamaño de la memoria compartida
+    shm_size: '1gb'  # Increase shared memory size to avoid Chrome crashes
     environment:
-      DISPLAY: ":0"  # Variable de entorno para Xvfb
+      DISPLAY: ":99"  # Match the DISPLAY variable used by Xvfb
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix  # Allow Xvfb to access the X11 display
+    depends_on:
+      - xvfb_service  # Ensure Xvfb is running before Flask starts
+    entrypoint:
+      - /bin/bash
+      - -c
+      - >
+        rm -f /tmp/.X0-lock &&
+        Xvfb :99 -screen 0 1024x768x16 &
+        python app.py
+
+  xvfb_service:
+    image: debian:buster  # Minimal Debian image for Xvfb
+    command: |
+      sh -c "
+      apt-get update &&
+      apt-get install -y xvfb &&
+      Xvfb :99 -screen 0 1024x768x16
+      "
+    shm_size: '1gb'
