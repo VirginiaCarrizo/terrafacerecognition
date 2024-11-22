@@ -40,17 +40,20 @@ RUN pip install --no-cache-dir playwright==1.38.0
 # Instala Playwright y sus navegadores
 RUN pip install --no-cache-dir playwright==1.38.0 && playwright install --with-deps
 
-# Instala Google Chrome
+# Install Google Chrome
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
     dpkg -i google-chrome-stable_current_amd64.deb || apt-get -fy install && \
     rm google-chrome-stable_current_amd64.deb
 
-# Install ChromeDriver (matching the Chrome version)
+# Install ChromeDriver (matching Chrome version)
 RUN wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/131.0.6778.85/linux64/chromedriver-linux64.zip && \
     unzip chromedriver-linux64.zip && \
     mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver && \
     chmod +x /usr/local/bin/chromedriver && \
     rm -rf chromedriver-linux64 chromedriver-linux64.zip
+
+# Ensure Chrome is in PATH
+ENV PATH="/usr/bin/google-chrome:${PATH}"
 
 # Establece variables de entorno para Xvfb
 ENV DISPLAY=:0

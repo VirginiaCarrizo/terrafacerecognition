@@ -252,13 +252,21 @@ def confirm_dni_response(data):
         logging.info("antes de entrar al with.")
         
         driver_path = "/usr/local/bin/chromedriver" # Cambia esto por la ruta de tu controlador
+        chrome_binary_path = "/usr/bin/google-chrome"
         url = "https://generalfoodargentina.movizen.com/pwa/inicio"
 
         options = Options()
-        options.binary_location = driver_path  # Indicar la ubicación del binario de Chrome
-        options.add_argument("--headless")     # Modo sin interfaz gráfica
-        options.add_argument("--no-sandbox")   # Evita problemas en entornos sin permisos completos
-        options.add_argument("--disable-dev-shm-usage")  # Mejora el uso de memoria compartida
+        options.binary_location = chrome_binary_path
+        options.add_argument("--headless")  # Run in headless mode
+        options.add_argument("--no-sandbox")  # Required for Docker environments
+        options.add_argument("--disable-dev-shm-usage")  # Avoid shared memory issues
+        options.add_argument("--disable-gpu")  # Disable GPU (optional but recommended)
+        options.add_argument("--disable-crash-reporter")
+        options.add_argument("--disable-extensions")
+        options.add_argument("--disable-in-process-stack-traces")
+        options.add_argument("--disable-logging")
+        options.add_argument("--log-level=3")
+        options.add_argument("--output=/dev/null")
 
         service = Service(driver_path)
         driver = webdriver.Chrome(service=service)
