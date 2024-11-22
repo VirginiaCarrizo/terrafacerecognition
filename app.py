@@ -268,6 +268,7 @@ def confirm_dni_response(data):
         options.add_argument("--disable-crash-reporter")
         options.add_argument("--disable-infobars")
         options.add_argument("--disable-dev-tools")
+        options.add_argument('--remote-debugging-pipe')
 
         service = Service(driver_path)
         driver = webdriver.Chrome(service=service)
