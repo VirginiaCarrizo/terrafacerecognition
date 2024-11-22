@@ -251,7 +251,7 @@ def confirm_dni_response(data):
         ref.child('order_general_food').set(nro_orden + 1)
         logging.info("antes de entrar al with.")
         
-        driver_path = "/usr/local/bin/chrome-linux64"  # Cambia esto por la ruta de tu controlador
+        driver_path = "/usr/local/bin/chromedriver" # Cambia esto por la ruta de tu controlador
         url = "https://generalfoodargentina.movizen.com/pwa/inicio"
 
         options = Options()

@@ -45,12 +45,12 @@ RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
     dpkg -i google-chrome-stable_current_amd64.deb || apt-get -fy install && \
     rm google-chrome-stable_current_amd64.deb
 
-# Instala ChromeDriver
-RUN wget https://storage.googleapis.com/chrome-for-testing-public/131.0.6778.85/linux64/chrome-linux64.zip && \
-    unzip chrome-linux64.zip && \
-    mv chrome-linux64 /usr/local/bin/chrome-linux64 && \
-    chmod +x /usr/local/bin/chrome-linux64 && \
-    rm chrome-linux64.zip
+# Install ChromeDriver (matching the Chrome version)
+RUN wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/131.0.6778.85/linux64/chromedriver-linux64.zip && \
+    unzip chromedriver-linux64.zip && \
+    mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver && \
+    chmod +x /usr/local/bin/chromedriver && \
+    rm -rf chromedriver-linux64 chromedriver-linux64.zip
 
 # Establece variables de entorno para Xvfb
 ENV DISPLAY=:0
