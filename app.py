@@ -252,14 +252,13 @@ def confirm_dni_response(data):
         logging.info("antes de entrar al with.")
         
         driver_path = "/usr/local/bin/chromedriver" # Cambia esto por la ruta de tu controlador
-        chrome_binary_path = "/usr/bin/google-chrome"
         url = "https://generalfoodargentina.movizen.com/pwa/inicio"
 
         options = Options()
-        options.binary_location = chrome_binary_path
-        options.add_argument("--headless")  # Run in headless mode
-        options.add_argument("--no-sandbox")  # Required in Docker
-        options.add_argument("--disable-dev-shm-usage")  # Address shared memory issues
+        options.binary_location = "/usr/bin/google-chrome"
+        options.add_argument("--headless")  # Ejecuta en modo headless
+        options.add_argument("--no-sandbox")  # Requerido en Docker
+        options.add_argument("--disable-dev-shm-usage")  # Soluciona problemas de memoria compartida
         options.add_argument("--disable-gpu")
         options.add_argument("--disable-extensions")
         options.add_argument("--disable-software-rasterizer")
@@ -268,10 +267,10 @@ def confirm_dni_response(data):
         options.add_argument("--disable-crash-reporter")
         options.add_argument("--disable-infobars")
         options.add_argument("--disable-dev-tools")
-        options.add_argument('--remote-debugging-pipe')
+        options.add_argument('--remote-debugging-port=9222')  # Usa un puerto para la depuración remota
 
-        service = Service(driver_path)
-        driver = webdriver.Chrome(service=service)
+
+        driver = webdriver.Chrome(options=options)
         driver.get(url)
 
         # Esperar a que la página cargue completamente
