@@ -34,29 +34,23 @@ RUN apt-get update && \
     xvfb \
     && rm -rf /var/lib/apt/lists/*
 
-# Instala Playwright y sus navegadores
-RUN pip install --no-cache-dir playwright==1.38.0
-
-# Instala Playwright y sus navegadores
-RUN pip install --no-cache-dir playwright==1.38.0 && playwright install --with-deps
-
-# Install Google Chrome
+# Añade el repositorio de Google Chrome y su clave
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /usr/share/keyrings/google-chrome.gpg && \
-    echo "deb [signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
-    apt-get update && apt-get install -y google-chrome-stable && \
-    rm -rf /var/lib/apt/lists/*
+    echo "deb [signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
 
-# Install ChromeDriver matching the Chrome version
-RUN CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+'); \
-    CHROMEDRIVER_VERSION=$(wget -qO- "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json" | grep -oP "(?<=\"$CHROME_VERSION\":\").*?(?=\")" | head -1); \
-    wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$CHROME_VERSION/linux64/chromedriver-linux64.zip; \
-    unzip chromedriver-linux64.zip; \
-    mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver; \
-    chmod -R 777 /usr/local/bin/chromedriver; \
-    rm -rf chromedriver-linux64 chromedriver-linux64.zip
+# Instala Google Chrome
+RUN apt-get update && apt-get install -y google-chrome-stable && rm -rf /var/lib/apt/lists/*
 
-# Ensure Chrome is in PATH
-ENV PATH="/usr/bin/google-chrome:${PATH}"
+# Instala chromedriver correspondiente a la versión de Chrome instalada
+RUN CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+') && \
+    CHROMEDRIVER_VERSION=$(wget -qO- "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION%.*}") && \
+    wget -O /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" && \
+    unzip /tmp/chromedriver.zip -d /usr/local/bin/ && \
+    chmod +x /usr/local/bin/chromedriver && \
+    rm /tmp/chromedriver.zip
+
+# Establece la variable de entorno para el PATH
+ENV PATH="/usr/local/bin:/usr/bin/google-chrome:${PATH}"
 
 # Establece variables de entorno para Xvfb
 ENV DISPLAY=:99
@@ -74,5 +68,5 @@ COPY . .
 # Expone el puerto de Flask
 EXPOSE 5000
 
-# Ejecuta la aplicación en Xvfb para manejar la pantalla virtual
-CMD rm -f /tmp/.X0-lock && Xvfb :99 -screen 0 1024x768x16 & python app.py
+# Ejecuta la aplicación
+CMD Xvfb :99 -screen 0 1024x768x16 & python app.py
