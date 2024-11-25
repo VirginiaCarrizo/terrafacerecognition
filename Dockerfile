@@ -4,6 +4,7 @@ FROM python:3.11-bullseye
 # Instala dependencias del sistema
 RUN apt-get update && \
     apt-get install -y \
+    apt-utils \ 
     cmake \
     build-essential \
     libgl1 \
@@ -47,8 +48,10 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
     rm -rf /var/lib/apt/lists/*
 
 # Configurar Xvfb y VNC
-RUN mkdir ~/.vnc && echo "password" | vncpasswd -f > ~/.vnc/passwd && chmod 600 ~/.vnc/passwd
-
+RUN mkdir -p ~/.vnc && \
+    x11vnc -storepasswd password ~/.vnc/passwd && \
+    chmod 600 ~/.vnc/passwd
+    
 # Establece el directorio de trabajo
 WORKDIR /app
 
