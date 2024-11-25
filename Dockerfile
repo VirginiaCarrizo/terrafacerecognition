@@ -32,28 +32,22 @@ RUN apt-get update && \
     gnupg2 \
     unzip \
     xvfb \
+    x11vnc \
+    fluxbox \
+    chromium \
+    chromium-driver \
+    python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
-# Añade el repositorio de Google Chrome y su clave
-RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /usr/share/keyrings/google-chrome.gpg && \
-    echo "deb [signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+# Instala Google Chrome y Chromedriver
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && \
+    apt-get install -y google-chrome-stable chromium-driver && \
+    rm -rf /var/lib/apt/lists/*
 
-# Instala Google Chrome
-RUN apt-get update && apt-get install -y google-chrome-stable && rm -rf /var/lib/apt/lists/*
-
-# Instala chromedriver correspondiente a la versión de Chrome instalada
-RUN CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+') && \
-    CHROMEDRIVER_VERSION=$(wget -qO- "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION%.*}") && \
-    wget -O /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" && \
-    unzip /tmp/chromedriver.zip -d /usr/local/bin/ && \
-    chmod +x /usr/local/bin/chromedriver && \
-    rm /tmp/chromedriver.zip
-
-# Establece la variable de entorno para el PATH
-ENV PATH="/usr/local/bin:/usr/bin/google-chrome:${PATH}"
-
-# Establece variables de entorno para Xvfb
-ENV DISPLAY=:99
+# Configurar Xvfb y VNC
+RUN mkdir ~/.vnc && echo "password" | vncpasswd -f > ~/.vnc/passwd && chmod 600 ~/.vnc/passwd
 
 # Establece el directorio de trabajo
 WORKDIR /app
@@ -65,8 +59,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copia el resto del código de la aplicación
 COPY . .
 
-# Expone el puerto de Flask
-EXPOSE 5000
+# Expone el puerto de Flask y VNC
+EXPOSE 5000 5900
 
 # Ejecuta la aplicación
-CMD Xvfb :99 -screen 0 1024x768x16 & python app.py
+CMD Xvfb :99 -screen 0 1920x1080x24 & \
+    fluxbox & \
+    x11vnc -display :99 -forever -nopw -rfbport 5900 & \
+    python3 app.py

@@ -254,44 +254,42 @@ def confirm_dni_response(data):
         driver_path = "/usr/local/bin/chromedriver" # Cambia esto por la ruta de tu controlador
         url = "https://generalfoodargentina.movizen.com/pwa/inicio"
 
-        options = Options()
-        options.binary_location = "/usr/bin/google-chrome"
-        options.add_argument("--headless")  # Ejecuta en modo headless
-        options.add_argument("--no-sandbox")  # Requerido en Docker
-        options.add_argument("--disable-dev-shm-usage")  # Soluciona problemas de memoria compartida
-        options.add_argument("--disable-gpu")
-        options.add_argument("--disable-extensions")
-        options.add_argument("--disable-software-rasterizer")
-        options.add_argument("--disable-logging")
-        options.add_argument("--log-level=3")
-        options.add_argument("--disable-crash-reporter")
-        options.add_argument("--disable-infobars")
-        options.add_argument("--disable-dev-tools")
-        options.add_argument('--remote-debugging-port=9222')  # Usa un puerto para la depuración remota
+        chrome_options = Options()
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--start-maximized")
+        chrome_options.add_argument("--window-size=1920x1080")
+        chrome_options.add_argument("--disable-infobars")
 
+        # Inicializa el navegador con el controlador y opciones
+        driver = webdriver.Chrome(executable_path=driver_path, options=chrome_options)
+        try:
+            driver.get(url)
 
-        driver = webdriver.Chrome(options=options)
-        driver.get(url)
+            # Esperar a que la página cargue completamente
+            time.sleep(3)
 
-        # Esperar a que la página cargue completamente
-        time.sleep(3)
+            # Localizar el campo de texto (modifica según el DOM de la página)
+            campo_input = driver.find_element(By.ID, "ion-input-1")  # Usa el selector correcto (ID, NAME, CSS_SELECTOR, etc.)
+            logging.info('paso el input')
+            # Rellenar el campo con el valor
+            campo_input.clear()  # Limpia el campo si es necesario
+            campo_input.send_keys(dni)
 
-        # Localizar el campo de texto (modifica según el DOM de la página)
-        campo_input = driver.find_element(By.ID, "ion-input-1")  # Usa el selector correcto (ID, NAME, CSS_SELECTOR, etc.)
-        logging.info('paso el input')
-        # Rellenar el campo con el valor
-        campo_input.clear()  # Limpia el campo si es necesario
-        campo_input.send_keys(dni)
+            # Opcional: Presionar Enter o enviar el formulario
+            campo_input.send_keys(Keys.RETURN)
 
-        # Opcional: Presionar Enter o enviar el formulario
-        campo_input.send_keys(Keys.RETURN)
+            # Esperar para observar el resultado (opcional)
+            time.sleep(5)
 
-        # Esperar para observar el resultado (opcional)
-        time.sleep(5)
+            emit('dni_confirmation_result', {'status': 'success', 'dni': dni})
 
-
-
-        emit('dni_confirmation_result', {'status': 'success', 'dni': dni})
+        except Exception as e:
+            logging.error(f"Error durante la automatización: {e}")
+            emit('dni_confirmation_result', {'status': 'error', 'dni': dni})
+        finally:
+            driver.quit()
     else:
         emit('dni_confirmation_result', {'status': 'denied', 'dni': dni})
 

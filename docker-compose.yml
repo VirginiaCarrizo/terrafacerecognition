@@ -4,6 +4,7 @@ services:
     build: .
     ports:
       - "5000:5000"
+      - "5900:5900"  # Puerto para VNC
     shm_size: '1gb'  # Aumenta el tamaño de la memoria compartida para evitar que Chrome se bloquee
     environment:
       DISPLAY: ":99"
