@@ -39,7 +39,7 @@ RUN apt-get update && \
 
 RUN apt-get update -qq -y && \
     apt-get install -y \
-    libgtk-4-1 \
+    libgtk-3-0 \
     xdg-utils \
     wget && \
     wget -q -O chrome-linux64.zip https://bit.ly/chrome-linux64-121-0-6167-85 && \
