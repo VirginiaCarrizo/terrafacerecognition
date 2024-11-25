@@ -11,7 +11,6 @@ from datetime import datetime
 import re
 import logging
 import asyncio
-from playwright.async_api import async_playwright
 # Importaciones adicionales para Selenium
 from selenium import webdriver
 from selenium.webdriver import Edge, EdgeOptions, ChromeOptions
