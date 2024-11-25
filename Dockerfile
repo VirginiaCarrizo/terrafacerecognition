@@ -32,8 +32,6 @@ RUN apt-get update && \
     gnupg2 \
     unzip \
     xvfb \
-    chromium \
-    chromium-driver \
     python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
