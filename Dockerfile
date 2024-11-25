@@ -62,8 +62,9 @@ COPY . .
 # Expone el puerto de Flask y VNC
 EXPOSE 5000 5900
 
-# Ejecuta la aplicación
-CMD Xvfb :99 -screen 0 1920x1080x24 & \
+# Limpia el perfil de usuario antes de iniciar Chrome
+CMD rm -rf /root/.config/google-chrome/Default && \
+    Xvfb :99 -screen 0 1920x1080x24 & \
     fluxbox & \
     x11vnc -display :99 -forever -nopw -rfbport 5900 & \
     python3 app.py
