@@ -29,7 +29,6 @@ RUN apt-get update && \
     libdrm2 \
     libgbm1 \
     libxfixes3 \
-    wget \
     gnupg2 \
     unzip \
     xvfb \
@@ -38,18 +37,20 @@ RUN apt-get update && \
     python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
-# Instalar Google Chrome versión 114
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
-    apt-get update && \
-    apt-get install -y google-chrome-stable=114.0.5735.90-1 && \
-    rm -rf /var/lib/apt/lists/*
-
-# Instalar ChromeDriver versión 114
-RUN wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip && \
-    unzip /tmp/chromedriver.zip -d /usr/bin/ && \
-    chmod +x /usr/bin/chromedriver && \
-    rm /tmp/chromedriver.zip
+RUN apt-get update -qq -y && \
+    apt-get install -y \
+    libgtk-4-1 \
+    xdg-utils \
+    wget && \
+    wget -q -O chrome-linux64.zip https://bit.ly/chrome-linux64-121-0-6167-85 && \
+    unzip chrome-linux64.zip && \
+    rm chrome-linux64.zip && \
+    mv chrome-linux64 /opt/chrome/ && \
+    ln -s /opt/chrome/chrome /usr/local/bin/ && \
+    wget -q -O chromedriver-linux64.zip https://bit.ly/chromedriver-linux64-121-0-6167-85 && \
+    unzip -j chromedriver-linux64.zip chromedriver-linux64/chromedriver && \
+    rm chromedriver-linux64.zip && \
+    mv chromedriver /usr/local/bin/
 
 # Establece el directorio de trabajo
 WORKDIR /app
