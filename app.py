@@ -26,6 +26,7 @@ import time
 import os
 from dotenv import load_dotenv
 import time
+from chromedriver_py import binary_path 
 
 # Configuración básica para el logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
@@ -249,43 +250,44 @@ def confirm_dni_response(data):
         nro_orden = ref.child('order_general_food').get()
         ref.child('order_general_food').set(nro_orden + 1)
         logging.info("antes de entrar al with.")
+
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--disable-gpu") # Usa un puerto para la depuración remota
+
+
+        svc = Service(executable_path=binary_path)
+        driver = webdriver.Chrome(service=svc, options=chrome_options)
         
-        driver_path = "/usr/local/bin/chromedriver" # Cambia esto por la ruta de tu controlador
-        url = "https://generalfoodargentina.movizen.com/pwa/inicio"
-
-        options = Options()
-        options.binary_location = "/usr/bin/google-chrome"
-        options.add_argument("--headless")  # Ejecuta en modo headless
-        options.add_argument("--no-sandbox")  # Requerido en Docker
-        options.add_argument("--disable-dev-shm-usage")  # Soluciona problemas de memoria compartida
-        options.add_argument("--disable-gpu")
-        options.add_argument("--disable-extensions")
-        options.add_argument("--disable-software-rasterizer")
-        options.add_argument("--disable-logging")
-        options.add_argument("--log-level=3")
-        options.add_argument("--disable-crash-reporter")
-        options.add_argument("--disable-infobars")
-        options.add_argument("--disable-dev-tools")
-        options.add_argument('--remote-debugging-port=9222')  # Usa un puerto para la depuración remota
-
-
-        driver = webdriver.Chrome(options=options)
-        driver.get(url)
+        driver.get("https://generalfoodargentina.movizen.com/pwa")
 
         # Esperar a que la página cargue completamente
+           # Wait for the page to load
         time.sleep(3)
+        
+        input_field = driver.find_element("id", "ion-input-0")
+        input_field.send_keys("terragene")
+        
+        # Simulate pressing ENTER to submit and wait for navigation
+        input_field.send_keys(Keys.RETURN)
+        time.sleep(5)  # Adjust based on your network speed
 
-        # Localizar el campo de texto (modifica según el DOM de la página)
-        campo_input = driver.find_element(By.ID, "ion-input-1")  # Usa el selector correcto (ID, NAME, CSS_SELECTOR, etc.)
-        logging.info('paso el input')
-        # Rellenar el campo con el valor
-        campo_input.clear()  # Limpia el campo si es necesario
-        campo_input.send_keys(dni)
-
-        # Opcional: Presionar Enter o enviar el formulario
-        campo_input.send_keys(Keys.RETURN)
-
-        # Esperar para observar el resultado (opcional)
+        # Step 2: Navigate to the second page
+        driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
+        
+        # Wait for the page to load
+        time.sleep(3)
+        
+        # Find the input field and enter "44291507"
+        input_field = driver.find_element("id", "ion-input-0")
+        input_field.send_keys(dni_confirmed)
+        
+        # Simulate pressing ENTER to submit
+        input_field.send_keys(Keys.RETURN)
+        
+        # Optional: Wait to observe the result
         time.sleep(5)
 
 
