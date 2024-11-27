@@ -7,3 +7,4 @@ face_recognition
 pickle-mixin
 selenium
 webdriver-manager
+chromedriver-py
