@@ -60,24 +60,6 @@ firebase_admin.initialize_app(cred, {
 })
 bucket = storage.bucket()
 
-
-# Define la lista de IPs permitidas
-#nslookup myip.opendns.com resolver1.opendns.com
-
-ALLOWED_IPS = {'127.29.0.1'}  # Reemplaza con la IP pública de tu computadora
-
-# Middleware para restringir acceso a rutas que comiencen con /terrarrhh
-@app.before_request
-def restrict_access():
-    # Verifica si la ruta solicitada comienza con /terrarrhh
-    if request.path.startswith('/terrarrhh'):
-        client_ip = request.remote_addr  # Obtiene la IP del cliente
-        # Si la IP no está permitida, retorna un error 403
-        if client_ip not in ALLOWED_IPS:
-            logging.warning(f"Acceso denegado para la IP: {client_ip}")
-            abort(403)  # Responde con un error 403 Forbidden
-
-
 @app.route('/terrarrhh', strict_slashes=False)
 def index():
     return render_template('index.html')
