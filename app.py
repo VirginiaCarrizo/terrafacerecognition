@@ -62,7 +62,9 @@ bucket = storage.bucket()
 
 
 # Define la lista de IPs permitidas
-ALLOWED_IPS = {'172.31.130.66'}  # Reemplaza con la IP pública de tu computadora
+#nslookup myip.opendns.com resolver1.opendns.com
+
+ALLOWED_IPS = {'190.216.87.234'}  # Reemplaza con la IP pública de tu computadora
 
 # Middleware para restringir acceso a rutas que comiencen con /terrarrhh
 @app.before_request
