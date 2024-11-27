@@ -278,7 +278,6 @@ def confirm_dni_response(data):
         svc = Service(executable_path=binary_path)
         driver = webdriver.Chrome(service=svc, options=chrome_options)
         
-<<<<<<< HEAD
         driver_path = "/usr/local/bin/chromedriver" # Cambia esto por la ruta de tu controlador
         url = "https://generalfoodargentina.movizen.com/pwa/inicio"
 
@@ -300,9 +299,6 @@ def confirm_dni_response(data):
 
         driver = webdriver.Chrome(options=options)
         driver.get(url)
-=======
-        driver.get("https://generalfoodargentina.movizen.com/pwa")
->>>>>>> 88f22412c12537ba27752c451995431ed957a2f4
 
         # Esperar a que la página cargue completamente
            # Wait for the page to load
