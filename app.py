@@ -72,7 +72,8 @@ def restrict_access():
     # Verifica si la ruta solicitada comienza con /terrarrhh
     if request.path.startswith('/terrarrhh'):
         client_ip = request.remote_addr  # Obtiene la IP del cliente
-
+        logging.info("client_ip")
+        logging.info(client_ip)
         # Si la IP no está permitida, retorna un error 403
         if client_ip not in ALLOWED_IPS:
             logging.warning(f"Acceso denegado para la IP: {client_ip}")
