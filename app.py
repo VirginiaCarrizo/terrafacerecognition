@@ -62,7 +62,7 @@ bucket = storage.bucket()
 
 
 # Define la lista de IPs permitidas
-ALLOWED_IPS = {'190.11.32.34'}  # Reemplaza con la IP pública de tu computadora
+ALLOWED_IPS = {'172.28.96.1'}  # Reemplaza con la IP pública de tu computadora
 
 # Middleware para restringir acceso a rutas que comiencen con /terrarrhh
 @app.before_request
