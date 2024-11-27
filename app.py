@@ -64,7 +64,7 @@ bucket = storage.bucket()
 # Define la lista de IPs permitidas
 #nslookup myip.opendns.com resolver1.opendns.com
 
-ALLOWED_IPS = {'190.216.87.234'}  # Reemplaza con la IP pública de tu computadora
+ALLOWED_IPS = {'127.28.0.1'}  # Reemplaza con la IP pública de tu computadora
 
 # Middleware para restringir acceso a rutas que comiencen con /terrarrhh
 @app.before_request
@@ -72,8 +72,6 @@ def restrict_access():
     # Verifica si la ruta solicitada comienza con /terrarrhh
     if request.path.startswith('/terrarrhh'):
         client_ip = request.remote_addr  # Obtiene la IP del cliente
-        logging.info("client_ip")
-        logging.info(client_ip)
         # Si la IP no está permitida, retorna un error 403
         if client_ip not in ALLOWED_IPS:
             logging.warning(f"Acceso denegado para la IP: {client_ip}")
