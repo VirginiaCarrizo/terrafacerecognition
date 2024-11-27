@@ -37,7 +37,7 @@ def cliente(dni_confirmed):
 
     try:
         # Conectar al servidor local Flask-SocketIO
-        sio.connect('http://190.11.32.34:5000')  # Reemplaza <IP_LOCAL> con la IP de tu máquina local
+        sio.connect('http://190.216.87.234:5000')  # Reemplaza <IP_LOCAL> con la IP de tu máquina local
 
         # Enviar mensaje al servidor
         logging.info(f"Enviando dni_confirmed: {dni_confirmed}")
