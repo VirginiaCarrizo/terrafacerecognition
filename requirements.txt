@@ -8,3 +8,4 @@ pickle-mixin
 selenium
 webdriver-manager
 chromedriver-py
+eventlet

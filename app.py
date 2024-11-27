@@ -27,6 +27,28 @@ import os
 from dotenv import load_dotenv
 import time
 from chromedriver_py import binary_path 
+import socketio
+
+def cliente(dni_confirmed):
+    import socketio  # Asegúrate de importar socketio aquí si no lo tienes al inicio del archivo.
+
+    # Crear un cliente SocketIO
+    sio = socketio.Client()
+
+    try:
+        # Conectar al servidor local Flask-SocketIO
+        sio.connect('http://190.11.32.34:5000')  # Reemplaza <IP_LOCAL> con la IP de tu máquina local
+
+        # Enviar mensaje al servidor
+        logging.info(f"Enviando dni_confirmed: {dni_confirmed}")
+        sio.emit('dni_confirmed_event', {'dni_confirmed': dni_confirmed})
+
+    except Exception as e:
+        logging.error(f"Error al conectar o enviar el mensaje: {e}")
+    finally:
+        # Cerrar la conexión
+        sio.disconnect()
+
 
 # Configuración básica para el logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
@@ -250,66 +272,8 @@ def confirm_dni_response(data):
         nro_orden = ref.child('order_general_food').get()
         ref.child('order_general_food').set(nro_orden + 1)
         logging.info("antes de entrar al with.")
-
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
-        chrome_options.add_argument("--no-sandbox")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.add_argument("--disable-gpu") # Usa un puerto para la depuración remota
-
-
-        svc = Service(executable_path=binary_path)
-        driver = webdriver.Chrome(service=svc, options=chrome_options)
         
-        driver_path = "/usr/local/bin/chromedriver" # Cambia esto por la ruta de tu controlador
-        url = "https://generalfoodargentina.movizen.com/pwa/inicio"
-
-        options = Options()
-        options.binary_location = "/usr/local/bin/chrome"
-        options.add_argument("--headless")  # Ejecuta en modo headless
-        options.add_argument("--no-sandbox")  # Requerido en Docker
-        options.add_argument("--disable-dev-shm-usage")  # Soluciona problemas de memoria compartida
-        options.add_argument("--disable-gpu")
-        options.add_argument("--disable-extensions")
-        options.add_argument("--disable-software-rasterizer")
-        options.add_argument("--disable-logging")
-        options.add_argument("--log-level=3")
-        options.add_argument("--disable-crash-reporter")
-        options.add_argument("--disable-infobars")
-        options.add_argument("--disable-dev-tools")
-        options.add_argument('--remote-debugging-port=9222')  # Usa un puerto para la depuración remota
-
-
-        driver = webdriver.Chrome(options=options)
-        driver.get(url)
-
-        # Esperar a que la página cargue completamente
-           # Wait for the page to load
-        time.sleep(3)
-        
-        input_field = driver.find_element("id", "ion-input-0")
-        input_field.send_keys("terragene")
-        
-        # Simulate pressing ENTER to submit and wait for navigation
-        input_field.send_keys(Keys.RETURN)
-        time.sleep(5)  # Adjust based on your network speed
-
-        # Step 2: Navigate to the second page
-        driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
-        
-        # Wait for the page to load
-        time.sleep(3)
-        
-        # Find the input field and enter "44291507"
-        input_field = driver.find_element("id", "ion-input-0")
-        input_field.send_keys(dni_confirmed)
-        
-        # Simulate pressing ENTER to submit
-        input_field.send_keys(Keys.RETURN)
-        
-        # Optional: Wait to observe the result
-        time.sleep(5)
-
+        cliente(dni_confirmed)
 
 
         emit('dni_confirmation_result', {'status': 'success', 'dni': dni})
