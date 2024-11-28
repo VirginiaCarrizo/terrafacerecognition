@@ -32,7 +32,7 @@ from chromedriver_py import binary_path
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 
 app = Flask(__name__, static_url_path='/terrarrhh/static', static_folder='static')
-socketio = SocketIO(app, cors_allowed_origins="https://terragene.life", path='/terrarrhh/socket.io', transports=["websocket", "polling"])
+socketio = SocketIO(app, cors_allowed_origins="*", path='/terrarrhh/socket.io', transports=["websocket", "polling"])
 cuil_value = ""  # Variable global para almacenar el cuil
 
 # Cargar las variables de entorno desde el archivo .env
@@ -237,6 +237,23 @@ def submit_image():
         logging.info(f"Error en el reconocimiento facial: {e}")
         return jsonify({"status": "error", "message": "Ocurrió un error en el servidor"}), 500
     
+
+def cliente():
+    # Crear un cliente SocketIO
+    sio = socketio.Client()
+
+    # Conectar al servidor
+    sio.connect('http://192.168.1.100:12345')  # Cambia la IP y puerto si es necesario
+
+    # Enviar mensaje
+    mensaje = "Hola, este es un mensaje entre computadoras!"
+    sio.send(mensaje)
+
+    # Cerrar conexión
+    sio.disconnect()
+
+
+
 @socketio.on('confirm_dni_response')
 def confirm_dni_response(data):
     dni_confirmed = data['confirmed']
@@ -250,65 +267,49 @@ def confirm_dni_response(data):
         nro_orden = ref.child('order_general_food').get()
         ref.child('order_general_food').set(nro_orden + 1)
         logging.info("antes de entrar al with.")
+        try:
 
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
-        chrome_options.add_argument("--no-sandbox")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.add_argument("--disable-gpu") # Usa un puerto para la depuración remota
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
+            chrome_options.add_argument("--no-sandbox")
+            chrome_options.add_argument("--disable-dev-shm-usage")
+            chrome_options.add_argument("--disable-gpu") # Usa un puerto para la depuración remota
 
 
-        svc = Service(executable_path=binary_path)
-        driver = webdriver.Chrome(service=svc, options=chrome_options)
+            svc = Service(executable_path=binary_path)
+            driver = webdriver.Chrome(service=svc, options=chrome_options)
+            
+            driver.get("https://generalfoodargentina.movizen.com/pwa")
+
+            # Esperar a que la página cargue completamente
+            # Wait for the page to load
+            time.sleep(3)
+            
+            input_field = driver.find_element("id", "ion-input-0")
+            input_field.send_keys("terragene")
+            
+            # Simulate pressing ENTER to submit and wait for navigation
+            input_field.send_keys(Keys.RETURN)
+            time.sleep(5)  # Adjust based on your network speed
+
+            # Step 2: Navigate to the second page
+            driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
+            
+            # Wait for the page to load
+            time.sleep(3)
+            
+            # Find the input field and enter "44291507"
+            input_field = driver.find_element("id", "ion-input-0")
+            input_field.send_keys(dni_confirmed)
+            
+            # Simulate pressing ENTER to submit
+            input_field.send_keys(Keys.RETURN)
+            
+            # Optional: Wait to observe the result
+            time.sleep(5)
         
-        driver_path = "/usr/local/bin/chromedriver" # Cambia esto por la ruta de tu controlador
-        url = "https://generalfoodargentina.movizen.com/pwa/inicio"
-
-        options = Options()
-        options.binary_location = "/usr/local/bin/chrome"
-        options.add_argument("--headless")  # Ejecuta en modo headless
-        options.add_argument("--no-sandbox")  # Requerido en Docker
-        options.add_argument("--disable-dev-shm-usage")  # Soluciona problemas de memoria compartida
-        options.add_argument("--disable-gpu")
-        options.add_argument("--disable-extensions")
-        options.add_argument("--disable-software-rasterizer")
-        options.add_argument("--disable-logging")
-        options.add_argument("--log-level=3")
-        options.add_argument("--disable-crash-reporter")
-        options.add_argument("--disable-infobars")
-        options.add_argument("--disable-dev-tools")
-        options.add_argument('--remote-debugging-port=9222')  # Usa un puerto para la depuración remota
-
-
-        driver = webdriver.Chrome(options=options)
-        driver.get(url)
-
-        # Esperar a que la página cargue completamente
-           # Wait for the page to load
-        time.sleep(3)
-        
-        input_field = driver.find_element("id", "ion-input-0")
-        input_field.send_keys("terragene")
-        
-        # Simulate pressing ENTER to submit and wait for navigation
-        input_field.send_keys(Keys.RETURN)
-        time.sleep(5)  # Adjust based on your network speed
-
-        # Step 2: Navigate to the second page
-        driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
-        
-        # Wait for the page to load
-        time.sleep(3)
-        
-        # Find the input field and enter "44291507"
-        input_field = driver.find_element("id", "ion-input-0")
-        input_field.send_keys(dni_confirmed)
-        
-        # Simulate pressing ENTER to submit
-        input_field.send_keys(Keys.RETURN)
-        
-        # Optional: Wait to observe the result
-        time.sleep(5)
+        except Exception as e:
+            logging.info(f"error: {e}")
 
 
 
@@ -316,6 +317,13 @@ def confirm_dni_response(data):
     else:
         emit('dni_confirmation_result', {'status': 'denied', 'dni': dni})
 
+# **Nuevo Evento** para manejar mensajes desde el script local
+@socketio.on('message_from_local')
+def handle_message_from_local(data):
+    logging.info(f"Mensaje recibido del script local: {data}")
+    # Procesar el mensaje recibido
+    response_message = {"status": "success", "data": "Mensaje procesado correctamente"}
+    socketio.emit('response_to_local', response_message)  # Responder al cliente local
 
 # Función para ejecutar el evento de forma asincrónica en Flask-SocketIO
 # @socketio.on('open_page_and_enter_dni')

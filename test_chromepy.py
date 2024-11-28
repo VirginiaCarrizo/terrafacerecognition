@@ -1,50 +1,35 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.service import Service
-import time
+import socketio
 
-from chromedriver_py import binary_path  # Import the binary path for ChromeDriver
+# Dirección del servidor Flask-SocketIO en AWS
+SERVER_URL = "http://54.81.210.167:5000"  # Cambia <IP_PUBLICA_AWS> por la dirección pública de tu instancia
 
-def perform_navigation():
-    # Initialize the WebDriver
-    svc = Service(executable_path=binary_path)
-    driver = webdriver.Chrome(service=svc)
+# Crear cliente SocketIO
+sio = socketio.Client()
 
-    try:
-        # Step 1: Navigate to the first page
-        driver.get("https://generalfoodargentina.movizen.com/pwa")
-        
-        # Wait for the page to load
-        time.sleep(3)
-        
-        # Find the input field and enter "terragene"
-        input_field = driver.find_element("id", "ion-input-0")
-        input_field.send_keys("terragene")
-        
-        # Simulate pressing ENTER to submit and wait for navigation
-        input_field.send_keys(Keys.RETURN)
-        time.sleep(5)  # Adjust based on your network speed
+# Definir eventos
+@sio.on('connect')
+def on_connect():
+    print("Conectado al servidor Flask-SocketIO en AWS!")
 
-        # Step 2: Navigate to the second page
-        driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
-        
-        # Wait for the page to load
-        time.sleep(3)
-        
-        # Find the input field and enter "44291507"
-        input_field = driver.find_element("id", "ion-input-0")
-        input_field.send_keys("44291507")
-        
-        # Simulate pressing ENTER to submit
-        input_field.send_keys(Keys.RETURN)
-        
-        # Optional: Wait to observe the result
-        time.sleep(5)
+@sio.on('response_to_local')
+def on_response(data):
+    print(f"Respuesta del servidor: {data}")
 
-    finally:
-        # Close the browser
-        driver.quit()
+@sio.on('disconnect')
+def on_disconnect():
+    print("Desconectado del servidor.")
 
-# Run the automation script
-if __name__ == "__main__":
-    perform_navigation()
+# Conectar al servidor
+try:
+    sio.connect(SERVER_URL)
+    print("Conexión establecida.")
+    
+    # Enviar un mensaje al servidor
+    mensaje = {"message": "Hola desde el script local!"}
+    sio.emit('message_from_local', mensaje)
+    print("Mensaje enviado.")
+    
+    # Mantener la conexión
+    sio.wait()
+except Exception as e:
+    print(f"Error al conectar: {e}")
