@@ -27,6 +27,9 @@ import os
 from dotenv import load_dotenv
 import time
 from chromedriver_py import binary_path 
+import socketio
+import requests
+from threading import Lock
 
 # Configuración básica para el logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
@@ -34,7 +37,67 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(me
 app = Flask(__name__, static_url_path='/terrarrhh/static', static_folder='static')
 socketio = SocketIO(app, cors_allowed_origins="*", path='/terrarrhh/socket.io', transports=["websocket", "polling"])
 cuil_value = ""  # Variable global para almacenar el cuil
+# In-memory store for DNIs with thread safety
+dnis = ["44291507"]
+dni_lock = Lock()
 
+def cliente(dni):
+    try:
+        url = "http://172.31.90.8:5000/receive_dni"  # Replace with your PC's public IP
+        payload = {"dni": dni}
+        headers = {"Content-Type": "application/json"}
+
+        logging.info(f"Preparing to send DNI: {dni} to {url}")
+        logging.debug(f"Payload: {payload}")
+
+        response = requests.post(url, json=payload, headers=headers, timeout=10)
+        logging.info(f"HTTP POST sent to {url}. Status Code: {response.status_code}")
+
+        if response.status_code == 200:
+            logging.info("DNI confirmed successfully sent. Response received.")
+            logging.debug(f"Response Data: {response.json()}")
+        else:
+            logging.error(f"Failed to send DNI. Status Code: {response.status_code}")
+            logging.error(f"Response Text: {response.text}")
+
+    except requests.exceptions.RequestException as req_err:
+        logging.error(f"HTTP request failed: {req_err}")
+    except Exception as e:
+        logging.error(f"Unexpected error in `cliente` function: {e}")
+
+# Endpoint to receive DNI data (alternative to sending from EC2 to PC)
+@app.route('/send_dni', methods=['POST'])
+def send_dni():
+    try:
+        data = request.get_json()
+        dni = data.get('dni')
+        if not dni:
+            logging.warning("DNI not provided in /send_dni request.")
+            return jsonify({"status": "error", "message": "DNI not provided"}), 400
+
+        with dni_lock:
+            dnis.append(dni)
+        logging.info(f"Received DNI: {dni}")
+        return jsonify({"status": "success", "message": "DNI received successfully"})
+    except Exception as e:
+        logging.error(f"Error in /send_dni: {e}")
+        return jsonify({"status": "error", "message": f"Error processing request: {e}"}), 500
+
+# Endpoint for PC to retrieve DNI data
+@app.route('/get_dni', methods=['GET'])
+def get_dni():
+    try:
+        with dni_lock:
+            if not dnis:
+                return jsonify({"status": "no_dni", "message": "No DNI available"}), 200
+            # Retrieve the first DNI in the list
+            dni = dnis.pop(0)
+        logging.info(f"Sending DNI to PC: {dni}")
+        return jsonify({"status": "success", "dni": dni}), 200
+    except Exception as e:
+        logging.error(f"Error in /get_dni: {e}")
+        return jsonify({"status": "error", "message": f"Error processing request: {e}"}), 500
+    
 # Cargar las variables de entorno desde el archivo .env
 load_dotenv()
 
@@ -237,23 +300,6 @@ def submit_image():
         logging.info(f"Error en el reconocimiento facial: {e}")
         return jsonify({"status": "error", "message": "Ocurrió un error en el servidor"}), 500
     
-
-def cliente():
-    # Crear un cliente SocketIO
-    sio = socketio.Client()
-
-    # Conectar al servidor
-    sio.connect('http://192.168.1.100:12345')  # Cambia la IP y puerto si es necesario
-
-    # Enviar mensaje
-    mensaje = "Hola, este es un mensaje entre computadoras!"
-    sio.send(mensaje)
-
-    # Cerrar conexión
-    sio.disconnect()
-
-
-
 @socketio.on('confirm_dni_response')
 def confirm_dni_response(data):
     dni_confirmed = data['confirmed']
@@ -269,44 +315,7 @@ def confirm_dni_response(data):
         logging.info("antes de entrar al with.")
         try:
 
-            chrome_options = Options()
-            chrome_options.add_argument("--headless")
-            chrome_options.add_argument("--no-sandbox")
-            chrome_options.add_argument("--disable-dev-shm-usage")
-            chrome_options.add_argument("--disable-gpu") # Usa un puerto para la depuración remota
-
-
-            svc = Service(executable_path=binary_path)
-            driver = webdriver.Chrome(service=svc, options=chrome_options)
-            
-            driver.get("https://generalfoodargentina.movizen.com/pwa")
-
-            # Esperar a que la página cargue completamente
-            # Wait for the page to load
-            time.sleep(3)
-            
-            input_field = driver.find_element("id", "ion-input-0")
-            input_field.send_keys("terragene")
-            
-            # Simulate pressing ENTER to submit and wait for navigation
-            input_field.send_keys(Keys.RETURN)
-            time.sleep(5)  # Adjust based on your network speed
-
-            # Step 2: Navigate to the second page
-            driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
-            
-            # Wait for the page to load
-            time.sleep(3)
-            
-            # Find the input field and enter "44291507"
-            input_field = driver.find_element("id", "ion-input-0")
-            input_field.send_keys(dni_confirmed)
-            
-            # Simulate pressing ENTER to submit
-            input_field.send_keys(Keys.RETURN)
-            
-            # Optional: Wait to observe the result
-            time.sleep(5)
+            cliente(dni)
         
         except Exception as e:
             logging.info(f"error: {e}")
