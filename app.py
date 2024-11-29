@@ -40,63 +40,6 @@ cuil_value = ""  # Variable global para almacenar el cuil
 # In-memory store for DNIs with thread safety
 dnis = ["44291507"]
 dni_lock = Lock()
-
-def cliente(dni):
-    try:
-        url = "http://172.31.90.8:5000/receive_dni"  # Replace with your PC's public IP
-        payload = {"dni": dni}
-        headers = {"Content-Type": "application/json"}
-
-        logging.info(f"Preparing to send DNI: {dni} to {url}")
-        logging.debug(f"Payload: {payload}")
-
-        response = requests.post(url, json=payload, headers=headers, timeout=10)
-        logging.info(f"HTTP POST sent to {url}. Status Code: {response.status_code}")
-
-        if response.status_code == 200:
-            logging.info("DNI confirmed successfully sent. Response received.")
-            logging.debug(f"Response Data: {response.json()}")
-        else:
-            logging.error(f"Failed to send DNI. Status Code: {response.status_code}")
-            logging.error(f"Response Text: {response.text}")
-
-    except requests.exceptions.RequestException as req_err:
-        logging.error(f"HTTP request failed: {req_err}")
-    except Exception as e:
-        logging.error(f"Unexpected error in `cliente` function: {e}")
-
-# Endpoint to receive DNI data (alternative to sending from EC2 to PC)
-@app.route('/send_dni', methods=['POST'])
-def send_dni():
-    try:
-        data = request.get_json()
-        dni = data.get('dni')
-        if not dni:
-            logging.warning("DNI not provided in /send_dni request.")
-            return jsonify({"status": "error", "message": "DNI not provided"}), 400
-
-        with dni_lock:
-            dnis.append(dni)
-        logging.info(f"Received DNI: {dni}")
-        return jsonify({"status": "success", "message": "DNI received successfully"})
-    except Exception as e:
-        logging.error(f"Error in /send_dni: {e}")
-        return jsonify({"status": "error", "message": f"Error processing request: {e}"}), 500
-
-# Endpoint for PC to retrieve DNI data
-@app.route('/get_dni', methods=['GET'])
-def get_dni():
-    try:
-        with dni_lock:
-            if not dnis:
-                return jsonify({"status": "no_dni", "message": "No DNI available"}), 200
-            # Retrieve the first DNI in the list
-            dni = dnis.pop(0)
-        logging.info(f"Sending DNI to PC: {dni}")
-        return jsonify({"status": "success", "dni": dni}), 200
-    except Exception as e:
-        logging.error(f"Error in /get_dni: {e}")
-        return jsonify({"status": "error", "message": f"Error processing request: {e}"}), 500
     
 # Cargar las variables de entorno desde el archivo .env
 load_dotenv()
@@ -299,6 +242,23 @@ def submit_image():
     except Exception as e:
         logging.info(f"Error en el reconocimiento facial: {e}")
         return jsonify({"status": "error", "message": "Ocurrió un error en el servidor"}), 500
+
+
+
+# Endpoint for PC to retrieve DNI data
+@app.route('/get_dni', methods=['GET'])
+def get_dni():
+    try:
+        with dni_lock:
+            if not dnis:
+                return jsonify({"status": "no_dni", "message": "No DNI available"}), 200
+            # Retrieve the first DNI in the list
+            dni = dnis.pop(0)
+        logging.info(f"Sending DNI to PC: {dni}")
+        return jsonify({"status": "success", "dni": dni}), 200
+    except Exception as e:
+        logging.error(f"Error in /get_dni: {e}")
+        return jsonify({"status": "error", "message": f"Error processing request: {e}"}), 500
     
 @socketio.on('confirm_dni_response')
 def confirm_dni_response(data):
@@ -313,81 +273,11 @@ def confirm_dni_response(data):
         nro_orden = ref.child('order_general_food').get()
         ref.child('order_general_food').set(nro_orden + 1)
         logging.info("antes de entrar al with.")
-        try:
-
-            cliente(dni)
-        
-        except Exception as e:
-            logging.info(f"error: {e}")
-
-
 
         emit('dni_confirmation_result', {'status': 'success', 'dni': dni})
     else:
         emit('dni_confirmation_result', {'status': 'denied', 'dni': dni})
 
-# **Nuevo Evento** para manejar mensajes desde el script local
-@socketio.on('message_from_local')
-def handle_message_from_local(data):
-    logging.info(f"Mensaje recibido del script local: {data}")
-    # Procesar el mensaje recibido
-    response_message = {"status": "success", "data": "Mensaje procesado correctamente"}
-    socketio.emit('response_to_local', response_message)  # Responder al cliente local
-
-# Función para ejecutar el evento de forma asincrónica en Flask-SocketIO
-# @socketio.on('open_page_and_enter_dni')
-# def handle_open_page_and_enter_dni(data):
-#     dni = data['dni']
-#     asyncio.run(open_page_and_enter_dni(dni))  # Ejecuta la función asincrónica
-
-# # Función para abrir la página y completar el DNI utilizando Playwright
-# async def open_page_and_enter_dni(dni):
-#     url = "https://generalfoodargentina.movizen.com/pwa/inicio"
-#     async with async_playwright() as p:
-#         browser = await p.chromium.launch(headless=False)  # Ejecuta en modo headless
-#         page = await browser.new_page()
-#         await page.goto(url)
-#         logging.info("Página abierta en el navegador.")
-        
-#         try:
-#             # Ajusta el selector según el atributo del campo de entrada de DNI
-#             dni_input = await page.wait_for_selector("dni_input", timeout=30000)  # Cambia por el selector correcto
-#             await dni_input.fill(dni)
-#             await dni_input.press("Enter")
-#             logging.info("DNI ingresado correctamente.")
-#         except Exception as e:
-#             logging.error(f"Error al ingresar el DNI: {e}")
-#         finally:
-#             await browser.close()
-
-# def open_page_and_enter_dni(dni):
-#     """Abre la página y completa el DNI en el campo de entrada usando Selenium."""
-#     url = "https://generalfoodargentina.movizen.com/pwa/inicio"
-
-#     chrome_options = Options()
-#     # chrome_options.add_argument("--headless")
-#     # chrome_options.add_argument("--no-sandbox")
-#     # chrome_options.add_argument("--disable-dev-shm-usage")
-#     # chrome_options.add_argument("--disable-gpu")
-
-#     # Utiliza ChromeDriverManager para manejar el driver
-#     driver = webdriver.Chrome(options=chrome_options)
-
-#     try:
-#         driver.get(url)
-#         logging.info("Página abierta en el navegador.")
-
-#         wait = WebDriverWait(driver, 10)
-#         # Ajusta el selector según el atributo del campo de entrada de DNI
-#         # Por ejemplo, si el campo tiene id="dni_input"
-#         dni_input = wait.until(EC.presence_of_element_located((By.ID, "dni_input")))
-#         dni_input.send_keys(dni)
-#         dni_input.submit()
-#         logging.info("DNI ingresado correctamente.")
-#     except Exception as e:
-#         logging.error(f"Error al ingresar el DNI: {e}")
-#     finally:
-#         driver.quit()
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', allow_unsafe_werkzeug=True, port=5000, debug=True)
