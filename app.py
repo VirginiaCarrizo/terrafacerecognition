@@ -192,7 +192,7 @@ def submit_image():
                     ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
                     nro_orden = ref.child('order_general_food').get()
                     ref.child('order_general_food').set(nro_orden + 1)
-                    dnis.append(dni_str)
+                    dnis.append(dni_str[2:-1])
 
                     socketio.emit('confirm_dni', {'dni': dni, 'dni_modificado': dni_str[2:-1], 'nombre_apellido': employeeInfo['nombre_apellido']})
                     return jsonify({"status": "confirmation_pending"})
