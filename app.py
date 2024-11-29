@@ -277,8 +277,9 @@ def confirm_dni_response(data):
         nro_orden = ref.child('order_general_food').get()
         ref.child('order_general_food').set(nro_orden + 1)
         logging.info("antes de entrar al with.")
+        logging.info(data)
         
-        cliente(dni_confirmed)
+        cliente(dni)
 
 
         emit('dni_confirmation_result', {'status': 'success', 'dni': dni})
