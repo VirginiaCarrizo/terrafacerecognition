@@ -1,35 +1,8 @@
 from flask import Flask, render_template, request, jsonify, abort
 from flask_socketio import SocketIO, emit
 import firebase_admin
-from firebase_admin import credentials, db, storage
-import cv2
-import numpy as np 
-import base64
-import face_recognition
-import pickle
-from datetime import datetime
-import re
 import logging
-import asyncio
-# Importaciones adicionales para Selenium
-from selenium import webdriver
-from selenium.webdriver import Edge, EdgeOptions, ChromeOptions
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-import time
-import os
-from dotenv import load_dotenv
-import time
-from chromedriver_py import binary_path 
 import socketio
-import requests
-from threading import Lock
 
 # Configuración básica para el logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
@@ -37,34 +10,6 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(me
 app = Flask(__name__, static_url_path='/terrarrhh/static', static_folder='static')
 socketio = SocketIO(app, cors_allowed_origins="*", path='/terrarrhh/socket.io', transports=["websocket", "polling"])
 cuil_value = ""  # Variable global para almacenar el cuil
-# In-memory store for DNIs with thread safety
-dnis = ["44291507"]
-dni_lock = Lock()
-    
-# Cargar las variables de entorno desde el archivo .env
-load_dotenv()
-
-# Construir las credenciales directamente desde las variables de entorno
-cred_data = {
-    "type": os.getenv("TYPE"),
-    "project_id": os.getenv("PROJECT_ID"),
-    "private_key_id": os.getenv("PRIVATE_KEY_ID"),
-    "private_key": os.getenv("PRIVATE_KEY").replace("\\n", "\n"),  # Reemplazar saltos de línea
-    "client_email": os.getenv("CLIENT_EMAIL"),
-    "client_id": os.getenv("CLIENT_ID"),
-    "auth_uri": os.getenv("AUTH_URI"),
-    "token_uri": os.getenv("TOKEN_URI"),
-    "auth_provider_x509_cert_url": os.getenv("AUTH_PROVIDER_X509_CERT_URL"),
-    "client_x509_cert_url": os.getenv("CLIENT_X509_CERT_URL"),
-}
-
-# Inicializar Firebase Admin
-cred = credentials.Certificate(cred_data)
-firebase_admin.initialize_app(cred, {
-    'databaseURL': "https://terra-employees-default-rtdb.firebaseio.com/",
-    'storageBucket': "terra-employees.appspot.com"
-})
-bucket = storage.bucket()
 
 @app.route('/terrarrhh', strict_slashes=False)
 def index():
@@ -74,107 +19,6 @@ def index():
 def handle_connect():
     logging.info("Cliente conectado")
 
-# Ruta para agregar un registro a Firebase
-# @app.route('/terrarrhh/agregar_registro', methods=['POST'])
-# def agregar_registro():
-#     try:
-#         data = request.form
-#         nombre_completo = f"{data['nombre']} {data['apellido']}"
-#         data_dict = {
-#             'legajo': data['legajo'],
-#             'nombre_apellido': nombre_completo,
-#             'cuil': data['cuil'],
-#             'empresa': data['empresa'],
-#             'fecha_nacimiento': data['fecha-nacimiento'],
-#             'rol': data['rol'],
-#             'sector': data['sector']
-#         }
-
-#         if 'foto' in request.files:
-#             foto = request.files['foto']
-#             blob = storage.bucket().blob(f"Images/{data_dict['nombre_apellido']}.png")
-#             blob.upload_from_file(foto, content_type='image/png')
-#             blob.make_public()
-#             foto_url = blob.public_url
-#             data_dict['foto'] = foto_url
-
-#         ref = db.reference('Employees')
-#         ref.child(data['cuil']).set(data_dict)
-
-#         return jsonify({'status': 'success', 'message': 'Registro agregado correctamente', 'registro': data_dict, 'cuil': data['cuil']})
-
-#     except Exception as e:
-#         logging.info(f"Error al agregar registro: {str(e)}")
-#         return jsonify({'status': 'error', 'message': 'Ocurrió un error en el servidor'}), 500
-
-# @app.route('/terrarrhh/buscar_registro', methods=['POST'])
-# def buscar_registro():
-#     try:
-#         search_term = request.json.get('search_term', '').lower().strip()
-#         ref = db.reference('Employees')
-#         registros = ref.get()
-
-#         if registros is None:
-#             return jsonify([])
-
-#         resultados = []
-
-#         for key, value in registros.items():
-#             nombre_completo = value.get('nombre_apellido', '').lower()
-#             cuil = str(value.get('cuil', ''))
-
-#             if search_term in nombre_completo or search_term in cuil:
-#                 blob = bucket.blob(f'Images/{nombre_completo.upper()}.png')
-#                 if blob.exists():
-#                     array = np.frombuffer(blob.download_as_string(), np.uint8)
-#                     img = cv2.imdecode(array, cv2.IMREAD_COLOR)
-#                     _, img_encoded = cv2.imencode('.png', img)
-#                     img_base64 = base64.b64encode(img_encoded).decode('utf-8')
-#                     value['foto'] = img_base64
-#                 else:
-#                     value['foto'] = None
-
-#                 resultados.append(value)
-
-#         return jsonify(resultados)
-#     except Exception as e:
-#         logging.info(f"Error en la búsqueda: {str(e)}")
-#         return jsonify({'error': 'Ocurrió un error en el servidor'}), 500
-
-# @app.route('/terrarrhh/modificar_registro/<cuil>', methods=['POST'])
-# def modificar_registro(cuil):
-#     data = request.json
-#     ref = db.reference(f'Employees/{cuil}')
-
-#     ref.update({
-#         'legajo': data['legajo'],
-#         'nombre_apellido': data['nombre_apellido'],
-#         'cuil': cuil,
-#         'empresa': data['empresa'],
-#         'fecha_nacimiento': data['fecha_nacimiento'],
-#         'rol': data['rol'],
-#         'sector': data['sector']
-#     })
-
-#     return jsonify({'status': 'success', 'message': 'Registro modificado correctamente'})
-
-# @app.route('/terrarrhh/eliminar_registro', methods=['POST'])
-# def eliminar_registro():
-#     try:
-#         data = request.get_json()
-#         ref = db.reference(f'Employees/{data["cuil"]}')
-#         registro = ref.get()
-#         nombre_apellido = registro["nombre_apellido"]
-
-#         if registro and 'foto' in registro:
-#             blob = bucket.blob(f"Images/{nombre_apellido}.png")
-#             blob.delete()
-
-#         ref.delete()
-#         return jsonify({'status': 'success', 'message': 'Registro eliminado correctamente'})
-#     except Exception as e:
-#         logging.info(f"Error al eliminar registro y foto: {str(e)}")
-#         return jsonify({'status': 'error', 'message': 'Ocurrió un error en el servidor'}), 500
 
 @app.route('/terrarrhh/generalfood')
 def general_food():
@@ -187,98 +31,9 @@ def submit_cuil():
     socketio.emit('cuil_received', {'cuil': cuil_value})
     return jsonify({'status': 'success'})
 
-with open('EncodeFile.p', 'rb') as file:
-    encodeListKnownWithIds = pickle.load(file)
-encodeListKnown, employeesIds = encodeListKnownWithIds
-
 @app.route('/terrarrhh/camara')
 def camara():
     return render_template('camara.html')
-
-@app.route('/terrarrhh/submit_image', methods=['POST'])
-def submit_image():
-    try:
-        data = request.json['image']
-        image_data = data.split(',')[1]
-        npimg = np.frombuffer(base64.b64decode(image_data), np.uint8)
-        img = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
-
-        imgS = cv2.resize(img, (0, 0), None, 0.25, 0.25)
-        imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
-
-        faceCurFrame = face_recognition.face_locations(imgS)
-        encodeCurFrame = face_recognition.face_encodings(imgS, faceCurFrame)
-        logging.info(faceCurFrame)
-        if faceCurFrame:
-            for encodeFace, faceLoc in zip(encodeCurFrame, faceCurFrame):
-                matches = face_recognition.compare_faces(encodeListKnown, encodeFace)
-                faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
-
-                matchIndex = np.argmin(faceDis)
-                if matches[matchIndex]:
-                    id = employeesIds[matchIndex]
-                    employeesRef = db.reference(f'Employees').get()
-                    employeeInfo = None
-                    for key, value in employeesRef.items():
-                        if value['nombre_apellido'] == id:
-                            employeeInfo = value
-                            logging.info(f'employeeInfo: {employeeInfo}')
-                            break
-
-                    dni = employeeInfo['cuil']
-                    dni_str = str(dni)
-                    ref = db.reference(f'Employees/{dni}')
-
-                    ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-                    nro_orden = ref.child('order_general_food').get()
-                    ref.child('order_general_food').set(nro_orden + 1)
-                    dnis.append(dni_str[2:-1])
-                    
-                    socketio.emit('confirm_dni', {'dni': dni, 'dni_modificado': dni_str[2:-1], 'nombre_apellido': employeeInfo['nombre_apellido']})
-                    return jsonify({"status": "confirmation_pending"})
-
-        logging.info("No se encontró coincidencia, se solicita ingreso manual del DNI.")
-        return jsonify({"status": "no_match"})
-
-    except Exception as e:
-        logging.info(f"Error en el reconocimiento facial: {e}")
-        return jsonify({"status": "error", "message": "Ocurrió un error en el servidor"}), 500
-
-
-
-# Endpoint for PC to retrieve DNI data
-@app.route('/get_dni', methods=['GET'])
-def get_dni():
-    try:
-        with dni_lock:
-            if not dnis:
-                return jsonify({"status": "no_dni", "message": "No DNI available"}), 200
-            # Retrieve the first DNI in the list
-            dni = dnis.pop(0)
-        logging.info(f"Sending DNI to PC: {dni}")
-        return jsonify({"status": "success", "dni": dni}), 200
-    except Exception as e:
-        logging.error(f"Error in /get_dni: {e}")
-        return jsonify({"status": "error", "message": f"Error processing request: {e}"}), 500
-    
-@socketio.on('confirm_dni_response')
-def confirm_dni_response(data):
-    dni_confirmed = data['confirmed']
-    dni = data['dni']
-    dni = str(dni)
-    dni_confirmed = str(dni_confirmed)
-
-    if dni_confirmed:
-        ref = db.reference(f'Employees/{dni}')
-        ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-        nro_orden = ref.child('order_general_food').get()
-        ref.child('order_general_food').set(nro_orden + 1)
-        logging.info("antes de entrar al with.")
-
-        emit('dni_confirmation_result', {'status': 'success', 'dni': dni})
-    else:
-        emit('dni_confirmation_result', {'status': 'denied', 'dni': dni})
-
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', allow_unsafe_werkzeug=True, port=5000, debug=True)
