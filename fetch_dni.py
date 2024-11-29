@@ -12,7 +12,7 @@ logging.basicConfig(
     ]
 )
 
-EC2_SERVER_URL = "http://54.81.210.167/get_dni"
+EC2_SERVER_URL = "http://54.81.210.167/get_dni"  # Replace with your EC2's public IP or domain
 
 def fetch_dni():
     try:

@@ -10,8 +10,6 @@ services:
       DISPLAY: ":99"
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
-    depends_on:
-      - nginx
     networks:
       - app-network
 
