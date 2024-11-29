@@ -10,7 +10,7 @@ def index():
 def receive_dni():
     try:
         data = request.get_json()
-        dni_confirmed = data.get('dni_confirmed')
+        dni_confirmed = data.get('dni')
         if not dni_confirmed:
             return jsonify({"status": "error", "message": "DNI not provided"}), 400
 

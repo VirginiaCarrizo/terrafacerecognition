@@ -30,13 +30,13 @@ from chromedriver_py import binary_path
 import socketio
 import requests
 
-def cliente(dni_confirmed):
+def cliente(dni):
     try:
         url = "http://190.216.87.234:5000/receive_dni"  # Replace with the public IP of your PC
-        payload = {"dni_confirmed": dni_confirmed}
+        payload = {"dni": dni}
         headers = {"Content-Type": "application/json"}
 
-        logging.info(f"Preparing to send DNI: {dni_confirmed} to {url}")
+        logging.info(f"Preparing to send DNI: {dni} to {url}")
         logging.debug(f"Payload: {payload}")
 
         response = requests.post(url, json=payload, headers=headers)
