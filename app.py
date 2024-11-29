@@ -11,13 +11,9 @@ from datetime import datetime
 import re
 import logging
 import asyncio
-# Importaciones adicionales para Selenium
 from selenium import webdriver
 from selenium.webdriver import Edge, EdgeOptions, ChromeOptions
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
@@ -25,21 +21,25 @@ from selenium.webdriver.chrome.options import Options
 import time
 import os
 from dotenv import load_dotenv
-import time
 from chromedriver_py import binary_path 
 import socketio
 import requests
+from threading import Lock
+
+# In-memory store for DNIs with thread safety
+dnis = []
+dni_lock = Lock()
 
 def cliente(dni):
     try:
-        url = "http://190.216.87.234:5000/receive_dni"  # Replace with the public IP of your PC
+        url = "http://190.216.87.234:5000/receive_dni"  # Replace with your PC's public IP
         payload = {"dni": dni}
         headers = {"Content-Type": "application/json"}
 
         logging.info(f"Preparing to send DNI: {dni} to {url}")
         logging.debug(f"Payload: {payload}")
 
-        response = requests.post(url, json=payload, headers=headers)
+        response = requests.post(url, json=payload, headers=headers, timeout=10)
         logging.info(f"HTTP POST sent to {url}. Status Code: {response.status_code}")
 
         if response.status_code == 200:
@@ -55,22 +55,29 @@ def cliente(dni):
         logging.error(f"Unexpected error in `cliente` function: {e}")
 
 
-# Configuración básica para el logger
-logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
+# Basic logger configuration
+logging.basicConfig(
+    level=logging.DEBUG,  # Set to DEBUG for more detailed logs
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    handlers=[
+        logging.StreamHandler(),  # Logs to console
+        logging.FileHandler("app_logs.log")  # Logs to a file for later analysis
+    ]
+)
 
 app = Flask(__name__, static_url_path='/terrarrhh/static', static_folder='static')
 socketio = SocketIO(app, cors_allowed_origins="https://terragene.life", path='/terrarrhh/socket.io', transports=["websocket", "polling"])
-cuil_value = ""  # Variable global para almacenar el cuil
+cuil_value = ""  # Global variable to store cuil
 
-# Cargar las variables de entorno desde el archivo .env
+# Load environment variables from .env file
 load_dotenv()
 
-# Construir las credenciales directamente desde las variables de entorno
+# Construct Firebase credentials from environment variables
 cred_data = {
     "type": os.getenv("TYPE"),
     "project_id": os.getenv("PROJECT_ID"),
     "private_key_id": os.getenv("PRIVATE_KEY_ID"),
-    "private_key": os.getenv("PRIVATE_KEY").replace("\\n", "\n"),  # Reemplazar saltos de línea
+    "private_key": os.getenv("PRIVATE_KEY").replace("\\n", "\n"),  # Replace newline characters
     "client_email": os.getenv("CLIENT_EMAIL"),
     "client_id": os.getenv("CLIENT_ID"),
     "auth_uri": os.getenv("AUTH_URI"),
@@ -79,7 +86,7 @@ cred_data = {
     "client_x509_cert_url": os.getenv("CLIENT_X509_CERT_URL"),
 }
 
-# Inicializar Firebase Admin
+# Initialize Firebase Admin
 cred = credentials.Certificate(cred_data)
 firebase_admin.initialize_app(cred, {
     'databaseURL': "https://terra-employees-default-rtdb.firebaseio.com/",
@@ -95,108 +102,40 @@ def index():
 def handle_connect():
     logging.info("Cliente conectado")
 
-# Ruta para agregar un registro a Firebase
-# @app.route('/terrarrhh/agregar_registro', methods=['POST'])
-# def agregar_registro():
-#     try:
-#         data = request.form
-#         nombre_completo = f"{data['nombre']} {data['apellido']}"
-#         data_dict = {
-#             'legajo': data['legajo'],
-#             'nombre_apellido': nombre_completo,
-#             'cuil': data['cuil'],
-#             'empresa': data['empresa'],
-#             'fecha_nacimiento': data['fecha-nacimiento'],
-#             'rol': data['rol'],
-#             'sector': data['sector']
-#         }
+# Endpoint to receive DNI data (alternative to sending from EC2 to PC)
+@app.route('/send_dni', methods=['POST'])
+def send_dni():
+    try:
+        data = request.get_json()
+        dni = data.get('dni')
+        if not dni:
+            logging.warning("DNI not provided in /send_dni request.")
+            return jsonify({"status": "error", "message": "DNI not provided"}), 400
 
-#         if 'foto' in request.files:
-#             foto = request.files['foto']
-#             blob = storage.bucket().blob(f"Images/{data_dict['nombre_apellido']}.png")
-#             blob.upload_from_file(foto, content_type='image/png')
-#             blob.make_public()
-#             foto_url = blob.public_url
-#             data_dict['foto'] = foto_url
+        with dni_lock:
+            dnis.append(dni)
+        logging.info(f"Received DNI: {dni}")
+        return jsonify({"status": "success", "message": "DNI received successfully"})
+    except Exception as e:
+        logging.error(f"Error in /send_dni: {e}")
+        return jsonify({"status": "error", "message": f"Error processing request: {e}"}), 500
 
-#         ref = db.reference('Employees')
-#         ref.child(data['cuil']).set(data_dict)
+# Endpoint for PC to retrieve DNI data
+@app.route('/get_dni', methods=['GET'])
+def get_dni():
+    try:
+        with dni_lock:
+            if not dnis:
+                return jsonify({"status": "no_dni", "message": "No DNI available"}), 200
+            # Retrieve the first DNI in the list
+            dni = dnis.pop(0)
+        logging.info(f"Sending DNI to PC: {dni}")
+        return jsonify({"status": "success", "dni": dni}), 200
+    except Exception as e:
+        logging.error(f"Error in /get_dni: {e}")
+        return jsonify({"status": "error", "message": f"Error processing request: {e}"}), 500
 
-#         return jsonify({'status': 'success', 'message': 'Registro agregado correctamente', 'registro': data_dict, 'cuil': data['cuil']})
-
-#     except Exception as e:
-#         logging.info(f"Error al agregar registro: {str(e)}")
-#         return jsonify({'status': 'error', 'message': 'Ocurrió un error en el servidor'}), 500
-
-# @app.route('/terrarrhh/buscar_registro', methods=['POST'])
-# def buscar_registro():
-#     try:
-#         search_term = request.json.get('search_term', '').lower().strip()
-#         ref = db.reference('Employees')
-#         registros = ref.get()
-
-#         if registros is None:
-#             return jsonify([])
-
-#         resultados = []
-
-#         for key, value in registros.items():
-#             nombre_completo = value.get('nombre_apellido', '').lower()
-#             cuil = str(value.get('cuil', ''))
-
-#             if search_term in nombre_completo or search_term in cuil:
-#                 blob = bucket.blob(f'Images/{nombre_completo.upper()}.png')
-#                 if blob.exists():
-#                     array = np.frombuffer(blob.download_as_string(), np.uint8)
-#                     img = cv2.imdecode(array, cv2.IMREAD_COLOR)
-#                     _, img_encoded = cv2.imencode('.png', img)
-#                     img_base64 = base64.b64encode(img_encoded).decode('utf-8')
-#                     value['foto'] = img_base64
-#                 else:
-#                     value['foto'] = None
-
-#                 resultados.append(value)
-
-#         return jsonify(resultados)
-#     except Exception as e:
-#         logging.info(f"Error en la búsqueda: {str(e)}")
-#         return jsonify({'error': 'Ocurrió un error en el servidor'}), 500
-
-# @app.route('/terrarrhh/modificar_registro/<cuil>', methods=['POST'])
-# def modificar_registro(cuil):
-#     data = request.json
-#     ref = db.reference(f'Employees/{cuil}')
-
-#     ref.update({
-#         'legajo': data['legajo'],
-#         'nombre_apellido': data['nombre_apellido'],
-#         'cuil': cuil,
-#         'empresa': data['empresa'],
-#         'fecha_nacimiento': data['fecha_nacimiento'],
-#         'rol': data['rol'],
-#         'sector': data['sector']
-#     })
-
-#     return jsonify({'status': 'success', 'message': 'Registro modificado correctamente'})
-
-# @app.route('/terrarrhh/eliminar_registro', methods=['POST'])
-# def eliminar_registro():
-#     try:
-#         data = request.get_json()
-#         ref = db.reference(f'Employees/{data["cuil"]}')
-#         registro = ref.get()
-#         nombre_apellido = registro["nombre_apellido"]
-
-#         if registro and 'foto' in registro:
-#             blob = bucket.blob(f"Images/{nombre_apellido}.png")
-#             blob.delete()
-
-#         ref.delete()
-#         return jsonify({'status': 'success', 'message': 'Registro eliminado correctamente'})
-#     except Exception as e:
-#         logging.info(f"Error al eliminar registro y foto: {str(e)}")
-#         return jsonify({'status': 'error', 'message': 'Ocurrió un error en el servidor'}), 500
-
+# Existing routes for Firebase and camera functionality
 @app.route('/terrarrhh/generalfood')
 def general_food():
     return render_template('index_gfood.html')
@@ -263,7 +202,7 @@ def submit_image():
     except Exception as e:
         logging.info(f"Error en el reconocimiento facial: {e}")
         return jsonify({"status": "error", "message": "Ocurrió un error en el servidor"}), 500
-    
+
 @socketio.on('confirm_dni_response')
 def confirm_dni_response(data):
     dni_confirmed = data['confirmed']
@@ -278,69 +217,12 @@ def confirm_dni_response(data):
         ref.child('order_general_food').set(nro_orden + 1)
         logging.info("antes de entrar al with.")
         logging.info(data)
-        
-        cliente(dni)
 
+        cliente(dni)
 
         emit('dni_confirmation_result', {'status': 'success', 'dni': dni})
     else:
         emit('dni_confirmation_result', {'status': 'denied', 'dni': dni})
-
-
-# Función para ejecutar el evento de forma asincrónica en Flask-SocketIO
-# @socketio.on('open_page_and_enter_dni')
-# def handle_open_page_and_enter_dni(data):
-#     dni = data['dni']
-#     asyncio.run(open_page_and_enter_dni(dni))  # Ejecuta la función asincrónica
-
-# # Función para abrir la página y completar el DNI utilizando Playwright
-# async def open_page_and_enter_dni(dni):
-#     url = "https://generalfoodargentina.movizen.com/pwa/inicio"
-#     async with async_playwright() as p:
-#         browser = await p.chromium.launch(headless=False)  # Ejecuta en modo headless
-#         page = await browser.new_page()
-#         await page.goto(url)
-#         logging.info("Página abierta en el navegador.")
-        
-#         try:
-#             # Ajusta el selector según el atributo del campo de entrada de DNI
-#             dni_input = await page.wait_for_selector("dni_input", timeout=30000)  # Cambia por el selector correcto
-#             await dni_input.fill(dni)
-#             await dni_input.press("Enter")
-#             logging.info("DNI ingresado correctamente.")
-#         except Exception as e:
-#             logging.error(f"Error al ingresar el DNI: {e}")
-#         finally:
-#             await browser.close()
-
-# def open_page_and_enter_dni(dni):
-#     """Abre la página y completa el DNI en el campo de entrada usando Selenium."""
-#     url = "https://generalfoodargentina.movizen.com/pwa/inicio"
-
-#     chrome_options = Options()
-#     # chrome_options.add_argument("--headless")
-#     # chrome_options.add_argument("--no-sandbox")
-#     # chrome_options.add_argument("--disable-dev-shm-usage")
-#     # chrome_options.add_argument("--disable-gpu")
-
-#     # Utiliza ChromeDriverManager para manejar el driver
-#     driver = webdriver.Chrome(options=chrome_options)
-
-#     try:
-#         driver.get(url)
-#         logging.info("Página abierta en el navegador.")
-
-#         wait = WebDriverWait(driver, 10)
-#         # Ajusta el selector según el atributo del campo de entrada de DNI
-#         # Por ejemplo, si el campo tiene id="dni_input"
-#         dni_input = wait.until(EC.presence_of_element_located((By.ID, "dni_input")))
-#         dni_input.send_keys(dni)
-#         dni_input.submit()
-#         logging.info("DNI ingresado correctamente.")
-#     except Exception as e:
-#         logging.error(f"Error al ingresar el DNI: {e}")
-#     finally:
-#         driver.quit()
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', allow_unsafe_werkzeug=True, port=5000, debug=True)

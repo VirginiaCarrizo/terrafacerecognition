@@ -1,10 +1,10 @@
-# Usa una imagen base de Python con Debian Buster
+# Use an official Python runtime as a parent image
 FROM python:3.11-bullseye
 
-# Instala dependencias del sistema
+# Install system dependencies
 RUN apt-get update && \
     apt-get install -y \
-    apt-utils \ 
+    apt-utils \
     cmake \
     build-essential \
     libgl1 \
@@ -35,35 +35,33 @@ RUN apt-get update && \
     python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
+# Install Chrome and Chromedriver
 RUN apt-get update -qq -y && \
     apt-get install -y \
     libgtk-3-0 \
     xdg-utils \
     wget && \
-    wget -q -O chrome-linux64.zip https://bit.ly/chrome-linux64-121-0-6167-85 && \
-    unzip chrome-linux64.zip && \
-    rm chrome-linux64.zip && \
-    mv chrome-linux64 /opt/chrome/ && \
-    ln -s /opt/chrome/chrome /usr/local/bin/ && \
-    wget -q -O chromedriver-linux64.zip https://bit.ly/chromedriver-linux64-121-0-6167-85 && \
-    unzip -j chromedriver-linux64.zip chromedriver-linux64/chromedriver && \
-    rm chromedriver-linux64.zip && \
-    mv chromedriver /usr/local/bin/
+    wget -q -O chrome-linux64.zip https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    apt install -y ./chrome-linux64.zip && \
+    wget -q -O chromedriver.zip https://chromedriver.storage.googleapis.com/$(wget -q -O - https://chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip && \
+    unzip chromedriver.zip && \
+    mv chromedriver /usr/local/bin/ && \
+    rm chromedriver.zip
 
-# Establece el directorio de trabajo
+# Set the working directory
 WORKDIR /app
 
-# Copia los archivos de requisitos e instálalos
+# Copy and install Python dependencies
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia el resto del código de la aplicación
+# Copy the rest of the application code
 COPY . .
 
-# Expone el puerto de Flask y VNC
+# Expose the Flask port
 EXPOSE 5000
 
-# Limpia el perfil de usuario antes de iniciar Chrome
+# Clean user profile before starting Chrome
 CMD rm -rf /root/.config/google-chrome/Default && \
     Xvfb :99 -screen 0 1920x1080x24 & \
     python3 app.py

@@ -9,3 +9,5 @@ selenium
 webdriver-manager
 chromedriver-py
 eventlet
+python-dotenv
+requests
