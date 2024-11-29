@@ -1,35 +1,35 @@
 import socketio
+import logging
 
-# Dirección del servidor Flask-SocketIO en AWS
-SERVER_URL = "http://54.81.210.167:5000"  # Cambia <IP_PUBLICA_AWS> por la dirección pública de tu instancia
+# Configuración básica para el logger
+logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 
-# Crear cliente SocketIO
-sio = socketio.Client()
+def cliente(dni_confirmed):
+    """
+    Función para enviar el valor de dni_confirmed a otro servidor mediante SocketIO.
+    """
+    sio = socketio.Client()
 
-# Definir eventos
-@sio.on('connect')
-def on_connect():
-    print("Conectado al servidor Flask-SocketIO en AWS!")
+    try:
+        # Conectar al servidor SocketIO
+        sio.connect('http://190.11.32.34:5000')  # Reemplaza con la IP y el puerto correctos
 
-@sio.on('response_to_local')
-def on_response(data):
-    print(f"Respuesta del servidor: {data}")
+        # Registrar la conexión exitosa
+        logging.info("Conectado al servidor SocketIO.")
 
-@sio.on('disconnect')
-def on_disconnect():
-    print("Desconectado del servidor.")
+        # Enviar el evento 'dni_confirmed_event' con el dato dni_confirmed
+        logging.info(f"Enviando dni_confirmed: {dni_confirmed}")
+        sio.emit('dni_confirmed_event', {'dni_confirmed': dni_confirmed})
 
-# Conectar al servidor
-try:
-    sio.connect(SERVER_URL)
-    print("Conexión establecida.")
-    
-    # Enviar un mensaje al servidor
-    mensaje = {"message": "Hola desde el script local!"}
-    sio.emit('message_from_local', mensaje)
-    print("Mensaje enviado.")
-    
-    # Mantener la conexión
-    sio.wait()
-except Exception as e:
-    print(f"Error al conectar: {e}")
+    except Exception as e:
+        # Manejar cualquier error de conexión o emisión
+        logging.error(f"Error al conectar o enviar el mensaje: {e}")
+    finally:
+        # Cerrar la conexión SocketIO
+        sio.disconnect()
+        logging.info("Desconectado del servidor SocketIO.")
+
+
+
+dni_confirmed = "12345678"  # Reemplaza con el valor real del DNI confirmado
+cliente(dni_confirmed)
