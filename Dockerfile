@@ -66,4 +66,4 @@ EXPOSE 5000
 # Limpia el perfil de usuario antes de iniciar Chrome
 CMD rm -rf /root/.config/google-chrome/Default && \
     Xvfb :99 -screen 0 1920x1080x24 & \
-    python3 app.py
+    python3 run.py
