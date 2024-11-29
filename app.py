@@ -32,19 +32,27 @@ import requests
 
 def cliente(dni_confirmed):
     try:
-        # Replace <PC_IP_ADDRESS> with the actual IP address of the personal PC running `test_chrome.py`
-        url = "http://190.11.32.34:5000/receive_dni"  # Replace <PC_IP_ADDRESS> with the personal PC's IP
+        url = "http://190.216.87.234:5000/receive_dni"  # Replace with the public IP of your PC
         payload = {"dni_confirmed": dni_confirmed}
         headers = {"Content-Type": "application/json"}
 
-        response = requests.post(url, json=payload, headers=headers)
-        if response.status_code == 200:
-            logging.info("DNI confirmed successfully sent.")
-        else:
-            logging.error(f"Failed to send DNI. Status code: {response.status_code}, Response: {response.text}")
+        logging.info(f"Preparing to send DNI: {dni_confirmed} to {url}")
+        logging.debug(f"Payload: {payload}")
 
+        response = requests.post(url, json=payload, headers=headers)
+        logging.info(f"HTTP POST sent to {url}. Status Code: {response.status_code}")
+
+        if response.status_code == 200:
+            logging.info("DNI confirmed successfully sent. Response received.")
+            logging.debug(f"Response Data: {response.json()}")
+        else:
+            logging.error(f"Failed to send DNI. Status Code: {response.status_code}")
+            logging.error(f"Response Text: {response.text}")
+
+    except requests.exceptions.RequestException as req_err:
+        logging.error(f"HTTP request failed: {req_err}")
     except Exception as e:
-        logging.error(f"Error in sending DNI via HTTP POST: {e}")
+        logging.error(f"Unexpected error in `cliente` function: {e}")
 
 
 # Configuración básica para el logger
