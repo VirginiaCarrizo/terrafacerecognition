@@ -1,20 +1,24 @@
-from flask import Flask
-from flask_socketio import SocketIO
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
-socketio = SocketIO(app, async_mode='eventlet')
 
-# Ruta básica opcional
 @app.route('/')
 def index():
-    return "Servidor Flask-SocketIO en ejecución"
+    return "HTTP Server running on Flask"
 
-# Manejador del evento para recibir dni_confirmed
-@socketio.on('dni_confirmed_event')
-def handle_dni_confirmed_event(data):
-    dni_confirmed = data.get('dni_confirmed')
-    print(f"DNI confirmado recibido: {dni_confirmed}")
-    # Aquí puedes procesar el dni_confirmed según lo necesites
+@app.route('/receive_dni', methods=['POST'])
+def receive_dni():
+    try:
+        data = request.get_json()
+        dni_confirmed = data.get('dni_confirmed')
+        if not dni_confirmed:
+            return jsonify({"status": "error", "message": "DNI not provided"}), 400
+
+        print(f"DNI confirmado recibido: {dni_confirmed}")
+        # Process dni_confirmed here if needed
+        return jsonify({"status": "success", "message": "DNI received successfully"})
+    except Exception as e:
+        return jsonify({"status": "error", "message": f"Error processing request: {e}"}), 500
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000)

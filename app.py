@@ -28,26 +28,23 @@ from dotenv import load_dotenv
 import time
 from chromedriver_py import binary_path 
 import socketio
+import requests
 
 def cliente(dni_confirmed):
-    import socketio  # Asegúrate de importar socketio aquí si no lo tienes al inicio del archivo.
-
-    # Crear un cliente SocketIO
-    sio = socketio.Client()
-
     try:
-        # Conectar al servidor local Flask-SocketIO
-        sio.connect('http://190.216.87.234:5000')  # Reemplaza <IP_LOCAL> con la IP de tu máquina local
+        # Replace <PC_IP_ADDRESS> with the actual IP address of the personal PC running `test_chrome.py`
+        url = "http://190.11.32.34:5000/receive_dni"  # Replace <PC_IP_ADDRESS> with the personal PC's IP
+        payload = {"dni_confirmed": dni_confirmed}
+        headers = {"Content-Type": "application/json"}
 
-        # Enviar mensaje al servidor
-        logging.info(f"Enviando dni_confirmed: {dni_confirmed}")
-        sio.emit('dni_confirmed_event', {'dni_confirmed': dni_confirmed})
+        response = requests.post(url, json=payload, headers=headers)
+        if response.status_code == 200:
+            logging.info("DNI confirmed successfully sent.")
+        else:
+            logging.error(f"Failed to send DNI. Status code: {response.status_code}, Response: {response.text}")
 
     except Exception as e:
-        logging.error(f"Error al conectar o enviar el mensaje: {e}")
-    finally:
-        # Cerrar la conexión
-        sio.disconnect()
+        logging.error(f"Error in sending DNI via HTTP POST: {e}")
 
 
 # Configuración básica para el logger
