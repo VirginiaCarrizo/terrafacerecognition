@@ -27,7 +27,7 @@ import requests
 from threading import Lock
 
 # In-memory store for DNIs with thread safety
-dnis = []
+dnis = ["44291507"]
 dni_lock = Lock()
 
 def cliente(dni):
