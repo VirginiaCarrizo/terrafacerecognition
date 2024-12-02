@@ -5,7 +5,6 @@ import face_recognition
 import cv2
 import numpy as np 
 import logging
-from bbdd_conection import db  # Importamos configuración de Firebase !!!!!!!!!!!!!!!!!!!!!VER ESTO
 from threading import Lock
 import pickle
 from datetime import datetime
@@ -25,9 +24,8 @@ cuil_value = ""  # Variable global para almacenar el cuil
 routes = Blueprint('routes', __name__)  # Crear un Blueprint para las rutas
 socketio_routes = []  # Opcional: lista para manejar eventos SocketIO globalmente
 
-def configure_routes(app, socketio):
+def configure_routes(app, socketio, db, bucket):
     """Configura las rutas y eventos asociados."""
-    app.register_blueprint(routes)
 
     @routes.route('/terrarrhh', strict_slashes=False)
     def index():
@@ -171,3 +169,6 @@ def configure_routes(app, socketio):
         except Exception as e:
             logging.info(f"Error al eliminar registro y foto: {str(e)}")
             return jsonify({'status': 'error', 'message': 'Ocurrió un error en el servidor'}), 500
+    
+    # Registrar el Blueprint al final
+    app.register_blueprint(routes)

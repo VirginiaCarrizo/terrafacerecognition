@@ -12,7 +12,6 @@ db = None
 bucket = None
 
 def initialize_firebase():
-    global db, bucket
     # Construir las credenciales directamente desde las variables de entorno
     cred_data = {
         "type": os.getenv("TYPE"),
@@ -36,8 +35,6 @@ def initialize_firebase():
         })
         logging.info("Firebase inicializado correctamente.")
 
-        # Asignar referencias
-        db = db.reference()
-        bucket = storage.bucket()
+        return db.reference(), storage.bucket()
     except Exception as e:
         logging.error(f'Error al conectar la base de datos: {e}')
