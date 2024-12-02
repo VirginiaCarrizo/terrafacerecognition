@@ -1,12 +1,11 @@
 import logging
 from flask_socketio import emit
 from datetime import datetime
-from bbdd_conection import db  # Firebase configuration
 
 # Configuración básica del logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 
-def configure_socketio_events(socketio):
+def configure_socketio_events(socketio, db):
     """Configura los eventos de SocketIO."""
     @socketio.on('connect')
     def handle_connect():
@@ -20,7 +19,7 @@ def configure_socketio_events(socketio):
         dni_confirmed = str(dni_confirmed)
 
         if dni_confirmed:
-            ref = db.reference(f'Employees/{dni}')
+            ref = db(f'Employees/{dni}')
             ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             nro_orden = ref.child('order_general_food').get()
             ref.child('order_general_food').set(nro_orden + 1)

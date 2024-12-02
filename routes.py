@@ -68,7 +68,7 @@ def configure_routes(app, socketio, db, bucket):
                     matchIndex = np.argmin(faceDis)
                     if matches[matchIndex]:
                         id = employeesIds[matchIndex]
-                        employeesRef = db.reference(f'Employees').get()
+                        employeesRef = db(f'Employees').get()
                         employeeInfo = None
                         for key, value in employeesRef.items():
                             if value['nombre_apellido'] == id:
@@ -78,7 +78,7 @@ def configure_routes(app, socketio, db, bucket):
 
                         dni = employeeInfo['cuil']
                         dni_str = str(dni)
-                        ref = db.reference(f'Employees/{dni}')
+                        ref = db(f'Employees/{dni}')
 
                         ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
                         nro_orden = ref.child('order_general_food').get()

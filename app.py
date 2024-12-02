@@ -14,4 +14,4 @@ db, bucket = initialize_firebase()
 configure_routes(app, socketio, db, bucket)
 
 # Configurar eventos de SocketIO
-configure_socketio_events(socketio)
+configure_socketio_events(socketio, db)
