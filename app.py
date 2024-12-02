@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_socketio import SocketIO
-from routes import routes
+from routes import configure_routes
 from bbdd_conection import initialize_firebase  # Configuración de Firebase
 from socketio_events import configure_socketio_events # Importar configuración de eventos
 
@@ -10,8 +10,8 @@ socketio = SocketIO(app, cors_allowed_origins="*", path='/terrarrhh/socket.io', 
 # Configurar Firebase
 initialize_firebase()
 
-# Registrar rutas
-app.register_blueprint(routes)
+# Configurar rutas
+configure_routes(app, socketio)
 
 # Configurar eventos de SocketIO
 configure_socketio_events(socketio)
