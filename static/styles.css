@@ -79,6 +79,17 @@ main {
     position: relative;
     color: white;
 }
+.form-container-login {
+    background-color: rgba(124, 124, 124, 0.8);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 20%;
+    max-width: 800px;
+    margin: 20px auto;
+    position: relative;
+    color: white;
+}
 
 .input-group-grid {
     display: grid;
@@ -268,7 +279,13 @@ input[type="text"] {
     margin-bottom: 10px;
 }
 
-
+input[type="password"] {
+    border: 1px solid #ccc;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
 
 .spinner {
     border: 8px solid #f3f3f3;
