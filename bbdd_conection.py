@@ -24,7 +24,9 @@ def initialize_firebase():
     }
     # Inicializar Firebase Admin
     cred = credentials.Certificate(cred_data)
-    logging.info('cred', cred)
+    logging.info(f'cred_data {cred_data}')
+    logging.info(f'Credenciales de Firebase inicializadas: {cred}')
+
     try:
         initialize_app(cred, {
             'databaseURL': "https://terra-employees-default-rtdb.firebaseio.com/",
