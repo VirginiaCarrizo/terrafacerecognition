@@ -8,7 +8,11 @@ load_dotenv()
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 
+db = None
+bucket = None
+
 def initialize_firebase():
+    global db, bucket
     # Construir las credenciales directamente desde las variables de entorno
     cred_data = {
         "type": os.getenv("TYPE"),
@@ -24,23 +28,16 @@ def initialize_firebase():
     }
     # Inicializar Firebase Admin
     cred = credentials.Certificate(cred_data)
-    logging.info(f'cred_data {cred_data}')
-    logging.info(f'Credenciales de Firebase inicializadas: {cred}')
 
     try:
         initialize_app(cred, {
             'databaseURL': "https://terra-employees-default-rtdb.firebaseio.com/",
             'storageBucket': "terra-employees.appspot.com"
         })
+        logging.info("Firebase inicializado correctamente.")
+
+        # Asignar referencias
+        db = db.reference()
+        bucket = storage.bucket()
     except Exception as e:
-        logging.info(f'Error al conectar la base de datos: {e}')
-
-# Variables que se inicializarán después de la configuración
-db = None
-bucket = None
-
-def get_firebase_references():
-    global db, bucket
-    db = db.reference()
-    bucket = storage.bucket()
-
+        logging.error(f'Error al conectar la base de datos: {e}')
