@@ -1,5 +1,4 @@
 from flask import jsonify
-from bbdd_conection import db, bucket
 import logging
 import cv2
 import numpy as np
@@ -8,7 +7,7 @@ import base64
 # Configuración básica del logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 
-def agregar_empleado(data, foto=None):
+def agregar_empleado(data, db, bucket, foto=None):
     """Agrega un registro de empleado en Firebase."""
     try:
         nombre_completo = f"{data['nombre']} {data['apellido']}"
@@ -38,7 +37,7 @@ def agregar_empleado(data, foto=None):
         logging.error(f"Error al agregar empleado: {e}")
         raise
 
-def buscar_empleados(search_term):
+def buscar_empleados(search_term, db, bucket):
     try:
         ref = db.reference('Employees')
         registros = ref.get()
@@ -70,7 +69,7 @@ def buscar_empleados(search_term):
         logging.error(f"Error al buscar empleados: {e}")
         raise
 
-def modificar_empleado(cuil, data):
+def modificar_empleado(cuil, data, db, bucket):
     """Modifica los datos de un empleado existente."""
     try:
         ref = db.reference(f'Employees/{cuil}')
@@ -88,7 +87,7 @@ def modificar_empleado(cuil, data):
         logging.error(f"Error al modificar empleado: {e}")
         raise
 
-def eliminar_empleado(cuil):
+def eliminar_empleado(cuil, db, bucket):
     """Elimina un empleado y su foto de Firebase."""
     try:
         ref = db.reference(f'Employees/{cuil}')

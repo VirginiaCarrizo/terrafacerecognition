@@ -117,7 +117,7 @@ def configure_routes(app, socketio, db, bucket):
         try:
             data = request.form
             foto = request.files['foto']
-            empleado = agregar_empleado(data, foto)
+            empleado = agregar_empleado(data, foto, db, bucket)
 
             return jsonify({'status': 'success', 'message': 'Registro agregado correctamente', 'registro': empleado, 'cuil': data['cuil']})
 
@@ -132,7 +132,7 @@ def configure_routes(app, socketio, db, bucket):
                 return jsonify({'error': 'Falta el campo "search_term" en la solicitud'}), 400
             
             search_term = request.json.get('search_term', '').lower().strip()
-            resultados = buscar_empleados(search_term)
+            resultados = buscar_empleados(search_term, db, bucket)
 
             return jsonify(resultados)
         
@@ -144,7 +144,7 @@ def configure_routes(app, socketio, db, bucket):
     def modificar_registro(cuil):
         try:
             data = request.json
-            modificar_empleado(cuil, data)
+            modificar_empleado(cuil, data, db, bucket)
 
             return jsonify({'status': 'success', 'message': 'Registro modificado correctamente'})
         except Exception as e:
@@ -161,7 +161,7 @@ def configure_routes(app, socketio, db, bucket):
                 return jsonify({'status': 'error', 'message': 'Falta el campo "cuil" en la solicitud'}), 400
 
 
-            if eliminar_empleado(cuil):
+            if eliminar_empleado(cuil, db, bucket):
                 return jsonify({'status': 'success', 'message': 'Registro eliminado correctamente'})
             else:
                 return jsonify({'status': 'error', 'message': 'Registro no encontrado'}), 404
