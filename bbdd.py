@@ -28,7 +28,7 @@ def agregar_empleado(data, db, bucket, foto=None):
             foto_url = blob.public_url
             data_dict['foto'] = foto_url
 
-        ref = db('Employees')
+        ref = db.reference('Employees')
         ref.child(data['cuil']).set(data_dict)
 
         return data_dict
@@ -39,7 +39,7 @@ def agregar_empleado(data, db, bucket, foto=None):
 
 def buscar_empleados(search_term, db, bucket):
     try:
-        ref = db('Employees')
+        ref = db.reference('Employees')
         registros = ref.get()
 
         if registros is None:
@@ -72,7 +72,7 @@ def buscar_empleados(search_term, db, bucket):
 def modificar_empleado(cuil, data, db, bucket):
     """Modifica los datos de un empleado existente."""
     try:
-        ref = db(f'Employees/{cuil}')
+        ref = db.reference(f'Employees/{cuil}')
         ref.update(data)
     #     ref.update({
     #     'legajo': data['legajo'],
@@ -90,7 +90,7 @@ def modificar_empleado(cuil, data, db, bucket):
 def eliminar_empleado(cuil, db, bucket):
     """Elimina un empleado y su foto de Firebase."""
     try:
-        ref = db(f'Employees/{cuil}')
+        ref = db.reference(f'Employees/{cuil}')
         registro = ref.get()
         
         if not registro:

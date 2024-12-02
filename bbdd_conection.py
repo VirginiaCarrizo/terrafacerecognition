@@ -32,7 +32,7 @@ def initialize_firebase():
         })
         logging.info("Firebase inicializado correctamente.")
 
-        return db.reference(), storage.bucket()
+        return db, storage
     except Exception as e:
         logging.error(f'Error al conectar la base de datos: {e}')
         raise
