@@ -8,9 +8,6 @@ load_dotenv()
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 
-db = None
-bucket = None
-
 def initialize_firebase():
     # Construir las credenciales directamente desde las variables de entorno
     cred_data = {
@@ -38,3 +35,4 @@ def initialize_firebase():
         return db.reference(), storage.bucket()
     except Exception as e:
         logging.error(f'Error al conectar la base de datos: {e}')
+        raise
