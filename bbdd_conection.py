@@ -1,10 +1,12 @@
 from firebase_admin import credentials, initialize_app, db, storage
 from dotenv import load_dotenv
+import logging
 import os
 
 # Cargar las variables de entorno desde el archivo .env
 load_dotenv()
 
+logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 
 def initialize_firebase():
     # Construir las credenciales directamente desde las variables de entorno
@@ -22,10 +24,14 @@ def initialize_firebase():
     }
     # Inicializar Firebase Admin
     cred = credentials.Certificate(cred_data)
-    initialize_app(cred, {
-        'databaseURL': "https://terra-employees-default-rtdb.firebaseio.com/",
-        'storageBucket': "terra-employees.appspot.com"
-    })
+    logging.info('cred', cred)
+    try:
+        initialize_app(cred, {
+            'databaseURL': "https://terra-employees-default-rtdb.firebaseio.com/",
+            'storageBucket': "terra-employees.appspot.com"
+        })
+    except Exception as e:
+        logging.info(f'Error al conectar la base de datos: {e}')
 
 # Variables que se inicializarán después de la configuración
 db = None
