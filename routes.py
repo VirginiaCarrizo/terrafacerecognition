@@ -1,16 +1,15 @@
-from flask import Blueprint, render_template, request, jsonify, abort
-from flask_socketio import SocketIO, emit
+from flask import Blueprint, render_template, request, jsonify
+from app import socketio  # Importamos socketio desde app.py
+from bbdd import agregar_empleado, buscar_empleados, modificar_empleado, eliminar_empleado
 import base64
 import face_recognition
 import cv2
 import numpy as np 
 import logging
-from bbdd_conection import db, bucket  # Importamos configuración de Firebase
-from app import socketio  # Importamos socketio desde app.py
+from bbdd_conection import db  # Importamos configuración de Firebase !!!!!!!!!!!!!!!!!!!!!VER ESTO
 from threading import Lock
-from datetime import datetime
 import pickle
-from bbdd import agregar_empleado, buscar_empleados, modificar_empleado, eliminar_empleado
+from datetime import datetime
 
 # Configuración básica para el logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')

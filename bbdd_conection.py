@@ -1,13 +1,7 @@
-from flask import Flask, render_template, request, jsonify, abort
 import firebase_admin
 from firebase_admin import credentials, db, storage
 from dotenv import load_dotenv
 import os
-from app import app, socketio
-import logging
-import cv2
-import numpy as np 
-import base64
 
 # Cargar las variables de entorno desde el archivo .env
 load_dotenv()

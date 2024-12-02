@@ -1,6 +1,5 @@
 from flask import jsonify
-from bbdd import db, bucket
-from datetime import datetime
+from bbdd_conection import db, bucket
 import logging
 import cv2
 import numpy as np
