@@ -48,12 +48,6 @@ def configure_routes(app, socketio, db, bucket):
     @routes.route('/terrarrhh', strict_slashes=False)
     @login_required
     @role_required('admin', 'terrarrhh')
-    def login():
-        return render_template('login.html')
-    
-    @routes.route('/terrarrhh/rrhh', strict_slashes=False)
-    @login_required
-    @role_required('admin', 'terrarrhh')
     def index():
         return render_template('index.html')
 
@@ -141,7 +135,7 @@ def configure_routes(app, socketio, db, bucket):
         
 
     # Ruta para agregar un registro a Firebase
-    @routes.route('/terrarrhh/rrhh/agregar_registro', methods=['POST'])
+    @routes.route('/terrarrhh/agregar_registro', methods=['POST'])
     @login_required
     @role_required('admin', 'terrarrhh')
     def agregar_registro():
@@ -156,7 +150,7 @@ def configure_routes(app, socketio, db, bucket):
             logging.info(f"Error al agregar registro: {str(e)}")
             return jsonify({'status': 'error', 'message': 'Ocurrió un error en el servidor'}), 500
 
-    @routes.route('/terrarrhh/rrhh/buscar_registro', methods=['POST'])
+    @routes.route('/terrarrhh/buscar_registro', methods=['POST'])
     @login_required
     @role_required('admin', 'terrarrhh')
     def buscar_registro():
@@ -173,7 +167,7 @@ def configure_routes(app, socketio, db, bucket):
             logging.info(f"Error en la búsqueda: {str(e)}")
             return jsonify({'error': 'Ocurrió un error en el servidor'}), 500
 
-    @routes.route('/terrarrhh/rrhh/modificar_registro/<cuil>', methods=['POST'])
+    @routes.route('/terrarrhh/modificar_registro/<cuil>', methods=['POST'])
     @login_required
     @role_required('admin', 'terrarrhh')
     def modificar_registro(cuil):
@@ -186,7 +180,7 @@ def configure_routes(app, socketio, db, bucket):
             logging.error(f"Error en /modificar_registro: {e}")
             return jsonify({'status': 'error', 'message': str(e)}), 500
 
-    @routes.route('/terrarrhh/rrhh/eliminar_registro', methods=['POST'])
+    @routes.route('/terrarrhh/eliminar_registro', methods=['POST'])
     @login_required
     @role_required('admin', 'terrarrhh')
     def eliminar_registro():

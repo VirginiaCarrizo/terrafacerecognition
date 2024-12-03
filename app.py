@@ -23,7 +23,7 @@ configure_socketio_events(socketio, db)
 # Configurar LoginManager
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = "https://terragene.life/terrarrhh"  # Vista para redirigir si el usuario no está autenticado
+login_manager.login_view = "auth.login"  # Vista para redirigir si el usuario no está autenticado
 
 @login_manager.user_loader
 def load_user(user_id):
