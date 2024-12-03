@@ -209,7 +209,9 @@ def configure_routes(app, socketio, db, bucket):
     def forbidden(error):
         return "Access Forbidden", 403  # Mensaje que se mostrará cuando el usuario no tenga permisos
     
-    # Registrar el Blueprint al final
-    app.register_blueprint(routes)
-    app.register_blueprint(auth)  # Rutas de autenticación
-    
+    try:
+        # Registrar el Blueprint al final
+        app.register_blueprint(routes)
+        app.register_blueprint(auth)  # Rutas de autenticación
+    except Exception as e:
+        logging.error(f'error al final {e}')
