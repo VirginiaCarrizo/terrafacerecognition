@@ -34,8 +34,4 @@ def configure_login(app):
         logout_user()
         return redirect(url_for("auth.login"))
 
-    @auth.errorhandler(403)
-    def forbidden(error):
-        return "Access Forbidden", 403
-
     app.register_blueprint(auth)  # Registrar el Blueprint de autenticación

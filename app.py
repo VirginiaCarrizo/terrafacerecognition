@@ -31,3 +31,8 @@ def load_user(user_id):
     return users.get(user_id)
 
 configure_login(app)
+
+# Definir un manejador de errores global para 403
+@app.errorhandler(403)
+def forbidden(error):
+    return "Access Forbidden", 403
