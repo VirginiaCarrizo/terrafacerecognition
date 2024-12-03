@@ -23,7 +23,7 @@ def configure_login(app):
                     if user.role in ['admin', 'terrarrhh']:
                         return redirect(url_for("routes.index"))
                     elif user.role == 'generalfood':
-                        return redirect(url_for("routes.general_food"))
+                        return redirect(url_for("routes.camara"))
             # Si la autenticación falla
             return render_template("login.html", error="Credenciales inválidas")
         return render_template("login.html")

@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> -->
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href=href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <header>
         <h1>
-            <img src="/static/logo.png" alt="Icono" class="icono-header">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Icono" class="icono-header">
             Login
         </h1>
     </header>
