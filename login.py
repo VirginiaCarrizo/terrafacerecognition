@@ -39,4 +39,4 @@ def configure_login(app):
         logout_user()
         return redirect(url_for("auth.login"))
 
-    app.register_blueprint(auth, url_prefix='/terrarrhh')  # Registrar el Blueprint de autenticación
+    app.register_blueprint(auth)  # Registrar el Blueprint de autenticación
