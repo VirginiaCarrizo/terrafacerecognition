@@ -1,39 +1,40 @@
 from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required
 from user import users
-from werkzeug.security import check_password_hash  # Para seguridad de contraseñas
 import logging
 
 auth = Blueprint("auth", __name__)
 
 def configure_login(app):
-    @auth.route("/login", methods=["POST"])
+    @auth.route("/login", methods=["GET", "POST"])
     def login():
-        logging.info(f"Método de solicitud: {request.method}")
+        logging.info(f"Método de la solicitud: {request.method}")
         if request.method == "POST":
-            logging.info('llegue aca2?')
-            username = request.form["username"]
-            password = request.form["password"]
+            username = request.form.get("username")
+            password = request.form.get("password")
+            logging.info('Llegué al manejo de POST')
             user = users.get(username)
-            
+            logging.info(f'Usuario obtenido: {user}')
             if user:
-                # Aquí deberías tener un método para verificar la contraseña de manera segura
                 if (user.id == 'admin' and password == "admin") or \
                    (user.id == 'generalfood' and password == "generalfood") or \
                    (user.id == 'terrarrhh' and password == "terrarrhh"):
                     login_user(user)
+                    logging.info('Autenticación exitosa')
                     # Redirigir según el rol del usuario
                     if user.role in ['admin', 'terrarrhh']:
-                        logging.info('holaaa')
                         return redirect(url_for("routes.index"))
                     elif user.role == 'generalfood':
                         return redirect(url_for("routes.camara"))
                 else:
-                    logging.info('Autenticación fallida')
-            # Si la autenticación falla
-            return render_template("login.html", error="Credenciales inválidas")
-        logging.info('llegue aca3?')
-        return render_template("login.html")
+                    logging.info('Contraseña incorrecta')
+                    return render_template("login.html", error="Credenciales inválidas")
+            else:
+                logging.info('Usuario no encontrado')
+                return render_template("login.html", error="Credenciales inválidas")
+        else:
+            logging.info('Solicitud GET recibida, mostrando formulario de inicio de sesión')
+            return render_template("login.html")
 
     @auth.route("/logout")
     @login_required
