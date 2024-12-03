@@ -13,6 +13,7 @@ def configure_login(app):
             username = request.form["username"]
             password = request.form["password"]
             user = users.get(username)
+            logging.info(f'user {user}')
             if user:
                 # Aquí deberías tener un método para verificar la contraseña de manera segura
                 if (user.id == 'admin' and password == "admin") or \
