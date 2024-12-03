@@ -7,7 +7,7 @@ import logging
 auth = Blueprint("auth", __name__)
 
 def configure_login(app):
-    @auth.route("/login", methods=["GET", "POST"])
+    @auth.route("/login", methods=["POST"])
     def login():
         logging.info(f"Método de solicitud: {request.method}")
         if request.method == "POST":
