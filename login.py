@@ -25,6 +25,8 @@ def configure_login(app):
                         return redirect(url_for("routes.index"))
                     elif user.role == 'generalfood':
                         return redirect(url_for("routes.camara"))
+                else:
+                    logging.info(f'Autenticación fallida')
             # Si la autenticación falla
             return render_template("login.html", error="Credenciales inválidas")
         return render_template("login.html")
