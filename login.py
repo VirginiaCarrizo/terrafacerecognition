@@ -9,6 +9,7 @@ auth = Blueprint("auth", __name__)
 def configure_login(app):
     @auth.route("/terrarrhh/login", methods=["GET", "POST"])
     def login():
+        logging.info('llegue aca')
         if request.method == "POST":
             username = request.form["username"]
             password = request.form["password"]
@@ -26,7 +27,7 @@ def configure_login(app):
                     elif user.role == 'generalfood':
                         return redirect(url_for("routes.camara"))
                 else:
-                    logging.info(f'Autenticación fallida')
+                    logging.info('Autenticación fallida')
             # Si la autenticación falla
             return render_template("login.html", error="Credenciales inválidas")
         return render_template("login.html")
