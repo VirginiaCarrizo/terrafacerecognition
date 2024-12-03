@@ -196,13 +196,13 @@ def configure_routes(app, socketio, db, bucket):
             logging.info(f"Error al eliminar registro y foto: {str(e)}")
             return jsonify({'status': 'error', 'message': 'Ocurrió un error en el servidor'}), 500
     
-    @app.route("/logout")
+    @auth.route("/logout")
     @login_required
     def logout():
         logout_user()  # Cierra la sesión del usuario
         return redirect(url_for("login"))  # Redirige al login
     
-    @app.errorhandler(403)
+    @auth.errorhandler(403)
     def forbidden(error):
         return "Access Forbidden", 403  # Mensaje que se mostrará cuando el usuario no tenga permisos
     
