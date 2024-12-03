@@ -30,7 +30,7 @@ def configure_login(app):
                     logging.info('Autenticación fallida')
             # Si la autenticación falla
             return render_template("login.html", error="Credenciales inválidas")
-        logging.info('se rompi')
+        
         return render_template("login.html")
 
     @auth.route("/logout")
@@ -39,4 +39,4 @@ def configure_login(app):
         logout_user()
         return redirect(url_for("auth.login"))
 
-    app.register_blueprint(auth, url_prefix='/terrarrhh')  # Registrar el Blueprint de autenticación
+    app.register_blueprint(auth)  # Registrar el Blueprint de autenticación
