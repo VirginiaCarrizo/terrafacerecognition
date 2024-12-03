@@ -11,6 +11,6 @@ class User(UserMixin):
 # Puedes usar una base de datos o un diccionario simple para almacenar los usuarios
 users = {
     'admin': User('admin', 'admin'),
-    'rrhh': User('terrarrhh', 'terrarrhh'),
+    'terrarrhh': User('terrarrhh', 'terrarrhh'),
     'generalfood': User('generalfood', 'generalfood')
 }
