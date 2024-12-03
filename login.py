@@ -5,12 +5,11 @@ from werkzeug.security import check_password_hash  # Para seguridad de contrase�
 import logging
 
 auth = Blueprint("auth", __name__)
-# Configuración básica para el logger
-logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 
 def configure_login(app):
     @auth.route("/terrarrhh/login", methods=["GET", "POST"])
     def login():
+        logging.info('llegue aca?')
         if request.method == "POST":
             username = request.form["username"]
             password = request.form["password"]
@@ -33,7 +32,7 @@ def configure_login(app):
             # Si la autenticación falla
             return render_template("login.html", error="Credenciales inválidas")
         
-        return redirect(url_for("routes.index"))
+        return render_template("login.html")
 
     @auth.route("/logout")
     @login_required
