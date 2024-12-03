@@ -29,13 +29,16 @@ main = Blueprint("main", __name__)
 socketio_routes = []  # Opcional: lista para manejar eventos SocketIO globalmente
 # Decorador para verificar roles
 def role_required(*roles):
-    def wrapper(fn):
-        def wrapped(*args, **kwargs):
-            if current_user.role not in roles:
-                abort(403)  # Error de acceso denegado
-            return fn(*args, **kwargs)
-        return wrapped
-    return wrapper
+    try:
+        def wrapper(fn):
+            def wrapped(*args, **kwargs):
+                if current_user.role not in roles:
+                    abort(403)  # Error de acceso denegado
+                return fn(*args, **kwargs)
+            return wrapped
+        return wrapper
+    except Exception as e:
+        logging.error(f'Error en role required {e}')
 
 def configure_routes(app, socketio, db, bucket):
     """Configura las rutas y eventos asociados."""
