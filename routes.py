@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from login import auth
-from user import users, role_required
+from user import users
 from bbdd import agregar_empleado, buscar_empleados, modificar_empleado, eliminar_empleado
 import base64
 import face_recognition
