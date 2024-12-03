@@ -7,9 +7,9 @@ import logging
 auth = Blueprint("auth", __name__)
 
 def configure_login(app):
-    @auth.route("/terrarrhh/login", methods=["GET", "POST"])
+    @auth.route("/login", methods=["GET", "POST"])
     def login():
-        logging.info('llegue aca?')
+        logging.info(f"Método de solicitud: {request.method}")
         if request.method == "POST":
             logging.info('llegue aca2?')
             username = request.form["username"]
@@ -41,4 +41,4 @@ def configure_login(app):
         logout_user()
         return redirect(url_for("auth.login"))
 
-    app.register_blueprint(auth)  # Registrar el Blueprint de autenticación
+    app.register_blueprint(auth, url_prefix='/terrarrhh')  # Registrar el Blueprint de autenticación
