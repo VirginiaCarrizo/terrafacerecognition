@@ -10,11 +10,9 @@ def configure_login(app):
     @auth.route("/terrarrhh/login", methods=["GET", "POST"])
     def login():
         if request.method == "POST":
-            logging.info('llegue aca')
             username = request.form["username"]
-            logging.info(f'username {username}')
             password = request.form["password"]
-            logging.info(f'password {password}')
+            logging.info('llegue aca')
             user = users.get(username)
             logging.info(f'user {user}')
             if user:
@@ -32,6 +30,7 @@ def configure_login(app):
                     logging.info('Autenticación fallida')
             # Si la autenticación falla
             return render_template("login.html", error="Credenciales inválidas")
+        logging.info('se rompi')
         return render_template("login.html")
 
     @auth.route("/logout")
