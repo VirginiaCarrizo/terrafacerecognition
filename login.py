@@ -7,7 +7,7 @@ import logging
 auth = Blueprint("auth", __name__)
 
 def configure_login(app):
-    @auth.route("/login", methods=["GET", "POST"])
+    @auth.route("/terrarrhh/login", methods=["GET", "POST"])
     def login():
         if request.method == "POST":
             username = request.form["username"]
