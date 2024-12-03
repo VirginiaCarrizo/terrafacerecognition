@@ -5,6 +5,8 @@ from werkzeug.security import check_password_hash  # Para seguridad de contrase�
 import logging
 
 auth = Blueprint("auth", __name__)
+# Configuración básica para el logger
+logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 
 def configure_login(app):
     @auth.route("/terrarrhh/login", methods=["GET", "POST"])
@@ -12,9 +14,8 @@ def configure_login(app):
         if request.method == "POST":
             username = request.form["username"]
             password = request.form["password"]
-            logging.info('llegue aca')
             user = users.get(username)
-            logging.info(f'user {user}')
+            
             if user:
                 # Aquí deberías tener un método para verificar la contraseña de manera segura
                 if (user.id == 'admin' and password == "admin") or \
@@ -23,6 +24,7 @@ def configure_login(app):
                     login_user(user)
                     # Redirigir según el rol del usuario
                     if user.role in ['admin', 'terrarrhh']:
+                        logging.info('holaaa')
                         return redirect(url_for("routes.index"))
                     elif user.role == 'generalfood':
                         return redirect(url_for("routes.camara"))
