@@ -203,4 +203,4 @@ def configure_routes(app, socketio, db, bucket):
     
 
     # Registrar el Blueprint al final
-    app.register_blueprint(routes)
+    app.register_blueprint(routes, url_prefix='/terrarrhh')
