@@ -11,6 +11,7 @@ def configure_login(app):
     def login():
         logging.info('llegue aca?')
         if request.method == "POST":
+            logging.info('llegue aca2?')
             username = request.form["username"]
             password = request.form["password"]
             user = users.get(username)
@@ -31,7 +32,7 @@ def configure_login(app):
                     logging.info('Autenticación fallida')
             # Si la autenticación falla
             return render_template("login.html", error="Credenciales inválidas")
-        
+        logging.info('llegue aca3?')
         return render_template("login.html")
 
     @auth.route("/logout")
