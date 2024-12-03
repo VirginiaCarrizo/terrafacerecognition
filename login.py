@@ -9,10 +9,12 @@ auth = Blueprint("auth", __name__)
 def configure_login(app):
     @auth.route("/terrarrhh/login", methods=["GET", "POST"])
     def login():
-        logging.info('llegue aca')
         if request.method == "POST":
+            logging.info('llegue aca')
             username = request.form["username"]
+            logging.info(f'username {username}')
             password = request.form["password"]
+            logging.info(f'password {password}')
             user = users.get(username)
             logging.info(f'user {user}')
             if user:
