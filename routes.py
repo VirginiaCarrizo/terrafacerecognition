@@ -25,7 +25,7 @@ dni_lock = Lock()
 cuil_value = ""  # Variable global para almacenar el cuil
 
 routes = Blueprint('routes', __name__)  # Crear un Blueprint para las rutas
-main = Blueprint("main", __name__)
+auth = Blueprint('auth', __name__)  # Crear un Blueprint para las auth
 socketio_routes = []  # Opcional: lista para manejar eventos SocketIO globalmente
 # Decorador para verificar roles
 def role_required(*roles):
@@ -212,6 +212,7 @@ def configure_routes(app, socketio, db, bucket):
     try:
         # Registrar el Blueprint al final
         app.register_blueprint(routes)
-        app.register_blueprint(auth)  # Rutas de autenticación
     except Exception as e:
         logging.error(f'error al final {e}')
+
+    app.register_blueprint(auth)  # Rutas de autenticación
