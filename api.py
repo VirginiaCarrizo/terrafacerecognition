@@ -115,6 +115,7 @@ def perform_navigation(dni):
     finally:
         # Close the browser
         driver.quit()
+        dni=[]
         logging.info("Browser closed.")
 
 def main():
@@ -130,8 +131,8 @@ def main():
         else:
             logging.info("No DNI fetched. Will retry after the polling interval.")
         
-        logging.info(f"Waiting for {POLLING_INTERVAL} seconds before the next attempt.")
-        time.sleep(POLLING_INTERVAL)
+
+    
 
 if __name__ == "__main__":
     main()

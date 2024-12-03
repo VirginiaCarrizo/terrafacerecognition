@@ -1,5 +1,6 @@
 Flask
 flask-socketio
+flask-login
 firebase-admin
 opencv-python
 numpy

@@ -1,0 +1,1749 @@
+2024-12-02 14:40:44,659 [INFO] Received DNI: 44291507
+2024-12-02 14:40:47,372 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 14:40:52,393 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7F24C6CB5+28821]
+	(No symbol) [0x00007FF7F2433840]
+	(No symbol) [0x00007FF7F22D578A]
+	(No symbol) [0x00007FF7F22AF4F5]
+	(No symbol) [0x00007FF7F2356247]
+	(No symbol) [0x00007FF7F236ECE2]
+	(No symbol) [0x00007FF7F234F0A3]
+	(No symbol) [0x00007FF7F231A778]
+	(No symbol) [0x00007FF7F231B8E1]
+	GetHandleVerifier [0x00007FF7F27FFCAD+3408013]
+	GetHandleVerifier [0x00007FF7F281741F+3504127]
+	GetHandleVerifier [0x00007FF7F280B5FD+3455453]
+	GetHandleVerifier [0x00007FF7F258BDBB+835995]
+	(No symbol) [0x00007FF7F243EB5F]
+	(No symbol) [0x00007FF7F243A814]
+	(No symbol) [0x00007FF7F243A9AD]
+	(No symbol) [0x00007FF7F242A199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-02 14:40:54,475 [INFO] Browser closed.
+2024-12-02 14:40:58,527 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-02 14:41:28,876 [INFO] Received DNI: 37295755
+2024-12-02 14:41:30,296 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 14:41:35,809 [INFO] Entered 'terragene' into the first input field.
+2024-12-02 14:41:35,838 [INFO] Submitted the first form.
+2024-12-02 14:41:40,839 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-02 14:41:44,595 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-02 14:41:44,643 [INFO] Submitted the second form.
+2024-12-02 14:41:51,812 [INFO] Browser closed.
+2024-12-02 14:41:55,901 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-02 14:42:26,266 [INFO] Received DNI: 37295755
+2024-12-02 14:42:27,690 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 14:42:32,688 [INFO] Entered 'terragene' into the first input field.
+2024-12-02 14:42:32,723 [INFO] Submitted the first form.
+2024-12-02 14:42:37,724 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-02 14:42:37,727 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7F24C6CB5+28821]
+	(No symbol) [0x00007FF7F2433840]
+	(No symbol) [0x00007FF7F22D578A]
+	(No symbol) [0x00007FF7F22AF4F5]
+	(No symbol) [0x00007FF7F2356247]
+	(No symbol) [0x00007FF7F236ECE2]
+	(No symbol) [0x00007FF7F234F0A3]
+	(No symbol) [0x00007FF7F231A778]
+	(No symbol) [0x00007FF7F231B8E1]
+	GetHandleVerifier [0x00007FF7F27FFCAD+3408013]
+	GetHandleVerifier [0x00007FF7F281741F+3504127]
+	GetHandleVerifier [0x00007FF7F280B5FD+3455453]
+	GetHandleVerifier [0x00007FF7F258BDBB+835995]
+	(No symbol) [0x00007FF7F243EB5F]
+	(No symbol) [0x00007FF7F243A814]
+	(No symbol) [0x00007FF7F243A9AD]
+	(No symbol) [0x00007FF7F242A199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-02 14:42:39,861 [INFO] Browser closed.
+2024-12-02 14:42:43,961 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-02 14:43:14,308 [INFO] Received DNI: 37295755
+2024-12-02 14:43:15,789 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 14:43:20,747 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7F24C6CB5+28821]
+	(No symbol) [0x00007FF7F2433840]
+	(No symbol) [0x00007FF7F22D578A]
+	(No symbol) [0x00007FF7F22AF4F5]
+	(No symbol) [0x00007FF7F2356247]
+	(No symbol) [0x00007FF7F236ECE2]
+	(No symbol) [0x00007FF7F234F0A3]
+	(No symbol) [0x00007FF7F231A778]
+	(No symbol) [0x00007FF7F231B8E1]
+	GetHandleVerifier [0x00007FF7F27FFCAD+3408013]
+	GetHandleVerifier [0x00007FF7F281741F+3504127]
+	GetHandleVerifier [0x00007FF7F280B5FD+3455453]
+	GetHandleVerifier [0x00007FF7F258BDBB+835995]
+	(No symbol) [0x00007FF7F243EB5F]
+	(No symbol) [0x00007FF7F243A814]
+	(No symbol) [0x00007FF7F243A9AD]
+	(No symbol) [0x00007FF7F242A199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-02 14:43:22,821 [INFO] Browser closed.
+2024-12-02 14:43:26,885 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-02 14:43:57,263 [INFO] Received DNI: 37295755
+2024-12-02 14:43:58,712 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 14:44:02,718 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7F24C6CB5+28821]
+	(No symbol) [0x00007FF7F2433840]
+	(No symbol) [0x00007FF7F22D578A]
+	(No symbol) [0x00007FF7F22AF4F5]
+	(No symbol) [0x00007FF7F2356247]
+	(No symbol) [0x00007FF7F236ECE2]
+	(No symbol) [0x00007FF7F234F0A3]
+	(No symbol) [0x00007FF7F231A778]
+	(No symbol) [0x00007FF7F231B8E1]
+	GetHandleVerifier [0x00007FF7F27FFCAD+3408013]
+	GetHandleVerifier [0x00007FF7F281741F+3504127]
+	GetHandleVerifier [0x00007FF7F280B5FD+3455453]
+	GetHandleVerifier [0x00007FF7F258BDBB+835995]
+	(No symbol) [0x00007FF7F243EB5F]
+	(No symbol) [0x00007FF7F243A814]
+	(No symbol) [0x00007FF7F243A9AD]
+	(No symbol) [0x00007FF7F242A199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-02 14:44:04,786 [INFO] Browser closed.
+2024-12-02 14:44:08,848 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-02 14:44:39,223 [INFO] No DNI available at the moment.
+2024-12-02 14:44:39,224 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:44:39,224 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-02 14:45:09,595 [INFO] No DNI available at the moment.
+2024-12-02 14:45:09,596 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:45:09,596 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-02 14:45:35,524 [INFO] No DNI available at the moment.
+2024-12-02 14:45:35,524 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:45:35,524 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:45:40,874 [INFO] No DNI available at the moment.
+2024-12-02 14:45:40,875 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:45:40,876 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:45:46,232 [INFO] No DNI available at the moment.
+2024-12-02 14:45:46,233 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:45:46,234 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:45:51,579 [INFO] No DNI available at the moment.
+2024-12-02 14:45:51,581 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:45:51,582 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:45:56,933 [INFO] No DNI available at the moment.
+2024-12-02 14:45:56,934 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:45:56,935 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:46:02,305 [INFO] No DNI available at the moment.
+2024-12-02 14:46:02,305 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:46:02,306 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:46:07,674 [INFO] No DNI available at the moment.
+2024-12-02 14:46:07,675 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:46:07,676 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:46:13,017 [INFO] No DNI available at the moment.
+2024-12-02 14:46:13,018 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:46:13,018 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:46:18,396 [INFO] No DNI available at the moment.
+2024-12-02 14:46:18,397 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:46:18,397 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:46:23,743 [INFO] No DNI available at the moment.
+2024-12-02 14:46:23,744 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:46:23,744 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:46:27,400 [INFO] No DNI available at the moment.
+2024-12-02 14:46:27,401 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:46:27,402 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:46:32,746 [INFO] No DNI available at the moment.
+2024-12-02 14:46:32,748 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:46:32,749 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:46:38,101 [INFO] No DNI available at the moment.
+2024-12-02 14:46:38,103 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:46:38,103 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:46:43,465 [INFO] Received DNI: 37295755
+2024-12-02 14:46:44,922 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 14:46:50,829 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7F24C6CB5+28821]
+	(No symbol) [0x00007FF7F2433840]
+	(No symbol) [0x00007FF7F22D578A]
+	(No symbol) [0x00007FF7F22AF4F5]
+	(No symbol) [0x00007FF7F2356247]
+	(No symbol) [0x00007FF7F236ECE2]
+	(No symbol) [0x00007FF7F234F0A3]
+	(No symbol) [0x00007FF7F231A778]
+	(No symbol) [0x00007FF7F231B8E1]
+	GetHandleVerifier [0x00007FF7F27FFCAD+3408013]
+	GetHandleVerifier [0x00007FF7F281741F+3504127]
+	GetHandleVerifier [0x00007FF7F280B5FD+3455453]
+	GetHandleVerifier [0x00007FF7F258BDBB+835995]
+	(No symbol) [0x00007FF7F243EB5F]
+	(No symbol) [0x00007FF7F243A814]
+	(No symbol) [0x00007FF7F243A9AD]
+	(No symbol) [0x00007FF7F242A199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-02 14:46:52,953 [INFO] Browser closed.
+2024-12-02 14:46:57,001 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:47:02,350 [INFO] No DNI available at the moment.
+2024-12-02 14:47:02,356 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:47:02,357 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:47:07,719 [INFO] No DNI available at the moment.
+2024-12-02 14:47:07,720 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:47:07,720 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:47:13,069 [INFO] No DNI available at the moment.
+2024-12-02 14:47:13,071 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:47:13,072 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:47:18,434 [INFO] No DNI available at the moment.
+2024-12-02 14:47:18,436 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:47:18,436 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:47:23,809 [INFO] No DNI available at the moment.
+2024-12-02 14:47:23,809 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:47:23,810 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:47:29,161 [INFO] No DNI available at the moment.
+2024-12-02 14:47:29,162 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:47:29,163 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:47:34,521 [INFO] No DNI available at the moment.
+2024-12-02 14:47:34,522 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:47:34,523 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:47:39,904 [INFO] No DNI available at the moment.
+2024-12-02 14:47:39,905 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:47:39,907 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:47:45,263 [INFO] No DNI available at the moment.
+2024-12-02 14:47:45,264 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:47:45,265 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:47:50,621 [INFO] No DNI available at the moment.
+2024-12-02 14:47:50,623 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:47:50,624 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:47:55,966 [INFO] No DNI available at the moment.
+2024-12-02 14:47:55,967 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:47:55,968 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:48:01,318 [INFO] No DNI available at the moment.
+2024-12-02 14:48:01,319 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:48:01,319 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:48:06,671 [INFO] No DNI available at the moment.
+2024-12-02 14:48:06,672 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:48:06,672 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:48:12,029 [INFO] No DNI available at the moment.
+2024-12-02 14:48:12,030 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:48:12,031 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:48:17,375 [INFO] No DNI available at the moment.
+2024-12-02 14:48:17,376 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:48:17,376 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:48:22,729 [INFO] No DNI available at the moment.
+2024-12-02 14:48:22,729 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:48:22,729 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:48:28,084 [INFO] No DNI available at the moment.
+2024-12-02 14:48:28,084 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:48:28,085 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:48:33,444 [INFO] No DNI available at the moment.
+2024-12-02 14:48:33,444 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:48:33,445 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:48:38,798 [INFO] No DNI available at the moment.
+2024-12-02 14:48:38,799 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:48:38,801 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:48:44,149 [INFO] No DNI available at the moment.
+2024-12-02 14:48:44,151 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:48:44,151 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:48:49,501 [INFO] No DNI available at the moment.
+2024-12-02 14:48:49,502 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:48:49,502 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:48:54,853 [INFO] No DNI available at the moment.
+2024-12-02 14:48:54,853 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:48:54,853 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:49:00,203 [INFO] No DNI available at the moment.
+2024-12-02 14:49:00,203 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:49:00,204 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:49:05,551 [INFO] No DNI available at the moment.
+2024-12-02 14:49:05,551 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:49:05,551 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:49:10,902 [INFO] No DNI available at the moment.
+2024-12-02 14:49:10,902 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:49:10,903 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:49:16,263 [INFO] No DNI available at the moment.
+2024-12-02 14:49:16,264 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:49:16,264 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:49:21,645 [INFO] No DNI available at the moment.
+2024-12-02 14:49:21,651 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:49:21,651 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:49:27,003 [INFO] No DNI available at the moment.
+2024-12-02 14:49:27,005 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:49:27,006 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:49:32,381 [INFO] No DNI available at the moment.
+2024-12-02 14:49:32,382 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:49:32,382 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:49:37,739 [INFO] No DNI available at the moment.
+2024-12-02 14:49:37,742 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:49:37,742 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:49:43,110 [INFO] No DNI available at the moment.
+2024-12-02 14:49:43,111 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:49:43,112 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:49:48,471 [INFO] No DNI available at the moment.
+2024-12-02 14:49:48,472 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:49:48,473 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:49:53,831 [INFO] No DNI available at the moment.
+2024-12-02 14:49:53,832 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:49:53,833 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:49:59,211 [INFO] No DNI available at the moment.
+2024-12-02 14:49:59,212 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:49:59,213 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:50:04,572 [INFO] No DNI available at the moment.
+2024-12-02 14:50:04,573 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:50:04,575 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:50:09,931 [INFO] No DNI available at the moment.
+2024-12-02 14:50:09,933 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:50:09,934 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:50:15,291 [INFO] No DNI available at the moment.
+2024-12-02 14:50:15,293 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:50:15,294 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:50:20,644 [INFO] No DNI available at the moment.
+2024-12-02 14:50:20,645 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:50:20,645 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:50:26,001 [INFO] No DNI available at the moment.
+2024-12-02 14:50:26,001 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:50:26,001 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:50:31,344 [INFO] No DNI available at the moment.
+2024-12-02 14:50:31,344 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:50:31,351 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:53:21,609 [INFO] No DNI available at the moment.
+2024-12-02 14:53:21,609 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:53:21,609 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:53:26,969 [INFO] No DNI available at the moment.
+2024-12-02 14:53:26,969 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:53:26,970 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:53:32,367 [INFO] No DNI available at the moment.
+2024-12-02 14:53:32,369 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:53:32,370 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:53:37,722 [INFO] No DNI available at the moment.
+2024-12-02 14:53:37,724 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:53:37,725 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:53:43,084 [INFO] Received DNI: 37295755
+2024-12-02 14:53:43,084 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 14:53:47,648 [INFO] Entered 'terragene' into the first input field.
+2024-12-02 14:53:47,682 [INFO] Submitted the first form.
+2024-12-02 14:53:52,683 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-02 14:53:56,201 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-02 14:53:56,229 [INFO] Submitted the second form.
+2024-12-02 14:54:03,652 [INFO] Browser closed.
+2024-12-02 14:54:03,652 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:54:08,998 [INFO] No DNI available at the moment.
+2024-12-02 14:54:08,998 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:54:09,002 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:54:14,370 [INFO] No DNI available at the moment.
+2024-12-02 14:54:14,370 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:54:14,370 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:54:19,724 [INFO] No DNI available at the moment.
+2024-12-02 14:54:19,724 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:54:19,724 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:54:25,087 [INFO] No DNI available at the moment.
+2024-12-02 14:54:25,088 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:54:25,088 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:54:42,686 [INFO] No DNI available at the moment.
+2024-12-02 14:54:42,686 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:54:42,686 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:54:48,073 [INFO] No DNI available at the moment.
+2024-12-02 14:54:48,074 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:54:48,075 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:54:53,424 [INFO] Received DNI: 37295755
+2024-12-02 14:54:53,425 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 14:55:01,009 [INFO] Entered 'terragene' into the first input field.
+2024-12-02 14:55:01,056 [INFO] Submitted the first form.
+2024-12-02 14:55:06,057 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-02 14:55:09,488 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-02 14:55:09,516 [INFO] Submitted the second form.
+2024-12-02 14:55:16,884 [INFO] Browser closed.
+2024-12-02 14:55:16,885 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:55:22,242 [INFO] Received DNI: 37295755
+2024-12-02 14:55:22,243 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 14:55:26,299 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000026BE2D45C10>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión')': /session/82750b1fadc3296321d8f72eb1c347b7/url
+2024-12-02 14:55:30,408 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000026BE2D45390>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión')': /session/82750b1fadc3296321d8f72eb1c347b7/url
+2024-12-02 14:55:34,478 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000026BE2D46CD0>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión')': /session/82750b1fadc3296321d8f72eb1c347b7/url
+2024-12-02 14:55:38,533 [ERROR] An error occurred during navigation: HTTPConnectionPool(host='localhost', port=58041): Max retries exceeded with url: /session/82750b1fadc3296321d8f72eb1c347b7/url (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000026BE2D476D0>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))
+2024-12-02 14:55:42,626 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000026BE2D47D90>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión')': /session/82750b1fadc3296321d8f72eb1c347b7
+2024-12-02 14:55:46,715 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000026BE2D483D0>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión')': /session/82750b1fadc3296321d8f72eb1c347b7
+2024-12-02 14:55:50,826 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000026BE2D48AD0>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión')': /session/82750b1fadc3296321d8f72eb1c347b7
+2024-12-02 14:55:58,989 [INFO] Browser closed.
+2024-12-02 14:55:58,990 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:56:04,341 [INFO] No DNI available at the moment.
+2024-12-02 14:56:04,341 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:56:04,341 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:56:09,699 [INFO] No DNI available at the moment.
+2024-12-02 14:56:09,699 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:56:09,699 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:56:15,048 [INFO] No DNI available at the moment.
+2024-12-02 14:56:15,049 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:56:15,050 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:56:20,414 [INFO] No DNI available at the moment.
+2024-12-02 14:56:20,416 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:56:20,418 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:56:25,777 [INFO] No DNI available at the moment.
+2024-12-02 14:56:25,778 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:56:25,779 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:56:31,153 [INFO] No DNI available at the moment.
+2024-12-02 14:56:31,154 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:56:31,154 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:56:36,504 [INFO] No DNI available at the moment.
+2024-12-02 14:56:36,505 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:56:36,506 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:57:58,398 [INFO] No DNI available at the moment.
+2024-12-02 14:57:58,399 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:57:58,399 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:58:03,756 [INFO] No DNI available at the moment.
+2024-12-02 14:58:03,756 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:58:03,756 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:58:09,110 [INFO] Received DNI: 37295755
+2024-12-02 14:58:09,111 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 14:58:12,283 [INFO] Entered 'terragene' into the first input field.
+2024-12-02 14:58:12,318 [INFO] Submitted the first form.
+2024-12-02 14:58:17,319 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-02 14:58:20,426 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-02 14:58:20,455 [INFO] Submitted the second form.
+2024-12-02 14:58:29,463 [INFO] Browser closed.
+2024-12-02 14:58:29,464 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:58:34,828 [INFO] No DNI available at the moment.
+2024-12-02 14:58:34,828 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:58:34,828 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:58:40,177 [INFO] No DNI available at the moment.
+2024-12-02 14:58:40,177 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:58:40,178 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:58:45,513 [INFO] No DNI available at the moment.
+2024-12-02 14:58:45,522 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:58:45,522 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 14:58:50,878 [INFO] No DNI available at the moment.
+2024-12-02 14:58:50,878 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 14:58:50,879 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:01:04,356 [INFO] No DNI available at the moment.
+2024-12-02 15:01:04,356 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:01:04,356 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:01:09,751 [INFO] No DNI available at the moment.
+2024-12-02 15:01:09,752 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:01:09,752 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:01:15,121 [INFO] Received DNI: 37295755
+2024-12-02 15:01:15,121 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 15:01:18,279 [INFO] Entered 'terragene' into the first input field.
+2024-12-02 15:01:18,306 [INFO] Submitted the first form.
+2024-12-02 15:01:23,310 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-02 15:01:26,768 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-02 15:01:26,796 [INFO] Submitted the second form.
+2024-12-02 15:01:31,825 [INFO] Browser closed.
+2024-12-02 15:01:31,826 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:01:37,404 [INFO] No DNI available at the moment.
+2024-12-02 15:01:37,405 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:01:37,407 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:01:42,768 [INFO] Received DNI: 37295755
+2024-12-02 15:01:42,769 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 15:01:42,774 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7F24C6CB5+28821]
+	(No symbol) [0x00007FF7F2433840]
+	(No symbol) [0x00007FF7F22D578A]
+	(No symbol) [0x00007FF7F22AF4F5]
+	(No symbol) [0x00007FF7F2356247]
+	(No symbol) [0x00007FF7F236ECE2]
+	(No symbol) [0x00007FF7F234F0A3]
+	(No symbol) [0x00007FF7F231A778]
+	(No symbol) [0x00007FF7F231B8E1]
+	GetHandleVerifier [0x00007FF7F27FFCAD+3408013]
+	GetHandleVerifier [0x00007FF7F281741F+3504127]
+	GetHandleVerifier [0x00007FF7F280B5FD+3455453]
+	GetHandleVerifier [0x00007FF7F258BDBB+835995]
+	(No symbol) [0x00007FF7F243EB5F]
+	(No symbol) [0x00007FF7F243A814]
+	(No symbol) [0x00007FF7F243A9AD]
+	(No symbol) [0x00007FF7F242A199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-02 15:08:53,721 [INFO] No DNI available at the moment.
+2024-12-02 15:08:53,721 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:08:53,721 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:08:59,152 [INFO] No DNI available at the moment.
+2024-12-02 15:08:59,154 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:08:59,154 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:09:04,525 [INFO] Received DNI: 37295755
+2024-12-02 15:09:04,526 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 15:09:07,697 [INFO] Entered 'terragene' into the first input field.
+2024-12-02 15:09:07,741 [INFO] Submitted the first form.
+2024-12-02 15:09:12,742 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-02 15:09:16,289 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-02 15:09:16,319 [INFO] Submitted the second form.
+2024-12-02 15:09:21,358 [INFO] Closed the navigation tab.
+2024-12-02 15:09:21,363 [INFO] Switched back to the main tab.
+2024-12-02 15:09:21,364 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:09:26,730 [INFO] No DNI available at the moment.
+2024-12-02 15:09:26,731 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:09:26,732 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:09:32,097 [INFO] Received DNI: 37295755
+2024-12-02 15:09:32,098 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 15:09:35,237 [ERROR] An error occurred during navigation: Message: element not interactable
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7F24C6CB5+28821]
+	(No symbol) [0x00007FF7F2433840]
+	(No symbol) [0x00007FF7F22D55B9]
+	(No symbol) [0x00007FF7F2322D14]
+	(No symbol) [0x00007FF7F2320DAD]
+	(No symbol) [0x00007FF7F234F2FA]
+	(No symbol) [0x00007FF7F231C3F6]
+	(No symbol) [0x00007FF7F234F510]
+	(No symbol) [0x00007FF7F236F412]
+	(No symbol) [0x00007FF7F234F0A3]
+	(No symbol) [0x00007FF7F231A778]
+	(No symbol) [0x00007FF7F231B8E1]
+	GetHandleVerifier [0x00007FF7F27FFCAD+3408013]
+	GetHandleVerifier [0x00007FF7F281741F+3504127]
+	GetHandleVerifier [0x00007FF7F280B5FD+3455453]
+	GetHandleVerifier [0x00007FF7F258BDBB+835995]
+	(No symbol) [0x00007FF7F243EB5F]
+	(No symbol) [0x00007FF7F243A814]
+	(No symbol) [0x00007FF7F243A9AD]
+	(No symbol) [0x00007FF7F242A199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-02 15:09:35,262 [INFO] Closed the navigation tab.
+2024-12-02 15:09:35,267 [INFO] Switched back to the main tab.
+2024-12-02 15:09:35,267 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:09:40,607 [INFO] No DNI available at the moment.
+2024-12-02 15:09:40,618 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:09:40,619 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:09:45,992 [INFO] Received DNI: 37295755
+2024-12-02 15:09:45,993 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 15:09:49,141 [ERROR] An error occurred during navigation: Message: element not interactable
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7F24C6CB5+28821]
+	(No symbol) [0x00007FF7F2433840]
+	(No symbol) [0x00007FF7F22D55B9]
+	(No symbol) [0x00007FF7F2322D14]
+	(No symbol) [0x00007FF7F2320DAD]
+	(No symbol) [0x00007FF7F234F2FA]
+	(No symbol) [0x00007FF7F231C3F6]
+	(No symbol) [0x00007FF7F234F510]
+	(No symbol) [0x00007FF7F236F412]
+	(No symbol) [0x00007FF7F234F0A3]
+	(No symbol) [0x00007FF7F231A778]
+	(No symbol) [0x00007FF7F231B8E1]
+	GetHandleVerifier [0x00007FF7F27FFCAD+3408013]
+	GetHandleVerifier [0x00007FF7F281741F+3504127]
+	GetHandleVerifier [0x00007FF7F280B5FD+3455453]
+	GetHandleVerifier [0x00007FF7F258BDBB+835995]
+	(No symbol) [0x00007FF7F243EB5F]
+	(No symbol) [0x00007FF7F243A814]
+	(No symbol) [0x00007FF7F243A9AD]
+	(No symbol) [0x00007FF7F242A199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-02 15:09:49,167 [INFO] Closed the navigation tab.
+2024-12-02 15:09:49,172 [INFO] Switched back to the main tab.
+2024-12-02 15:09:49,172 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:09:54,519 [INFO] No DNI available at the moment.
+2024-12-02 15:09:54,520 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:09:54,521 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:09:59,888 [INFO] No DNI available at the moment.
+2024-12-02 15:09:59,890 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:09:59,890 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:10:05,243 [INFO] No DNI available at the moment.
+2024-12-02 15:10:05,243 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:10:05,243 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:10:10,594 [INFO] No DNI available at the moment.
+2024-12-02 15:10:10,595 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:10:10,595 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:10:15,977 [INFO] No DNI available at the moment.
+2024-12-02 15:10:15,977 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:10:15,977 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:10:21,325 [INFO] No DNI available at the moment.
+2024-12-02 15:10:21,326 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:10:21,326 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:10:26,698 [INFO] No DNI available at the moment.
+2024-12-02 15:10:26,698 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:10:26,699 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:10:32,067 [INFO] No DNI available at the moment.
+2024-12-02 15:10:32,067 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:10:32,068 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:10:37,410 [INFO] No DNI available at the moment.
+2024-12-02 15:10:37,411 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:10:37,412 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:10:42,783 [INFO] No DNI available at the moment.
+2024-12-02 15:10:42,784 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:10:42,784 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:10:48,151 [INFO] No DNI available at the moment.
+2024-12-02 15:10:48,152 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:10:48,152 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:10:53,507 [INFO] No DNI available at the moment.
+2024-12-02 15:10:53,508 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:10:53,509 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:11:17,126 [INFO] No DNI available at the moment.
+2024-12-02 15:11:17,128 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:11:17,128 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:11:22,493 [INFO] Received DNI: 37295755
+2024-12-02 15:11:22,494 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 15:11:25,648 [INFO] Entered 'terragene' into the first input field.
+2024-12-02 15:11:25,687 [INFO] Submitted the first form.
+2024-12-02 15:11:25,688 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-02 15:11:26,483 [ERROR] An error occurred during navigation: Message: element not interactable
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7F24C6CB5+28821]
+	(No symbol) [0x00007FF7F2433840]
+	(No symbol) [0x00007FF7F22D55B9]
+	(No symbol) [0x00007FF7F2322D14]
+	(No symbol) [0x00007FF7F2320DAD]
+	(No symbol) [0x00007FF7F234F2FA]
+	(No symbol) [0x00007FF7F231C3F6]
+	(No symbol) [0x00007FF7F234F510]
+	(No symbol) [0x00007FF7F236F412]
+	(No symbol) [0x00007FF7F234F0A3]
+	(No symbol) [0x00007FF7F231A778]
+	(No symbol) [0x00007FF7F231B8E1]
+	GetHandleVerifier [0x00007FF7F27FFCAD+3408013]
+	GetHandleVerifier [0x00007FF7F281741F+3504127]
+	GetHandleVerifier [0x00007FF7F280B5FD+3455453]
+	GetHandleVerifier [0x00007FF7F258BDBB+835995]
+	(No symbol) [0x00007FF7F243EB5F]
+	(No symbol) [0x00007FF7F243A814]
+	(No symbol) [0x00007FF7F243A9AD]
+	(No symbol) [0x00007FF7F242A199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-02 15:11:26,515 [INFO] Closed the navigation tab.
+2024-12-02 15:11:26,520 [INFO] Switched back to the main tab.
+2024-12-02 15:11:26,520 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:11:31,897 [INFO] No DNI available at the moment.
+2024-12-02 15:11:31,897 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:11:31,897 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:11:37,262 [INFO] No DNI available at the moment.
+2024-12-02 15:11:37,263 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:11:37,263 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:11:42,619 [INFO] Received DNI: 37295755
+2024-12-02 15:11:42,620 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 15:11:45,773 [INFO] Entered 'terragene' into the first input field.
+2024-12-02 15:11:45,799 [INFO] Submitted the first form.
+2024-12-02 15:11:45,799 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-02 15:11:45,985 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-02 15:11:46,018 [INFO] Submitted the second form.
+2024-12-02 15:11:56,050 [INFO] Closed the navigation tab.
+2024-12-02 15:11:56,051 [INFO] Switched back to the main tab.
+2024-12-02 15:11:56,051 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:12:01,398 [INFO] No DNI available at the moment.
+2024-12-02 15:12:01,399 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:12:01,399 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:12:06,765 [INFO] No DNI available at the moment.
+2024-12-02 15:12:06,766 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:12:06,767 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:12:12,112 [INFO] No DNI available at the moment.
+2024-12-02 15:12:12,117 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:12:12,118 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:12:17,467 [INFO] No DNI available at the moment.
+2024-12-02 15:12:17,468 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:12:17,469 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:12:22,809 [INFO] No DNI available at the moment.
+2024-12-02 15:12:22,810 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:12:22,810 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:12:28,167 [INFO] No DNI available at the moment.
+2024-12-02 15:12:28,169 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:12:28,170 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:12:33,522 [INFO] No DNI available at the moment.
+2024-12-02 15:12:33,523 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:12:33,523 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:12:38,870 [INFO] No DNI available at the moment.
+2024-12-02 15:12:38,871 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:12:38,871 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:12:44,221 [INFO] No DNI available at the moment.
+2024-12-02 15:12:44,221 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:12:44,221 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:12:49,586 [INFO] No DNI available at the moment.
+2024-12-02 15:12:49,587 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:12:49,587 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:12:54,939 [INFO] No DNI available at the moment.
+2024-12-02 15:12:54,941 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:12:54,941 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:13:00,307 [INFO] No DNI available at the moment.
+2024-12-02 15:13:00,313 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:13:00,314 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:13:05,663 [INFO] No DNI available at the moment.
+2024-12-02 15:13:05,665 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:13:05,666 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:13:11,009 [INFO] No DNI available at the moment.
+2024-12-02 15:13:11,012 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:13:11,012 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:13:16,354 [INFO] No DNI available at the moment.
+2024-12-02 15:13:16,355 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:13:16,355 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:13:21,705 [INFO] No DNI available at the moment.
+2024-12-02 15:13:21,707 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-02 15:13:21,708 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-02 15:13:32,208 [INFO] No DNI available at the moment.
+2024-12-02 15:13:32,208 [INFO] No DNI fetched
+2024-12-02 15:13:32,543 [INFO] No DNI available at the moment.
+2024-12-02 15:13:32,544 [INFO] No DNI fetched
+2024-12-02 15:13:32,895 [INFO] No DNI available at the moment.
+2024-12-02 15:13:32,895 [INFO] No DNI fetched
+2024-12-02 15:13:33,250 [INFO] No DNI available at the moment.
+2024-12-02 15:13:33,250 [INFO] No DNI fetched
+2024-12-02 15:13:33,627 [INFO] No DNI available at the moment.
+2024-12-02 15:13:33,627 [INFO] No DNI fetched
+2024-12-02 15:13:33,984 [INFO] No DNI available at the moment.
+2024-12-02 15:13:33,985 [INFO] No DNI fetched
+2024-12-02 15:13:34,332 [INFO] No DNI available at the moment.
+2024-12-02 15:13:34,332 [INFO] No DNI fetched
+2024-12-02 15:13:34,672 [INFO] No DNI available at the moment.
+2024-12-02 15:13:34,676 [INFO] No DNI fetched
+2024-12-02 15:13:35,017 [INFO] No DNI available at the moment.
+2024-12-02 15:13:35,017 [INFO] No DNI fetched
+2024-12-02 15:13:35,367 [INFO] No DNI available at the moment.
+2024-12-02 15:13:35,367 [INFO] No DNI fetched
+2024-12-02 15:13:35,747 [INFO] No DNI available at the moment.
+2024-12-02 15:13:35,747 [INFO] No DNI fetched
+2024-12-02 15:13:36,089 [INFO] No DNI available at the moment.
+2024-12-02 15:13:36,090 [INFO] No DNI fetched
+2024-12-02 15:13:36,462 [INFO] No DNI available at the moment.
+2024-12-02 15:13:36,463 [INFO] No DNI fetched
+2024-12-02 15:13:36,807 [INFO] No DNI available at the moment.
+2024-12-02 15:13:36,808 [INFO] No DNI fetched
+2024-12-02 15:13:37,164 [INFO] No DNI available at the moment.
+2024-12-02 15:13:37,164 [INFO] No DNI fetched
+2024-12-02 15:13:37,525 [INFO] No DNI available at the moment.
+2024-12-02 15:13:37,527 [INFO] No DNI fetched
+2024-12-02 15:13:37,883 [INFO] No DNI available at the moment.
+2024-12-02 15:13:37,884 [INFO] No DNI fetched
+2024-12-02 15:13:38,261 [INFO] No DNI available at the moment.
+2024-12-02 15:13:38,262 [INFO] No DNI fetched
+2024-12-02 15:13:38,688 [INFO] No DNI available at the moment.
+2024-12-02 15:13:38,689 [INFO] No DNI fetched
+2024-12-02 15:13:39,057 [INFO] No DNI available at the moment.
+2024-12-02 15:13:39,057 [INFO] No DNI fetched
+2024-12-02 15:13:39,420 [INFO] Received DNI: 37295755
+2024-12-02 15:13:39,421 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-02 15:13:42,567 [INFO] Entered 'terragene' into the first input field.
+2024-12-02 15:13:42,599 [INFO] Submitted the first form.
+2024-12-02 15:13:42,600 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-02 15:13:43,745 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-02 15:13:43,785 [INFO] Submitted the second form.
+2024-12-02 15:13:53,817 [INFO] Closed the navigation tab.
+2024-12-02 15:13:53,821 [INFO] Switched back to the main tab.
+2024-12-02 15:13:54,193 [INFO] No DNI available at the moment.
+2024-12-02 15:13:54,194 [INFO] No DNI fetched
+2024-12-02 15:13:54,554 [INFO] No DNI available at the moment.
+2024-12-02 15:13:54,554 [INFO] No DNI fetched
+2024-12-02 15:13:54,904 [INFO] No DNI available at the moment.
+2024-12-02 15:13:54,906 [INFO] No DNI fetched
+2024-12-02 15:13:55,265 [INFO] No DNI available at the moment.
+2024-12-02 15:13:55,266 [INFO] No DNI fetched
+2024-12-02 15:13:55,644 [INFO] No DNI available at the moment.
+2024-12-02 15:13:55,644 [INFO] No DNI fetched
+2024-12-02 15:13:55,990 [INFO] No DNI available at the moment.
+2024-12-02 15:13:55,990 [INFO] No DNI fetched
+2024-12-02 15:13:56,358 [INFO] No DNI available at the moment.
+2024-12-02 15:13:56,359 [INFO] No DNI fetched
+2024-12-02 15:13:56,696 [INFO] No DNI available at the moment.
+2024-12-02 15:13:56,703 [INFO] No DNI fetched
+2024-12-02 15:13:57,054 [INFO] No DNI available at the moment.
+2024-12-02 15:13:57,054 [INFO] No DNI fetched
+2024-12-02 15:13:57,398 [INFO] No DNI available at the moment.
+2024-12-02 15:13:57,399 [INFO] No DNI fetched
+2024-12-02 15:13:57,741 [INFO] No DNI available at the moment.
+2024-12-02 15:13:57,743 [INFO] No DNI fetched
+2024-12-02 15:13:58,084 [INFO] No DNI available at the moment.
+2024-12-02 15:13:58,084 [INFO] No DNI fetched
+2024-12-02 15:13:58,454 [INFO] No DNI available at the moment.
+2024-12-02 15:13:58,455 [INFO] No DNI fetched
+2024-12-02 15:13:58,834 [INFO] No DNI available at the moment.
+2024-12-02 15:13:58,835 [INFO] No DNI fetched
+2024-12-02 15:13:59,202 [INFO] No DNI available at the moment.
+2024-12-02 15:13:59,203 [INFO] No DNI fetched
+2024-12-02 15:13:59,552 [INFO] No DNI available at the moment.
+2024-12-02 15:13:59,554 [INFO] No DNI fetched
+2024-12-02 15:13:59,905 [INFO] No DNI available at the moment.
+2024-12-02 15:13:59,907 [INFO] No DNI fetched
+2024-12-02 15:14:00,258 [INFO] No DNI available at the moment.
+2024-12-02 15:14:00,259 [INFO] No DNI fetched
+2024-12-02 15:14:00,609 [INFO] No DNI available at the moment.
+2024-12-02 15:14:00,610 [INFO] No DNI fetched
+2024-12-02 15:14:00,968 [INFO] No DNI available at the moment.
+2024-12-02 15:14:00,969 [INFO] No DNI fetched
+2024-12-02 15:14:01,318 [INFO] No DNI available at the moment.
+2024-12-02 15:14:01,319 [INFO] No DNI fetched
+2024-12-02 15:14:01,669 [INFO] No DNI available at the moment.
+2024-12-02 15:14:01,669 [INFO] No DNI fetched
+2024-12-02 15:14:02,023 [INFO] No DNI available at the moment.
+2024-12-02 15:14:02,023 [INFO] No DNI fetched
+2024-12-02 15:14:02,364 [INFO] No DNI available at the moment.
+2024-12-02 15:14:02,374 [INFO] No DNI fetched
+2024-12-02 15:14:02,754 [INFO] No DNI available at the moment.
+2024-12-02 15:14:02,754 [INFO] No DNI fetched
+2024-12-02 15:14:03,117 [INFO] No DNI available at the moment.
+2024-12-02 15:14:03,118 [INFO] No DNI fetched
+2024-12-02 15:14:03,475 [INFO] No DNI available at the moment.
+2024-12-02 15:14:03,476 [INFO] No DNI fetched
+2024-12-02 15:14:03,829 [INFO] No DNI available at the moment.
+2024-12-02 15:14:03,830 [INFO] No DNI fetched
+2024-12-02 15:14:04,178 [INFO] No DNI available at the moment.
+2024-12-02 15:14:04,178 [INFO] No DNI fetched
+2024-12-02 15:14:04,531 [INFO] No DNI available at the moment.
+2024-12-02 15:14:04,531 [INFO] No DNI fetched
+2024-12-02 15:14:04,883 [INFO] No DNI available at the moment.
+2024-12-02 15:14:04,883 [INFO] No DNI fetched
+2024-12-02 15:14:05,224 [INFO] No DNI available at the moment.
+2024-12-02 15:14:05,232 [INFO] No DNI fetched
+2024-12-02 15:14:05,586 [INFO] No DNI available at the moment.
+2024-12-02 15:14:05,590 [INFO] No DNI fetched
+2024-12-02 15:14:05,952 [INFO] No DNI available at the moment.
+2024-12-02 15:14:05,953 [INFO] No DNI fetched
+2024-12-02 15:14:06,316 [INFO] No DNI available at the moment.
+2024-12-02 15:14:06,316 [INFO] No DNI fetched
+2024-12-02 15:14:06,674 [INFO] No DNI available at the moment.
+2024-12-02 15:14:06,674 [INFO] No DNI fetched
+2024-12-02 15:14:07,026 [INFO] No DNI available at the moment.
+2024-12-02 15:14:07,027 [INFO] No DNI fetched
+2024-12-02 15:14:07,405 [INFO] No DNI available at the moment.
+2024-12-02 15:14:07,405 [INFO] No DNI fetched
+2024-12-02 15:14:07,746 [INFO] No DNI available at the moment.
+2024-12-02 15:14:07,746 [INFO] No DNI fetched
+2024-12-02 15:14:08,122 [INFO] No DNI available at the moment.
+2024-12-02 15:14:08,124 [INFO] No DNI fetched
+2024-12-02 15:14:08,471 [INFO] No DNI available at the moment.
+2024-12-02 15:14:08,472 [INFO] No DNI fetched
+2024-12-02 15:14:08,833 [INFO] No DNI available at the moment.
+2024-12-02 15:14:08,834 [INFO] No DNI fetched
+2024-12-02 15:14:09,177 [INFO] No DNI available at the moment.
+2024-12-02 15:14:09,178 [INFO] No DNI fetched
+2024-12-02 15:14:10,584 [INFO] No DNI available at the moment.
+2024-12-02 15:14:10,584 [INFO] No DNI fetched
+2024-12-02 15:14:10,995 [INFO] No DNI available at the moment.
+2024-12-02 15:14:10,995 [INFO] No DNI fetched
+2024-12-02 15:14:11,407 [INFO] No DNI available at the moment.
+2024-12-02 15:14:11,407 [INFO] No DNI fetched
+2024-12-02 15:14:11,794 [INFO] No DNI available at the moment.
+2024-12-02 15:14:11,800 [INFO] No DNI fetched
+2024-12-02 15:14:12,149 [INFO] No DNI available at the moment.
+2024-12-02 15:14:12,150 [INFO] No DNI fetched
+2024-12-02 15:14:12,518 [INFO] No DNI available at the moment.
+2024-12-02 15:14:12,518 [INFO] No DNI fetched
+2024-12-02 15:14:12,890 [INFO] No DNI available at the moment.
+2024-12-02 15:14:12,894 [INFO] No DNI fetched
+2024-12-02 15:14:13,275 [INFO] No DNI available at the moment.
+2024-12-02 15:14:13,280 [INFO] No DNI fetched
+2024-12-02 15:14:13,630 [INFO] No DNI available at the moment.
+2024-12-02 15:14:13,631 [INFO] No DNI fetched
+2024-12-02 15:14:13,982 [INFO] No DNI available at the moment.
+2024-12-02 15:14:13,984 [INFO] No DNI fetched
+2024-12-02 15:14:14,359 [INFO] No DNI available at the moment.
+2024-12-02 15:14:14,360 [INFO] No DNI fetched
+2024-12-02 15:14:14,716 [INFO] No DNI available at the moment.
+2024-12-02 15:14:14,717 [INFO] No DNI fetched
+2024-12-02 15:14:15,078 [INFO] No DNI available at the moment.
+2024-12-02 15:14:15,080 [INFO] No DNI fetched
+2024-12-02 15:14:15,429 [INFO] No DNI available at the moment.
+2024-12-02 15:14:15,430 [INFO] No DNI fetched
+2024-12-02 15:14:15,774 [INFO] No DNI available at the moment.
+2024-12-02 15:14:15,777 [INFO] No DNI fetched
+2024-12-02 15:14:16,147 [INFO] No DNI available at the moment.
+2024-12-02 15:14:16,148 [INFO] No DNI fetched
+2024-12-02 15:14:16,516 [INFO] No DNI available at the moment.
+2024-12-02 15:14:16,516 [INFO] No DNI fetched
+2024-12-02 15:14:16,872 [INFO] No DNI available at the moment.
+2024-12-02 15:14:16,874 [INFO] No DNI fetched
+2024-12-02 15:14:17,219 [INFO] No DNI available at the moment.
+2024-12-02 15:14:17,220 [INFO] No DNI fetched
+2024-12-02 15:14:17,560 [INFO] No DNI available at the moment.
+2024-12-02 15:14:17,560 [INFO] No DNI fetched
+2024-12-02 15:14:17,918 [INFO] No DNI available at the moment.
+2024-12-02 15:14:17,919 [INFO] No DNI fetched
+2024-12-02 15:14:18,287 [INFO] No DNI available at the moment.
+2024-12-02 15:14:18,289 [INFO] No DNI fetched
+2024-12-02 15:14:18,657 [INFO] No DNI available at the moment.
+2024-12-02 15:14:18,657 [INFO] No DNI fetched
+2024-12-02 15:14:19,005 [INFO] No DNI available at the moment.
+2024-12-02 15:14:19,014 [INFO] No DNI fetched
+2024-12-02 15:14:19,359 [INFO] No DNI available at the moment.
+2024-12-02 15:14:19,360 [INFO] No DNI fetched
+2024-12-02 15:14:19,725 [INFO] No DNI available at the moment.
+2024-12-02 15:14:19,726 [INFO] No DNI fetched
+2024-12-02 15:14:20,086 [INFO] No DNI available at the moment.
+2024-12-02 15:14:20,086 [INFO] No DNI fetched
+2024-12-02 15:14:20,444 [INFO] No DNI available at the moment.
+2024-12-02 15:14:20,445 [INFO] No DNI fetched
+2024-12-02 15:14:20,796 [INFO] No DNI available at the moment.
+2024-12-02 15:14:20,796 [INFO] No DNI fetched
+2024-12-02 15:14:21,164 [INFO] No DNI available at the moment.
+2024-12-02 15:14:21,164 [INFO] No DNI fetched
+2024-12-02 15:14:21,521 [INFO] No DNI available at the moment.
+2024-12-02 15:14:21,521 [INFO] No DNI fetched
+2024-12-02 15:14:21,876 [INFO] No DNI available at the moment.
+2024-12-02 15:14:21,876 [INFO] No DNI fetched
+2024-12-02 15:14:22,216 [INFO] No DNI available at the moment.
+2024-12-02 15:14:22,216 [INFO] No DNI fetched
+2024-12-02 15:14:22,567 [INFO] No DNI available at the moment.
+2024-12-02 15:14:22,567 [INFO] No DNI fetched
+2024-12-02 15:14:22,917 [INFO] No DNI available at the moment.
+2024-12-02 15:14:22,917 [INFO] No DNI fetched
+2024-12-02 15:14:23,268 [INFO] No DNI available at the moment.
+2024-12-02 15:14:23,268 [INFO] No DNI fetched
+2024-12-02 15:14:23,615 [INFO] No DNI available at the moment.
+2024-12-02 15:14:23,617 [INFO] No DNI fetched
+2024-12-02 15:14:23,970 [INFO] No DNI available at the moment.
+2024-12-02 15:14:23,971 [INFO] No DNI fetched
+2024-12-02 15:14:24,316 [INFO] No DNI available at the moment.
+2024-12-02 15:14:24,317 [INFO] No DNI fetched
+2024-12-02 15:14:24,666 [INFO] No DNI available at the moment.
+2024-12-02 15:14:24,666 [INFO] No DNI fetched
+2024-12-02 15:14:25,022 [INFO] No DNI available at the moment.
+2024-12-02 15:14:25,022 [INFO] No DNI fetched
+2024-12-02 15:14:25,397 [INFO] No DNI available at the moment.
+2024-12-02 15:14:25,397 [INFO] No DNI fetched
+2024-12-02 15:14:25,752 [INFO] No DNI available at the moment.
+2024-12-02 15:14:25,753 [INFO] No DNI fetched
+2024-12-02 15:14:26,110 [INFO] No DNI available at the moment.
+2024-12-02 15:14:26,114 [INFO] No DNI fetched
+2024-12-02 15:14:26,464 [INFO] No DNI available at the moment.
+2024-12-02 15:14:26,474 [INFO] No DNI fetched
+2024-12-02 15:14:26,846 [INFO] No DNI available at the moment.
+2024-12-02 15:14:26,847 [INFO] No DNI fetched
+2024-12-02 15:14:27,203 [INFO] No DNI available at the moment.
+2024-12-02 15:14:27,203 [INFO] No DNI fetched
+2024-12-02 15:14:27,544 [INFO] No DNI available at the moment.
+2024-12-02 15:14:27,544 [INFO] No DNI fetched
+2024-12-02 15:14:27,899 [INFO] No DNI available at the moment.
+2024-12-02 15:14:27,900 [INFO] No DNI fetched
+2024-12-02 15:14:28,242 [INFO] No DNI available at the moment.
+2024-12-02 15:14:28,244 [INFO] No DNI fetched
+2024-12-02 15:14:28,589 [INFO] No DNI available at the moment.
+2024-12-02 15:14:28,590 [INFO] No DNI fetched
+2024-12-02 15:14:28,958 [INFO] No DNI available at the moment.
+2024-12-02 15:14:28,958 [INFO] No DNI fetched
+2024-12-02 15:14:29,325 [INFO] No DNI available at the moment.
+2024-12-02 15:14:29,325 [INFO] No DNI fetched
+2024-12-02 15:14:29,686 [INFO] No DNI available at the moment.
+2024-12-02 15:14:29,686 [INFO] No DNI fetched
+2024-12-02 15:14:30,024 [INFO] No DNI available at the moment.
+2024-12-02 15:14:30,034 [INFO] No DNI fetched
+2024-12-02 15:14:30,392 [INFO] No DNI available at the moment.
+2024-12-02 15:14:30,392 [INFO] No DNI fetched
+2024-12-02 15:14:30,760 [INFO] No DNI available at the moment.
+2024-12-02 15:14:30,761 [INFO] No DNI fetched
+2024-12-02 15:14:31,106 [INFO] No DNI available at the moment.
+2024-12-02 15:14:31,107 [INFO] No DNI fetched
+2024-12-02 15:14:31,468 [INFO] No DNI available at the moment.
+2024-12-02 15:14:31,468 [INFO] No DNI fetched
+2024-12-02 15:14:31,834 [INFO] No DNI available at the moment.
+2024-12-02 15:14:31,834 [INFO] No DNI fetched
+2024-12-02 15:14:32,207 [INFO] No DNI available at the moment.
+2024-12-02 15:14:32,208 [INFO] No DNI fetched
+2024-12-02 15:14:32,557 [INFO] No DNI available at the moment.
+2024-12-02 15:14:32,557 [INFO] No DNI fetched
+2024-12-02 15:14:32,910 [INFO] No DNI available at the moment.
+2024-12-02 15:14:32,910 [INFO] No DNI fetched
+2024-12-02 15:14:33,261 [INFO] No DNI available at the moment.
+2024-12-02 15:14:33,263 [INFO] No DNI fetched
+2024-12-02 15:14:33,613 [INFO] No DNI available at the moment.
+2024-12-02 15:14:33,614 [INFO] No DNI fetched
+2024-12-02 15:14:33,978 [INFO] No DNI available at the moment.
+2024-12-02 15:14:33,979 [INFO] No DNI fetched
+2024-12-02 15:14:34,340 [INFO] No DNI available at the moment.
+2024-12-02 15:14:34,340 [INFO] No DNI fetched
+2024-12-02 15:14:34,711 [INFO] No DNI available at the moment.
+2024-12-02 15:14:34,712 [INFO] No DNI fetched
+2024-12-02 15:14:35,064 [INFO] No DNI available at the moment.
+2024-12-02 15:14:35,064 [INFO] No DNI fetched
+2024-12-02 15:14:35,422 [INFO] No DNI available at the moment.
+2024-12-02 15:14:35,424 [INFO] No DNI fetched
+2024-12-02 15:14:35,804 [INFO] No DNI available at the moment.
+2024-12-02 15:14:35,805 [INFO] No DNI fetched
+2024-12-02 15:14:36,144 [INFO] No DNI available at the moment.
+2024-12-02 15:14:36,144 [INFO] No DNI fetched
+2024-12-02 15:14:36,511 [INFO] No DNI available at the moment.
+2024-12-02 15:14:36,512 [INFO] No DNI fetched
+2024-12-02 15:14:36,862 [INFO] No DNI available at the moment.
+2024-12-02 15:14:36,864 [INFO] No DNI fetched
+2024-12-02 15:14:37,213 [INFO] No DNI available at the moment.
+2024-12-02 15:14:37,214 [INFO] No DNI fetched
+2024-12-02 15:14:37,559 [INFO] No DNI available at the moment.
+2024-12-02 15:14:37,560 [INFO] No DNI fetched
+2024-12-02 15:14:37,920 [INFO] No DNI available at the moment.
+2024-12-02 15:14:37,921 [INFO] No DNI fetched
+2024-12-02 15:14:38,264 [INFO] No DNI available at the moment.
+2024-12-02 15:14:38,269 [INFO] No DNI fetched
+2024-12-02 15:14:38,643 [INFO] No DNI available at the moment.
+2024-12-02 15:14:38,643 [INFO] No DNI fetched
+2024-12-02 15:14:39,008 [INFO] No DNI available at the moment.
+2024-12-02 15:14:39,008 [INFO] No DNI fetched
+2024-12-02 15:14:39,395 [INFO] No DNI available at the moment.
+2024-12-02 15:14:39,395 [INFO] No DNI fetched
+2024-12-02 15:14:39,763 [INFO] No DNI available at the moment.
+2024-12-02 15:14:39,764 [INFO] No DNI fetched
+2024-12-02 15:14:40,131 [INFO] No DNI available at the moment.
+2024-12-02 15:14:40,133 [INFO] No DNI fetched
+2024-12-02 15:14:40,482 [INFO] No DNI available at the moment.
+2024-12-02 15:14:40,483 [INFO] No DNI fetched
+2024-12-02 15:14:40,835 [INFO] No DNI available at the moment.
+2024-12-02 15:14:40,835 [INFO] No DNI fetched
+2024-12-02 15:14:41,183 [INFO] No DNI available at the moment.
+2024-12-02 15:14:41,184 [INFO] No DNI fetched
+2024-12-02 15:14:41,533 [INFO] No DNI available at the moment.
+2024-12-02 15:14:41,534 [INFO] No DNI fetched
+2024-12-02 15:14:41,889 [INFO] No DNI available at the moment.
+2024-12-02 15:14:41,889 [INFO] No DNI fetched
+2024-12-02 15:14:42,236 [INFO] No DNI available at the moment.
+2024-12-02 15:14:42,236 [INFO] No DNI fetched
+2024-12-02 15:14:42,582 [INFO] No DNI available at the moment.
+2024-12-02 15:14:42,584 [INFO] No DNI fetched
+2024-12-02 15:14:42,939 [INFO] No DNI available at the moment.
+2024-12-02 15:14:42,940 [INFO] No DNI fetched
+2024-12-02 15:14:43,288 [INFO] No DNI available at the moment.
+2024-12-02 15:14:43,289 [INFO] No DNI fetched
+2024-12-02 15:14:43,637 [INFO] No DNI available at the moment.
+2024-12-02 15:14:43,638 [INFO] No DNI fetched
+2024-12-02 15:14:43,980 [INFO] No DNI available at the moment.
+2024-12-02 15:14:43,981 [INFO] No DNI fetched
+2024-12-02 15:14:44,326 [INFO] No DNI available at the moment.
+2024-12-02 15:14:44,327 [INFO] No DNI fetched
+2024-12-02 15:14:44,670 [INFO] No DNI available at the moment.
+2024-12-02 15:14:44,670 [INFO] No DNI fetched
+2024-12-02 15:14:45,035 [INFO] No DNI available at the moment.
+2024-12-02 15:14:45,036 [INFO] No DNI fetched
+2024-12-02 15:14:45,399 [INFO] No DNI available at the moment.
+2024-12-02 15:14:45,400 [INFO] No DNI fetched
+2024-12-02 15:14:45,769 [INFO] No DNI available at the moment.
+2024-12-02 15:14:45,770 [INFO] No DNI fetched
+2024-12-02 15:14:46,122 [INFO] No DNI available at the moment.
+2024-12-02 15:14:46,122 [INFO] No DNI fetched
+2024-12-02 15:14:46,464 [INFO] No DNI available at the moment.
+2024-12-02 15:14:46,465 [INFO] No DNI fetched
+2024-12-02 15:14:46,820 [INFO] No DNI available at the moment.
+2024-12-02 15:14:46,822 [INFO] No DNI fetched
+2024-12-02 15:14:47,190 [INFO] No DNI available at the moment.
+2024-12-02 15:14:47,191 [INFO] No DNI fetched
+2024-12-02 15:14:47,542 [INFO] No DNI available at the moment.
+2024-12-02 15:14:47,542 [INFO] No DNI fetched
+2024-12-02 15:14:47,898 [INFO] No DNI available at the moment.
+2024-12-02 15:14:47,900 [INFO] No DNI fetched
+2024-12-02 15:14:48,256 [INFO] No DNI available at the moment.
+2024-12-02 15:14:48,256 [INFO] No DNI fetched
+2024-12-02 15:14:48,597 [INFO] No DNI available at the moment.
+2024-12-02 15:14:48,599 [INFO] No DNI fetched
+2024-12-02 15:14:48,964 [INFO] No DNI available at the moment.
+2024-12-02 15:14:48,964 [INFO] No DNI fetched
+2024-12-02 15:14:49,307 [INFO] No DNI available at the moment.
+2024-12-02 15:14:49,307 [INFO] No DNI fetched
+2024-12-02 15:14:49,675 [INFO] No DNI available at the moment.
+2024-12-02 15:14:49,676 [INFO] No DNI fetched
+2024-12-02 15:14:50,031 [INFO] No DNI available at the moment.
+2024-12-02 15:14:50,032 [INFO] No DNI fetched
+2024-12-02 15:14:50,396 [INFO] No DNI available at the moment.
+2024-12-02 15:14:50,397 [INFO] No DNI fetched
+2024-12-02 15:14:50,746 [INFO] No DNI available at the moment.
+2024-12-02 15:14:50,746 [INFO] No DNI fetched
+2024-12-02 15:14:51,098 [INFO] No DNI available at the moment.
+2024-12-02 15:14:51,099 [INFO] No DNI fetched
+2024-12-02 15:14:51,443 [INFO] No DNI available at the moment.
+2024-12-02 15:14:51,445 [INFO] No DNI fetched
+2024-12-02 15:14:51,809 [INFO] No DNI available at the moment.
+2024-12-02 15:14:51,810 [INFO] No DNI fetched
+2024-12-02 15:14:52,167 [INFO] No DNI available at the moment.
+2024-12-02 15:14:52,168 [INFO] No DNI fetched
+2024-12-02 15:14:52,534 [INFO] No DNI available at the moment.
+2024-12-02 15:14:52,535 [INFO] No DNI fetched
+2024-12-02 15:14:52,884 [INFO] No DNI available at the moment.
+2024-12-02 15:14:52,885 [INFO] No DNI fetched
+2024-12-02 15:14:53,238 [INFO] No DNI available at the moment.
+2024-12-02 15:14:53,238 [INFO] No DNI fetched
+2024-12-02 15:14:53,585 [INFO] No DNI available at the moment.
+2024-12-02 15:14:53,585 [INFO] No DNI fetched
+2024-12-02 15:14:53,954 [INFO] No DNI available at the moment.
+2024-12-02 15:14:53,955 [INFO] No DNI fetched
+2024-12-02 15:14:54,314 [INFO] No DNI available at the moment.
+2024-12-02 15:14:54,314 [INFO] No DNI fetched
+2024-12-02 15:14:54,655 [INFO] No DNI available at the moment.
+2024-12-02 15:14:54,655 [INFO] No DNI fetched
+2024-12-02 15:14:55,032 [INFO] No DNI available at the moment.
+2024-12-02 15:14:55,033 [INFO] No DNI fetched
+2024-12-02 15:14:55,374 [INFO] No DNI available at the moment.
+2024-12-02 15:14:55,375 [INFO] No DNI fetched
+2024-12-02 15:14:55,736 [INFO] No DNI available at the moment.
+2024-12-02 15:14:55,736 [INFO] No DNI fetched
+2024-12-02 15:14:56,078 [INFO] No DNI available at the moment.
+2024-12-02 15:14:56,079 [INFO] No DNI fetched
+2024-12-02 15:14:56,446 [INFO] No DNI available at the moment.
+2024-12-02 15:14:56,446 [INFO] No DNI fetched
+2024-12-02 15:14:56,824 [INFO] No DNI available at the moment.
+2024-12-02 15:14:56,825 [INFO] No DNI fetched
+2024-12-02 15:14:57,166 [INFO] No DNI available at the moment.
+2024-12-02 15:14:57,166 [INFO] No DNI fetched
+2024-12-02 15:14:57,528 [INFO] No DNI available at the moment.
+2024-12-02 15:14:57,536 [INFO] No DNI fetched
+2024-12-02 15:14:57,884 [INFO] No DNI available at the moment.
+2024-12-02 15:14:57,884 [INFO] No DNI fetched
+2024-12-02 15:14:58,232 [INFO] No DNI available at the moment.
+2024-12-02 15:14:58,233 [INFO] No DNI fetched
+2024-12-02 15:14:58,574 [INFO] No DNI available at the moment.
+2024-12-02 15:14:58,582 [INFO] No DNI fetched
+2024-12-02 15:14:58,926 [INFO] No DNI available at the moment.
+2024-12-02 15:14:58,927 [INFO] No DNI fetched
+2024-12-02 15:14:59,276 [INFO] No DNI available at the moment.
+2024-12-02 15:14:59,276 [INFO] No DNI fetched
+2024-12-02 15:14:59,646 [INFO] No DNI available at the moment.
+2024-12-02 15:14:59,646 [INFO] No DNI fetched
+2024-12-02 15:15:00,021 [INFO] No DNI available at the moment.
+2024-12-02 15:15:00,022 [INFO] No DNI fetched
+2024-12-02 15:15:00,391 [INFO] No DNI available at the moment.
+2024-12-02 15:15:00,393 [INFO] No DNI fetched
+2024-12-02 15:15:00,743 [INFO] No DNI available at the moment.
+2024-12-02 15:15:00,745 [INFO] No DNI fetched
+2024-12-02 15:15:01,097 [INFO] No DNI available at the moment.
+2024-12-02 15:15:01,097 [INFO] No DNI fetched
+2024-12-02 15:15:01,456 [INFO] No DNI available at the moment.
+2024-12-02 15:15:01,457 [INFO] No DNI fetched
+2024-12-02 15:15:01,810 [INFO] No DNI available at the moment.
+2024-12-02 15:15:01,810 [INFO] No DNI fetched
+2024-12-02 15:15:02,145 [INFO] No DNI available at the moment.
+2024-12-02 15:15:02,154 [INFO] No DNI fetched
+2024-12-02 15:15:02,509 [INFO] No DNI available at the moment.
+2024-12-02 15:15:02,510 [INFO] No DNI fetched
+2024-12-02 15:15:02,854 [INFO] No DNI available at the moment.
+2024-12-02 15:15:02,856 [INFO] No DNI fetched
+2024-12-02 15:15:03,210 [INFO] No DNI available at the moment.
+2024-12-02 15:15:03,210 [INFO] No DNI fetched
+2024-12-02 15:15:03,561 [INFO] No DNI available at the moment.
+2024-12-02 15:15:03,564 [INFO] No DNI fetched
+2024-12-02 15:15:03,925 [INFO] No DNI available at the moment.
+2024-12-02 15:15:03,925 [INFO] No DNI fetched
+2024-12-02 15:15:04,269 [INFO] No DNI available at the moment.
+2024-12-02 15:15:04,273 [INFO] No DNI fetched
+2024-12-02 15:15:04,626 [INFO] No DNI available at the moment.
+2024-12-02 15:15:04,626 [INFO] No DNI fetched
+2024-12-02 15:15:04,988 [INFO] No DNI available at the moment.
+2024-12-02 15:15:04,988 [INFO] No DNI fetched
+2024-12-02 15:15:05,339 [INFO] No DNI available at the moment.
+2024-12-02 15:15:05,340 [INFO] No DNI fetched
+2024-12-02 15:15:05,696 [INFO] No DNI available at the moment.
+2024-12-02 15:15:05,696 [INFO] No DNI fetched
+2024-12-02 15:15:06,060 [INFO] No DNI available at the moment.
+2024-12-02 15:15:06,061 [INFO] No DNI fetched
+2024-12-02 15:15:06,410 [INFO] No DNI available at the moment.
+2024-12-02 15:15:06,412 [INFO] No DNI fetched
+2024-12-02 15:15:06,760 [INFO] No DNI available at the moment.
+2024-12-02 15:15:06,762 [INFO] No DNI fetched
+2024-12-02 15:15:07,121 [INFO] No DNI available at the moment.
+2024-12-02 15:15:07,122 [INFO] No DNI fetched
+2024-12-02 15:15:07,474 [INFO] No DNI available at the moment.
+2024-12-02 15:15:07,474 [INFO] No DNI fetched
+2024-12-02 15:15:07,824 [INFO] No DNI available at the moment.
+2024-12-02 15:15:07,824 [INFO] No DNI fetched
+2024-12-02 15:33:45,695 [INFO] Entered 'terragene' into the first input field.
+2024-12-02 15:33:45,759 [INFO] Submitted the first form.
+2024-12-02 15:33:48,282 [INFO] No DNI available at the moment.
+2024-12-02 15:33:48,282 [INFO] No DNI fetched
+2024-12-02 15:33:48,636 [INFO] No DNI available at the moment.
+2024-12-02 15:33:48,636 [INFO] No DNI fetched
+2024-12-02 15:33:48,995 [INFO] No DNI available at the moment.
+2024-12-02 15:33:48,996 [INFO] No DNI fetched
+2024-12-02 15:33:49,368 [INFO] No DNI available at the moment.
+2024-12-02 15:33:49,370 [INFO] No DNI fetched
+2024-12-02 15:33:49,745 [INFO] No DNI available at the moment.
+2024-12-02 15:33:49,747 [INFO] No DNI fetched
+2024-12-02 15:33:50,145 [INFO] No DNI available at the moment.
+2024-12-02 15:33:50,146 [INFO] No DNI fetched
+2024-12-02 15:33:50,502 [INFO] No DNI available at the moment.
+2024-12-02 15:33:50,502 [INFO] No DNI fetched
+2024-12-02 15:33:50,873 [INFO] No DNI available at the moment.
+2024-12-02 15:33:50,874 [INFO] No DNI fetched
+2024-12-02 15:33:51,229 [INFO] No DNI available at the moment.
+2024-12-02 15:33:51,229 [INFO] No DNI fetched
+2024-12-02 15:33:51,579 [INFO] No DNI available at the moment.
+2024-12-02 15:33:51,581 [INFO] No DNI fetched
+2024-12-02 15:33:51,936 [INFO] No DNI available at the moment.
+2024-12-02 15:33:51,936 [INFO] No DNI fetched
+2024-12-02 15:33:52,293 [INFO] No DNI available at the moment.
+2024-12-02 15:33:52,295 [INFO] No DNI fetched
+2024-12-02 15:33:52,654 [INFO] No DNI available at the moment.
+2024-12-02 15:33:52,656 [INFO] No DNI fetched
+2024-12-02 15:33:53,000 [INFO] No DNI available at the moment.
+2024-12-02 15:33:53,000 [INFO] No DNI fetched
+2024-12-02 15:33:53,356 [INFO] No DNI available at the moment.
+2024-12-02 15:33:53,357 [INFO] No DNI fetched
+2024-12-02 15:33:53,709 [INFO] No DNI available at the moment.
+2024-12-02 15:33:53,709 [INFO] No DNI fetched
+2024-12-02 15:33:54,066 [INFO] No DNI available at the moment.
+2024-12-02 15:33:54,066 [INFO] No DNI fetched
+2024-12-02 15:33:54,405 [INFO] No DNI available at the moment.
+2024-12-02 15:33:54,406 [INFO] No DNI fetched
+2024-12-02 15:33:54,756 [INFO] No DNI available at the moment.
+2024-12-02 15:33:54,756 [INFO] No DNI fetched
+2024-12-02 15:33:55,454 [INFO] No DNI available at the moment.
+2024-12-02 15:33:55,455 [INFO] No DNI fetched
+2024-12-02 15:33:55,809 [INFO] No DNI available at the moment.
+2024-12-02 15:33:55,810 [INFO] No DNI fetched
+2024-12-02 15:33:56,188 [INFO] Received DNI: 37295755
+2024-12-03 08:43:33,281 [INFO] Main tab opened.
+2024-12-03 08:43:33,741 [INFO] No DNI available at the moment.
+2024-12-03 08:43:33,742 [INFO] No DNI fetched. Retrying...
+2024-12-03 08:43:33,743 [INFO] Waiting for 5 seconds before retrying.
+2024-12-03 08:43:39,338 [INFO] No DNI available at the moment.
+2024-12-03 08:43:39,339 [INFO] No DNI fetched. Retrying...
+2024-12-03 08:43:39,340 [INFO] Waiting for 5 seconds before retrying.
+2024-12-03 08:43:44,793 [INFO] No DNI available at the moment.
+2024-12-03 08:43:44,794 [INFO] No DNI fetched. Retrying...
+2024-12-03 08:43:44,794 [INFO] Waiting for 5 seconds before retrying.
+2024-12-03 08:43:50,291 [INFO] Received DNI: 37295755
+2024-12-03 08:48:43,762 [INFO] Main tab opened.
+2024-12-03 08:48:44,215 [INFO] No DNI available at the moment.
+2024-12-03 08:48:44,215 [INFO] No DNI fetched. Retrying...
+2024-12-03 08:48:44,215 [INFO] Waiting for 5 seconds before retrying.
+2024-12-03 08:48:49,705 [INFO] Received DNI: 37295755
+2024-12-03 08:50:43,021 [INFO] Main tab opened.
+2024-12-03 08:50:43,496 [INFO] No DNI available at the moment.
+2024-12-03 08:50:43,496 [INFO] No DNI fetched. Retrying...
+2024-12-03 08:50:43,496 [INFO] Waiting for 5 seconds before retrying.
+2024-12-03 08:50:48,973 [INFO] No DNI available at the moment.
+2024-12-03 08:50:48,974 [INFO] No DNI fetched. Retrying...
+2024-12-03 08:50:48,974 [INFO] Waiting for 5 seconds before retrying.
+2024-12-03 08:50:54,602 [INFO] Received DNI: 38374102
+2024-12-03 08:51:19,327 [INFO] Main tab opened.
+2024-12-03 08:51:19,866 [INFO] Received DNI: 38374102
+2024-12-03 08:51:35,290 [INFO] Main tab opened.
+2024-12-03 08:51:35,831 [INFO] No DNI available at the moment.
+2024-12-03 08:51:35,831 [INFO] No DNI fetched. Retrying...
+2024-12-03 08:51:35,831 [INFO] Waiting for 5 seconds before retrying.
+2024-12-03 08:51:41,331 [INFO] Received DNI: 37295755
+2024-12-03 08:53:11,439 [INFO] No DNI available at the moment.
+2024-12-03 08:53:11,439 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 08:53:11,439 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-03 08:53:41,943 [INFO] Received DNI: 37295755
+2024-12-03 08:53:43,415 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 08:53:48,289 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 08:53:48,327 [INFO] Submitted the first form.
+2024-12-03 08:53:53,327 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-03 08:53:56,857 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-03 08:53:56,907 [INFO] Submitted the second form.
+2024-12-03 08:54:04,254 [INFO] Browser closed.
+2024-12-03 08:54:08,290 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-03 08:54:38,750 [INFO] Received DNI: 37295755
+2024-12-03 08:54:40,228 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:01:15,235 [INFO] No DNI available at the moment.
+2024-12-03 09:01:15,235 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 09:01:15,235 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-03 09:01:34,967 [INFO] No DNI available at the moment.
+2024-12-03 09:01:34,969 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 09:01:34,969 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-03 09:02:05,439 [INFO] Received DNI: 37295755
+2024-12-03 09:02:05,440 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:02:08,624 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 09:02:08,682 [INFO] Submitted the first form.
+2024-12-03 09:02:13,683 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-03 09:02:16,840 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-03 09:02:16,898 [INFO] Submitted the second form.
+2024-12-03 09:02:21,927 [INFO] Browser closed.
+2024-12-03 09:02:21,928 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-03 09:02:52,492 [INFO] Received DNI: 37295755
+2024-12-03 09:02:52,493 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:02:52,495 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7B3266CB5+28821]
+	(No symbol) [0x00007FF7B31D3840]
+	(No symbol) [0x00007FF7B307578A]
+	(No symbol) [0x00007FF7B304F4F5]
+	(No symbol) [0x00007FF7B30F6247]
+	(No symbol) [0x00007FF7B310ECE2]
+	(No symbol) [0x00007FF7B30EF0A3]
+	(No symbol) [0x00007FF7B30BA778]
+	(No symbol) [0x00007FF7B30BB8E1]
+	GetHandleVerifier [0x00007FF7B359FCAD+3408013]
+	GetHandleVerifier [0x00007FF7B35B741F+3504127]
+	GetHandleVerifier [0x00007FF7B35AB5FD+3455453]
+	GetHandleVerifier [0x00007FF7B332BDBB+835995]
+	(No symbol) [0x00007FF7B31DEB5F]
+	(No symbol) [0x00007FF7B31DA814]
+	(No symbol) [0x00007FF7B31DA9AD]
+	(No symbol) [0x00007FF7B31CA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-03 09:47:17,342 [INFO] Received DNI: 37295755
+2024-12-03 09:47:26,556 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:47:57,345 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 09:48:02,455 [INFO] Submitted the first form.
+2024-12-03 09:48:13,719 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-03 09:49:53,672 [INFO] Received DNI: 37295755
+2024-12-03 09:49:57,084 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:50:01,521 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 09:50:03,507 [INFO] Submitted the first form.
+2024-12-03 09:50:19,452 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-03 09:50:21,843 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7B3266CB5+28821]
+	(No symbol) [0x00007FF7B31D3840]
+	(No symbol) [0x00007FF7B307578A]
+	(No symbol) [0x00007FF7B304F4F5]
+	(No symbol) [0x00007FF7B30F6247]
+	(No symbol) [0x00007FF7B310ECE2]
+	(No symbol) [0x00007FF7B30EF0A3]
+	(No symbol) [0x00007FF7B30BA778]
+	(No symbol) [0x00007FF7B30BB8E1]
+	GetHandleVerifier [0x00007FF7B359FCAD+3408013]
+	GetHandleVerifier [0x00007FF7B35B741F+3504127]
+	GetHandleVerifier [0x00007FF7B35AB5FD+3455453]
+	GetHandleVerifier [0x00007FF7B332BDBB+835995]
+	(No symbol) [0x00007FF7B31DEB5F]
+	(No symbol) [0x00007FF7B31DA814]
+	(No symbol) [0x00007FF7B31DA9AD]
+	(No symbol) [0x00007FF7B31CA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-03 09:50:46,619 [INFO] Received DNI: 37295755
+2024-12-03 09:50:57,177 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:51:04,113 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 09:51:20,497 [INFO] Submitted the first form.
+2024-12-03 09:51:20,923 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-03 09:52:00,128 [INFO] Received DNI: 37295755
+2024-12-03 09:52:08,597 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:52:13,297 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 09:52:19,253 [INFO] Submitted the first form.
+2024-12-03 09:52:44,404 [INFO] Received DNI: 37295755
+2024-12-03 09:53:05,459 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:53:10,932 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 09:53:14,158 [INFO] Submitted the first form.
+2024-12-03 09:53:20,359 [ERROR] An error occurred during navigation: 'module' object is not callable
+2024-12-03 09:53:40,223 [INFO] Received DNI: 37295755
+2024-12-03 09:53:40,224 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:53:41,145 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 09:53:41,189 [INFO] Submitted the first form.
+2024-12-03 09:53:41,189 [ERROR] An error occurred during navigation: 'module' object is not callable
+2024-12-03 09:53:41,241 [INFO] Browser closed.
+2024-12-03 09:53:41,242 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-03 09:54:11,741 [INFO] Received DNI: 37295755
+2024-12-03 09:54:11,742 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:54:11,743 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7B3266CB5+28821]
+	(No symbol) [0x00007FF7B31D3840]
+	(No symbol) [0x00007FF7B307578A]
+	(No symbol) [0x00007FF7B304F4F5]
+	(No symbol) [0x00007FF7B30F6247]
+	(No symbol) [0x00007FF7B310ECE2]
+	(No symbol) [0x00007FF7B30EF0A3]
+	(No symbol) [0x00007FF7B30BA778]
+	(No symbol) [0x00007FF7B30BB8E1]
+	GetHandleVerifier [0x00007FF7B359FCAD+3408013]
+	GetHandleVerifier [0x00007FF7B35B741F+3504127]
+	GetHandleVerifier [0x00007FF7B35AB5FD+3455453]
+	GetHandleVerifier [0x00007FF7B332BDBB+835995]
+	(No symbol) [0x00007FF7B31DEB5F]
+	(No symbol) [0x00007FF7B31DA814]
+	(No symbol) [0x00007FF7B31DA9AD]
+	(No symbol) [0x00007FF7B31CA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-03 09:54:27,888 [INFO] Received DNI: 37295755
+2024-12-03 09:54:27,889 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:54:29,484 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 09:54:29,572 [INFO] Submitted the first form.
+2024-12-03 09:54:29,573 [ERROR] An error occurred during navigation: 'module' object is not callable
+2024-12-03 09:54:29,651 [INFO] Browser closed.
+2024-12-03 09:54:29,651 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-03 09:55:00,292 [INFO] Received DNI: 37295755
+2024-12-03 09:55:00,293 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:55:00,295 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7B3266CB5+28821]
+	(No symbol) [0x00007FF7B31D3840]
+	(No symbol) [0x00007FF7B307578A]
+	(No symbol) [0x00007FF7B304F4F5]
+	(No symbol) [0x00007FF7B30F6247]
+	(No symbol) [0x00007FF7B310ECE2]
+	(No symbol) [0x00007FF7B30EF0A3]
+	(No symbol) [0x00007FF7B30BA778]
+	(No symbol) [0x00007FF7B30BB8E1]
+	GetHandleVerifier [0x00007FF7B359FCAD+3408013]
+	GetHandleVerifier [0x00007FF7B35B741F+3504127]
+	GetHandleVerifier [0x00007FF7B35AB5FD+3455453]
+	GetHandleVerifier [0x00007FF7B332BDBB+835995]
+	(No symbol) [0x00007FF7B31DEB5F]
+	(No symbol) [0x00007FF7B31DA814]
+	(No symbol) [0x00007FF7B31DA9AD]
+	(No symbol) [0x00007FF7B31CA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-03 09:55:19,315 [INFO] Received DNI: 37295755
+2024-12-03 09:55:19,315 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:55:20,341 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 09:55:20,390 [INFO] Submitted the first form.
+2024-12-03 09:55:20,391 [ERROR] An error occurred during navigation: 'module' object is not callable
+2024-12-03 09:55:20,442 [INFO] Browser closed.
+2024-12-03 09:55:20,443 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-03 09:55:50,918 [INFO] Received DNI: 37295755
+2024-12-03 09:55:50,919 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:55:50,920 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7B3266CB5+28821]
+	(No symbol) [0x00007FF7B31D3840]
+	(No symbol) [0x00007FF7B307578A]
+	(No symbol) [0x00007FF7B304F4F5]
+	(No symbol) [0x00007FF7B30F6247]
+	(No symbol) [0x00007FF7B310ECE2]
+	(No symbol) [0x00007FF7B30EF0A3]
+	(No symbol) [0x00007FF7B30BA778]
+	(No symbol) [0x00007FF7B30BB8E1]
+	GetHandleVerifier [0x00007FF7B359FCAD+3408013]
+	GetHandleVerifier [0x00007FF7B35B741F+3504127]
+	GetHandleVerifier [0x00007FF7B35AB5FD+3455453]
+	GetHandleVerifier [0x00007FF7B332BDBB+835995]
+	(No symbol) [0x00007FF7B31DEB5F]
+	(No symbol) [0x00007FF7B31DA814]
+	(No symbol) [0x00007FF7B31DA9AD]
+	(No symbol) [0x00007FF7B31CA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-03 09:57:02,921 [INFO] Received DNI: 37295755
+2024-12-03 09:57:02,922 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:57:04,100 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 09:57:04,131 [INFO] Submitted the first form.
+2024-12-03 09:57:04,132 [ERROR] An error occurred during navigation: 'module' object is not callable
+2024-12-03 09:57:04,183 [INFO] Browser closed.
+2024-12-03 09:57:04,184 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-03 09:57:34,666 [INFO] Received DNI: 37295755
+2024-12-03 09:57:34,667 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:57:34,671 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7B3266CB5+28821]
+	(No symbol) [0x00007FF7B31D3840]
+	(No symbol) [0x00007FF7B307578A]
+	(No symbol) [0x00007FF7B304F4F5]
+	(No symbol) [0x00007FF7B30F6247]
+	(No symbol) [0x00007FF7B310ECE2]
+	(No symbol) [0x00007FF7B30EF0A3]
+	(No symbol) [0x00007FF7B30BA778]
+	(No symbol) [0x00007FF7B30BB8E1]
+	GetHandleVerifier [0x00007FF7B359FCAD+3408013]
+	GetHandleVerifier [0x00007FF7B35B741F+3504127]
+	GetHandleVerifier [0x00007FF7B35AB5FD+3455453]
+	GetHandleVerifier [0x00007FF7B332BDBB+835995]
+	(No symbol) [0x00007FF7B31DEB5F]
+	(No symbol) [0x00007FF7B31DA814]
+	(No symbol) [0x00007FF7B31DA9AD]
+	(No symbol) [0x00007FF7B31CA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-03 09:58:06,188 [INFO] Received DNI: 37295755
+2024-12-03 09:58:07,771 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:58:12,428 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 09:58:12,453 [INFO] Submitted the first form.
+2024-12-03 09:58:17,455 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-03 09:58:20,961 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-03 09:58:21,007 [INFO] Submitted the second form.
+2024-12-03 09:58:28,382 [INFO] Browser closed.
+2024-12-03 09:58:32,452 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-03 09:59:00,858 [INFO] Received DNI: 37295755
+2024-12-03 09:59:02,460 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:59:06,836 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 09:59:06,883 [INFO] Submitted the first form.
+2024-12-03 09:59:11,886 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-03 09:59:15,454 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-03 09:59:15,496 [INFO] Submitted the second form.
+2024-12-03 09:59:24,432 [INFO] Browser closed.
+2024-12-03 09:59:29,058 [INFO] Received DNI: 37295755
+2024-12-03 09:59:30,559 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 09:59:34,854 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 09:59:34,895 [INFO] Submitted the first form.
+2024-12-03 09:59:39,897 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-03 09:59:43,397 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-03 09:59:43,454 [INFO] Submitted the second form.
+2024-12-03 09:59:50,677 [INFO] Browser closed.
+2024-12-03 09:59:55,217 [INFO] Received DNI: 37295755
+2024-12-03 09:59:56,673 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 10:00:01,168 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 10:00:01,212 [INFO] Submitted the first form.
+2024-12-03 10:00:06,215 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-03 10:00:09,665 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7B3266CB5+28821]
+	(No symbol) [0x00007FF7B31D3840]
+	(No symbol) [0x00007FF7B307578A]
+	(No symbol) [0x00007FF7B304F4F5]
+	(No symbol) [0x00007FF7B30F6247]
+	(No symbol) [0x00007FF7B310ECE2]
+	(No symbol) [0x00007FF7B30EF0A3]
+	(No symbol) [0x00007FF7B30BA778]
+	(No symbol) [0x00007FF7B30BB8E1]
+	GetHandleVerifier [0x00007FF7B359FCAD+3408013]
+	GetHandleVerifier [0x00007FF7B35B741F+3504127]
+	GetHandleVerifier [0x00007FF7B35AB5FD+3455453]
+	GetHandleVerifier [0x00007FF7B332BDBB+835995]
+	(No symbol) [0x00007FF7B31DEB5F]
+	(No symbol) [0x00007FF7B31DA814]
+	(No symbol) [0x00007FF7B31DA9AD]
+	(No symbol) [0x00007FF7B31CA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-03 10:00:11,885 [INFO] Browser closed.
+2024-12-03 10:00:16,377 [INFO] Received DNI: 37295755
+2024-12-03 10:00:17,983 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 10:00:21,790 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7B3266CB5+28821]
+	(No symbol) [0x00007FF7B31D3840]
+	(No symbol) [0x00007FF7B307578A]
+	(No symbol) [0x00007FF7B304F4F5]
+	(No symbol) [0x00007FF7B30F6247]
+	(No symbol) [0x00007FF7B310ECE2]
+	(No symbol) [0x00007FF7B30EF0A3]
+	(No symbol) [0x00007FF7B30BA778]
+	(No symbol) [0x00007FF7B30BB8E1]
+	GetHandleVerifier [0x00007FF7B359FCAD+3408013]
+	GetHandleVerifier [0x00007FF7B35B741F+3504127]
+	GetHandleVerifier [0x00007FF7B35AB5FD+3455453]
+	GetHandleVerifier [0x00007FF7B332BDBB+835995]
+	(No symbol) [0x00007FF7B31DEB5F]
+	(No symbol) [0x00007FF7B31DA814]
+	(No symbol) [0x00007FF7B31DA9AD]
+	(No symbol) [0x00007FF7B31CA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-03 10:00:23,919 [INFO] Browser closed.
+2024-12-03 10:00:28,445 [INFO] Received DNI: 37295755
+2024-12-03 10:00:30,022 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 10:00:34,016 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7B3266CB5+28821]
+	(No symbol) [0x00007FF7B31D3840]
+	(No symbol) [0x00007FF7B307578A]
+	(No symbol) [0x00007FF7B304F4F5]
+	(No symbol) [0x00007FF7B30F6247]
+	(No symbol) [0x00007FF7B310ECE2]
+	(No symbol) [0x00007FF7B30EF0A3]
+	(No symbol) [0x00007FF7B30BA778]
+	(No symbol) [0x00007FF7B30BB8E1]
+	GetHandleVerifier [0x00007FF7B359FCAD+3408013]
+	GetHandleVerifier [0x00007FF7B35B741F+3504127]
+	GetHandleVerifier [0x00007FF7B35AB5FD+3455453]
+	GetHandleVerifier [0x00007FF7B332BDBB+835995]
+	(No symbol) [0x00007FF7B31DEB5F]
+	(No symbol) [0x00007FF7B31DA814]
+	(No symbol) [0x00007FF7B31DA9AD]
+	(No symbol) [0x00007FF7B31CA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-03 10:00:36,123 [INFO] Browser closed.
+2024-12-03 10:00:40,636 [INFO] Received DNI: 37295755
+2024-12-03 10:00:42,144 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 10:00:46,044 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7B3266CB5+28821]
+	(No symbol) [0x00007FF7B31D3840]
+	(No symbol) [0x00007FF7B307578A]
+	(No symbol) [0x00007FF7B304F4F5]
+	(No symbol) [0x00007FF7B30F6247]
+	(No symbol) [0x00007FF7B310ECE2]
+	(No symbol) [0x00007FF7B30EF0A3]
+	(No symbol) [0x00007FF7B30BA778]
+	(No symbol) [0x00007FF7B30BB8E1]
+	GetHandleVerifier [0x00007FF7B359FCAD+3408013]
+	GetHandleVerifier [0x00007FF7B35B741F+3504127]
+	GetHandleVerifier [0x00007FF7B35AB5FD+3455453]
+	GetHandleVerifier [0x00007FF7B332BDBB+835995]
+	(No symbol) [0x00007FF7B31DEB5F]
+	(No symbol) [0x00007FF7B31DA814]
+	(No symbol) [0x00007FF7B31DA9AD]
+	(No symbol) [0x00007FF7B31CA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-03 10:00:48,179 [INFO] Browser closed.
+2024-12-03 10:00:52,728 [INFO] Received DNI: 37295755
+2024-12-03 10:00:54,405 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 10:01:06,871 [INFO] No DNI available at the moment.
+2024-12-03 10:01:06,872 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:07,334 [INFO] No DNI available at the moment.
+2024-12-03 10:01:07,335 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:07,790 [INFO] No DNI available at the moment.
+2024-12-03 10:01:07,790 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:08,287 [INFO] No DNI available at the moment.
+2024-12-03 10:01:08,288 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:08,756 [INFO] No DNI available at the moment.
+2024-12-03 10:01:08,757 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:09,258 [INFO] No DNI available at the moment.
+2024-12-03 10:01:09,258 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:09,718 [INFO] No DNI available at the moment.
+2024-12-03 10:01:09,719 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:10,164 [INFO] No DNI available at the moment.
+2024-12-03 10:01:10,165 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:10,626 [INFO] No DNI available at the moment.
+2024-12-03 10:01:10,627 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:11,084 [INFO] No DNI available at the moment.
+2024-12-03 10:01:11,085 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:11,654 [INFO] No DNI available at the moment.
+2024-12-03 10:01:11,655 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:12,128 [INFO] No DNI available at the moment.
+2024-12-03 10:01:12,129 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:12,585 [INFO] No DNI available at the moment.
+2024-12-03 10:01:12,586 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:13,051 [INFO] No DNI available at the moment.
+2024-12-03 10:01:13,052 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:14,016 [INFO] No DNI available at the moment.
+2024-12-03 10:01:14,017 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:14,478 [INFO] No DNI available at the moment.
+2024-12-03 10:01:14,478 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:14,947 [INFO] No DNI available at the moment.
+2024-12-03 10:01:14,947 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:15,418 [INFO] No DNI available at the moment.
+2024-12-03 10:01:15,419 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:15,889 [INFO] No DNI available at the moment.
+2024-12-03 10:01:15,890 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:16,527 [INFO] No DNI available at the moment.
+2024-12-03 10:01:16,528 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:17,019 [INFO] Received DNI: 37295755
+2024-12-03 10:01:18,502 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 10:01:22,813 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 10:01:22,863 [INFO] Submitted the first form.
+2024-12-03 10:01:27,865 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-03 10:01:31,366 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-03 10:01:31,422 [INFO] Submitted the second form.
+2024-12-03 10:01:38,687 [INFO] Browser closed.
+2024-12-03 10:01:43,299 [INFO] No DNI available at the moment.
+2024-12-03 10:01:43,299 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:43,789 [INFO] No DNI available at the moment.
+2024-12-03 10:01:43,790 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:44,245 [INFO] No DNI available at the moment.
+2024-12-03 10:01:44,246 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:44,707 [INFO] No DNI available at the moment.
+2024-12-03 10:01:44,708 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:45,159 [INFO] No DNI available at the moment.
+2024-12-03 10:01:45,160 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:45,663 [INFO] No DNI available at the moment.
+2024-12-03 10:01:45,663 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:46,124 [INFO] No DNI available at the moment.
+2024-12-03 10:01:46,125 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:46,648 [INFO] No DNI available at the moment.
+2024-12-03 10:01:46,649 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:47,148 [INFO] No DNI available at the moment.
+2024-12-03 10:01:47,148 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:47,598 [INFO] No DNI available at the moment.
+2024-12-03 10:01:47,599 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:48,057 [INFO] No DNI available at the moment.
+2024-12-03 10:01:48,057 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:48,498 [INFO] No DNI available at the moment.
+2024-12-03 10:01:48,500 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:49,068 [INFO] No DNI available at the moment.
+2024-12-03 10:01:49,069 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:49,530 [INFO] No DNI available at the moment.
+2024-12-03 10:01:49,531 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:49,973 [INFO] No DNI available at the moment.
+2024-12-03 10:01:49,974 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:50,429 [INFO] No DNI available at the moment.
+2024-12-03 10:01:50,429 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:50,898 [INFO] No DNI available at the moment.
+2024-12-03 10:01:50,899 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:51,363 [INFO] No DNI available at the moment.
+2024-12-03 10:01:51,364 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:51,925 [INFO] No DNI available at the moment.
+2024-12-03 10:01:51,926 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:52,450 [INFO] No DNI available at the moment.
+2024-12-03 10:01:52,451 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:52,937 [INFO] No DNI available at the moment.
+2024-12-03 10:01:52,938 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:53,445 [INFO] No DNI available at the moment.
+2024-12-03 10:01:53,446 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:53,910 [INFO] No DNI available at the moment.
+2024-12-03 10:01:53,911 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:54,463 [INFO] No DNI available at the moment.
+2024-12-03 10:01:54,465 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:55,048 [INFO] No DNI available at the moment.
+2024-12-03 10:01:55,049 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:55,584 [INFO] No DNI available at the moment.
+2024-12-03 10:01:55,585 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:56,519 [INFO] No DNI available at the moment.
+2024-12-03 10:01:56,519 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:56,982 [INFO] No DNI available at the moment.
+2024-12-03 10:01:56,983 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:57,547 [INFO] No DNI available at the moment.
+2024-12-03 10:01:57,548 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:01:58,183 [INFO] Received DNI: 37295755
+2024-12-03 10:01:59,646 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-03 10:02:04,349 [INFO] Entered 'terragene' into the first input field.
+2024-12-03 10:02:04,402 [INFO] Submitted the first form.
+2024-12-03 10:02:09,404 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-03 10:02:12,847 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-03 10:02:12,896 [INFO] Submitted the second form.
+2024-12-03 10:02:20,099 [INFO] Browser closed.
+2024-12-03 10:02:24,618 [INFO] No DNI available at the moment.
+2024-12-03 10:02:24,618 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:25,061 [INFO] No DNI available at the moment.
+2024-12-03 10:02:25,062 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:25,616 [INFO] No DNI available at the moment.
+2024-12-03 10:02:25,618 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:26,085 [INFO] No DNI available at the moment.
+2024-12-03 10:02:26,085 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:26,530 [INFO] No DNI available at the moment.
+2024-12-03 10:02:26,531 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:27,003 [INFO] No DNI available at the moment.
+2024-12-03 10:02:27,004 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:27,557 [INFO] No DNI available at the moment.
+2024-12-03 10:02:27,558 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:28,056 [INFO] No DNI available at the moment.
+2024-12-03 10:02:28,058 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:28,571 [INFO] No DNI available at the moment.
+2024-12-03 10:02:28,572 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:29,026 [INFO] No DNI available at the moment.
+2024-12-03 10:02:29,027 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:29,633 [INFO] No DNI available at the moment.
+2024-12-03 10:02:29,633 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:30,082 [INFO] No DNI available at the moment.
+2024-12-03 10:02:30,082 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:30,557 [INFO] No DNI available at the moment.
+2024-12-03 10:02:30,558 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:31,003 [INFO] No DNI available at the moment.
+2024-12-03 10:02:31,004 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:31,464 [INFO] No DNI available at the moment.
+2024-12-03 10:02:31,464 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:31,980 [INFO] No DNI available at the moment.
+2024-12-03 10:02:31,980 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:32,432 [INFO] No DNI available at the moment.
+2024-12-03 10:02:32,433 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:34,015 [INFO] No DNI available at the moment.
+2024-12-03 10:02:34,017 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:34,475 [INFO] No DNI available at the moment.
+2024-12-03 10:02:34,477 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-03 10:02:34,978 [INFO] No DNI available at the moment.
+2024-12-03 10:02:34,979 [INFO] No DNI fetched. Will retry after the polling interval.

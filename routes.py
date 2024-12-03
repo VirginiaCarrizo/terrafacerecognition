@@ -1,4 +1,7 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from login import auth
+from user import users, role_required
 from bbdd import agregar_empleado, buscar_empleados, modificar_empleado, eliminar_empleado
 import base64
 import face_recognition
@@ -22,16 +25,29 @@ dni_lock = Lock()
 cuil_value = ""  # Variable global para almacenar el cuil
 
 routes = Blueprint('routes', __name__)  # Crear un Blueprint para las rutas
+main = Blueprint("main", __name__)
 socketio_routes = []  # Opcional: lista para manejar eventos SocketIO globalmente
+# Decorador para verificar roles
+def role_required(*roles):
+    def wrapper(fn):
+        def wrapped(*args, **kwargs):
+            if current_user.role not in roles:
+                abort(403)  # Error de acceso denegado
+            return fn(*args, **kwargs)
+        return wrapped
+    return wrapper
 
 def configure_routes(app, socketio, db, bucket):
     """Configura las rutas y eventos asociados."""
 
     @routes.route('/terrarrhh', strict_slashes=False)
+    @login_required
+    @role_required('admin', 'terrarrhh')
     def index():
         return render_template('index.html')
 
     @routes.route('/terrarrhh/generalfood')
+    @login_required
     def general_food():
         return render_template('index_gfood.html')
 
@@ -43,6 +59,8 @@ def configure_routes(app, socketio, db, bucket):
         return jsonify({'status': 'success'})
 
     @routes.route('/terrarrhh/camara')
+    @login_required
+    @role_required('admin', 'generalfood')
     def camara():
         return render_template('camara.html')
 
@@ -113,6 +131,8 @@ def configure_routes(app, socketio, db, bucket):
 
     # Ruta para agregar un registro a Firebase
     @routes.route('/terrarrhh/agregar_registro', methods=['POST'])
+    @login_required
+    @role_required('admin', 'terrarrhh')
     def agregar_registro():
         try:
             data = request.form
@@ -126,6 +146,8 @@ def configure_routes(app, socketio, db, bucket):
             return jsonify({'status': 'error', 'message': 'Ocurrió un error en el servidor'}), 500
 
     @routes.route('/terrarrhh/buscar_registro', methods=['POST'])
+    @login_required
+    @role_required('admin', 'terrarrhh')
     def buscar_registro():
         try:
             if not request.json or 'search_term' not in request.json:
@@ -141,6 +163,8 @@ def configure_routes(app, socketio, db, bucket):
             return jsonify({'error': 'Ocurrió un error en el servidor'}), 500
 
     @routes.route('/terrarrhh/modificar_registro/<cuil>', methods=['POST'])
+    @login_required
+    @role_required('admin', 'terrarrhh')
     def modificar_registro(cuil):
         try:
             data = request.json
@@ -152,6 +176,8 @@ def configure_routes(app, socketio, db, bucket):
             return jsonify({'status': 'error', 'message': str(e)}), 500
 
     @routes.route('/terrarrhh/eliminar_registro', methods=['POST'])
+    @login_required
+    @role_required('admin', 'terrarrhh')
     def eliminar_registro():
         try:
             data = request.get_json()
@@ -170,5 +196,17 @@ def configure_routes(app, socketio, db, bucket):
             logging.info(f"Error al eliminar registro y foto: {str(e)}")
             return jsonify({'status': 'error', 'message': 'Ocurrió un error en el servidor'}), 500
     
+    @app.route("/logout")
+    @login_required
+    def logout():
+        logout_user()  # Cierra la sesión del usuario
+        return redirect(url_for("login"))  # Redirige al login
+    
+    @app.errorhandler(403)
+    def forbidden(error):
+        return "Access Forbidden", 403  # Mensaje que se mostrará cuando el usuario no tenga permisos
+    
     # Registrar el Blueprint al final
     app.register_blueprint(routes)
+    app.register_blueprint(auth)  # Rutas de autenticación
+    
