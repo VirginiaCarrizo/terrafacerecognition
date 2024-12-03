@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required, logout_user
+from app import app
 from user import users
 
 auth = Blueprint("auth", __name__)
@@ -19,6 +20,13 @@ def login():
     return render_template("login.html")
 
 @auth.route("/logout")
+@login_required
 def logout():
-    logout_user()
-    return redirect(url_for("auth.login"))
+    logout_user()  # Cierra la sesión del usuario
+    return redirect(url_for("login"))  # Redirige al login
+    
+@auth.errorhandler(403)
+def forbidden(error):
+    return "Access Forbidden", 403  # Mensaje que se mostrará cuando el usuario no tenga permisos
+
+app.register_blueprint(auth)  # Rutas de autenticación

@@ -1,11 +1,11 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from functools import wraps
-from login import auth
 from user import users
 from bbdd import agregar_empleado, buscar_empleados, modificar_empleado, eliminar_empleado
 import base64
 import face_recognition
+from login import auth
 import cv2
 import numpy as np 
 import logging
@@ -201,17 +201,7 @@ def configure_routes(app, socketio, db, bucket):
             logging.info(f"Error al eliminar registro y foto: {str(e)}")
             return jsonify({'status': 'error', 'message': 'Ocurrió un error en el servidor'}), 500
     
-    @auth.route("/logout")
-    @login_required
-    def logout():
-        logout_user()  # Cierra la sesión del usuario
-        return redirect(url_for("login"))  # Redirige al login
-    
-    @auth.errorhandler(403)
-    def forbidden(error):
-        return "Access Forbidden", 403  # Mensaje que se mostrará cuando el usuario no tenga permisos
     
 
     # Registrar el Blueprint al final
     app.register_blueprint(routes)
-    app.register_blueprint(auth)  # Rutas de autenticación
