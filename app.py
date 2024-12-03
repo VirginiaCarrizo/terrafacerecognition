@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_socketio import SocketIO
 from flask_login import LoginManager
+from login import configure_login
 from routes import configure_routes
 from bbdd_conection import initialize_firebase  # Configuración de Firebase
 from socketio_events import configure_socketio_events # Importar configuración de eventos
@@ -22,3 +23,4 @@ configure_socketio_events(socketio, db)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "templates/login.html"  # Vista para redirigir si el usuario no está autenticado
+configure_login(app)
