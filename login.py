@@ -32,7 +32,7 @@ def configure_login(app):
                     logging.info('Autenticación fallida')
             # Si la autenticación falla
             return render_template("login.html", error="Credenciales inválidas")
-        return render_template("login.html")
+        return render_template(url_for("routes.login"))
 
     @auth.route("/logout")
     @login_required
