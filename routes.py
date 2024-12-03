@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from functools import wraps
 from login import auth
 from user import users
 from bbdd import agregar_empleado, buscar_empleados, modificar_empleado, eliminar_empleado
@@ -25,12 +26,13 @@ dni_lock = Lock()
 cuil_value = ""  # Variable global para almacenar el cuil
 
 routes = Blueprint('routes', __name__)  # Crear un Blueprint para las rutas
-auth = Blueprint('auth', __name__)  # Crear un Blueprint para las auth
+
 socketio_routes = []  # Opcional: lista para manejar eventos SocketIO globalmente
 # Decorador para verificar roles
 def role_required(*roles):
     try:
         def wrapper(fn):
+            @wraps(fn)
             def wrapped(*args, **kwargs):
                 if current_user.role not in roles:
                     abort(403)  # Error de acceso denegado
@@ -209,10 +211,7 @@ def configure_routes(app, socketio, db, bucket):
     def forbidden(error):
         return "Access Forbidden", 403  # Mensaje que se mostrará cuando el usuario no tenga permisos
     
-    try:
-        # Registrar el Blueprint al final
-        app.register_blueprint(routes)
-    except Exception as e:
-        logging.error(f'error al final {e}')
 
+    # Registrar el Blueprint al final
+    app.register_blueprint(routes)
     app.register_blueprint(auth)  # Rutas de autenticación
