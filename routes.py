@@ -48,7 +48,7 @@ def configure_routes(app, socketio, db, bucket):
     @routes.route('/terrarrhh', strict_slashes=False)
     @login_required
     @role_required('admin', 'terrarrhh')
-    def index():
+    def login():
         return render_template('login.html')
     
     @routes.route('/terrarrhh/rrhh', strict_slashes=False)
