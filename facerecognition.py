@@ -18,29 +18,32 @@ dnis = ["44291507"]
 dni_lock = Lock()
 cuil_value = ""  # Variable global para almacenar el cuil
 
-
+# FUNCION DEL RECONOCIMIENTO FACIAL
 def facerec(db):
     try:
         data = request.json['image']
         image_data = data.split(',')[1]
         npimg = np.frombuffer(base64.b64decode(image_data), np.uint8)
         img = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
-
         imgS = cv2.resize(img, (0, 0), None, 0.25, 0.25)
         imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
 
         faceCurFrame = face_recognition.face_locations(imgS)
         encodeCurFrame = face_recognition.face_encodings(imgS, faceCurFrame)
-        logging.info(faceCurFrame)
+        logging.info(f'faceCurFrame: {faceCurFrame}')
+        
         if faceCurFrame:
             for encodeFace, faceLoc in zip(encodeCurFrame, faceCurFrame):
                 matches = face_recognition.compare_faces(encodeListKnown, encodeFace)
                 faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
 
                 matchIndex = np.argmin(faceDis)
+                logging.info(f'matchIndex: {matchIndex}')
                 if matches[matchIndex]:
                     id = employeesIds[matchIndex]
+                    logging.info(f'id: {id}')
                     employeesRef = db.reference(f'Employees').get()
+                    logging.info(f'employeesRef: {employeesRef}')
                     employeeInfo = None
                     for key, value in employeesRef.items():
                         if value['nombre_apellido'] == id:
@@ -61,7 +64,8 @@ def facerec(db):
     except Exception as e:
         logging.info(f"Error en el reconocimiento facial: {e}")
         return jsonify({"status": "error", "message": "Ocurrió un error en el servidor"}), 500
-    
+
+# FUNCION QUE ENVIA EL DNI AL SCRIPT LOCAL   
 def submit_dni():
     try:
         with dni_lock:
