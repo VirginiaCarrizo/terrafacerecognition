@@ -100,7 +100,7 @@ captureButton.addEventListener('click', function() {
                 } else {
                     // Si el usuario cancela, pide que ingrese el DNI manualmente y abre la web
                     const dni = prompt("Por favor, ingrese el DNI manualmente.");
-                    socket.emit('update_db', dni);
+                    socket.emit('update_db', {dni: dni});
                     openAndHandlePrint("https://generalfoodargentina.movizen.com/pwa/inicio");
                 }
             });
