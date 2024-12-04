@@ -82,6 +82,7 @@ captureButton.addEventListener('click', function() {
     .then(data => {
         if (data.status === 'no_match') {
             const dni = prompt("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
+            console.log('laslalslass')
             console.log(dni)
             // Abrir la página una vez que el usuario presione "Aceptar"
             openAndHandlePrint("https://generalfoodargentina.movizen.com/pwa/inicio");
