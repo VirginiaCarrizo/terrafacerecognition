@@ -46,11 +46,9 @@ def facerec(db):
 
                     employeesDatosCompletosBD = db.reference(f'Employees').get()
                     employeeInfoCompletaBD = None
-                    logging.info(f'employeesDatosCompletosBD: {employeesDatosCompletosBD}')
                     for cuil, infoCompletaBD in employeesDatosCompletosBD.items():
                         if infoCompletaBD['nombre_apellido'] == nombre_completo:
                             employeeInfoCompletaBD = infoCompletaBD
-                            logging.info(f'employeeInfo: {employeeInfoCompletaBD}')
                             break
 
                     cuil = employeeInfoCompletaBD['cuil']
