@@ -74,13 +74,13 @@ def submit_dni():
     try:
         with dni_lock:
             if not dnis:
-                return jsonify({"status": "no_dni", "message": "No DNI available"}), 200
+                return dnis
             # Retrieve the first DNI in the list
             logging.info(f'dnis {dnis}')
             dni = dnis.pop(0)
             logging.info(f'dni {dni}')
             logging.info(f"Sending DNI to PC: {dni}")
-            return jsonify({"status": "success", "dni": dni}), 200
+            return dni
     except Exception as e:
             logging.error(f"Error in /submit_dni: {e}")
             return None
