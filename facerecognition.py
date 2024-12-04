@@ -7,20 +7,16 @@ import cv2
 import numpy as np 
 import logging
 from threading import Lock
-from globals import dnis
+from globals import global_dni
 
 # IMPORTACION DE LA CODIFICACIÓN DE LAS IMAGENES PARA EL RECONOCIMIENTO FACIAL
 with open('EncodeFile.p', 'rb') as file:
     encodeListKnownWithIds = pickle.load(file)
 encodeListKnown, employeesApellidoNombre = encodeListKnownWithIds
 
-# In-memory store for DNIs with thread safety
-
-cuil_value = ""  # Variable global para almacenar el cuil
-
 # FUNCION DEL RECONOCIMIENTO FACIAL
 def facerec(db):
-    global dnis
+    global dni
     try:
         data = request.json['image']
         image_data = data.split(',')[1]
@@ -58,13 +54,11 @@ def facerec(db):
 
                     cuil = employeeInfoCompletaBD['cuil']
                     cuil_str = str(cuil)
-                    dni = cuil_str[2:-1]
-                    dnis.pop()
-                    dnis.append(dni)
+                    global_dni = cuil_str[2:-1]
 
-                    return dni, dnis, cuil_str, employeeInfoCompletaBD
+                    return global_dni, cuil_str, employeeInfoCompletaBD
         
-        return dni, dnis, cuil_str, employeeInfoCompletaBD
+        return global_dni, cuil_str, employeeInfoCompletaBD
             
     except Exception as e:
         logging.info(f"No se encontró un rostro: {e}")
@@ -72,17 +66,16 @@ def facerec(db):
 
 # FUNCION QUE ENVIA EL DNI AL SCRIPT LOCAL   
 def submit_dni(dni_lock):
-    global dnis
+    global global_dni
     try:
         with dni_lock:
-            logging.info(f'dnis {dnis}')
-            if not dnis:
-                return dnis
+            logging.info(f'dnis {global_dni}')
+            if global_dni == 0:
+                return global_dni
             # Retrieve the first DNI in the list
-            dni = dnis.pop(0)
-            logging.info(f'dni {dni}')
-            logging.info(f"Sending DNI to PC: {dni}")
-            return dni
+            logging.info(f'dni {global_dni}')
+            logging.info(f"Sending DNI to PC: {global_dni}")
+            return global_dni
     except Exception as e:
             logging.error(f"Error in /submit_dni: {e}")
             return None

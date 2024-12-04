@@ -6,6 +6,7 @@ from bbdd import agregar_empleado, buscar_empleados, modificar_empleado, elimina
 from facerecognition import facerec, submit_dni
 import logging
 from threading import Lock
+from globals import global_dni
 
 # Configuración básica para el logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
@@ -66,7 +67,6 @@ def configure_routes(app, socketio, db, bucket):
             else:
                 logging.info("No se encontró coincidencia, se solicita ingreso manual del DNI.")
                 return jsonify({"status": "no_match"})
-
 
     # ENDPOINT PARA EL SCRIPT LOCAL
     @routes.route('/get_dni', methods=['GET'])

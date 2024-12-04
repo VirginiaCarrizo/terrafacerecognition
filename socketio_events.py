@@ -1,7 +1,7 @@
 import logging
 from flask_socketio import emit
 from datetime import datetime
-from globals import dnis
+from globals import global_dni
 
 # Configuración básica del logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
@@ -28,9 +28,9 @@ def configure_socketio_events(socketio, db):
 
     @socketio.on('update_db')
     def update_db(dni):
-        global dnis
-        dnis.append(dni)
-        logging.info(dni)
+        global global_dni
+        global_dni = dni
+        logging.info(global_dni)
         logging.info(db.reference(f'Employees/'))
         # ref = db.reference(f'Employees/{cuil}')
         # ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
