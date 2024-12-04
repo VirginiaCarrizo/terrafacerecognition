@@ -73,7 +73,7 @@ def facerec(db):
 def submit_dni():
     try:
         with dni_lock:
-            logging.info(f'dnis {dnis}')
+            logging.info(f'dnis 222')
             if not dnis:
                 return dnis
             # Retrieve the first DNI in the list
