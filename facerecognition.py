@@ -60,7 +60,9 @@ def facerec(db):
                     cuil_str = str(cuil)
                     dni = cuil_str[2:-1]
 
+                    logging.info(f'dni desde facerecognition: {dni}')
                     dnis.append(dni)
+        
         return dni, dnis, cuil_str, employeeInfoCompletaBD
             
     except Exception as e:
