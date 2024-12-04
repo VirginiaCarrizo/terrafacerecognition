@@ -31,6 +31,11 @@ def facerec(db):
         faceCurFrame = face_recognition.face_locations(imgS)
         encodeCurFrame = face_recognition.face_encodings(imgS, faceCurFrame)
 
+        dni = None 
+        dnis = None 
+        cuil_str = None 
+        employeeInfoCompletaBD = None
+
         #verifica si encuentra cara
         if faceCurFrame:
             for encodeFace, faceLoc in zip(encodeCurFrame, faceCurFrame):
@@ -56,8 +61,8 @@ def facerec(db):
                     dni = cuil_str[2:-1]
 
                     dnis.append(dni)
-                    return dni, dnis, cuil_str, employeeInfoCompletaBD
-                
+        return dni, dnis, cuil_str, employeeInfoCompletaBD
+            
     except Exception as e:
         logging.info(f"No se encontró un rostro: {e}")
         return jsonify({"status": "error", "message": "Ocurrió un error en el servidor"}), 500
