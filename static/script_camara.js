@@ -94,17 +94,15 @@ captureButton.addEventListener('click', function() {
         } else if (data.status === 'confirmation_pending') {
             // El servidor indica que el DNI está pendiente de confirmación.
             socket.once('confirm_dni', function(confirmData) {
-                console.log('confirmData')
-                console.log(confirmData)
                 const dni = confirmData.dni;
-                const cuil_str = confirmData.cuil_str;
+                const cuil = confirmData.employeeInfoCompletaBD['cuil'];
                 const nombre_completo = confirmData.employeeInfoCompletaBD['nombre_apellido'];
                 
                 const confirmed = window.confirm(`DNI detectado: ${dni} para ${nombre_completo}\n¿Es correcto?`);
 
                 if (confirmed) {
                     // Si el usuario confirma, envía la respuesta positiva al servidor para actualizar la base de datos
-                    socket.emit('confirm_dni_response', { cuil_str: cuil_str, confirmed: true });
+                    socket.emit('confirm_dni_response', { cuil: cuil, confirmed: true });
                 } else {
                     // Si el usuario cancela, pide que ingrese el DNI manualmente y abre la web
                     alert("Por favor, ingrese el DNI manualmente.");
