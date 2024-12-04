@@ -76,7 +76,9 @@ def submit_dni():
             if not dnis:
                 return jsonify({"status": "no_dni", "message": "No DNI available"}), 200
             # Retrieve the first DNI in the list
+            logging.info(f'dnis {dnis}')
             dni = dnis.pop(0)
+            logging.info(f'dni {dni}')
             logging.info(f"Sending DNI to PC: {dni}")
             return dni
     except Exception as e:
