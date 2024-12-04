@@ -77,7 +77,7 @@ def submit_dni():
             if not dnis:
                 return dnis
             # Retrieve the first DNI in the list
-            dni = dnis.pop(0)
+            dni = dnis[0]
             logging.info(f'dni {dni}')
             logging.info(f"Sending DNI to PC: {dni}")
             return dni
