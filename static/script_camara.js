@@ -9,18 +9,14 @@ socket.on('connect', function() {
     socket.emit('mi_evento', {data: 'Hola servidor'});
 });
 
-socket.on('mi_respuesta', function(data) {
-    console.log('Respuesta del servidor:', data);
-});
-
 // Función para activar una cámara específica
 function activateCamera(deviceId) {
+    console.log('activateCamera')
     const constraints = {
         video: {
             deviceId: { ideal: deviceId }
         }
     };
-
     navigator.mediaDevices.getUserMedia(constraints)
         .then(function(stream) {
             video.srcObject = stream;  // Muestra el video en el elemento de video
@@ -29,6 +25,7 @@ function activateCamera(deviceId) {
             console.log("Error al acceder a la cámara: ", err);
         });
 }
+
 // Enumerar dispositivos y activar una cámara que no sea la predeterminada
 navigator.mediaDevices.enumerateDevices()
     .then(devices => {
@@ -41,8 +38,8 @@ navigator.mediaDevices.enumerateDevices()
 
 // Función para abrir una ventana, escuchar Enter, manejar impresión y cerrar
 function openAndHandlePrint(url) {
+    console.log('wait_print')
     const newWindow = window.open(url, "_blank");
-    console.log(url);
 
     if (newWindow) {
         // Escuchar la tecla Enter en la nueva ventana
@@ -118,7 +115,8 @@ captureButton.addEventListener('click', function() {
 
 
 // Recibir el resultado de la confirmación de DNI y abrir la web automáticamente si se confirma
-socket.on('dni_confirmation_result', function(data) {
+socket.on('wait_print', function(data) {
+    console.log('wait_print')
     if (data.status === 'success') {
         console.log('llegue hasta aca')
         try {

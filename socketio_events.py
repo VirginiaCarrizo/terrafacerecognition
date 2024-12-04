@@ -13,18 +13,15 @@ def configure_socketio_events(socketio, db):
 
     @socketio.on('confirm_dni_response')
     def confirm_dni_response(data):
-        logging.info(f'data: {data}')
         confirmed = data['confirmed']
         cuil = data['cuil']
-        logging.info(f'dni_confirmed: {confirmed}')
-        logging.info(f'cuil: {cuil}')
         if confirmed:
             ref = db.reference(f'Employees/{cuil}')
             ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             nro_orden = ref.child('order_general_food').get()
             ref.child('order_general_food').set(nro_orden + 1)
 
-            emit('dni_confirmation_result', {'status': 'success', 'cuil': cuil})
+            emit('wait_print', {'status': 'success', 'cuil': cuil})
         else:
-            emit('dni_confirmation_result', {'status': 'denied', 'cuil': cuil})
+            emit('wait_print', {'status': 'denied', 'cuil': cuil})
 
