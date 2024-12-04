@@ -60,8 +60,8 @@ def facerec(db):
                     cuil_str = str(cuil)
                     dni = cuil_str[2:-1]
 
-                    dnis.append(dni)
                     logging.info(f'dni desde facerecognition1: {dni} {dnis} {cuil_str} {employeeInfoCompletaBD}')
+                    dnis.append(dni)
                     return dni, dnis, cuil_str, employeeInfoCompletaBD
         
         logging.info(f'dni desde facerecognition2: {dni} {dnis} {cuil_str} {employeeInfoCompletaBD}')
