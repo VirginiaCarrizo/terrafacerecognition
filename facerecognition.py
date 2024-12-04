@@ -14,7 +14,7 @@ with open('EncodeFile.p', 'rb') as file:
 encodeListKnown, employeesApellidoNombre = encodeListKnownWithIds
 
 # In-memory store for DNIs with thread safety
-dnis = ["1"]
+dnis = ["1234567489"]
 dni_lock = Lock()
 cuil_value = ""  # Variable global para almacenar el cuil
 
@@ -31,8 +31,7 @@ def facerec(db):
         faceCurFrame = face_recognition.face_locations(imgS)
         encodeCurFrame = face_recognition.face_encodings(imgS, faceCurFrame)
 
-        dni = None 
-        dnis = None 
+        dni = None  
         cuil_str = None 
         employeeInfoCompletaBD = None
 
@@ -61,7 +60,7 @@ def facerec(db):
                     dni = cuil_str[2:-1]
                     dnis.pop()
                     dnis.append(dni)
-                    
+
                     return dni, dnis, cuil_str, employeeInfoCompletaBD
         
         logging.info(f'dni desde facerecognition2: {dni} {dnis} {cuil_str} {employeeInfoCompletaBD}')
