@@ -82,8 +82,6 @@ captureButton.addEventListener('click', function() {
     .then(data => {
         if (data.status === 'no_match') {
             const dni = prompt("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
-            console.log('laslalslass')
-            console.log(dni)
             // Abrir la página una vez que el usuario presione "Aceptar"
             openAndHandlePrint("https://generalfoodargentina.movizen.com/pwa/inicio");
 
@@ -102,7 +100,6 @@ captureButton.addEventListener('click', function() {
                 } else {
                     // Si el usuario cancela, pide que ingrese el DNI manualmente y abre la web
                     const dni = prompt("Por favor, ingrese el DNI manualmente.");
-                    console.log(dni)
                     socket.emit('update_db', dni);
                     openAndHandlePrint("https://generalfoodargentina.movizen.com/pwa/inicio");
                 }
@@ -117,9 +114,7 @@ captureButton.addEventListener('click', function() {
 
 // Espera el evento de la impresion
 socket.on('wait_print', function(data) {
-    console.log('wait_print')
     if (data.status === 'success') {
-        console.log('llegue hasta aca')
         try {
             newWindow.addEventListener("beforeprint", function () {
                 console.log("Se inició la impresión en la nueva ventana.");

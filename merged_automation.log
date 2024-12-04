@@ -4745,3 +4745,5 @@ Stacktrace:
 2024-12-04 08:53:34,458 [INFO] No DNI fetched. Will retry after the polling interval.
 2024-12-04 08:53:34,951 [INFO] No DNI available at the moment.
 2024-12-04 08:53:34,952 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 12:33:43,736 [INFO] Received DNI: 1234567489
+2024-12-04 12:33:45,655 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
