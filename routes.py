@@ -6,6 +6,7 @@ from bbdd import agregar_empleado, buscar_empleados, modificar_empleado, elimina
 from facerecognition import facerec, submit_dni
 import logging
 from threading import Lock
+from globals import dnis
 
 # Configuración básica para el logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
@@ -72,7 +73,7 @@ def configure_routes(app, socketio, db, bucket):
     # ENDPOINT PARA EL SCRIPT LOCAL
     @routes.route('/get_dni', methods=['GET'])
     def get_dni():
-        dni = submit_dni(dnis, dni_lock)
+        dni = submit_dni(dni_lock)
         logging.info(f'DDDDDDDDDDDDDNINIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII: {dni}')
         if dni:
             return jsonify({"status": "success", "dni": dni}), 200

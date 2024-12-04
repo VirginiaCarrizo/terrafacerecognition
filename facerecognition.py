@@ -7,6 +7,7 @@ import cv2
 import numpy as np 
 import logging
 from threading import Lock
+from globals import dnis
 
 # IMPORTACION DE LA CODIFICACIÓN DE LAS IMAGENES PARA EL RECONOCIMIENTO FACIAL
 with open('EncodeFile.p', 'rb') as file:
@@ -69,7 +70,8 @@ def facerec(db, dnis):
         return jsonify({"status": "error", "message": "Ocurrió un error en el servidor"}), 500
 
 # FUNCION QUE ENVIA EL DNI AL SCRIPT LOCAL   
-def submit_dni(dnis, dni_lock):
+def submit_dni(dni_lock):
+    global dnis
     try:
         with dni_lock:
             logging.info(f'dnis {dnis}')
