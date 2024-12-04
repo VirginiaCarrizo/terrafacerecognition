@@ -11,7 +11,7 @@ from threading import Lock
 # IMPORTACION DE LA CODIFICACIÓN DE LAS IMAGENES PARA EL RECONOCIMIENTO FACIAL
 with open('EncodeFile.p', 'rb') as file:
     encodeListKnownWithIds = pickle.load(file)
-encodeListKnown, employeesIds = encodeListKnownWithIds
+encodeListKnown, employeesApellidoNombre = encodeListKnownWithIds
 
 # In-memory store for DNIs with thread safety
 dnis = ["44291507"]
@@ -30,39 +30,43 @@ def facerec(db):
 
         faceCurFrame = face_recognition.face_locations(imgS)
         encodeCurFrame = face_recognition.face_encodings(imgS, faceCurFrame)
-        logging.info(f'faceCurFrame: {faceCurFrame}')
-        
+
+        #verifica si encuentra cara
         if faceCurFrame:
             for encodeFace, faceLoc in zip(encodeCurFrame, faceCurFrame):
                 matches = face_recognition.compare_faces(encodeListKnown, encodeFace)
                 faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
 
+                #busca una coincidencia entre los datos reconocidos y los registrados
                 matchIndex = np.argmin(faceDis)
-                logging.info(f'matchIndex: {matchIndex}')
+
+                #si encuentra una coincidencia, procede con la actualización en la base de datos
                 if matches[matchIndex]:
-                    id = employeesIds[matchIndex]
-                    logging.info(f'id: {id}')
-                    employeesRef = db.reference(f'Employees').get()
-                    logging.info(f'employeesRef: {employeesRef}')
-                    employeeInfo = None
-                    for key, value in employeesRef.items():
-                        if value['nombre_apellido'] == id:
-                            employeeInfo = value
-                            logging.info(f'employeeInfo: {employeeInfo}')
+                    nombre_completo = employeesApellidoNombre[matchIndex]
+
+                    employeesDatosCompletosBD = db.reference(f'Employees').get()
+                    employeeInfoCompletaBD = None
+
+                    for cuil, infoCompletaBD in employeesDatosCompletosBD.items():
+                        if infoCompletaBD['nombre_apellido'] == nombre_completo:
+                            employeeInfoCompletaBD = infoCompletaBD
+                            logging.info(f'employeeInfo: {employeeInfoCompletaBD}')
                             break
 
-                    dni = employeeInfo['cuil']
-                    dni_str = str(dni)
-                    ref = db.reference(f'Employees/{dni}')
+                    cuil = employeeInfoCompletaBD['cuil']
+                    cuil_str = str(cuil)
+                    dni = cuil_str[2:-1]
 
+                    ref = db.reference(f'Employees/{cuil}')
+                    logging.info(f'ref: {ref}')
                     ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
                     nro_orden = ref.child('order_general_food').get()
                     ref.child('order_general_food').set(nro_orden + 1)
-                    dnis.append(dni_str[2:-1])
+                    dnis.append(dni)
 
-                    return dni, dnis, dni_str, employeeInfo
+                    return dni, dnis, cuil_str, employeeInfoCompletaBD
     except Exception as e:
-        logging.info(f"Error en el reconocimiento facial: {e}")
+        logging.info(f"No se encontró un rostro: {e}")
         return jsonify({"status": "error", "message": "Ocurrió un error en el servidor"}), 500
 
 # FUNCION QUE ENVIA EL DNI AL SCRIPT LOCAL   
