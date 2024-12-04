@@ -14,7 +14,7 @@ with open('EncodeFile.p', 'rb') as file:
 encodeListKnown, employeesApellidoNombre = encodeListKnownWithIds
 
 # In-memory store for DNIs with thread safety
-dnis = [""]
+dnis = ["1"]
 dni_lock = Lock()
 cuil_value = ""  # Variable global para almacenar el cuil
 
@@ -59,9 +59,9 @@ def facerec(db):
                     cuil = employeeInfoCompletaBD['cuil']
                     cuil_str = str(cuil)
                     dni = cuil_str[2:-1]
-
-                    logging.info(f'dni desde facerecognition1: {dni} {dnis} {cuil_str} {employeeInfoCompletaBD}')
+                    dnis.pop()
                     dnis.append(dni)
+                    
                     return dni, dnis, cuil_str, employeeInfoCompletaBD
         
         logging.info(f'dni desde facerecognition2: {dni} {dnis} {cuil_str} {employeeInfoCompletaBD}')
