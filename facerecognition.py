@@ -80,7 +80,7 @@ def submit_dni():
             dni = dnis.pop(0)
             logging.info(f'dni {dni}')
             logging.info(f"Sending DNI to PC: {dni}")
-            return dni
+            return jsonify({"status": "success", "dni": dni}), 200
     except Exception as e:
             logging.error(f"Error in /submit_dni: {e}")
             return None
