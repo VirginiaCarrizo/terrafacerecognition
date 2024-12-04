@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(me
 routes = Blueprint('routes', __name__)  # Crear un Blueprint para las rutas
 
 dni_lock = Lock()
-
+cuil_value=''
 # DECORADOR PARA VERIFICAR LOS ROLES
 def role_required(*roles):
     def wrapper(fn):
@@ -60,9 +60,9 @@ def configure_routes(app, socketio, db, bucket):
     # ENDPOINT PARA EL RECONOCIMIENTO FACIAL
     @routes.route('/terrarrhh/submit_image', methods=['POST'])
     def submit_image():
-            dni, cuil_str, employeeInfoCompletaBD = facerec(db)
-            if dni and cuil_str and employeeInfoCompletaBD:
-                socketio.emit('confirm_dni', {'dni': dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
+            cuil_str, employeeInfoCompletaBD = facerec(db)
+            if global_dni!=0 and cuil_str and employeeInfoCompletaBD:
+                socketio.emit('confirm_dni', {'global_dni': global_dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
                 return jsonify({"status": "confirmation_pending"})
             else:
                 logging.info("No se encontró coincidencia, se solicita ingreso manual del DNI.")

@@ -56,9 +56,9 @@ def facerec(db):
                     cuil_str = str(cuil)
                     global_dni = cuil_str[2:-1]
 
-                    return global_dni, cuil_str, employeeInfoCompletaBD
+                    return cuil_str, employeeInfoCompletaBD
         
-        return global_dni, cuil_str, employeeInfoCompletaBD
+        return cuil_str, employeeInfoCompletaBD
             
     except Exception as e:
         logging.info(f"No se encontró un rostro: {e}")
