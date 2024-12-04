@@ -14,12 +14,11 @@ with open('EncodeFile.p', 'rb') as file:
 encodeListKnown, employeesApellidoNombre = encodeListKnownWithIds
 
 # In-memory store for DNIs with thread safety
-dnis = ['123456']
-dni_lock = Lock()
+
 cuil_value = ""  # Variable global para almacenar el cuil
 
 # FUNCION DEL RECONOCIMIENTO FACIAL
-def facerec(db):
+def facerec(db, dnis):
     try:
         data = request.json['image']
         image_data = data.split(',')[1]
@@ -70,20 +69,17 @@ def facerec(db):
         return jsonify({"status": "error", "message": "Ocurrió un error en el servidor"}), 500
 
 # FUNCION QUE ENVIA EL DNI AL SCRIPT LOCAL   
-def submit_dni():
+def submit_dni(dnis, dni_lock):
     try:
         with dni_lock:
-            logging.info(f'dnis 222')
+            logging.info(f'dnis {dnis}')
             if not dnis:
                 return dnis
             # Retrieve the first DNI in the list
             dni = dnis.pop(0)
-            if len(dnis) != 0:
-                logging.info(f'dni {dni}')
-                logging.info(f"Sending DNI to PC: {dni}")
-                return dni
-            else:
-                return "04343434"
+            logging.info(f'dni {dni}')
+            logging.info(f"Sending DNI to PC: {dni}")
+            return dni
     except Exception as e:
             logging.error(f"Error in /submit_dni: {e}")
             return None

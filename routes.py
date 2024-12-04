@@ -5,11 +5,15 @@ from user import users
 from bbdd import agregar_empleado, buscar_empleados, modificar_empleado, eliminar_empleado
 from facerecognition import facerec, submit_dni
 import logging
+from threading import Lock
 
 # Configuración básica para el logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 
 routes = Blueprint('routes', __name__)  # Crear un Blueprint para las rutas
+
+dnis = ["12121212"]
+dni_lock = Lock()
 
 # DECORADOR PARA VERIFICAR LOS ROLES
 def role_required(*roles):
@@ -56,7 +60,7 @@ def configure_routes(app, socketio, db, bucket):
     # ENDPOINT PARA EL RECONOCIMIENTO FACIAL
     @routes.route('/terrarrhh/submit_image', methods=['POST'])
     def submit_image():
-            dni, dnis, cuil_str, employeeInfoCompletaBD = facerec(db)
+            dni, dnis, cuil_str, employeeInfoCompletaBD = facerec(db, dnis)
             if dni and dnis and cuil_str and employeeInfoCompletaBD:
                 socketio.emit('confirm_dni', {'dni': dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
                 return jsonify({"status": "confirmation_pending"})
@@ -68,7 +72,7 @@ def configure_routes(app, socketio, db, bucket):
     # ENDPOINT PARA EL SCRIPT LOCAL
     @routes.route('/get_dni', methods=['GET'])
     def get_dni():
-        dni = submit_dni()
+        dni = submit_dni(dnis)
         logging.info(f'DDDDDDDDDDDDDNINIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII: {dni}')
         if dni:
             return jsonify({"status": "success", "dni": dni}), 200

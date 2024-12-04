@@ -1,7 +1,7 @@
 import logging
 from flask_socketio import emit
 from datetime import datetime
-from facerecognition import dnis
+from routes import dnis
 
 # Configuración básica del logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
