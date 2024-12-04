@@ -7872,3 +7872,80 @@ Stacktrace:
 2024-12-04 14:41:36,149 [INFO] No DNI fetched. Will retry after the polling interval.
 2024-12-04 14:41:36,591 [ERROR] Failed to fetch DNI. Status Code: 500
 2024-12-04 14:41:36,592 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:44:06,583 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 14:44:06,584 [INFO] Received DNI: 1234567489
+2024-12-04 14:44:08,127 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 14:44:12,439 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7C6596CB5+28821]
+	(No symbol) [0x00007FF7C6503840]
+	(No symbol) [0x00007FF7C63A578A]
+	(No symbol) [0x00007FF7C637F4F5]
+	(No symbol) [0x00007FF7C6426247]
+	(No symbol) [0x00007FF7C643ECE2]
+	(No symbol) [0x00007FF7C641F0A3]
+	(No symbol) [0x00007FF7C63EA778]
+	(No symbol) [0x00007FF7C63EB8E1]
+	GetHandleVerifier [0x00007FF7C68CFCAD+3408013]
+	GetHandleVerifier [0x00007FF7C68E741F+3504127]
+	GetHandleVerifier [0x00007FF7C68DB5FD+3455453]
+	GetHandleVerifier [0x00007FF7C665BDBB+835995]
+	(No symbol) [0x00007FF7C650EB5F]
+	(No symbol) [0x00007FF7C650A814]
+	(No symbol) [0x00007FF7C650A9AD]
+	(No symbol) [0x00007FF7C64FA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-04 14:44:14,524 [INFO] Browser closed.
+2024-12-04 14:44:19,084 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 14:44:19,084 [INFO] Received DNI: 1234567489
+2024-12-04 14:44:20,729 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 14:44:26,175 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7C6596CB5+28821]
+	(No symbol) [0x00007FF7C6503840]
+	(No symbol) [0x00007FF7C63A578A]
+	(No symbol) [0x00007FF7C637F4F5]
+	(No symbol) [0x00007FF7C6426247]
+	(No symbol) [0x00007FF7C643ECE2]
+	(No symbol) [0x00007FF7C641F0A3]
+	(No symbol) [0x00007FF7C63EA778]
+	(No symbol) [0x00007FF7C63EB8E1]
+	GetHandleVerifier [0x00007FF7C68CFCAD+3408013]
+	GetHandleVerifier [0x00007FF7C68E741F+3504127]
+	GetHandleVerifier [0x00007FF7C68DB5FD+3455453]
+	GetHandleVerifier [0x00007FF7C665BDBB+835995]
+	(No symbol) [0x00007FF7C650EB5F]
+	(No symbol) [0x00007FF7C650A814]
+	(No symbol) [0x00007FF7C650A9AD]
+	(No symbol) [0x00007FF7C64FA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-04 14:44:28,362 [INFO] Browser closed.
+2024-12-04 14:44:32,893 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 14:44:32,894 [INFO] Received DNI: 1234567489
+2024-12-04 14:44:34,434 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 14:44:40,809 [INFO] Entered 'terragene' into the first input field.
+2024-12-04 14:44:40,839 [INFO] Submitted the first form.
+2024-12-04 14:44:45,841 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-04 14:44:49,460 [INFO] Entered DNI '1234567489' into the second input field.
+2024-12-04 14:44:49,492 [INFO] Submitted the second form.
+2024-12-04 14:44:56,754 [INFO] Browser closed.
+2024-12-04 14:45:01,298 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 14:45:01,299 [INFO] Received DNI: 1234567489
+2024-12-04 14:45:02,734 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 14:45:08,307 [INFO] Entered 'terragene' into the first input field.
+2024-12-04 14:45:08,333 [INFO] Submitted the first form.
+2024-12-04 14:45:13,337 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-04 14:45:16,898 [INFO] Entered DNI '1234567489' into the second input field.
+2024-12-04 14:45:16,928 [INFO] Submitted the second form.
+2024-12-04 14:45:24,190 [INFO] Browser closed.
+2024-12-04 14:45:29,717 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 14:45:29,718 [INFO] Received DNI: 1234567489
+2024-12-04 14:45:31,196 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
