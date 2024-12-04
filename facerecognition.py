@@ -73,10 +73,10 @@ def facerec(db):
 def submit_dni():
     try:
         with dni_lock:
+            logging.info(f'dnis {dnis}')
             if not dnis:
                 return dnis
             # Retrieve the first DNI in the list
-            logging.info(f'dnis {dnis}')
             dni = dnis.pop(0)
             logging.info(f'dni {dni}')
             logging.info(f"Sending DNI to PC: {dni}")
