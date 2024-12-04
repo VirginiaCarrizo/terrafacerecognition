@@ -69,6 +69,7 @@ def configure_routes(app, socketio, db, bucket):
     @routes.route('/get_dni', methods=['GET'])
     def get_dni():
         dni = submit_dni()
+        logging.info(f'DDDDDDDDDDDDDDDDDDDDNIIIIIIIIIIIIIIIIIIIIIIIIIIIIII: {dni}')
         if dni:
             return jsonify({"status": "success", "dni": dni}), 200
         else:

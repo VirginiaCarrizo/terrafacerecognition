@@ -5346,3 +5346,260 @@ Stacktrace:
 2024-12-04 14:04:18,622 [INFO] No DNI fetched. Will retry after the polling interval.
 2024-12-04 14:04:19,792 [ERROR] Failed to fetch DNI. Status Code: 500
 2024-12-04 14:04:19,792 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:08:52,751 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 14:08:52,752 [INFO] Received DNI: 1234567489
+2024-12-04 14:08:54,212 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 14:09:00,825 [INFO] Entered 'terragene' into the first input field.
+2024-12-04 14:09:00,893 [INFO] Submitted the first form.
+2024-12-04 14:09:05,894 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-04 14:09:05,897 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7C6596CB5+28821]
+	(No symbol) [0x00007FF7C6503840]
+	(No symbol) [0x00007FF7C63A578A]
+	(No symbol) [0x00007FF7C637F4F5]
+	(No symbol) [0x00007FF7C6426247]
+	(No symbol) [0x00007FF7C643ECE2]
+	(No symbol) [0x00007FF7C641F0A3]
+	(No symbol) [0x00007FF7C63EA778]
+	(No symbol) [0x00007FF7C63EB8E1]
+	GetHandleVerifier [0x00007FF7C68CFCAD+3408013]
+	GetHandleVerifier [0x00007FF7C68E741F+3504127]
+	GetHandleVerifier [0x00007FF7C68DB5FD+3455453]
+	GetHandleVerifier [0x00007FF7C665BDBB+835995]
+	(No symbol) [0x00007FF7C650EB5F]
+	(No symbol) [0x00007FF7C650A814]
+	(No symbol) [0x00007FF7C650A9AD]
+	(No symbol) [0x00007FF7C64FA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-04 14:09:08,050 [INFO] Browser closed.
+2024-12-04 14:09:13,283 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:13,284 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:14,510 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:14,511 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:15,386 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:15,387 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:16,168 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:16,168 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:17,002 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:17,003 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:17,783 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:17,785 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:18,559 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:18,559 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:19,355 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:19,356 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:20,114 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:20,115 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:20,993 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:20,993 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:21,928 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:21,929 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:22,731 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:22,733 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:23,945 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:23,947 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:24,786 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:24,789 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:25,545 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:25,546 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:26,907 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:26,907 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:27,650 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:27,650 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:28,475 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:28,475 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:29,335 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:29,335 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:30,236 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:30,236 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:31,014 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:31,015 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:31,860 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:31,860 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:32,687 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:32,687 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:33,499 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:33,500 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:34,341 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:34,342 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:35,512 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:35,513 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:36,284 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:36,287 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:37,138 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:37,140 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:38,262 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:38,264 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:39,028 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:39,029 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:40,296 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:40,297 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:41,429 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:41,432 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:42,177 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:42,178 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:42,992 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:42,994 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:43,779 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:43,780 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:44,554 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:44,555 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:45,310 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:45,310 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:46,260 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:46,261 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:47,007 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:47,007 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:47,853 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:47,855 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:48,708 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:48,708 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:49,505 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:49,507 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:50,311 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:50,313 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:51,225 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:51,226 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:52,017 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:52,018 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:52,876 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:52,877 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:53,650 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:53,650 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:54,476 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:54,476 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:55,247 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:55,248 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:56,082 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:56,083 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:57,216 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:57,217 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:58,399 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:58,401 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:09:59,521 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:09:59,522 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:00,350 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:00,352 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:01,150 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:01,152 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:01,931 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:01,932 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:03,051 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:03,052 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:03,797 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:03,797 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:04,570 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:04,571 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:05,359 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:05,362 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:06,150 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:06,152 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:06,948 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:06,949 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:07,718 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:07,719 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:08,530 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:08,532 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:09,321 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:09,323 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:10,183 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:10,185 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:10,994 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:10,995 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:11,810 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:11,811 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:12,769 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:12,771 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:13,544 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:13,545 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:14,365 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:14,366 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:15,474 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:15,476 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:16,261 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:16,261 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:17,398 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:17,399 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:19,468 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:19,469 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:20,657 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:20,658 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:21,497 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:21,498 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:22,269 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:22,270 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:23,131 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:23,133 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:26,639 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:26,641 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:27,764 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:27,765 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:28,782 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:28,783 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:29,674 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:29,675 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:30,436 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:30,437 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:31,293 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:31,294 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:32,098 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:32,100 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:32,876 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:32,878 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:33,979 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:33,981 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:34,962 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:34,963 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:36,004 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:36,005 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:36,897 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:36,898 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:37,793 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:37,794 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:38,700 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:38,701 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:39,491 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:39,492 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:40,301 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:40,303 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:41,176 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:41,177 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:41,971 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:41,972 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:44,561 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:44,563 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:45,367 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:45,368 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:46,219 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:46,220 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:47,077 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:47,078 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:48,188 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:48,190 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:49,016 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:49,017 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:49,801 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:49,801 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:50,665 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:50,666 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:51,466 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:51,468 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:52,246 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:52,246 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:53,093 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:53,094 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:53,946 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:53,947 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:54,724 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:54,725 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:55,511 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:55,512 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:56,282 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:56,283 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-04 14:10:57,069 [ERROR] Failed to fetch DNI. Status Code: 500
+2024-12-04 14:10:57,070 [INFO] No DNI fetched. Will retry after the polling interval.
