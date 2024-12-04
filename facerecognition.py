@@ -19,7 +19,8 @@ encodeListKnown, employeesApellidoNombre = encodeListKnownWithIds
 cuil_value = ""  # Variable global para almacenar el cuil
 
 # FUNCION DEL RECONOCIMIENTO FACIAL
-def facerec(db, dnis):
+def facerec(db):
+    global dnis
     try:
         data = request.json['image']
         image_data = data.split(',')[1]

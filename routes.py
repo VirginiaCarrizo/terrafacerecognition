@@ -6,14 +6,12 @@ from bbdd import agregar_empleado, buscar_empleados, modificar_empleado, elimina
 from facerecognition import facerec, submit_dni
 import logging
 from threading import Lock
-from globals import dnis
 
 # Configuración básica para el logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 
 routes = Blueprint('routes', __name__)  # Crear un Blueprint para las rutas
 
-dnis = ["12121212"]
 dni_lock = Lock()
 
 # DECORADOR PARA VERIFICAR LOS ROLES
@@ -61,7 +59,7 @@ def configure_routes(app, socketio, db, bucket):
     # ENDPOINT PARA EL RECONOCIMIENTO FACIAL
     @routes.route('/terrarrhh/submit_image', methods=['POST'])
     def submit_image():
-            dni, dnis, cuil_str, employeeInfoCompletaBD = facerec(db, dnis)
+            dni, dnis, cuil_str, employeeInfoCompletaBD = facerec(db)
             if dni and dnis and cuil_str and employeeInfoCompletaBD:
                 socketio.emit('confirm_dni', {'dni': dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
                 return jsonify({"status": "confirmation_pending"})
