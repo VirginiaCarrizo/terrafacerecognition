@@ -60,8 +60,8 @@ def configure_routes(app, socketio, db, bucket):
     # ENDPOINT PARA EL RECONOCIMIENTO FACIAL
     @routes.route('/terrarrhh/submit_image', methods=['POST'])
     def submit_image():
-            dni, dnis, cuil_str, employeeInfoCompletaBD = facerec(db)
-            if dni and dnis and cuil_str and employeeInfoCompletaBD:
+            dni, cuil_str, employeeInfoCompletaBD = facerec(db)
+            if dni and cuil_str and employeeInfoCompletaBD:
                 socketio.emit('confirm_dni', {'dni': dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
                 return jsonify({"status": "confirmation_pending"})
             else:
