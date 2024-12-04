@@ -56,9 +56,9 @@ def configure_routes(app, socketio, db, bucket):
     # ENDPOINT PARA EL RECONOCIMIENTO FACIAL
     @routes.route('/terrarrhh/submit_image', methods=['POST'])
     def submit_image():
-            dni, dnis, dni_str, employeeInfo = facerec(db)
-            if dni and dnis and dni_str and employeeInfo:
-                socketio.emit('confirm_dni', {'dni': dni, 'dni_modificado': dni_str[2:-1], 'nombre_apellido': employeeInfo['nombre_apellido']})
+            dni, dnis, cuil_str, employeeInfoCompletaBD = facerec(db)
+            if dni and dnis and cuil_str and employeeInfoCompletaBD:
+                socketio.emit('confirm_dni', {'dni': dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
                 return jsonify({"status": "confirmation_pending"})
             else:
                 logging.info("No se encontró coincidencia, se solicita ingreso manual del DNI.")

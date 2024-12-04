@@ -87,32 +87,27 @@ captureButton.addEventListener('click', function() {
     .then(response => response.json())
     .then(data => {
         if (data.status === 'no_match') {
-            // Alerta para indicar que no se ha reconocido a la persona
             alert("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
-            
             // Abrir la página una vez que el usuario presione "Aceptar"
             openAndHandlePrint("https://generalfoodargentina.movizen.com/pwa/inicio");
-            // openAndHandlePrint("https://terragene.life/terrarrhh/generalfood");
+
         } else if (data.status === 'confirmation_pending') {
             // El servidor indica que el DNI está pendiente de confirmación.
-
             socket.once('confirm_dni', function(confirmData) {
 
                 const dni = confirmData.dni;
-                const dni_modificado = confirmData.dni_modificado;
-                const nombre = confirmData.nombre_apellido;
+                const cuil_str = confirmData.cuil_str;
+                const nombre_completo = confirmData.employeeInfoCompletaBD['nombre_apellido'];
                 
-                // Mostrar mensaje de confirmación al usuario
-                const confirmed = window.confirm(`DNI detectado: ${dni_modificado} para ${nombre}\n¿Es correcto?`);
+                const confirmed = window.confirm(`DNI detectado: ${dni} para ${nombre_completo}\n¿Es correcto?`);
 
                 if (confirmed) {
-                    // Si el usuario confirma, envía la respuesta positiva al servidor
-                    socket.emit('confirm_dni_response', { dni: dni, confirmed: true });
+                    // Si el usuario confirma, envía la respuesta positiva al servidor para actualizar la base de datos
+                    socket.emit('confirm_dni_response', { cuil_str: cuil_str, confirmed: true });
                 } else {
                     // Si el usuario cancela, pide que ingrese el DNI manualmente y abre la web
                     alert("Por favor, ingrese el DNI manualmente.");
                     openAndHandlePrint("https://generalfoodargentina.movizen.com/pwa/inicio");
-                    // openAndHandlePrint("https://terragene.life/terrarrhh/generalfood");
                 }
             });
         }

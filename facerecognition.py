@@ -55,16 +55,14 @@ def facerec(db):
                     cuil_str = str(cuil)
                     dni = cuil_str[2:-1]
 
-                    ref = db.reference(f'Employees/{cuil}')
-                    ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-                    nro_orden = ref.child('order_general_food').get()
-                    ref.child('order_general_food').set(nro_orden + 1)
+                    # #actualización de base de datos
+                    # ref = db.reference(f'Employees/{cuil}')
+                    # ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+                    # nro_orden = ref.child('order_general_food').get()
+                    # ref.child('order_general_food').set(nro_orden + 1)
                     dnis.append(dni)
-                    logging.info(f'dni: {dni}')
-                    logging.info(f'dnis: {dnis}')
-                    logging.info(f'cuil_str: {cuil_str}')
-                    logging.info(f'employeeInfoCompletaBD: {employeeInfoCompletaBD}')
                     return dni, dnis, cuil_str, employeeInfoCompletaBD
+                
     except Exception as e:
         logging.info(f"No se encontró un rostro: {e}")
         return jsonify({"status": "error", "message": "Ocurrió un error en el servidor"}), 500
