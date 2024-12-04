@@ -25,3 +25,13 @@ def configure_socketio_events(socketio, db):
         else:
             emit('wait_print', {'status': 'denied', 'cuil': cuil})
 
+    @socketio.on('update_db')
+    def update_db(dni):
+        logging.info(dni)
+        logging.info(db.reference(f'Employees/'))
+        # ref = db.reference(f'Employees/{cuil}')
+        # ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        # nro_orden = ref.child('order_general_food').get()
+        # ref.child('order_general_food').set(nro_orden + 1)
+
+

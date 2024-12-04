@@ -11,7 +11,6 @@ socket.on('connect', function() {
 
 // Función para activar una cámara específica
 function activateCamera(deviceId) {
-    console.log('activateCamera')
     const constraints = {
         video: {
             deviceId: { ideal: deviceId }
@@ -38,9 +37,7 @@ navigator.mediaDevices.enumerateDevices()
 
 // Función para abrir una ventana, escuchar Enter, manejar impresión y cerrar
 function openAndHandlePrint(url) {
-    console.log('wait_print')
     const newWindow = window.open(url, "_blank");
-
     if (newWindow) {
         // Escuchar la tecla Enter en la nueva ventana
         // newWindow.addEventListener("keydown", function (event) {
@@ -84,7 +81,8 @@ captureButton.addEventListener('click', function() {
     .then(response => response.json())
     .then(data => {
         if (data.status === 'no_match') {
-            alert("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
+            const dni = prompt("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
+            console.log(dni)
             // Abrir la página una vez que el usuario presione "Aceptar"
             openAndHandlePrint("https://generalfoodargentina.movizen.com/pwa/inicio");
 
@@ -102,7 +100,9 @@ captureButton.addEventListener('click', function() {
                     socket.emit('confirm_dni_response', { cuil: cuil, confirmed: true });
                 } else {
                     // Si el usuario cancela, pide que ingrese el DNI manualmente y abre la web
-                    alert("Por favor, ingrese el DNI manualmente.");
+                    const dni = prompt("Por favor, ingrese el DNI manualmente.");
+                    console.log(dni)
+                    socket.emit('update_db', dni);
                     openAndHandlePrint("https://generalfoodargentina.movizen.com/pwa/inicio");
                 }
             });
@@ -114,7 +114,7 @@ captureButton.addEventListener('click', function() {
 });
 
 
-// Recibir el resultado de la confirmación de DNI y abrir la web automáticamente si se confirma
+// Espera el evento de la impresion
 socket.on('wait_print', function(data) {
     console.log('wait_print')
     if (data.status === 'success') {
