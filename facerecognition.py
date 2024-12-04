@@ -14,7 +14,7 @@ with open('EncodeFile.p', 'rb') as file:
 encodeListKnown, employeesApellidoNombre = encodeListKnownWithIds
 
 # In-memory store for DNIs with thread safety
-dnis = 0
+dnis = ['123456']
 dni_lock = Lock()
 cuil_value = ""  # Variable global para almacenar el cuil
 
