@@ -7949,3 +7949,312 @@ Stacktrace:
 2024-12-04 14:45:29,717 [INFO] data: {'dni': '1234567489', 'status': 'success'}
 2024-12-04 14:45:29,718 [INFO] Received DNI: 1234567489
 2024-12-04 14:45:31,196 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 15:04:31,283 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 15:04:31,284 [INFO] Received DNI: 1234567489
+2024-12-04 15:04:33,032 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 15:04:39,310 [INFO] Entered 'terragene' into the first input field.
+2024-12-04 15:04:39,382 [INFO] Submitted the first form.
+2024-12-04 15:04:44,384 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-04 15:04:47,936 [INFO] Entered DNI '1234567489' into the second input field.
+2024-12-04 15:04:47,970 [INFO] Submitted the second form.
+2024-12-04 15:04:55,268 [INFO] Browser closed.
+2024-12-04 15:04:59,843 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 15:04:59,844 [INFO] Received DNI: 1234567489
+2024-12-04 15:05:01,435 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 15:05:06,967 [INFO] Entered 'terragene' into the first input field.
+2024-12-04 15:05:07,028 [INFO] Submitted the first form.
+2024-12-04 15:05:12,029 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-04 15:05:15,659 [INFO] Entered DNI '1234567489' into the second input field.
+2024-12-04 15:05:15,699 [INFO] Submitted the second form.
+2024-12-04 15:05:22,971 [INFO] Browser closed.
+2024-12-04 15:05:27,579 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 15:05:27,579 [INFO] Received DNI: 1234567489
+2024-12-04 15:05:29,152 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 15:05:33,481 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7C6596CB5+28821]
+	(No symbol) [0x00007FF7C6503840]
+	(No symbol) [0x00007FF7C63A578A]
+	(No symbol) [0x00007FF7C637F4F5]
+	(No symbol) [0x00007FF7C6426247]
+	(No symbol) [0x00007FF7C643ECE2]
+	(No symbol) [0x00007FF7C641F0A3]
+	(No symbol) [0x00007FF7C63EA778]
+	(No symbol) [0x00007FF7C63EB8E1]
+	GetHandleVerifier [0x00007FF7C68CFCAD+3408013]
+	GetHandleVerifier [0x00007FF7C68E741F+3504127]
+	GetHandleVerifier [0x00007FF7C68DB5FD+3455453]
+	GetHandleVerifier [0x00007FF7C665BDBB+835995]
+	(No symbol) [0x00007FF7C650EB5F]
+	(No symbol) [0x00007FF7C650A814]
+	(No symbol) [0x00007FF7C650A9AD]
+	(No symbol) [0x00007FF7C64FA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-04 15:05:35,562 [INFO] Browser closed.
+2024-12-04 15:05:40,043 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 15:05:40,044 [INFO] Received DNI: 1234567489
+2024-12-04 15:05:41,581 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 15:05:47,391 [INFO] Entered 'terragene' into the first input field.
+2024-12-04 15:05:47,453 [INFO] Submitted the first form.
+2024-12-04 15:05:52,454 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-04 15:05:56,097 [INFO] Entered DNI '1234567489' into the second input field.
+2024-12-04 15:05:56,133 [INFO] Submitted the second form.
+2024-12-04 15:06:03,414 [INFO] Browser closed.
+2024-12-04 15:06:07,944 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 15:06:07,945 [INFO] Received DNI: 1234567489
+2024-12-04 15:06:09,496 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 15:06:14,797 [INFO] Entered 'terragene' into the first input field.
+2024-12-04 15:06:14,850 [INFO] Submitted the first form.
+2024-12-04 15:06:19,852 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-04 15:06:19,852 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7C6596CB5+28821]
+	(No symbol) [0x00007FF7C6503840]
+	(No symbol) [0x00007FF7C63A578A]
+	(No symbol) [0x00007FF7C637F4F5]
+	(No symbol) [0x00007FF7C6426247]
+	(No symbol) [0x00007FF7C643ECE2]
+	(No symbol) [0x00007FF7C641F0A3]
+	(No symbol) [0x00007FF7C63EA778]
+	(No symbol) [0x00007FF7C63EB8E1]
+	GetHandleVerifier [0x00007FF7C68CFCAD+3408013]
+	GetHandleVerifier [0x00007FF7C68E741F+3504127]
+	GetHandleVerifier [0x00007FF7C68DB5FD+3455453]
+	GetHandleVerifier [0x00007FF7C665BDBB+835995]
+	(No symbol) [0x00007FF7C650EB5F]
+	(No symbol) [0x00007FF7C650A814]
+	(No symbol) [0x00007FF7C650A9AD]
+	(No symbol) [0x00007FF7C64FA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-04 15:08:03,158 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 15:08:03,158 [INFO] Received DNI: 1234567489
+2024-12-04 15:08:04,837 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 15:08:10,388 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7C6596CB5+28821]
+	(No symbol) [0x00007FF7C6503840]
+	(No symbol) [0x00007FF7C63A578A]
+	(No symbol) [0x00007FF7C637F4F5]
+	(No symbol) [0x00007FF7C6426247]
+	(No symbol) [0x00007FF7C643ECE2]
+	(No symbol) [0x00007FF7C641F0A3]
+	(No symbol) [0x00007FF7C63EA778]
+	(No symbol) [0x00007FF7C63EB8E1]
+	GetHandleVerifier [0x00007FF7C68CFCAD+3408013]
+	GetHandleVerifier [0x00007FF7C68E741F+3504127]
+	GetHandleVerifier [0x00007FF7C68DB5FD+3455453]
+	GetHandleVerifier [0x00007FF7C665BDBB+835995]
+	(No symbol) [0x00007FF7C650EB5F]
+	(No symbol) [0x00007FF7C650A814]
+	(No symbol) [0x00007FF7C650A9AD]
+	(No symbol) [0x00007FF7C64FA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-04 15:08:12,491 [INFO] Browser closed.
+2024-12-04 15:08:16,993 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 15:08:16,993 [INFO] Received DNI: 1234567489
+2024-12-04 15:08:18,615 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 15:08:24,588 [INFO] Entered 'terragene' into the first input field.
+2024-12-04 15:08:24,635 [INFO] Submitted the first form.
+2024-12-04 15:08:29,637 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-04 15:08:33,744 [INFO] Entered DNI '1234567489' into the second input field.
+2024-12-04 15:08:33,776 [INFO] Submitted the second form.
+2024-12-04 15:08:41,024 [INFO] Browser closed.
+2024-12-04 15:08:45,669 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 15:08:45,670 [INFO] Received DNI: 1234567489
+2024-12-04 15:08:47,216 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 15:08:52,655 [INFO] Entered 'terragene' into the first input field.
+2024-12-04 15:08:52,699 [INFO] Submitted the first form.
+2024-12-04 15:08:57,701 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-04 15:09:01,215 [INFO] Entered DNI '1234567489' into the second input field.
+2024-12-04 15:09:01,252 [INFO] Submitted the second form.
+2024-12-04 15:09:08,523 [INFO] Browser closed.
+2024-12-04 15:09:13,175 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 15:09:13,175 [INFO] Received DNI: 1234567489
+2024-12-04 15:09:14,776 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 15:09:20,584 [INFO] Entered 'terragene' into the first input field.
+2024-12-04 15:09:20,624 [INFO] Submitted the first form.
+2024-12-04 15:09:25,625 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-04 15:09:29,078 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7C6596CB5+28821]
+	(No symbol) [0x00007FF7C6503840]
+	(No symbol) [0x00007FF7C63A578A]
+	(No symbol) [0x00007FF7C637F4F5]
+	(No symbol) [0x00007FF7C6426247]
+	(No symbol) [0x00007FF7C643ECE2]
+	(No symbol) [0x00007FF7C641F0A3]
+	(No symbol) [0x00007FF7C63EA778]
+	(No symbol) [0x00007FF7C63EB8E1]
+	GetHandleVerifier [0x00007FF7C68CFCAD+3408013]
+	GetHandleVerifier [0x00007FF7C68E741F+3504127]
+	GetHandleVerifier [0x00007FF7C68DB5FD+3455453]
+	GetHandleVerifier [0x00007FF7C665BDBB+835995]
+	(No symbol) [0x00007FF7C650EB5F]
+	(No symbol) [0x00007FF7C650A814]
+	(No symbol) [0x00007FF7C650A9AD]
+	(No symbol) [0x00007FF7C64FA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-04 15:09:31,206 [INFO] Browser closed.
+2024-12-04 15:09:35,711 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 15:09:35,711 [INFO] Received DNI: 1234567489
+2024-12-04 15:09:37,251 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 15:09:41,770 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7C6596CB5+28821]
+	(No symbol) [0x00007FF7C6503840]
+	(No symbol) [0x00007FF7C63A578A]
+	(No symbol) [0x00007FF7C637F4F5]
+	(No symbol) [0x00007FF7C6426247]
+	(No symbol) [0x00007FF7C643ECE2]
+	(No symbol) [0x00007FF7C641F0A3]
+	(No symbol) [0x00007FF7C63EA778]
+	(No symbol) [0x00007FF7C63EB8E1]
+	GetHandleVerifier [0x00007FF7C68CFCAD+3408013]
+	GetHandleVerifier [0x00007FF7C68E741F+3504127]
+	GetHandleVerifier [0x00007FF7C68DB5FD+3455453]
+	GetHandleVerifier [0x00007FF7C665BDBB+835995]
+	(No symbol) [0x00007FF7C650EB5F]
+	(No symbol) [0x00007FF7C650A814]
+	(No symbol) [0x00007FF7C650A9AD]
+	(No symbol) [0x00007FF7C64FA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-04 15:09:43,836 [INFO] Browser closed.
+2024-12-04 15:09:48,502 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 15:09:48,502 [INFO] Received DNI: 1234567489
+2024-12-04 15:09:50,101 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 15:09:54,012 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7C6596CB5+28821]
+	(No symbol) [0x00007FF7C6503840]
+	(No symbol) [0x00007FF7C63A578A]
+	(No symbol) [0x00007FF7C637F4F5]
+	(No symbol) [0x00007FF7C6426247]
+	(No symbol) [0x00007FF7C643ECE2]
+	(No symbol) [0x00007FF7C641F0A3]
+	(No symbol) [0x00007FF7C63EA778]
+	(No symbol) [0x00007FF7C63EB8E1]
+	GetHandleVerifier [0x00007FF7C68CFCAD+3408013]
+	GetHandleVerifier [0x00007FF7C68E741F+3504127]
+	GetHandleVerifier [0x00007FF7C68DB5FD+3455453]
+	GetHandleVerifier [0x00007FF7C665BDBB+835995]
+	(No symbol) [0x00007FF7C650EB5F]
+	(No symbol) [0x00007FF7C650A814]
+	(No symbol) [0x00007FF7C650A9AD]
+	(No symbol) [0x00007FF7C64FA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-04 15:09:56,099 [INFO] Browser closed.
+2024-12-04 15:10:00,617 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 15:10:00,617 [INFO] Received DNI: 1234567489
+2024-12-04 15:10:02,259 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 15:10:08,061 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7C6596CB5+28821]
+	(No symbol) [0x00007FF7C6503840]
+	(No symbol) [0x00007FF7C63A578A]
+	(No symbol) [0x00007FF7C637F4F5]
+	(No symbol) [0x00007FF7C6426247]
+	(No symbol) [0x00007FF7C643ECE2]
+	(No symbol) [0x00007FF7C641F0A3]
+	(No symbol) [0x00007FF7C63EA778]
+	(No symbol) [0x00007FF7C63EB8E1]
+	GetHandleVerifier [0x00007FF7C68CFCAD+3408013]
+	GetHandleVerifier [0x00007FF7C68E741F+3504127]
+	GetHandleVerifier [0x00007FF7C68DB5FD+3455453]
+	GetHandleVerifier [0x00007FF7C665BDBB+835995]
+	(No symbol) [0x00007FF7C650EB5F]
+	(No symbol) [0x00007FF7C650A814]
+	(No symbol) [0x00007FF7C650A9AD]
+	(No symbol) [0x00007FF7C64FA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-04 15:10:10,227 [INFO] Browser closed.
+2024-12-04 15:10:14,790 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 15:10:14,790 [INFO] Received DNI: 1234567489
+2024-12-04 15:10:16,398 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 15:10:21,954 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7C6596CB5+28821]
+	(No symbol) [0x00007FF7C6503840]
+	(No symbol) [0x00007FF7C63A578A]
+	(No symbol) [0x00007FF7C637F4F5]
+	(No symbol) [0x00007FF7C6426247]
+	(No symbol) [0x00007FF7C643ECE2]
+	(No symbol) [0x00007FF7C641F0A3]
+	(No symbol) [0x00007FF7C63EA778]
+	(No symbol) [0x00007FF7C63EB8E1]
+	GetHandleVerifier [0x00007FF7C68CFCAD+3408013]
+	GetHandleVerifier [0x00007FF7C68E741F+3504127]
+	GetHandleVerifier [0x00007FF7C68DB5FD+3455453]
+	GetHandleVerifier [0x00007FF7C665BDBB+835995]
+	(No symbol) [0x00007FF7C650EB5F]
+	(No symbol) [0x00007FF7C650A814]
+	(No symbol) [0x00007FF7C650A9AD]
+	(No symbol) [0x00007FF7C64FA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-04 15:10:24,030 [INFO] Browser closed.
+2024-12-04 15:10:28,604 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 15:10:28,604 [INFO] Received DNI: 1234567489
+2024-12-04 15:10:30,154 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 15:10:35,415 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7C6596CB5+28821]
+	(No symbol) [0x00007FF7C6503840]
+	(No symbol) [0x00007FF7C63A578A]
+	(No symbol) [0x00007FF7C637F4F5]
+	(No symbol) [0x00007FF7C6426247]
+	(No symbol) [0x00007FF7C643ECE2]
+	(No symbol) [0x00007FF7C641F0A3]
+	(No symbol) [0x00007FF7C63EA778]
+	(No symbol) [0x00007FF7C63EB8E1]
+	GetHandleVerifier [0x00007FF7C68CFCAD+3408013]
+	GetHandleVerifier [0x00007FF7C68E741F+3504127]
+	GetHandleVerifier [0x00007FF7C68DB5FD+3455453]
+	GetHandleVerifier [0x00007FF7C665BDBB+835995]
+	(No symbol) [0x00007FF7C650EB5F]
+	(No symbol) [0x00007FF7C650A814]
+	(No symbol) [0x00007FF7C650A9AD]
+	(No symbol) [0x00007FF7C64FA199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-04 15:10:37,510 [INFO] Browser closed.
+2024-12-04 15:10:42,014 [INFO] data: {'dni': '1234567489', 'status': 'success'}
+2024-12-04 15:10:42,015 [INFO] Received DNI: 1234567489
+2024-12-04 15:10:43,662 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-04 15:10:46,715 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None)': /session/9cb0dc6d30690ee5c56882099ad99091
+2024-12-04 15:10:50,781 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000236DB9D9D10>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión')': /session/9cb0dc6d30690ee5c56882099ad99091
+2024-12-04 15:10:54,841 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000236DB9D9D90>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión')': /session/9cb0dc6d30690ee5c56882099ad99091
+2024-12-04 15:11:02,976 [INFO] Browser closed.

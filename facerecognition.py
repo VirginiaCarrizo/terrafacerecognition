@@ -14,7 +14,7 @@ with open('EncodeFile.p', 'rb') as file:
 encodeListKnown, employeesApellidoNombre = encodeListKnownWithIds
 
 # In-memory store for DNIs with thread safety
-dnis = ["1234567489"]
+dnis = 0
 dni_lock = Lock()
 cuil_value = ""  # Variable global para almacenar el cuil
 
@@ -77,10 +77,13 @@ def submit_dni():
             if not dnis:
                 return dnis
             # Retrieve the first DNI in the list
-            dni = dnis[0]
-            logging.info(f'dni {dni}')
-            logging.info(f"Sending DNI to PC: {dni}")
-            return dni
+            dni = dnis.pop(0)
+            if len(dnis) != 0:
+                logging.info(f'dni {dni}')
+                logging.info(f"Sending DNI to PC: {dni}")
+                return dni
+            else:
+                return "04343434"
     except Exception as e:
             logging.error(f"Error in /submit_dni: {e}")
             return None

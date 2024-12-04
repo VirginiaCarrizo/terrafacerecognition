@@ -47,6 +47,7 @@ def fetch_dni():
         response = requests.get(EC2_SERVER_URL, timeout=10)
         if response.status_code == 200:
             data = response.json()
+            
             logging.info(f'data: {data}')
             if data.get('status') == 'success':
                 dni = data.get('dni')
