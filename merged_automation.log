@@ -452,3 +452,123 @@ Stacktrace:
 	BaseThreadInitThunk [0x00007FF9EB99257D+29]
 	RtlUserThreadStart [0x00007FF9EBB4AF08+40]
 
+2024-12-06 10:25:28,691 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-06 10:25:34,067 [INFO] Entered 'terragene' into the first input field.
+2024-12-06 10:25:34,091 [INFO] Submitted the first form.
+2024-12-06 10:25:39,097 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:25:42,546 [INFO] Entered DNI '3342424' into the second input field.
+2024-12-06 10:25:42,577 [INFO] Submitted the second form.
+2024-12-06 10:25:47,579 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-06 10:25:52,582 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:25:55,756 [INFO] Entered DNI '5454545' into the second input field.
+2024-12-06 10:25:55,818 [INFO] Submitted the second form.
+2024-12-06 10:26:00,820 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-06 10:26:05,822 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:26:08,981 [INFO] Entered DNI '101010' into the second input field.
+2024-12-06 10:26:09,008 [INFO] Submitted the second form.
+2024-12-06 10:26:14,011 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-06 10:26:19,013 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:26:22,177 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:26:22,207 [INFO] Submitted the second form.
+2024-12-06 10:26:27,208 [INFO] Waiting for 5 seconds before the next attempt.
+2024-12-06 10:26:32,209 [ERROR] An unexpected error occurred: pop from empty list
+2024-12-06 10:26:34,490 [INFO] Browser closed.
+2024-12-06 10:49:28,497 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-06 10:49:34,976 [INFO] Entered 'terragene' into the first input field.
+2024-12-06 10:49:35,003 [INFO] Submitted the first form.
+2024-12-06 10:49:40,004 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:49:43,475 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:49:43,505 [INFO] Submitted the second form.
+2024-12-06 10:49:48,506 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:50:18,504 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:50:21,721 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:50:21,778 [INFO] Submitted the second form.
+2024-12-06 10:50:26,781 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:50:56,780 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:50:59,989 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:51:00,041 [INFO] Submitted the second form.
+2024-12-06 10:51:05,042 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:51:35,049 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:51:38,435 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:51:38,466 [INFO] Submitted the second form.
+2024-12-06 10:51:43,468 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:52:13,475 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:52:13,478 [ERROR] An unexpected error occurred: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.109)
+Stacktrace:
+	GetHandleVerifier [0x00007FF728F46CB5+28821]
+	(No symbol) [0x00007FF728EB3840]
+	(No symbol) [0x00007FF728D5578A]
+	(No symbol) [0x00007FF728D2F4F5]
+	(No symbol) [0x00007FF728DD6247]
+	(No symbol) [0x00007FF728DEECE2]
+	(No symbol) [0x00007FF728DCF0A3]
+	(No symbol) [0x00007FF728D9A778]
+	(No symbol) [0x00007FF728D9B8E1]
+	GetHandleVerifier [0x00007FF72927FCAD+3408013]
+	GetHandleVerifier [0x00007FF72929741F+3504127]
+	GetHandleVerifier [0x00007FF72928B5FD+3455453]
+	GetHandleVerifier [0x00007FF72900BDBB+835995]
+	(No symbol) [0x00007FF728EBEB5F]
+	(No symbol) [0x00007FF728EBA814]
+	(No symbol) [0x00007FF728EBA9AD]
+	(No symbol) [0x00007FF728EAA199]
+	BaseThreadInitThunk [0x00007FF9EB99257D+29]
+	RtlUserThreadStart [0x00007FF9EBB4AF08+40]
+
+2024-12-06 10:52:15,730 [INFO] Browser closed.
+2024-12-06 10:53:32,540 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-06 10:53:38,198 [INFO] Entered 'terragene' into the first input field.
+2024-12-06 10:53:38,225 [INFO] Submitted the first form.
+2024-12-06 10:53:43,227 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:53:46,719 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:53:46,767 [INFO] Submitted the second form.
+2024-12-06 10:53:51,769 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:54:21,776 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:54:24,952 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:54:24,980 [INFO] Submitted the second form.
+2024-12-06 10:54:29,983 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:54:59,991 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:55:03,162 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:55:03,194 [INFO] Submitted the second form.
+2024-12-06 10:55:08,196 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:55:38,203 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:55:41,579 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:55:41,610 [INFO] Submitted the second form.
+2024-12-06 10:55:46,613 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:56:16,619 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:56:19,813 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:56:19,867 [INFO] Submitted the second form.
+2024-12-06 10:56:24,869 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 11:09:33,782 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 11:09:33,872 [ERROR] An unexpected error occurred: Message: disconnected: not connected to DevTools
+  (failed to check if window was closed: disconnected: not connected to DevTools)
+  (Session info: chrome=131.0.6778.109)
+Stacktrace:
+	GetHandleVerifier [0x00007FF728F46CB5+28821]
+	(No symbol) [0x00007FF728EB3840]
+	(No symbol) [0x00007FF728D5578A]
+	(No symbol) [0x00007FF728D4230C]
+	(No symbol) [0x00007FF728D421D0]
+	(No symbol) [0x00007FF728D58131]
+	(No symbol) [0x00007FF728DEED12]
+	(No symbol) [0x00007FF728DCF0A3]
+	(No symbol) [0x00007FF728D9A778]
+	(No symbol) [0x00007FF728D9B8E1]
+	GetHandleVerifier [0x00007FF72927FCAD+3408013]
+	GetHandleVerifier [0x00007FF72929741F+3504127]
+	GetHandleVerifier [0x00007FF72928B5FD+3455453]
+	GetHandleVerifier [0x00007FF72900BDBB+835995]
+	(No symbol) [0x00007FF728EBEB5F]
+	(No symbol) [0x00007FF728EBA814]
+	(No symbol) [0x00007FF728EBA9AD]
+	(No symbol) [0x00007FF728EAA199]
+	BaseThreadInitThunk [0x00007FF9EB99257D+29]
+	RtlUserThreadStart [0x00007FF9EBB4AF08+40]
+
+2024-12-06 11:09:38,255 [INFO] Browser closed.
+2024-12-06 12:03:26,979 [INFO] Navigating to https://terragene.life/terrarrhh/camara
+2024-12-06 12:03:31,295 [INFO] Username and password entered. Now you must manually click 'classify' button.
+2024-12-06 12:06:52,266 [INFO] Navigating to https://terragene.life/terrarrhh/camara
+2024-12-06 12:06:57,422 [INFO] Username and password entered. Now you must manually click 'classify' button.

@@ -1,43 +1,17 @@
-import requests
 import time
 import logging
+import requests
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.service import Service
-from chromedriver_py import binary_path
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-# --------------------- Configuration ---------------------
+# Configure logging
+logging.basicConfig(level=logging.INFO)
 
-# Logging Configuration
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s [%(levelname)s] %(message)s',
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler("merged_automation.log")
-    ]
-)
-
-# EC2 Server URL to fetch DNI
-EC2_SERVER_URL = "http://54.81.210.167/get_dni"  # Replace with your EC2's public IP or domain
-
-# Polling Interval for fetching DNI (in seconds)
-POLLING_INTERVAL = 30
-
-# URLs for Selenium Navigation
-FIRST_PAGE_URL = "https://generalfoodargentina.movizen.com/pwa"
-SECOND_PAGE_URL = "https://generalfoodargentina.movizen.com/pwa/inicio"
-
-# Element IDs
-FIRST_INPUT_ID = "ion-input-0"
-SECOND_INPUT_ID = "ion-input-0"  # Assuming it's the same ID; adjust if different
-
-# Timeout Settings
-PAGE_LOAD_TIMEOUT = 10  # seconds
-ELEMENT_LOAD_TIMEOUT = 10  # seconds
-
-# --------------------------------------------------------
+EC2_SERVER_URL = "http://54.81.210.167/get_dni"
 
 def fetch_dni():
     """
@@ -64,77 +38,117 @@ def fetch_dni():
         logging.error(f"Unexpected error: {e}")
     return None
 
-def initialize_session():
-    """
-    Initialize the Selenium WebDriver session and perform the first login step.
-    Returns the driver instance.
-    """
-    svc = Service(executable_path=binary_path)
-    driver = webdriver.Chrome(service=svc)
-    driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
+def setup_driver():
+    # Set Chrome options to allow camera usage
+    chrome_options = Options()
+    chrome_options.add_experimental_option("prefs", {
+        "profile.default_content_setting_values.media_stream_camera": 1,
+        "profile.default_content_setting_values.media_stream_mic": 1,
+        "profile.default_content_setting_values.geolocation": 1,
+        "profile.default_content_setting_values.notifications": 1
+    })
+    chrome_options.add_argument("--use-fake-ui-for-media-stream")  # automatically grant camera permission
 
-    logging.info(f"Navigating to {FIRST_PAGE_URL}")
-    driver.get(FIRST_PAGE_URL)
-    time.sleep(3)  # Wait for the page to load
-
-    # Enter "terragene" in the first input field
-    input_field = driver.find_element("id", FIRST_INPUT_ID)
-    input_field.send_keys("terragene")
-    logging.info("Entered 'terragene' into the first input field.")
-
-    # Submit the form
-    input_field.send_keys(Keys.RETURN)
-    logging.info("Submitted the first form.")
-    time.sleep(5)  # Wait for the navigation
-
-    # At this point, we are logged in and the session is active.
-    # Return the driver so it can be reused.
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.maximize_window()
     return driver
 
-def perform_dni_submission(driver, dni):
-    """
-    Uses the given Selenium WebDriver session to navigate to the second page
-    and submit the provided DNI, without re-logging in.
-    """
-    logging.info(f"Navigating to {SECOND_PAGE_URL}")
-    driver.get(SECOND_PAGE_URL)
-    time.sleep(3)  # Wait for the page to load
+def login_to_terragene(driver):
+    driver.get("https://terragene.life/terrarrhh/camara")
+    # Fill username and password
+    WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.ID, "username")))
+    username_input = driver.find_element(By.ID, "username")
+    password_input = driver.find_element(By.ID, "password")
+    username_input.send_keys("generalfood")
+    password_input.send_keys("generalfood")
 
-    input_field = driver.find_element("id", SECOND_INPUT_ID)
-    input_field.send_keys(dni)
-    logging.info(f"Entered DNI '{dni}' into the second input field.")
+    # Click the login button
+    login_button = driver.find_element(By.CSS_SELECTOR, "button.btn")
+    login_button.click()
 
-    # Submit the DNI
-    input_field.send_keys(Keys.RETURN)
-    logging.info("Submitted the second form.")
-    time.sleep(5)  # Optional observation time
+def wait_for_user_capture(driver):
+    # Wait until the "Capturar" button is present
+    WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.ID, "capture")))
 
-def main():
-    """
-    Main function to initialize the session once, then continuously
-    fetch and submit DNIs using the same logged-in session.
-    """
-    # Initialize the session (login once)
-    driver = initialize_session()
+    # Here we assume the user will click the "Capturar" button themselves on the webpage.
+    # If we need to click it via automation, uncomment the next two lines:
+    # capture_button = driver.find_element(By.ID, "capture")
+    # capture_button.click()
 
+    # Wait for the popup to appear. If it's a JS alert, handle it:
+    time.sleep(10)  # give some time for the popup to appear after user clicks capture
     try:
-        while True:
-            # If you have logic to fetch DNI from the server, use it here.
-            # For now, we use a hardcoded DNI.
-            dni = fetch_dni()
-            if dni:
-                perform_dni_submission(driver, dni)
-            else:
-                logging.info("No DNI fetched. Will retry after the polling interval.")
+        WebDriverWait(driver, 10).until(EC.alert_is_present())
+        alert = driver.switch_to.alert
+        alert.accept()
+    except:
+        logging.info("No alert found. Possibly a different popup mechanism.")
 
-            logging.info(f"Waiting for {POLLING_INTERVAL} seconds before the next attempt.")
-            time.sleep(POLLING_INTERVAL)
-    except Exception as e:
-        logging.error(f"An unexpected error occurred: {e}")
-    finally:
-        # Close the browser when done or on error
-        driver.quit()
-        logging.info("Browser closed.")
+def fill_terragene_in_movizen(driver):
+    # After accepting, redirect or navigate manually to https://generalfoodargentina.movizen.com/pwa
+    driver.get("https://generalfoodargentina.movizen.com/pwa")
+
+    # Wait for ion-input-0 to be available
+    WebDriverWait(driver, 20).until(
+        EC.visibility_of_element_located((By.ID, "ion-input-0"))
+    )
+    ion_input = driver.find_element(By.ID, "ion-input-0")
+
+    # Clear if needed and type "terragene"
+    ion_input.clear()
+    ion_input.send_keys("terragene")
+    ion_input.send_keys(Keys.ENTER)
+
+def navigate_and_fill_dni(driver):
+    # Navigate to inicio page (this might happen automatically after entering terragene, 
+    # but if not, explicitly go there)
+    time.sleep(3)
+    driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
+
+    # Wait for ion-input-0 again
+    WebDriverWait(driver, 20).until(
+        EC.visibility_of_element_located((By.ID, "ion-input-0"))
+    )
+    ion_input = driver.find_element(By.ID, "ion-input-0")
+
+    # Fetch DNI
+    dni = fetch_dni()
+    if dni is None:
+        dni = ""  # If no DNI, leave it blank or handle accordingly
+
+    ion_input.clear()
+    ion_input.send_keys(dni)
+    ion_input.send_keys(Keys.ENTER)
+
+def main_loop():
+    driver = setup_driver()
+
+    # First iteration: perform login
+    login_to_terragene(driver)
+    wait_for_user_capture(driver)
+    fill_terragene_in_movizen(driver)
+    navigate_and_fill_dni(driver)
+
+    # Now wait for user input in console
+    user_input = input("Please enter a number and press ENTER: ")
+    # Once the user has pressed enter, loop back
+
+    # In subsequent loops: no need to login again, just go directly to terragene camera
+    while True:
+        # Go back to camera page
+        driver.get("https://terragene.life/terrarrhh/camara")
+
+        # Wait for user to press "Capturar" and handle popup again
+        wait_for_user_capture(driver)
+
+        # Fill terragene again on movizen
+        fill_terragene_in_movizen(driver)
+
+        # Navigate and fill dni again
+        navigate_and_fill_dni(driver)
+
+        # Wait again for user input
+        user_input = input("Please enter a number and press ENTER (or Ctrl+C to stop): ")
 
 if __name__ == "__main__":
-    main()
+    main_loop()
