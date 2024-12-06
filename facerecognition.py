@@ -70,10 +70,10 @@ def submit_dni(dni_lock):
     try:
         with dni_lock:
             if global_dni==0:
-                return jsonify({"status": "no_dni", "message": "No DNI available"}), 200
+                return False
             # Retrieve the first DNI in the list
         logging.info(f"Sending DNI to PC: {global_dni}")
-        return jsonify({"status": "success", "dni": global_dni}), 200
+        return True
     except Exception as e:
         logging.error(f"Error in /get_dni: {e}")
-        return jsonify({"status": "error", "message": f"Error processing request: {e}"}), 500
+        return False
