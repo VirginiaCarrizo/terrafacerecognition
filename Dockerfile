@@ -67,4 +67,4 @@ EXPOSE 5000
 # Clean user profile before starting Chrome and run the Flask app with Xvfb
 CMD rm -rf /root/.config/google-chrome/Default && \
     Xvfb :99 -screen 0 1920x1080x24 & \
-    python3 app.py
+    python3 run.py

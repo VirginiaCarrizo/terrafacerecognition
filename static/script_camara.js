@@ -9,10 +9,6 @@ socket.on('connect', function() {
     socket.emit('mi_evento', {data: 'Hola servidor'});
 });
 
-socket.on('mi_respuesta', function(data) {
-    console.log('Respuesta del servidor:', data);
-});
-
 // Función para activar una cámara específica
 function activateCamera(deviceId) {
     const constraints = {
@@ -20,7 +16,6 @@ function activateCamera(deviceId) {
             deviceId: { ideal: deviceId }
         }
     };
-
     navigator.mediaDevices.getUserMedia(constraints)
         .then(function(stream) {
             video.srcObject = stream;  // Muestra el video en el elemento de video
@@ -29,6 +24,7 @@ function activateCamera(deviceId) {
             console.log("Error al acceder a la cámara: ", err);
         });
 }
+
 // Enumerar dispositivos y activar una cámara que no sea la predeterminada
 navigator.mediaDevices.enumerateDevices()
     .then(devices => {
@@ -42,8 +38,6 @@ navigator.mediaDevices.enumerateDevices()
 // Función para abrir una ventana, escuchar Enter, manejar impresión y cerrar
 function openAndHandlePrint(url) {
     const newWindow = window.open(url, "_blank");
-    console.log(url);
-
     if (newWindow) {
         // Escuchar la tecla Enter en la nueva ventana
         // newWindow.addEventListener("keydown", function (event) {
@@ -87,32 +81,28 @@ captureButton.addEventListener('click', function() {
     .then(response => response.json())
     .then(data => {
         if (data.status === 'no_match') {
-            // Alerta para indicar que no se ha reconocido a la persona
-            alert("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
-            
+            const dni = prompt("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
+            socket.emit('update_db', dni);
             // Abrir la página una vez que el usuario presione "Aceptar"
             openAndHandlePrint("https://generalfoodargentina.movizen.com/pwa/inicio");
-            // openAndHandlePrint("https://terragene.life/terrarrhh/generalfood");
+
         } else if (data.status === 'confirmation_pending') {
             // El servidor indica que el DNI está pendiente de confirmación.
-
             socket.once('confirm_dni', function(confirmData) {
-
                 const dni = confirmData.dni;
-                const dni_modificado = confirmData.dni_modificado;
-                const nombre = confirmData.nombre_apellido;
+                const cuil = confirmData.employeeInfoCompletaBD['cuil'];
+                const nombre_completo = confirmData.employeeInfoCompletaBD['nombre_apellido'];
                 
-                // Mostrar mensaje de confirmación al usuario
-                const confirmed = window.confirm(`DNI detectado: ${dni_modificado} para ${nombre}\n¿Es correcto?`);
+                const confirmed = window.confirm(`DNI detectado: ${dni} para ${nombre_completo}\n¿Es correcto?`);
 
                 if (confirmed) {
-                    // Si el usuario confirma, envía la respuesta positiva al servidor
-                    socket.emit('confirm_dni_response', { dni: dni, confirmed: true });
+                    // Si el usuario confirma, envía la respuesta positiva al servidor para actualizar la base de datos
+                    socket.emit('confirm_dni_response', { cuil: cuil, confirmed: true });
                 } else {
                     // Si el usuario cancela, pide que ingrese el DNI manualmente y abre la web
-                    alert("Por favor, ingrese el DNI manualmente.");
+                    const dni = prompt("Por favor, ingrese el DNI manualmente.");
+                    socket.emit('update_db', dni);
                     openAndHandlePrint("https://generalfoodargentina.movizen.com/pwa/inicio");
-                    // openAndHandlePrint("https://terragene.life/terrarrhh/generalfood");
                 }
             });
         }
@@ -123,10 +113,9 @@ captureButton.addEventListener('click', function() {
 });
 
 
-// Recibir el resultado de la confirmación de DNI y abrir la web automáticamente si se confirma
-socket.on('dni_confirmation_result', function(data) {
+// Espera el evento de la impresion
+socket.on('wait_print', function(data) {
     if (data.status === 'success') {
-        console.log('llegue hasta aca')
         try {
             newWindow.addEventListener("beforeprint", function () {
                 console.log("Se inició la impresión en la nueva ventana.");

@@ -1,5 +1,6 @@
 Flask
 flask-socketio
+flask-login
 firebase-admin
 opencv-python
 numpy
@@ -7,7 +8,4 @@ face_recognition
 pickle-mixin
 selenium
 webdriver-manager
-chromedriver-py
-eventlet
-python-dotenv
-requests
+chromedriver-py==121.0.6167.85
