@@ -61,6 +61,9 @@ def configure_routes(app, socketio, db, bucket):
     @routes.route('/terrarrhh/submit_image', methods=['POST'])
     def submit_image():
             cuil_str, employeeInfoCompletaBD = facerec(db)
+            logging.info(f'global_dni desde submit_image: {global_dni}')
+            logging.info(f'cuil_str desde submit_image: {cuil_str}')
+            logging.info(f'employeeInfoCompletaBD desde submit_image: {employeeInfoCompletaBD}')
             if global_dni!=0 and cuil_str and employeeInfoCompletaBD:
                 socketio.emit('confirm_dni', {'global_dni': global_dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
                 return jsonify({"status": "confirmation_pending"})
