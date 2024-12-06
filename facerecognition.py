@@ -55,7 +55,7 @@ def facerec(db):
                     cuil = employeeInfoCompletaBD['cuil']
                     cuil_str = str(cuil)
                     global_dni = cuil_str[2:-1]
-
+                    logging.info(f'global_dni desde reconocimiento facial: {global_dni}')
                     return cuil_str, employeeInfoCompletaBD
         
         return cuil_str, employeeInfoCompletaBD
@@ -68,13 +68,14 @@ def facerec(db):
 def submit_dni(dni_lock):
     global global_dni
     try:
+        logging.info(f'global_dni desde submit_dni: {global_dni}')
         with dni_lock:
             logging.info(f'dnis {global_dni}')
             if global_dni == 0:
                 return global_dni
             # Retrieve the first DNI in the list
-            logging.info(f'dni {global_dni}')
-            logging.info(f"Sending DNI to PC: {global_dni}")
+            # logging.info(f'dni {global_dni}')
+            # logging.info(f"Sending DNI to PC: {global_dni}")
             return global_dni
     except Exception as e:
             logging.error(f"Error in /submit_dni: {e}")
