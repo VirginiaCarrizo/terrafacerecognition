@@ -89,6 +89,8 @@ captureButton.addEventListener('click', function() {
         } else if (data.status === 'confirmation_pending') {
             // El servidor indica que el DNI está pendiente de confirmación.
             socket.once('confirm_dni', function(confirmData) {
+                console.log("confirmData")
+                console.log(confirmData)
                 const dni = confirmData.dni;
                 const cuil = confirmData.employeeInfoCompletaBD['cuil'];
                 const nombre_completo = confirmData.employeeInfoCompletaBD['nombre_apellido'];
