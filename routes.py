@@ -14,6 +14,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(me
 routes = Blueprint('routes', __name__)  # Crear un Blueprint para las rutas
 
 dni_lock = Lock()
+global_dni_lock = Lock()
 cuil_value=''
 # DECORADOR PARA VERIFICAR LOS ROLES
 def role_required(*roles):
@@ -57,16 +58,33 @@ def configure_routes(app, socketio, db, bucket):
         return jsonify({'status': 'success'})
 
 
+    def update_global_dni(new_dni):
+        """
+        Actualiza el valor de la variable global `global_dni` de forma segura.
+        """
+        global global_dni
+        with global_dni_lock:  # Asegura que solo un hilo pueda modificar la variable a la vez
+            global_dni = new_dni
+    
+
+    def get_global_dni():
+        """
+        Obtiene el valor de la variable global `global_dni` de forma segura.
+        """
+        with global_dni_lock:  # Asegura acceso seguro para leer la variable
+            return global_dni
+
     # ENDPOINT PARA EL RECONOCIMIENTO FACIAL
     @routes.route('/terrarrhh/submit_image', methods=['POST'])
     def submit_image():
             cuil_str, employeeInfoCompletaBD = facerec(db, socketio)
-            logging.info(f'global_dni desde submit_image: {global_dni}')
+            new_dni = get_global_dni()
+            logging.info(f'new_dni desde submit_image: {new_dni}')
             logging.info(f'cuil_str desde submit_image: {cuil_str}')
             logging.info(f'employeeInfoCompletaBD desde submit_image: {employeeInfoCompletaBD}')
-            if global_dni!=0 and cuil_str and employeeInfoCompletaBD:
+            if new_dni!=0 and cuil_str and employeeInfoCompletaBD:
                 logging.info(f'HOLA desde el if de submit_image')
-                socketio.emit('confirm_dni', {'global_dni': global_dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
+                socketio.emit('confirm_dni', {'new_dni': new_dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
                 return jsonify({"status": "confirmation_pending"})
             else:
                 logging.info("No se encontró coincidencia, se solicita ingreso manual del DNI.")
@@ -76,8 +94,8 @@ def configure_routes(app, socketio, db, bucket):
     @routes.route('/get_dni', methods=['GET'])
     def get_dni():
         dni = submit_dni(dni_lock)
-        logging.info(f'global_dni desde get_dni: {global_dni}')
-        if dni:
+        logging.info(f'new_dni desde get_dni: {dni}')
+        if dni != 0:
             return jsonify({"status": "success", "dni": dni}), 200
         else:
             return jsonify({"status": "error", "message": "Error processing request"}), 500

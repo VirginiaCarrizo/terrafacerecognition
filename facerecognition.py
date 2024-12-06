@@ -8,6 +8,7 @@ import numpy as np
 import logging
 from threading import Lock
 from globals import global_dni
+from routes import get_global_dni, update_global_dni
 
 # IMPORTACION DE LA CODIFICACIÓN DE LAS IMAGENES PARA EL RECONOCIMIENTO FACIAL
 with open('EncodeFile.p', 'rb') as file:
@@ -54,8 +55,8 @@ def facerec(db, socketio):
 
                     cuil = employeeInfoCompletaBD['cuil']
                     cuil_str = str(cuil)
-                    global_dni = cuil_str[2:-1]
-                    socketio.emit('global_dni', global_dni)
+                    dni = cuil_str[2:-1]
+                    update_global_dni(dni)
 
                     logging.info(f'global_dni desde reconocimiento facial: {global_dni}')
                     return cuil_str, employeeInfoCompletaBD
@@ -68,14 +69,14 @@ def facerec(db, socketio):
 
 # FUNCION QUE ENVIA EL DNI AL SCRIPT LOCAL   
 def submit_dni(dni_lock):
-    global global_dni
+    new_dni = get_global_dni()
     try:
         with dni_lock:
-            if global_dni==0:
+            if new_dni==0:
                 return False
             # Retrieve the first DNI in the list
-        logging.info(f"Sending DNI to PC: {global_dni}")
-        return True
+        logging.info(f"Sending DNI to PC: {new_dni}")
+        return new_dni
     except Exception as e:
         logging.error(f"Error in /get_dni: {e}")
-        return False
+        return None

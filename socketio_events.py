@@ -4,6 +4,7 @@ from datetime import datetime
 from globals import global_dni
 from routes import dni_lock
 from facerecognition import submit_dni
+from routes import get_global_dni, update_global_dni
 
 # Configuración básica del logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
@@ -30,11 +31,8 @@ def configure_socketio_events(socketio, db):
 
     @socketio.on('update_db')
     def update_db(dni):
-        global global_dni
-        global_dni = dni
-        socketio.emit('global_dni', global_dni)
+        new_dni = get_global_dni()
         logging.info(f'global_dni desde update_db: {global_dni}')
-        submit_dni(dni_lock)
         # logging.info(global_dni)
         logging.info(db.reference(f'Employees/'))
         # ref = db.reference(f'Employees/{cuil}')
