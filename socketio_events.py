@@ -3,8 +3,7 @@ from flask_socketio import emit
 from datetime import datetime
 from globals import global_dni
 from routes import dni_lock
-from facerecognition import submit_dni
-from routes import get_global_dni, update_global_dni
+from facerecognition import submit_dni, get_global_dni, update_global_dni
 
 # Configuración básica del logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')

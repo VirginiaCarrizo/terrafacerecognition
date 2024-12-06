@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from functools import wraps
 from user import users
 from bbdd import agregar_empleado, buscar_empleados, modificar_empleado, eliminar_empleado
-from facerecognition import facerec, submit_dni
+from facerecognition import facerec, submit_dni, get_global_dni, update_global_dni
 import logging
 from threading import Lock
 from globals import global_dni
@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(me
 routes = Blueprint('routes', __name__)  # Crear un Blueprint para las rutas
 
 dni_lock = Lock()
-global_dni_lock = Lock()
+
 cuil_value=''
 # DECORADOR PARA VERIFICAR LOS ROLES
 def role_required(*roles):
@@ -56,23 +56,6 @@ def configure_routes(app, socketio, db, bucket):
         cuil_value = request.json.get('cuil')
         socketio.emit('cuil_received', {'cuil': cuil_value})
         return jsonify({'status': 'success'})
-
-
-    def update_global_dni(new_dni):
-        """
-        Actualiza el valor de la variable global `global_dni` de forma segura.
-        """
-        global global_dni
-        with global_dni_lock:  # Asegura que solo un hilo pueda modificar la variable a la vez
-            global_dni = new_dni
-    
-
-    def get_global_dni():
-        """
-        Obtiene el valor de la variable global `global_dni` de forma segura.
-        """
-        with global_dni_lock:  # Asegura acceso seguro para leer la variable
-            return global_dni
 
     # ENDPOINT PARA EL RECONOCIMIENTO FACIAL
     @routes.route('/terrarrhh/submit_image', methods=['POST'])

@@ -8,13 +8,30 @@ import numpy as np
 import logging
 from threading import Lock
 from globals import global_dni
-from routes import get_global_dni, update_global_dni
+
+global_dni_lock = Lock()
 
 # IMPORTACION DE LA CODIFICACIÓN DE LAS IMAGENES PARA EL RECONOCIMIENTO FACIAL
 with open('EncodeFile.p', 'rb') as file:
     encodeListKnownWithIds = pickle.load(file)
 encodeListKnown, employeesApellidoNombre = encodeListKnownWithIds
 
+def update_global_dni(new_dni):
+    """
+    Actualiza el valor de la variable global `global_dni` de forma segura.
+    """
+    global global_dni
+    with global_dni_lock:  # Asegura que solo un hilo pueda modificar la variable a la vez
+        global_dni = new_dni
+
+
+def get_global_dni():
+    """
+    Obtiene el valor de la variable global `global_dni` de forma segura.
+    """
+    with global_dni_lock:  # Asegura acceso seguro para leer la variable
+        return global_dni
+    
 # FUNCION DEL RECONOCIMIENTO FACIAL
 def facerec(db, socketio):
     global dni
