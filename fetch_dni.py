@@ -4,7 +4,8 @@ import logging
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
-from chromedriver_py import binary_path  # Import the binary path for ChromeDriver
+from chromedriver_py import binary_path
+from selenium.webdriver.chrome.options import Options
 
 # --------------------- Configuration ---------------------
 
@@ -68,9 +69,14 @@ def perform_navigation(dni):
     Performs the Selenium automation by navigating through the website
     and entering the provided DNI.
     """
-    # Initialize the WebDriver
+    # Initialize Chrome Options
+    chrome_options = Options()
+    chrome_options.add_argument("--user-data-dir=C:\\Users\\Mateo Rovere\\AppData\\Local\\Google\\Chrome\\User Data")  # Replace with the path to your profile directory
+    chrome_options.add_argument("--profile-directory=Default")  # Use the default profile or specify another profile
+    
+    # Initialize the WebDriver with options
     svc = Service(executable_path=binary_path)
-    driver = webdriver.Chrome(service=svc)
+    driver = webdriver.Chrome(service=svc, options=chrome_options)
     driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
 
     try:
@@ -116,7 +122,6 @@ def perform_navigation(dni):
         # Close the browser
         driver.quit()
         logging.info("Browser closed.")
-
 def main():
     """
     Main function to continuously fetch DNI and perform automation.
