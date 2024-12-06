@@ -30,7 +30,7 @@ def configure_socketio_events(socketio, db):
 
     @socketio.on('update_db')
     def update_db(dni):
-        new_dni = get_global_dni()
+        new_dni = update_global_dni()
         logging.info(f'global_dni desde update_db: {global_dni}')
         # logging.info(global_dni)
         logging.info(db.reference(f'Employees/'))
