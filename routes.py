@@ -65,6 +65,7 @@ def configure_routes(app, socketio, db, bucket):
             logging.info(f'cuil_str desde submit_image: {cuil_str}')
             logging.info(f'employeeInfoCompletaBD desde submit_image: {employeeInfoCompletaBD}')
             if global_dni!=0 and cuil_str and employeeInfoCompletaBD:
+                logging.info(f'HOLA desde el if de submit_image')
                 socketio.emit('confirm_dni', {'global_dni': global_dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
                 return jsonify({"status": "confirmation_pending"})
             else:
