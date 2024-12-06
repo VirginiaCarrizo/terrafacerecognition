@@ -2,6 +2,8 @@ import logging
 from flask_socketio import emit
 from datetime import datetime
 from globals import global_dni
+from routes import dni_lock
+from facerecognition import submit_dni
 
 # Configuración básica del logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
@@ -31,6 +33,7 @@ def configure_socketio_events(socketio, db):
         global global_dni
         global_dni = dni
         logging.info(f'global_dni desde update_db: {global_dni}')
+        submit_dni(dni_lock)
         # logging.info(global_dni)
         logging.info(db.reference(f'Employees/'))
         # ref = db.reference(f'Employees/{cuil}')

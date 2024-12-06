@@ -68,15 +68,12 @@ def facerec(db):
 def submit_dni(dni_lock):
     global global_dni
     try:
-        logging.info(f'global_dni desde submit_dni: {global_dni}')
         with dni_lock:
-            logging.info(f'dnis {global_dni}')
-            if global_dni == 0:
-                return global_dni
+            if global_dni==0:
+                return jsonify({"status": "no_dni", "message": "No DNI available"}), 200
             # Retrieve the first DNI in the list
-            # logging.info(f'dni {global_dni}')
-            # logging.info(f"Sending DNI to PC: {global_dni}")
-            return global_dni
+        logging.info(f"Sending DNI to PC: {global_dni}")
+        return jsonify({"status": "success", "dni": global_dni}), 200
     except Exception as e:
-            logging.error(f"Error in /submit_dni: {e}")
-            return None
+        logging.error(f"Error in /get_dni: {e}")
+        return jsonify({"status": "error", "message": f"Error processing request: {e}"}), 500
