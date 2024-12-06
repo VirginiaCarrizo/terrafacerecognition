@@ -11559,3 +11559,87 @@ Stacktrace:
 	RtlUserThreadStart [0x00007FFBECB4AF08+40]
 
 2024-12-06 11:27:09,298 [INFO] Browser closed.
+2024-12-06 11:34:47,628 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-06 11:34:53,230 [INFO] Entered 'terragene' into the first input field.
+2024-12-06 11:34:53,266 [INFO] Submitted the first form.
+2024-12-06 11:34:58,617 [INFO] Received DNI: 44444444
+2024-12-06 11:34:58,618 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 11:34:58,620 [ERROR] An unexpected error occurred: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF7332C6CB5+28821]
+	(No symbol) [0x00007FF733233840]
+	(No symbol) [0x00007FF7330D578A]
+	(No symbol) [0x00007FF7330AF4F5]
+	(No symbol) [0x00007FF733156247]
+	(No symbol) [0x00007FF73316ECE2]
+	(No symbol) [0x00007FF73314F0A3]
+	(No symbol) [0x00007FF73311A778]
+	(No symbol) [0x00007FF73311B8E1]
+	GetHandleVerifier [0x00007FF7335FFCAD+3408013]
+	GetHandleVerifier [0x00007FF73361741F+3504127]
+	GetHandleVerifier [0x00007FF73360B5FD+3455453]
+	GetHandleVerifier [0x00007FF73338BDBB+835995]
+	(No symbol) [0x00007FF73323EB5F]
+	(No symbol) [0x00007FF73323A814]
+	(No symbol) [0x00007FF73323A9AD]
+	(No symbol) [0x00007FF73322A199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-06 11:35:00,811 [INFO] Browser closed.
+2024-12-06 11:36:05,671 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-06 11:36:10,916 [INFO] Entered 'terragene' into the first input field.
+2024-12-06 11:36:10,983 [INFO] Submitted the first form.
+2024-12-06 11:36:16,335 [INFO] Received DNI: None
+2024-12-06 11:36:16,336 [INFO] No DNI fetched. Will retry after the polling interval.
+2024-12-06 11:36:16,336 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 11:36:46,677 [INFO] Received DNI: 37295755
+2024-12-06 11:36:46,678 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 11:36:50,149 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-06 11:36:50,197 [INFO] Submitted the second form.
+2024-12-06 11:36:55,199 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 11:37:25,555 [INFO] Received DNI: 37295755
+2024-12-06 11:37:25,556 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 11:37:28,786 [INFO] Entered DNI '37295755' into the second input field.
+2024-12-06 11:37:28,826 [INFO] Submitted the second form.
+2024-12-06 11:37:33,827 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 11:38:04,184 [INFO] Received DNI: 44291507
+2024-12-06 11:38:04,184 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 11:38:07,433 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 11:38:07,504 [INFO] Submitted the second form.
+2024-12-06 11:38:12,505 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 11:38:42,880 [INFO] Received DNI: 44291507
+2024-12-06 11:38:42,880 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 11:38:46,434 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 11:38:46,483 [INFO] Submitted the second form.
+2024-12-06 11:38:51,485 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 11:39:21,844 [INFO] Received DNI: 44291507
+2024-12-06 11:39:21,845 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 11:39:25,132 [ERROR] An unexpected error occurred: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="ion-input-0"]"}
+  (Session info: chrome=131.0.6778.86); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF7332C6CB5+28821]
+	(No symbol) [0x00007FF733233840]
+	(No symbol) [0x00007FF7330D578A]
+	(No symbol) [0x00007FF7331291BE]
+	(No symbol) [0x00007FF7331294AC]
+	(No symbol) [0x00007FF733172647]
+	(No symbol) [0x00007FF73314F33F]
+	(No symbol) [0x00007FF73316F412]
+	(No symbol) [0x00007FF73314F0A3]
+	(No symbol) [0x00007FF73311A778]
+	(No symbol) [0x00007FF73311B8E1]
+	GetHandleVerifier [0x00007FF7335FFCAD+3408013]
+	GetHandleVerifier [0x00007FF73361741F+3504127]
+	GetHandleVerifier [0x00007FF73360B5FD+3455453]
+	GetHandleVerifier [0x00007FF73338BDBB+835995]
+	(No symbol) [0x00007FF73323EB5F]
+	(No symbol) [0x00007FF73323A814]
+	(No symbol) [0x00007FF73323A9AD]
+	(No symbol) [0x00007FF73322A199]
+	BaseThreadInitThunk [0x00007FFBEBF8257D+29]
+	RtlUserThreadStart [0x00007FFBECB4AF08+40]
+
+2024-12-06 11:39:27,500 [INFO] Browser closed.
