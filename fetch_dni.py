@@ -64,79 +64,77 @@ def fetch_dni():
         logging.error(f"Unexpected error: {e}")
     return None
 
-def perform_navigation(dni):
+def initialize_session():
     """
-    Performs the Selenium automation by navigating through the website
-    and entering the provided DNI.
+    Initialize the Selenium WebDriver session and perform the first login step.
+    Returns the driver instance.
     """
-    # Initialize Chrome Options
-    chrome_options = Options()
-    chrome_options.add_argument("--user-data-dir=C:\\Users\\Mateo Rovere\\AppData\\Local\\Google\\Chrome\\User Data")  # Replace with the path to your profile directory
-    chrome_options.add_argument("--profile-directory=Default")  # Use the default profile or specify another profile
-    
-    # Initialize the WebDriver with options
     svc = Service(executable_path=binary_path)
-    driver = webdriver.Chrome(service=svc, options=chrome_options)
+    driver = webdriver.Chrome(service=svc)
     driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
 
-    try:
-        # Step 1: Navigate to the first page
-        logging.info(f"Navigating to {FIRST_PAGE_URL}")
-        driver.get(FIRST_PAGE_URL)
-        
-        # Wait for the page to load
-        time.sleep(3)  # Consider using WebDriverWait for better reliability
-        
-        # Find the input field and enter "terragene"
-        input_field = driver.find_element("id", FIRST_INPUT_ID)
-        input_field.send_keys("terragene")
-        logging.info("Entered 'terragene' into the first input field.")
-        
-        # Simulate pressing ENTER to submit and wait for navigation
-        input_field.send_keys(Keys.RETURN)
-        logging.info("Submitted the first form.")
-        time.sleep(5)  # Adjust based on your network speed
+    logging.info(f"Navigating to {FIRST_PAGE_URL}")
+    driver.get(FIRST_PAGE_URL)
+    time.sleep(3)  # Wait for the page to load
 
-        # Step 2: Navigate to the second page
-        logging.info(f"Navigating to {SECOND_PAGE_URL}")
-        driver.get(SECOND_PAGE_URL)
-        
-        # Wait for the page to load
-        time.sleep(3)
-        
-        # Find the input field and enter the fetched DNI
-        input_field = driver.find_element("id", SECOND_INPUT_ID)
-        input_field.send_keys(dni)
-        logging.info(f"Entered DNI '{dni}' into the second input field.")
-        
-        # Simulate pressing ENTER to submit
-        input_field.send_keys(Keys.RETURN)
-        logging.info("Submitted the second form.")
-        
-        # Optional: Wait to observe the result
-        time.sleep(5)
+    # Enter "terragene" in the first input field
+    input_field = driver.find_element("id", FIRST_INPUT_ID)
+    input_field.send_keys("terragene")
+    logging.info("Entered 'terragene' into the first input field.")
 
-    except Exception as e:
-        logging.error(f"An error occurred during navigation: {e}")
-    finally:
-        # Close the browser
-        driver.quit()
-        logging.info("Browser closed.")
+    # Submit the form
+    input_field.send_keys(Keys.RETURN)
+    logging.info("Submitted the first form.")
+    time.sleep(5)  # Wait for the navigation
+
+    # At this point, we are logged in and the session is active.
+    # Return the driver so it can be reused.
+    return driver
+
+def perform_dni_submission(driver, dni):
+    """
+    Uses the given Selenium WebDriver session to navigate to the second page
+    and submit the provided DNI, without re-logging in.
+    """
+    logging.info(f"Navigating to {SECOND_PAGE_URL}")
+    driver.get(SECOND_PAGE_URL)
+    time.sleep(3)  # Wait for the page to load
+
+    input_field = driver.find_element("id", SECOND_INPUT_ID)
+    input_field.send_keys(dni)
+    logging.info(f"Entered DNI '{dni}' into the second input field.")
+
+    # Submit the DNI
+    input_field.send_keys(Keys.RETURN)
+    logging.info("Submitted the second form.")
+    time.sleep(5)  # Optional observation time
+
 def main():
     """
-    Main function to continuously fetch DNI and perform automation.
+    Main function to initialize the session once, then continuously
+    fetch and submit DNIs using the same logged-in session.
     """
-    while True:
-        dni = fetch_dni()
-        if dni:
-            perform_navigation(dni)
-            # After successful automation, you might want to wait or exit
-            # Here, we'll wait for the next polling interval
-        else:
-            logging.info("No DNI fetched. Will retry after the polling interval.")
-        
-        logging.info(f"Waiting for {POLLING_INTERVAL} seconds before the next attempt.")
-        time.sleep(POLLING_INTERVAL)
+    # Initialize the session (login once)
+    driver = initialize_session()
+
+    try:
+        while True:
+            # If you have logic to fetch DNI from the server, use it here.
+            # For now, we use a hardcoded DNI.
+            dni = fetch_dni()
+            if dni:
+                perform_dni_submission(driver, dni)
+            else:
+                logging.info("No DNI fetched. Will retry after the polling interval.")
+
+            logging.info(f"Waiting for {POLLING_INTERVAL} seconds before the next attempt.")
+            time.sleep(POLLING_INTERVAL)
+    except Exception as e:
+        logging.error(f"An unexpected error occurred: {e}")
+    finally:
+        # Close the browser when done or on error
+        driver.quit()
+        logging.info("Browser closed.")
 
 if __name__ == "__main__":
     main()

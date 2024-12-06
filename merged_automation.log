@@ -241,3 +241,214 @@
 2024-12-06 09:49:58,316 [ERROR] Failed to fetch DNI. Status Code: 502
 2024-12-06 09:49:58,316 [INFO] No DNI fetched. Will retry after the polling interval.
 2024-12-06 09:49:58,320 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:02:55,395 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-06 10:03:00,859 [INFO] Entered 'terragene' into the first input field.
+2024-12-06 10:03:00,922 [INFO] Submitted the first form.
+2024-12-06 10:03:05,923 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:03:09,578 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:03:09,641 [INFO] Submitted the second form.
+2024-12-06 10:03:16,976 [INFO] Browser closed.
+2024-12-06 10:03:16,976 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:03:25,124 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-06 10:03:29,620 [INFO] Entered 'terragene' into the first input field.
+2024-12-06 10:03:29,681 [INFO] Submitted the first form.
+2024-12-06 10:03:34,682 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:03:38,197 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:03:38,263 [INFO] Submitted the second form.
+2024-12-06 10:03:45,815 [INFO] Browser closed.
+2024-12-06 10:03:45,816 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:04:17,834 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-06 10:04:22,190 [INFO] Entered 'terragene' into the first input field.
+2024-12-06 10:04:22,255 [INFO] Submitted the first form.
+2024-12-06 10:04:27,256 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:04:31,192 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:04:31,262 [INFO] Submitted the second form.
+2024-12-06 10:04:38,475 [INFO] Browser closed.
+2024-12-06 10:04:38,476 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:05:10,445 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-06 10:05:14,627 [INFO] Entered 'terragene' into the first input field.
+2024-12-06 10:05:14,688 [INFO] Submitted the first form.
+2024-12-06 10:05:19,692 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:05:23,399 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:05:23,482 [INFO] Submitted the second form.
+2024-12-06 10:05:27,577 [WARNING] Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectionResetError(10054, 'Se ha forzado la interrupción de una conexión existente por el host remoto', None, 10054, None)': /session/e064671618159777adbe701ad8a17154
+2024-12-06 10:06:00,177 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:06:03,713 [ERROR] An error occurred during navigation: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="ion-input-0"]"}
+  (Session info: chrome=131.0.6778.109); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF728F46CB5+28821]
+	(No symbol) [0x00007FF728EB3840]
+	(No symbol) [0x00007FF728D5578A]
+	(No symbol) [0x00007FF728DA91BE]
+	(No symbol) [0x00007FF728DA94AC]
+	(No symbol) [0x00007FF728DF2647]
+	(No symbol) [0x00007FF728DCF33F]
+	(No symbol) [0x00007FF728DEF412]
+	(No symbol) [0x00007FF728DCF0A3]
+	(No symbol) [0x00007FF728D9A778]
+	(No symbol) [0x00007FF728D9B8E1]
+	GetHandleVerifier [0x00007FF72927FCAD+3408013]
+	GetHandleVerifier [0x00007FF72929741F+3504127]
+	GetHandleVerifier [0x00007FF72928B5FD+3455453]
+	GetHandleVerifier [0x00007FF72900BDBB+835995]
+	(No symbol) [0x00007FF728EBEB5F]
+	(No symbol) [0x00007FF728EBA814]
+	(No symbol) [0x00007FF728EBA9AD]
+	(No symbol) [0x00007FF728EAA199]
+	BaseThreadInitThunk [0x00007FF9EB99257D+29]
+	RtlUserThreadStart [0x00007FF9EBB4AF08+40]
+
+2024-12-06 10:06:05,964 [INFO] Browser closed.
+2024-12-06 10:06:05,965 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:06:37,885 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:06:41,393 [ERROR] An error occurred during navigation: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="ion-input-0"]"}
+  (Session info: chrome=131.0.6778.109); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF728F46CB5+28821]
+	(No symbol) [0x00007FF728EB3840]
+	(No symbol) [0x00007FF728D5578A]
+	(No symbol) [0x00007FF728DA91BE]
+	(No symbol) [0x00007FF728DA94AC]
+	(No symbol) [0x00007FF728DF2647]
+	(No symbol) [0x00007FF728DCF33F]
+	(No symbol) [0x00007FF728DEF412]
+	(No symbol) [0x00007FF728DCF0A3]
+	(No symbol) [0x00007FF728D9A778]
+	(No symbol) [0x00007FF728D9B8E1]
+	GetHandleVerifier [0x00007FF72927FCAD+3408013]
+	GetHandleVerifier [0x00007FF72929741F+3504127]
+	GetHandleVerifier [0x00007FF72928B5FD+3455453]
+	GetHandleVerifier [0x00007FF72900BDBB+835995]
+	(No symbol) [0x00007FF728EBEB5F]
+	(No symbol) [0x00007FF728EBA814]
+	(No symbol) [0x00007FF728EBA9AD]
+	(No symbol) [0x00007FF728EAA199]
+	BaseThreadInitThunk [0x00007FF9EB99257D+29]
+	RtlUserThreadStart [0x00007FF9EBB4AF08+40]
+
+2024-12-06 10:06:43,674 [INFO] Browser closed.
+2024-12-06 10:06:43,674 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:07:15,595 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:07:19,015 [ERROR] An error occurred during navigation: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="ion-input-0"]"}
+  (Session info: chrome=131.0.6778.109); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF728F46CB5+28821]
+	(No symbol) [0x00007FF728EB3840]
+	(No symbol) [0x00007FF728D5578A]
+	(No symbol) [0x00007FF728DA91BE]
+	(No symbol) [0x00007FF728DA94AC]
+	(No symbol) [0x00007FF728DF2647]
+	(No symbol) [0x00007FF728DCF33F]
+	(No symbol) [0x00007FF728DEF412]
+	(No symbol) [0x00007FF728DCF0A3]
+	(No symbol) [0x00007FF728D9A778]
+	(No symbol) [0x00007FF728D9B8E1]
+	GetHandleVerifier [0x00007FF72927FCAD+3408013]
+	GetHandleVerifier [0x00007FF72929741F+3504127]
+	GetHandleVerifier [0x00007FF72928B5FD+3455453]
+	GetHandleVerifier [0x00007FF72900BDBB+835995]
+	(No symbol) [0x00007FF728EBEB5F]
+	(No symbol) [0x00007FF728EBA814]
+	(No symbol) [0x00007FF728EBA9AD]
+	(No symbol) [0x00007FF728EAA199]
+	BaseThreadInitThunk [0x00007FF9EB99257D+29]
+	RtlUserThreadStart [0x00007FF9EBB4AF08+40]
+
+2024-12-06 10:07:21,245 [INFO] Browser closed.
+2024-12-06 10:07:21,245 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:07:53,306 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:07:56,929 [ERROR] An error occurred during navigation: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.109)
+Stacktrace:
+	GetHandleVerifier [0x00007FF728F46CB5+28821]
+	(No symbol) [0x00007FF728EB3840]
+	(No symbol) [0x00007FF728D5578A]
+	(No symbol) [0x00007FF728D2F4F5]
+	(No symbol) [0x00007FF728DD6247]
+	(No symbol) [0x00007FF728DEECE2]
+	(No symbol) [0x00007FF728DCF0A3]
+	(No symbol) [0x00007FF728D9A778]
+	(No symbol) [0x00007FF728D9B8E1]
+	GetHandleVerifier [0x00007FF72927FCAD+3408013]
+	GetHandleVerifier [0x00007FF72929741F+3504127]
+	GetHandleVerifier [0x00007FF72928B5FD+3455453]
+	GetHandleVerifier [0x00007FF72900BDBB+835995]
+	(No symbol) [0x00007FF728EBEB5F]
+	(No symbol) [0x00007FF728EBA814]
+	(No symbol) [0x00007FF728EBA9AD]
+	(No symbol) [0x00007FF728EAA199]
+	BaseThreadInitThunk [0x00007FF9EB99257D+29]
+	RtlUserThreadStart [0x00007FF9EBB4AF08+40]
+
+2024-12-06 10:07:59,221 [INFO] Browser closed.
+2024-12-06 10:07:59,221 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:13:19,220 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-06 10:13:24,563 [INFO] Entered 'terragene' into the first input field.
+2024-12-06 10:13:24,612 [INFO] Submitted the first form.
+2024-12-06 10:13:29,615 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:13:33,138 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:13:33,213 [INFO] Submitted the second form.
+2024-12-06 10:13:38,214 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:14:08,212 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:14:11,403 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:14:11,477 [INFO] Submitted the second form.
+2024-12-06 10:14:16,482 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:14:46,480 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:14:46,484 [ERROR] An unexpected error occurred: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.109)
+Stacktrace:
+	GetHandleVerifier [0x00007FF728F46CB5+28821]
+	(No symbol) [0x00007FF728EB3840]
+	(No symbol) [0x00007FF728D5578A]
+	(No symbol) [0x00007FF728D2F4F5]
+	(No symbol) [0x00007FF728DD6247]
+	(No symbol) [0x00007FF728DEECE2]
+	(No symbol) [0x00007FF728DCF0A3]
+	(No symbol) [0x00007FF728D9A778]
+	(No symbol) [0x00007FF728D9B8E1]
+	GetHandleVerifier [0x00007FF72927FCAD+3408013]
+	GetHandleVerifier [0x00007FF72929741F+3504127]
+	GetHandleVerifier [0x00007FF72928B5FD+3455453]
+	GetHandleVerifier [0x00007FF72900BDBB+835995]
+	(No symbol) [0x00007FF728EBEB5F]
+	(No symbol) [0x00007FF728EBA814]
+	(No symbol) [0x00007FF728EBA9AD]
+	(No symbol) [0x00007FF728EAA199]
+	BaseThreadInitThunk [0x00007FF9EB99257D+29]
+	RtlUserThreadStart [0x00007FF9EBB4AF08+40]
+
+2024-12-06 10:14:48,695 [INFO] Browser closed.
+2024-12-06 10:15:03,560 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa
+2024-12-06 10:15:07,898 [INFO] Entered 'terragene' into the first input field.
+2024-12-06 10:15:07,960 [INFO] Submitted the first form.
+2024-12-06 10:15:12,961 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:15:16,542 [INFO] Entered DNI '44291507' into the second input field.
+2024-12-06 10:15:16,626 [INFO] Submitted the second form.
+2024-12-06 10:15:21,629 [INFO] Waiting for 30 seconds before the next attempt.
+2024-12-06 10:15:51,627 [INFO] Navigating to https://generalfoodargentina.movizen.com/pwa/inicio
+2024-12-06 10:15:54,788 [ERROR] An unexpected error occurred: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.109)
+Stacktrace:
+	GetHandleVerifier [0x00007FF728F46CB5+28821]
+	(No symbol) [0x00007FF728EB3840]
+	(No symbol) [0x00007FF728D5578A]
+	(No symbol) [0x00007FF728D2F4F5]
+	(No symbol) [0x00007FF728DD6247]
+	(No symbol) [0x00007FF728DEECE2]
+	(No symbol) [0x00007FF728DCF0A3]
+	(No symbol) [0x00007FF728D9A778]
+	(No symbol) [0x00007FF728D9B8E1]
+	GetHandleVerifier [0x00007FF72927FCAD+3408013]
+	GetHandleVerifier [0x00007FF72929741F+3504127]
+	GetHandleVerifier [0x00007FF72928B5FD+3455453]
+	GetHandleVerifier [0x00007FF72900BDBB+835995]
+	(No symbol) [0x00007FF728EBEB5F]
+	(No symbol) [0x00007FF728EBA814]
+	(No symbol) [0x00007FF728EBA9AD]
+	(No symbol) [0x00007FF728EAA199]
+	BaseThreadInitThunk [0x00007FF9EB99257D+29]
+	RtlUserThreadStart [0x00007FF9EBB4AF08+40]
+
