@@ -60,7 +60,7 @@ def configure_routes(app, socketio, db, bucket):
     # ENDPOINT PARA EL RECONOCIMIENTO FACIAL
     @routes.route('/terrarrhh/submit_image', methods=['POST'])
     def submit_image():
-            cuil_str, employeeInfoCompletaBD = facerec(db)
+            cuil_str, employeeInfoCompletaBD = facerec(db, socketio)
             logging.info(f'global_dni desde submit_image: {global_dni}')
             logging.info(f'cuil_str desde submit_image: {cuil_str}')
             logging.info(f'employeeInfoCompletaBD desde submit_image: {employeeInfoCompletaBD}')

@@ -15,7 +15,7 @@ with open('EncodeFile.p', 'rb') as file:
 encodeListKnown, employeesApellidoNombre = encodeListKnownWithIds
 
 # FUNCION DEL RECONOCIMIENTO FACIAL
-def facerec(db):
+def facerec(db, socketio):
     global dni
     try:
         data = request.json['image']
@@ -55,6 +55,8 @@ def facerec(db):
                     cuil = employeeInfoCompletaBD['cuil']
                     cuil_str = str(cuil)
                     global_dni = cuil_str[2:-1]
+                    socketio.emit('global_dni', global_dni)
+
                     logging.info(f'global_dni desde reconocimiento facial: {global_dni}')
                     return cuil_str, employeeInfoCompletaBD
         

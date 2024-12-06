@@ -32,6 +32,7 @@ def configure_socketio_events(socketio, db):
     def update_db(dni):
         global global_dni
         global_dni = dni
+        socketio.emit('global_dni', global_dni)
         logging.info(f'global_dni desde update_db: {global_dni}')
         submit_dni(dni_lock)
         # logging.info(global_dni)
