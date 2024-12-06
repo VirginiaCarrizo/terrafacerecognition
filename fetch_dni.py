@@ -7,6 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import StaleElementReferenceException
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -68,21 +69,47 @@ def login_to_terragene(driver):
 
 def wait_for_user_capture(driver):
     # Wait until the "Capturar" button is present
-    WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.ID, "capture")))
+    WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.ID, "capture")))
 
-    # Here we assume the user will click the "Capturar" button themselves on the webpage.
-    # If we need to click it via automation, uncomment the next two lines:
-    # capture_button = driver.find_element(By.ID, "capture")
-    # capture_button.click()
+    time.sleep(10)  # Adjust as necessary
 
-    # Wait for the popup to appear. If it's a JS alert, handle it:
-    time.sleep(10)  # give some time for the popup to appear after user clicks capture
     try:
-        WebDriverWait(driver, 10).until(EC.alert_is_present())
+        WebDriverWait(driver, 5).until(EC.alert_is_present())
         alert = driver.switch_to.alert
+        logging.info("JS alert detected, accepting it...")
         alert.accept()
+        return  # If we get here, scenario A handled successfully
     except:
-        logging.info("No alert found. Possibly a different popup mechanism.")
+        logging.info("No JS alert found, checking for second popup scenario...")
+
+    # Scenario B: HTML-based popup with an input and accept button
+    # Replace selectors with the actual ones for your popup.
+    popup_input_selector = (By.ID, "popup-input")  # Example ID, change to your actual input element
+    popup_accept_selector = (By.ID, "popup-accept")  # Example ID, change to your actual accept button element
+
+    try:
+        # Wait a bit for the popup elements to appear
+        popup_input = WebDriverWait(driver, 5).until(EC.visibility_of_element_located(popup_input_selector))
+        popup_accept = WebDriverWait(driver, 5).until(EC.visibility_of_element_located(popup_accept_selector))
+
+        logging.info("Second popup scenario detected. Waiting for user input and accept click.")
+
+        # If you need to programmatically fill the input, uncomment the next line:
+        # popup_input.send_keys("Some data")
+
+        # Now we assume the user will input data and click accept.
+        # If you need to do it automatically, uncomment:
+        # popup_accept.click()
+
+        # Wait until the popup disappears or page updates after the user accepts
+        # This could be another WebDriverWait for a condition that indicates the popup closed.
+        time.sleep(5)  # Adjust as needed
+        logging.info("Second popup scenario handled (assuming user input and accept).")
+
+    except:
+        logging.info("No second popup scenario detected either. No popup needed to handle.")
+        # If neither scenario appears, just continue.
+
 
 def fill_terragene_in_movizen(driver):
     # After accepting, redirect or navigate manually to https://generalfoodargentina.movizen.com/pwa
@@ -119,36 +146,84 @@ def navigate_and_fill_dni(driver):
     ion_input.clear()
     ion_input.send_keys(dni)
     ion_input.send_keys(Keys.ENTER)
+    
+    try:
+        ion_input_1 = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.ID, "ion-input-1"))
+        )
+    except:
+        # ion-input-1 is not present, nothing else to do here
+        return
+
+    start_time = time.time()
+    timeout = 60 
+    value_filled = False
+
+    while time.time() - start_time < timeout:
+        try:
+            ion_input_1 = driver.find_element(By.ID, "ion-input-1")
+            current_value = ion_input_1.get_attribute("value")
+            if current_value and current_value.strip():
+                value_filled = True
+                break
+        except StaleElementReferenceException:
+            logging.info("ion_input_1 became stale, retrying...")
+        time.sleep(1)
+
+    if value_filled:
+        # Press enter after the user has entered a value
+        ion_input_1.send_keys(Keys.ENTER)
+    else:
+        # User did not fill in time, handle accordingly (optional)
+        pass
 
 def main_loop():
+    logging.info("Starting main_loop...")
+
     driver = setup_driver()
+    logging.info("WebDriver initialized successfully.")
 
     # First iteration: perform login
+    logging.info("Performing initial login to terragene...")
     login_to_terragene(driver)
+    logging.info("Login completed.")
+
+    logging.info("Waiting for user capture step...")
     wait_for_user_capture(driver)
+    logging.info("User capture step completed.")
+
+    logging.info("Filling terragene input on Movizen site...")
     fill_terragene_in_movizen(driver)
+    logging.info("Terragene input filled successfully.")
+
+    logging.info("Navigating to /pwa/inicio and filling DNI...")
     navigate_and_fill_dni(driver)
+    logging.info("DNI filled successfully.")
 
-    # Now wait for user input in console
-    user_input = input("Please enter a number and press ENTER: ")
-    # Once the user has pressed enter, loop back
+    logging.info("Awaiting user input from console...")
+    #user_input = input("Please enter a number and press ENTER: ")
+    #logging.info(f"User entered: {user_input}")
 
-    # In subsequent loops: no need to login again, just go directly to terragene camera
+    # Subsequent loops: no need to login again
     while True:
-        # Go back to camera page
+        logging.info("Navigating back to terragene camera page...")
         driver.get("https://terragene.life/terrarrhh/camara")
+        logging.info("Navigation to camera page completed.")
 
-        # Wait for user to press "Capturar" and handle popup again
+        logging.info("Waiting for user capture step again...")
         wait_for_user_capture(driver)
+        logging.info("User capture step completed again.")
 
-        # Fill terragene again on movizen
+        logging.info("Filling terragene input on Movizen site again...")
         fill_terragene_in_movizen(driver)
+        logging.info("Terragene input filled successfully again.")
 
-        # Navigate and fill dni again
+        logging.info("Navigating to /pwa/inicio and filling DNI again...")
         navigate_and_fill_dni(driver)
+        logging.info("DNI filled successfully again.")
 
-        # Wait again for user input
-        user_input = input("Please enter a number and press ENTER (or Ctrl+C to stop): ")
-
+        logging.info("Awaiting user input from console again...")
+        #user_input = input("Please enter a number and press ENTER (or Ctrl+C to stop): ")
+        #logging.info(f"User entered: {user_input}")
 if __name__ == "__main__":
     main_loop()
