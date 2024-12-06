@@ -33,11 +33,29 @@ def configure_socketio_events(socketio, db):
         update_global_dni(dni)
         new_dni = get_global_dni()
         logging.info(f'new_dni desde update_db: {new_dni}')
-        # logging.info(global_dni)
-        logging.info(db.reference(f'Employees/'))
-        # ref = db.reference(f'Employees/{cuil}')
-        # ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-        # nro_orden = ref.child('order_general_food').get()
-        # ref.child('order_general_food').set(nro_orden + 1)
+
+        employees_ref = db.reference(f'Employees/')
+        employees = employees_ref.get()
+
+        if not employees:
+            return None
+
+        for cuil, datos in employees.items():
+            # Asegurarse de que el CUIL tenga al menos 11 caracteres
+            if len(cuil) >= 11:
+                # Extraer los dígitos desde el tercer hasta el anteúltimo
+                segmento_cuil = cuil[2:-1]
+                
+                # Comparar con el DNI proporcionado
+                if segmento_cuil == str(dni):
+
+                    logging.info(f'cuil: {cuil}, datos: {datos}')
+                    ref = db.reference(f'Employees/{cuil}')
+                    ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+                    nro_orden = ref.child('order_general_food').get()
+                    ref.child('order_general_food').set(nro_orden + 1)
+                # Si no se encuentra ninguna coincidencia
+                logging.info('NO SE ENCONTRO COINCIDENCIA EN LA BASE DE DATOS')
+
 
 

@@ -74,8 +74,7 @@ def facerec(db, socketio):
                     cuil_str = str(cuil)
                     dni = cuil_str[2:-1]
                     update_global_dni(dni)
-
-                    logging.info(f'global_dni desde reconocimiento facial: {global_dni}')
+                    
                     return cuil_str, employeeInfoCompletaBD
         
         return cuil_str, employeeInfoCompletaBD
