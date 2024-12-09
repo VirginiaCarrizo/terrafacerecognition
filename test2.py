@@ -1,6 +1,9 @@
 import time
 import logging
 import requests
+import threading
+import tkinter as tk
+from tkinter import messagebox
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -8,27 +11,21 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# Configure logging
 logging.basicConfig(level=logging.INFO)
-
-# Global timeouts
-TIMEOUT = 30  # Default timeout for Selenium waits
-RETRY_INTERVAL = 5  # Interval to sleep between retries for DNI fetching
-EC2_REQUEST_TIMEOUT = 10  # Timeout for EC2 requests
-FETCH_DNI_MAX_RETRIES = 5
 
 EC2_SERVER_URL = "http://54.81.210.167/get_dni"
 
 
-def fetch_dni(max_retries=FETCH_DNI_MAX_RETRIES, retry_interval=RETRY_INTERVAL):
+def fetch_dni(max_retries=5, retry_interval=5):
     """
-    Fetches the DNI from the EC2 server within specified timeouts and retry logic.
+    Fetches the DNI from the EC2 server.
     """
     retries = 0
     while retries < max_retries:
         try:
             logging.info("Attempting to fetch DNI from server...")
-            response = requests.get(EC2_SERVER_URL, timeout=EC2_REQUEST_TIMEOUT)
+            response = requests.get(EC2_SERVER_URL, timeout=10)
+
             if response.status_code == 200:
                 data = response.json()
                 status = data.get('status')
@@ -68,7 +65,7 @@ def setup_driver():
     })
 
     chrome_options.add_argument("--use-fake-ui-for-media-stream")
-    chrome_options.add_argument("--ignore-certificate-errors")  
+    chrome_options.add_argument("--ignore-certificate-errors")
     chrome_options.add_argument("--disable-web-security")
     try:
         driver = webdriver.Chrome(options=chrome_options)
@@ -83,10 +80,8 @@ def setup_driver():
 def login_to_terragene(driver):
     logging.info("Navigating to terragene login page.")
     driver.get("https://terragene.life/terrarrhh/camara")
-
-    # Wait for username and password fields (Timeout applied)
     logging.info("Waiting for username and password fields to appear.")
-    WebDriverWait(driver, TIMEOUT).until(EC.visibility_of_element_located((By.ID, "username")))
+    WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.ID, "username")))
 
     username_input = driver.find_element(By.ID, "username")
     password_input = driver.find_element(By.ID, "password")
@@ -103,12 +98,9 @@ def login_to_terragene(driver):
 def wait_for_user_capture(driver):
     """
     Waits for a user to accept a JavaScript alert and fetches the DNI.
-
-    We apply a long wait timeout here as this likely involves user interaction.
     """
     try:
-        logging.info("Waiting for JS alert to appear (up to 10 minutes)...")
-        # Long timeout for user interaction, e.g., 600 seconds
+        logging.info("Waiting for JS alert to appear...")
         WebDriverWait(driver, 600).until(EC.alert_is_present())
         alert = driver.switch_to.alert
         alert_text = alert.text
@@ -119,7 +111,6 @@ def wait_for_user_capture(driver):
         else:
             logging.info("Confirm scenario detected. Waiting for user confirmation (manual accept).")
 
-        # Fetch DNI after user interaction with the alert
         dni = fetch_dni()
 
         if not dni:
@@ -127,8 +118,7 @@ def wait_for_user_capture(driver):
         else:
             logging.info(f"Fetched DNI: {dni}")
 
-        # Wait for alert to disappear
-        logging.info("Waiting for alert to be dismissed (up to 5 minutes)...")
+        logging.info("Waiting for alert to be dismissed...")
         WebDriverWait(driver, 300).until_not(EC.alert_is_present())
         logging.info("Alert dismissed by the user.")
 
@@ -143,7 +133,7 @@ def fill_terragene_in_movizen(driver):
     driver.get("https://generalfoodargentina.movizen.com/pwa")
 
     logging.info("Waiting for ion-input-0 element on Movizen page.")
-    WebDriverWait(driver, TIMEOUT).until(
+    WebDriverWait(driver, 20).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, "input[id^='ion-input-']"))
     )
 
@@ -157,77 +147,62 @@ def fill_terragene_in_movizen(driver):
 
 def navigate_and_fill_dni(driver, dni):
     logging.info("Navigating to /pwa/inicio page.")
-    time.sleep(1)  # Small sleep, can be replaced or adjusted as needed
+    time.sleep(1)
     driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
 
     logging.info("Waiting for ion-input-0 on /pwa/inicio page.")
-    WebDriverWait(driver, TIMEOUT).until(
+    WebDriverWait(driver, 20).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, "input[id^='ion-input-']"))
     )
 
-    ion_input = driver.find_element(By.CSS_SELECTOR, "input[id^='ion-input-']")
+    ion_inputs = driver.find_element(By.CSS_SELECTOR, "input[id^='ion-input-']")
+
     logging.info(f"Filling DNI '{dni}' into ion-input-0.")
-    ion_input.clear()
-    ion_input.send_keys(dni)
-    ion_input.send_keys(Keys.ENTER)
+    ion_inputs.clear()
+    ion_inputs.send_keys(dni)
+    ion_inputs.send_keys(Keys.ENTER)
     logging.info("DNI submitted successfully.")
-
-    # Wait for the URL to change after submission, applying timeouts
+    logging.info(f"Current URL: {driver.current_url}")
     current_url = driver.current_url
-    logging.info(f"Current URL before submit: {current_url}")
-    WebDriverWait(driver, TIMEOUT).until(EC.url_changes(current_url))
-
+    WebDriverWait(driver, 300).until(EC.url_changes(current_url))
+    logging.info(f"Current URL: {driver.current_url}")
     current_url = driver.current_url
-    logging.info(f"Current URL after first change: {current_url}")
-    WebDriverWait(driver, TIMEOUT).until(EC.url_changes(current_url))
-    time.sleep(5)  # Adjust or remove if not needed
-    logging.info(f"Final Current URL: {driver.current_url}")
-    time.sleep(8)
-    logging.info("DNI navigation steps completed successfully.")
+    WebDriverWait(driver, 300).until(EC.url_changes(current_url))
+    logging.info(f"Current URL: {driver.current_url}")
+    time.sleep(5)
+    logging.info("todo correcto hasta aca")
 
 
 def main_loop():
-    logging.info("Starting main_loop...")
-
-    driver = setup_driver()
-    logging.info("WebDriver initialized successfully.")
-
-    logging.info("Performing initial login to terragene...")
-    login_to_terragene(driver)
-    logging.info("Login completed successfully.")
-
-    logging.info("Waiting for user capture step...")
-    dni = wait_for_user_capture(driver)
-    if not dni:
-        logging.error("No DNI retrieved. Cannot proceed.")
-        return
-    logging.info("User capture step completed.")
-
-    logging.info("Filling terragene input on Movizen site...")
-    fill_terragene_in_movizen(driver)
-    logging.info("Terragene input filled successfully.")
-
-    logging.info("Navigating to /pwa/inicio and filling DNI...")
-    navigate_and_fill_dni(driver, dni)
-    logging.info("DNI filled successfully.")
-
-    # Loop for subsequent captures
     while True:
-        logging.info("Navigating back to terragene camera page...")
-        driver.get("https://terragene.life/terrarrhh/camara")
-        logging.info("Navigation to camera page completed.")
+        logging.info("Starting main_loop...")
 
-        logging.info("Waiting for user capture step again...")
-        new_dni = wait_for_user_capture(driver)
-        if not new_dni:
-            logging.error("No DNI retrieved in loop. Will wait and retry.")
-            time.sleep(RETRY_INTERVAL)
-            continue
-        logging.info("User capture step completed again.")
+        driver = setup_driver()
+        logging.info("WebDriver initialized successfully.")
 
-        logging.info("Navigating to /pwa/inicio and filling new DNI...")
-        navigate_and_fill_dni(driver, new_dni)
-        logging.info("DNI filled successfully again.")
+        logging.info("Performing initial login to terragene...")
+        login_to_terragene(driver)
+        logging.info("Login completed successfully.")
+
+        logging.info("Waiting for user capture step...")
+        dni = wait_for_user_capture(driver)
+        if not dni:
+            logging.error("No DNI retrieved. Cannot proceed.")
+            driver.quit()
+            return
+        logging.info("User capture step completed.")
+
+        logging.info("Filling terragene input on Movizen site...")
+        fill_terragene_in_movizen(driver)
+        logging.info("Terragene input filled successfully.")
+
+        logging.info("Navigating to /pwa/inicio and filling DNI...")
+        navigate_and_fill_dni(driver, dni)
+        logging.info("DNI filled successfully.")
+
+        # Close the driver session at the end
+        driver.quit()
+        logging.info("Process completed successfully.")
 
 if __name__ == "__main__":
     try:
