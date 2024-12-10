@@ -88,7 +88,7 @@ def facerec(db, socketio):
 def submit_dni(dni_lock):
     global dni_log
     new_dni = get_global_dni()
-
+    logging.info(f"new_dni: {new_dni} desde submit_dni")
     try:
         with dni_lock:
             logging.info(f"new_dni: {new_dni}, dni_log: {dni_log}, comprobacion: {dni_log==new_dni}")
