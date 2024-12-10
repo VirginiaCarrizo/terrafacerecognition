@@ -86,6 +86,7 @@ def facerec(db, socketio):
 
 # FUNCION QUE ENVIA EL DNI AL SCRIPT LOCAL   
 def submit_dni(dni_lock):
+    global dni_log
     new_dni = get_global_dni()
 
     try:
