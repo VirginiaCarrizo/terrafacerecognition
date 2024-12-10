@@ -78,7 +78,7 @@ captureButton.addEventListener('click', function() {
         body: JSON.stringify({ image: imageData }),
         headers: { 'Content-Type': 'application/json' }
     })
-    .then(response => response.json())
+    // .then(response => response.json())
     .then(data => {
         if (data.status === 'no_match') {
             const dni = prompt("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
