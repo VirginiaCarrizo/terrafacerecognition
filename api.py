@@ -205,7 +205,7 @@ def main_loop():
     dni = wait_for_user_capture(driver)
     if not dni:
         logging.error("No DNI retrieved. Cannot proceed.")
-        return
+        # return
     logging.info("User capture step completed.")
 
     logging.info("Filling terragene input on Movizen site...")
