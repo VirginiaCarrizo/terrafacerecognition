@@ -81,7 +81,8 @@ socket.once('confirm_dni', function(confirmData) {
     } else {
         // Si el usuario cancela, pide que ingrese el DNI manualmente y abre la web
         const dni = prompt("Por favor, ingrese el DNI manualmente.");
-        socket.emit('update_db', dni);
+        if (dni){
+            socket.emit('update_db', dni);}
     }
 });
 
@@ -111,6 +112,11 @@ captureButton.addEventListener('click', function() {
     });
 });
 
+socket.on('update_db_result', function(data) {
+    if (data.status === 'not_found') {
+        alert("DNI no encontrado en la base de datos.");
+    }
+});
 
 // Espera el evento de la impresion
 socket.on('wait_print', function(data) {
