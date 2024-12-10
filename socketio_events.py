@@ -24,10 +24,6 @@ def configure_socketio_events(socketio, db):
             nro_orden = ref.child('order_general_food').get()
             ref.child('order_general_food').set(nro_orden + 1)
 
-            emit('wait_print', {'status': 'success', 'cuil': cuil})
-        else:
-            emit('wait_print', {'status': 'denied', 'cuil': cuil})
-
     @socketio.on('update_db')
     def update_db(dni):
         update_global_dni(dni)
@@ -36,7 +32,7 @@ def configure_socketio_events(socketio, db):
 
         employees_ref = db.reference(f'Employees/')
         employees = employees_ref.get()
-
+        prueba = 0
         if not employees:
             return None
 
@@ -54,9 +50,11 @@ def configure_socketio_events(socketio, db):
                     ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
                     nro_orden = ref.child('order_general_food').get()
                     ref.child('order_general_food').set(nro_orden + 1)
-                    return
-                # Si no se encuentra ninguna coincidencia
-        logging.info('NO SE ENCONTRO COINCIDENCIA EN LA BASE DE DATOS')
+                    prueba=1
+                    break
+        if prueba == 0:
+            # Si no se encuentra ninguna coincidencia
+            logging.info('NO SE ENCONTRO COINCIDENCIA EN LA BASE DE DATOS')
 
 
 

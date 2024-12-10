@@ -36,7 +36,6 @@ def get_global_dni():
     
 # FUNCION DEL RECONOCIMIENTO FACIAL
 def facerec(db, socketio):
-    global dni
     try:
         data = request.json['image']
         image_data = data.split(',')[1]
