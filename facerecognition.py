@@ -30,12 +30,12 @@ def get_global_dni():
     """
     Obtiene el valor de la variable global `global_dni` de forma segura.
     """
-    global global_dni
     with global_dni_lock:  # Asegura acceso seguro para leer la variable
         return global_dni
     
 # FUNCION DEL RECONOCIMIENTO FACIAL
 def facerec(db, socketio):
+    global dni
     try:
         data = request.json['image']
         image_data = data.split(',')[1]
@@ -88,7 +88,7 @@ def facerec(db, socketio):
 def submit_dni(dni_lock):
     global dni_log
     new_dni = get_global_dni()
-    logging.info(f"new_dni: {new_dni} desde submit_dni")
+
     try:
         with dni_lock:
             logging.info(f"new_dni: {new_dni}, dni_log: {dni_log}, comprobacion: {dni_log==new_dni}")

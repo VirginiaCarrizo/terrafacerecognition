@@ -62,7 +62,7 @@ def configure_routes(app, socketio, db, bucket):
     def submit_image():
             cuil_str, employeeInfoCompletaBD = facerec(db, socketio)
             new_dni = get_global_dni()
-            logging.info(f"new_dni: {new_dni}, employeeInfoCompletaBD: {employeeInfoCompletaBD}")
+            
             if new_dni!=0 and cuil_str and employeeInfoCompletaBD:
                 socketio.emit('confirm_dni', {'new_dni': new_dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
                 return jsonify({"status": "confirmation_pending"})
@@ -74,7 +74,7 @@ def configure_routes(app, socketio, db, bucket):
     @routes.route('/get_dni', methods=['GET'])
     def get_dni():
         dni = submit_dni(dni_lock)
-        logging.info(f'dni desde get_dni: {dni}')
+
         if dni != 0:
             return jsonify({"status": "success", "dni": dni}), 200
         else:

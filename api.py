@@ -13,9 +13,9 @@ logging.basicConfig(level=logging.INFO)
 
 # Global timeouts
 TIMEOUT = 30  # Default timeout for Selenium waits
-RETRY_INTERVAL = 2  # Interval to sleep between retries for DNI fetching
-EC2_REQUEST_TIMEOUT = 2  # Timeout for EC2 requests
-FETCH_DNI_MAX_RETRIES = 2
+RETRY_INTERVAL = 5  # Interval to sleep between retries for DNI fetching
+EC2_REQUEST_TIMEOUT = 10  # Timeout for EC2 requests
+FETCH_DNI_MAX_RETRIES = 5
 
 EC2_SERVER_URL = "http://54.81.210.167/get_dni"
 
@@ -205,7 +205,7 @@ def main_loop():
     dni = wait_for_user_capture(driver)
     if not dni:
         logging.error("No DNI retrieved. Cannot proceed.")
-        # return
+        return
     logging.info("User capture step completed.")
 
     logging.info("Filling terragene input on Movizen site...")

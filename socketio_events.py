@@ -17,35 +17,16 @@ def configure_socketio_events(socketio, db):
     @socketio.on('confirm_dni_response')
     def confirm_dni_response(data):
         confirmed = data['confirmed']
+        cuil = data['cuil']
         if confirmed:
-            cuil = data['cuil']
             ref = db.reference(f'Employees/{cuil}')
             ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             nro_orden = ref.child('order_general_food').get()
             ref.child('order_general_food').set(nro_orden + 1)
+
+            emit('wait_print', {'status': 'success', 'cuil': cuil})
         else:
-            dni = data['dni']
-            employees_ref = db.reference(f'Employees/')
-            employees = employees_ref.get()
-
-            if not employees:
-                return None
-
-            for cuil, datos in employees.items():
-                # Asegurarse de que el CUIL tenga al menos 11 caracteres
-                if len(cuil) >= 11:
-                    # Extraer los dígitos desde el tercer hasta el anteúltimo
-                    segmento_cuil = cuil[2:-1]
-                    
-                    # Comparar con el DNI proporcionado
-                    if segmento_cuil == str(dni):
-
-                        logging.info(f'cuil: {cuil}, datos: {datos}')
-                        ref = db.reference(f'Employees/{cuil}')
-                        ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-                        nro_orden = ref.child('order_general_food').get()
-                        ref.child('order_general_food').set(nro_orden + 1)
-                        break
+            emit('wait_print', {'status': 'denied', 'cuil': cuil})
 
     @socketio.on('update_db')
     def update_db(dni):
