@@ -30,6 +30,7 @@ def get_global_dni():
     """
     Obtiene el valor de la variable global `global_dni` de forma segura.
     """
+    global global_dni
     with global_dni_lock:  # Asegura acceso seguro para leer la variable
         return global_dni
     

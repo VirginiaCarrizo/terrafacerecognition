@@ -13,9 +13,9 @@ logging.basicConfig(level=logging.INFO)
 
 # Global timeouts
 TIMEOUT = 30  # Default timeout for Selenium waits
-RETRY_INTERVAL = 5  # Interval to sleep between retries for DNI fetching
-EC2_REQUEST_TIMEOUT = 10  # Timeout for EC2 requests
-FETCH_DNI_MAX_RETRIES = 5
+RETRY_INTERVAL = 2  # Interval to sleep between retries for DNI fetching
+EC2_REQUEST_TIMEOUT = 2  # Timeout for EC2 requests
+FETCH_DNI_MAX_RETRIES = 2
 
 EC2_SERVER_URL = "http://54.81.210.167/get_dni"
 
@@ -166,24 +166,29 @@ def navigate_and_fill_dni(driver, dni):
     )
 
     ion_input = driver.find_element(By.CSS_SELECTOR, "input[id^='ion-input-']")
-    logging.info(f"Filling DNI '{dni}' into ion-input-0.")
+    logging.info(f"Filling DNI '{int(dni)}' into ion-input-0.")
     ion_input.clear()
-    ion_input.send_keys(dni)
+    ion_input.send_keys(int(dni))
     ion_input.send_keys(Keys.ENTER)
     logging.info("DNI submitted successfully.")
 
     # Wait for the URL to change after submission, applying timeouts
     current_url = driver.current_url
     logging.info(f"Current URL before submit: {current_url}")
-    WebDriverWait(driver, TIMEOUT).until(EC.url_changes(current_url))
+    if current_url == "https://generalfoodargentina.movizen.com/pwa/pedido-web-print":
+        WebDriverWait(driver, TIMEOUT).until(EC.url_changes(current_url))
+        time.sleep(5)
+    else:    
+        
+        WebDriverWait(driver, TIMEOUT).until(EC.url_changes(current_url))
 
-    current_url = driver.current_url
-    logging.info(f"Current URL after first change: {current_url}")
-    WebDriverWait(driver, TIMEOUT).until(EC.url_changes(current_url))
-    time.sleep(5)  # Adjust or remove if not needed
-    logging.info(f"Final Current URL: {driver.current_url}")
-    time.sleep(8)
-    logging.info("DNI navigation steps completed successfully.")
+        current_url = driver.current_url
+        logging.info(f"Current URL after first change: {current_url}")
+        WebDriverWait(driver, TIMEOUT).until(EC.url_changes(current_url))
+        time.sleep(5)  # Adjust or remove if not needed
+        logging.info(f"Final Current URL: {driver.current_url}")
+        time.sleep(3)
+        logging.info("DNI navigation steps completed successfully.")
 
 
 def main_loop():
