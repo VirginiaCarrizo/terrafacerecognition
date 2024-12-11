@@ -16,6 +16,8 @@ def configure_socketio_events(socketio, db):
 
     @socketio.on('confirm_dni_response')
     def confirm_dni_response(data):
+        update_global_dni(str(cuil[2:-1]))
+        logging.info(f'cuil {cuil}')
         confirmed = data['confirmed']
         cuil = data['cuil']
         if confirmed:

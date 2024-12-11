@@ -78,8 +78,7 @@ def facerec(db, socketio):
                     cuil = employeeInfoCompletaBD['cuil']
                     cuil_str = str(cuil)
                     dni = cuil_str[2:-1]
-                    update_global_dni(dni)
-                    logging.info(f'cuil {cuil}')
+                    
 
                     return cuil_str, employeeInfoCompletaBD
         
