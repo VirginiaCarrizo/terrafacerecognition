@@ -62,19 +62,24 @@ def facerec(db, socketio):
 
                 #si encuentra una coincidencia, procede con la actualización en la base de datos
                 if matches[matchIndex]:
+                    logging.info(f'macheo')
                     nombre_completo = employeesApellidoNombre[matchIndex]
+                    logging.info(f'nombre_completo {nombre_completo}')
 
                     employeesDatosCompletosBD = db.reference(f'Employees').get()
                     employeeInfoCompletaBD = None
                     for cuil, infoCompletaBD in employeesDatosCompletosBD.items():
                         if infoCompletaBD['nombre_apellido'] == nombre_completo:
                             employeeInfoCompletaBD = infoCompletaBD
+                            logging.info(f'employeeInfoCompletaBD {employeeInfoCompletaBD}')
+                            
                             break
 
                     cuil = employeeInfoCompletaBD['cuil']
                     cuil_str = str(cuil)
                     dni = cuil_str[2:-1]
                     update_global_dni(dni)
+                    logging.info(f'cuil {cuil}')
 
                     return cuil_str, employeeInfoCompletaBD
         
