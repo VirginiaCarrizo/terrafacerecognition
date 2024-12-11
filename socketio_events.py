@@ -18,8 +18,9 @@ def configure_socketio_events(socketio, db):
     def confirm_dni_response(data):
         confirmed = data['confirmed']
         cuil = data['cuil']
-        update_global_dni(str(cuil[2:-1]))
-        logging.info(f'cuil {cuil}')
+        update_global_dni(str(cuil)[2:-1])
+        dni = get_global_dni()
+        logging.info(f'dni desde confirm dni response {dni}')
         if confirmed:
             ref = db.reference(f'Employees/{cuil}')
             ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
