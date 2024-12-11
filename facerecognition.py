@@ -82,7 +82,7 @@ def facerec(db, socketio):
 
                     return cuil_str, dni, employeeInfoCompletaBD
         
-        return cuil_str, employeeInfoCompletaBD
+        return cuil_str, dni, employeeInfoCompletaBD
             
     except Exception as e:
         logging.info(f"No se encontró un rostro: {e}")
