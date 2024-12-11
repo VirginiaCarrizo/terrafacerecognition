@@ -80,7 +80,7 @@ def facerec(db, socketio):
                     dni = cuil_str[2:-1]
                     
 
-                    return cuil_str, employeeInfoCompletaBD
+                    return cuil_str, dni, employeeInfoCompletaBD
         
         return cuil_str, employeeInfoCompletaBD
             
