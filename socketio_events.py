@@ -62,6 +62,7 @@ def configure_socketio_events(socketio, db):
                 # Si no se encuentra ninguna coincidencia
         logging.info('NO SE ENCONTRO COINCIDENCIA EN LA BASE DE DATOS')
         update_global_dni(0)
+        return
 
 
 
