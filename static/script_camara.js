@@ -98,6 +98,8 @@ captureButton.addEventListener('click', function() {
     })
     .then(response => response.json())
     .then(data => {
+        console.log('data.status')
+        console.log(data.status)
         if (data.status === 'no_match') {
             const dni = prompt("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
             socket.emit('update_db', dni);
