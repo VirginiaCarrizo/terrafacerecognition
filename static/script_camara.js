@@ -69,6 +69,7 @@ function openAndHandlePrint(url) {
 
 // El servidor indica que el DNI está pendiente de confirmación.
 socket.once('confirm_dni', function(confirmData) {
+    console.log('llegue al confirm dni')
     const dni = confirmData.dni;
     const cuil = confirmData.employeeInfoCompletaBD['cuil'];
     const nombre_completo = confirmData.employeeInfoCompletaBD['nombre_apellido'];
@@ -98,7 +99,7 @@ captureButton.addEventListener('click', function() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log('data.status')
+        console.log('llegue al fetch')
         console.log(data.status)
         if (data.status === 'no_match') {
             const dni = prompt("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
