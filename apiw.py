@@ -7,6 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -140,7 +141,7 @@ def wait_for_user_capture(driver):
 
 def fill_terragene_in_movizen(driver):
     logging.info("Navigating to Movizen PWA to fill 'terragene'.")
-    driver.get("https://generalfoodargentina.movizen.com/pwa")
+    driver.get("https://generalfoodargentina.movizen.com/pwa/")
 
     logging.info("Waiting for ion-input-0 element on Movizen page.")
     WebDriverWait(driver, TIMEOUT).until(
@@ -152,12 +153,16 @@ def fill_terragene_in_movizen(driver):
     ion_input.clear()
     ion_input.send_keys("terragene")
     ion_input.send_keys(Keys.ENTER)
+    current_url = driver.current_url
+    WebDriverWait(driver, TIMEOUT).until(EC.url_changes(current_url))
     logging.info("'terragene' submitted successfully.")
+
+
+    time.sleep(1)
 
 
 def navigate_and_fill_dni(driver, dni):
     logging.info("Navigating to /pwa/inicio page.")
-    time.sleep(1)  # Small sleep, can be replaced or adjusted as needed
     driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
 
     logging.info("Waiting for ion-input-0 on /pwa/inicio page.")
@@ -166,27 +171,42 @@ def navigate_and_fill_dni(driver, dni):
     )
 
     ion_input = driver.find_element(By.CSS_SELECTOR, "input[id^='ion-input-']")
+
+
     logging.info(f"Filling DNI '{dni}' into ion-input-0.")
     ion_input.clear()
-    ion_input.send_keys(dni)
+    ion_input.send_keys(int(dni))
     ion_input.send_keys(Keys.ENTER)
     logging.info("DNI submitted successfully.")
-
+ 
     # Wait for the URL to change after submission, applying timeouts
+    
     current_url = driver.current_url
     logging.info(f"Current URL before submit: {current_url}")
+    # time.sleep(1000)
     WebDriverWait(driver, TIMEOUT).until(EC.url_changes(current_url))
 
     current_url = driver.current_url
-    logging.info(f"Current URL after first change: {current_url}")
-    WebDriverWait(driver, TIMEOUT).until(EC.url_changes(current_url))
-    time.sleep(5)  # Adjust or remove if not needed
-    logging.info(f"Final Current URL: {driver.current_url}")
-    time.sleep(8)
-    logging.info("DNI navigation steps completed successfully.")
+  
+    while True:
+
+        current_url = driver.current_url
+        if current_url == 'https://generalfoodargentina.movizen.com/pwa/pedido-pc':
+            logging.info(f"ESTOY EN PEDIDO-PC")
+            continue
+        else:
+            time.sleep(1)
+            break
+
+
+        # AGREGAR MENSAJES DE ESPERA
+        # AGREGAR EL CLICK EN IMPRIMIR
+        # TRATAR DE ROMPERLO
+     
 
 
 def main_loop():
+
     logging.info("Starting main_loop...")
 
     driver = setup_driver()
@@ -224,7 +244,7 @@ def main_loop():
             time.sleep(RETRY_INTERVAL)
             continue
         logging.info("User capture step completed again.")
-
+ 
         logging.info("Navigating to /pwa/inicio and filling new DNI...")
         navigate_and_fill_dni(driver, new_dni)
         logging.info("DNI filled successfully again.")

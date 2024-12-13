@@ -3,9 +3,38 @@ import logging
 import cv2
 import numpy as np
 import base64
+from datetime import datetime
 
 # Configuración básica del logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
+
+def actualizar_bd(db, cuil):
+    estado = ''
+    # Obtener la fecha actual
+    current_date = datetime.now().strftime("%Y-%m-%d")
+    # Obtener el último tiempo de asistencia de la base de datos
+    last_attendance_time = ref.child('last_attendance_time').get()
+
+    if last_attendance_time:
+        # Convertir el último tiempo de asistencia a una fecha
+        last_date = datetime.strptime(last_attendance_time, "%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d")
+
+        # Comparar fechas
+        if last_date == current_date:
+            estado = 'pedido'
+            logging.info("Ya se registró la asistencia para hoy.")
+        else:
+            # Registrar la nueva asistencia
+            ref = db.reference(f'Employees/{cuil}')
+            ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            nro_orden = ref.child('order_general_food').get()
+            ref.child('order_general_food').set(nro_orden + 1)
+            logging.info("Asistencia registrada.")
+            estado = 'registrado'
+    else:
+        estado = 'nomach'
+
+    return estado
 
 def agregar_empleado(data, db, bucket, foto=None):
     """Agrega un registro de empleado en Firebase."""
@@ -74,15 +103,6 @@ def modificar_empleado(cuil, data, db, bucket):
     try:
         ref = db.reference(f'Employees/{cuil}')
         ref.update(data)
-    #     ref.update({
-    #     'legajo': data['legajo'],
-    #     'nombre_apellido': data['nombre_apellido'],
-    #     'cuil': cuil,
-    #     'empresa': data['empresa'],
-    #     'fecha_nacimiento': data['fecha_nacimiento'],
-    #     'rol': data['rol'],
-    #     'sector': data['sector']
-    # })
     except Exception as e:
         logging.error(f"Error al modificar empleado: {e}")
         raise

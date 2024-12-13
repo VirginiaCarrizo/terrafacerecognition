@@ -4,6 +4,7 @@ from datetime import datetime
 from globals import global_dni
 from routes import dni_lock
 from facerecognition import submit_dni, get_global_dni, update_global_dni
+from bbdd import actualizar_bd
 
 # Configuración básica del logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
@@ -21,16 +22,17 @@ def configure_socketio_events(socketio, db):
         update_global_dni(str(cuil)[2:-1])
         dni = get_global_dni()
         logging.info(f'dni desde confirm dni response {dni}')
-        logging.info('HOOOOOOOOLAAAAAAAAAAAAAAAAAAAA')
+        actualizacion=''
         if confirmed:
-            ref = db.reference(f'Employees/{cuil}')
-            ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-            nro_orden = ref.child('order_general_food').get()
-            ref.child('order_general_food').set(nro_orden + 1)
-
-            emit('wait_print', {'status': 'success', 'cuil': cuil})
+            actualizacion = actualizar_bd(db, cuil)
+            if actualizacion == 'pedido':
+                emit('actualizacion_bd', {'status': 'denied', 'actualizacion': actualizacion})
+            elif actualizacion == 'registrado':
+                emit('actualizacion_bd', {'status': 'success', 'actualizacion': actualizacion})
+            elif actualizacion == 'nomach':
+                emit('actualizacion_bd', {'status': 'denied', 'actualizacion': actualizacion})
         else:
-            emit('wait_print', {'status': 'denied', 'cuil': cuil})
+            emit('actualizacion_bd', {'status': 'denied', 'actualizacion': actualizacion})
 
     @socketio.on('update_db')
     def update_db(dni):
@@ -40,7 +42,7 @@ def configure_socketio_events(socketio, db):
 
         employees_ref = db.reference(f'Employees/')
         employees = employees_ref.get()
-
+        actualizacion=''
         if not employees:
             return None
 
@@ -54,14 +56,18 @@ def configure_socketio_events(socketio, db):
                 if segmento_cuil == str(dni):
 
                     logging.info(f'cuil: {cuil}, datos: {datos}')
-                    ref = db.reference(f'Employees/{cuil}')
-                    ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-                    nro_orden = ref.child('order_general_food').get()
-                    ref.child('order_general_food').set(nro_orden + 1)
+                    actualizacion=actualizar_bd(db, cuil)
+                    if actualizacion == 'pedido':
+                        emit('actualizacion_bd', {'status': 'denied', 'actualizacion': actualizacion})
+                    elif actualizacion == 'registrado':
+                        emit('actualizacion_bd', {'status': 'success', 'actualizacion': actualizacion})
+                    elif actualizacion == 'nomach':
+                        emit('actualizacion_bd', {'status': 'denied', 'actualizacion': actualizacion})  
                     return
                 # Si no se encuentra ninguna coincidencia
         logging.info('NO SE ENCONTRO COINCIDENCIA EN LA BASE DE DATOS')
         update_global_dni(0)
+        emit('actualizacion_bd', {'status': 'denied', 'actualizacion': actualizacion})
         return
 
 

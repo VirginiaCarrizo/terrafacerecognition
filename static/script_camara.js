@@ -115,26 +115,36 @@ captureButton.addEventListener('click', function() {
 
 
 // Espera el evento de la impresion
-socket.on('wait_print', function(data) {
-    if (data.status === 'success') {
-        try {
-            newWindow.addEventListener("beforeprint", function () {
-                console.log("Se inició la impresión en la nueva ventana.");
-            });
+socket.on('actualizacion_bd', function(data) {
+    if (data.actualizacion === 'pedido') {
+        alert('Ya pidió menú el día de hoy')
+    } else if (data.actualizacion === 'registrado'){
+        // Mostrar el indicador de carga
+        const loadingElement = document.createElement('div');
+        loadingElement.id = 'loading';
+        loadingElement.style.position = 'fixed';
+        loadingElement.style.top = '0';
+        loadingElement.style.left = '0';
+        loadingElement.style.width = '100%';
+        loadingElement.style.height = '100%';
+        loadingElement.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+        loadingElement.style.display = 'flex';
+        loadingElement.style.alignItems = 'center';
+        loadingElement.style.justifyContent = 'center';
+        loadingElement.style.fontSize = '20px';
+        loadingElement.style.zIndex = '9999';
+        loadingElement.textContent = 'Cargando...';
+        
+        document.body.appendChild(loadingElement);
 
-            // Manejar evento después de imprimir
-            newWindow.addEventListener("afterprint", function () {
-                console.log("Se terminó la impresión. Cerrando la ventana.");
-                newWindow.close();
-            });
-
-            // Fallback para navegadores sin soporte de eventos de impresión
-            newWindow.onbeforeunload = function () {
-                console.log("La ventana ha sido cerrada.");
-            };
-        } catch (e) {
-            console.error("Error verificando el estado de la nueva ventana:", e);
-        }
+        // Simula una acción o espera antes de quitar el indicador de carga
+        setTimeout(() => {
+            document.body.removeChild(loadingElement);
+        }, 3000); // Simula 3 segundos de carga
+    } else if (data.actualizacion === 'nomach'){
+        alert('No se encuentra en la base de datos. Contáctese con el administrador')
+    } else if (data.actualizacion === ''){
+        alert('DNI no confirmado. Cierre y vuelva a iniciar el programa')
     }
 });
 
