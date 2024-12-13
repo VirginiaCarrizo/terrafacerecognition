@@ -81,8 +81,12 @@ socket.once('confirm_dni', function(confirmData) {
         socket.emit('confirm_dni_response', { cuil: cuil, confirmed: true });
     } else {
         dni = prompt("Por favor, ingrese el DNI manualmente.");
+        console.log('dni script camara:')
+        console.log(dni)
         if (dni !== null){
             socket.emit('update_db', dni);
+        } else {
+            socket.emit('update_dni_global', 0)
         }
     }
 });
@@ -106,6 +110,8 @@ captureButton.addEventListener('click', function() {
             const dni = prompt("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
             if (dni !== null){
                 socket.emit('update_db', dni);
+            } else {
+                socket.emit('update_dni_global', 0)
             }
 
         } 

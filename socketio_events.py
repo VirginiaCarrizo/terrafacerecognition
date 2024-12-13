@@ -15,6 +15,10 @@ def configure_socketio_events(socketio, db):
     def handle_connect():
         logging.info("Cliente conectado")
 
+    @socketio.on('update_dni_global')
+    def update_dni_global(dni):
+        update_global_dni(dni)
+
     @socketio.on('confirm_dni_response')
     def confirm_dni_response(data):
         confirmed = data['confirmed']

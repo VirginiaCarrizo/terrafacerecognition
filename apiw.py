@@ -217,10 +217,13 @@ def main_loop():
     logging.info("Login completed successfully.")
 
     logging.info("Waiting for user capture step...")
-    dni = wait_for_user_capture(driver)
-    if not dni:
-        logging.error("No DNI retrieved. Cannot proceed.")
-        return
+    while True:
+        dni = wait_for_user_capture(driver)
+        print(dni)
+        if dni == None:
+            continue
+        else:
+            break
     logging.info("User capture step completed.")
 
     logging.info("Filling terragene input on Movizen site...")
