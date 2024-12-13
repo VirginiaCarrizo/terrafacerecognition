@@ -36,10 +36,6 @@ def configure_socketio_events(socketio, db):
 
     @socketio.on('update_db')
     def update_db(dni):
-        update_global_dni(dni)
-        new_dni = get_global_dni()
-        logging.info(f'new_dni desde update_db: {new_dni}')
-
         employees_ref = db.reference(f'Employees/')
         employees = employees_ref.get()
         actualizacion=''
@@ -58,10 +54,13 @@ def configure_socketio_events(socketio, db):
                     logging.info(f'cuil: {cuil}, datos: {datos}')
                     actualizacion=actualizar_bd(db, cuil)
                     if actualizacion == 'pedido':
+                        update_global_dni(0)
                         emit('actualizacion_bd', {'status': 'denied', 'actualizacion': actualizacion})
                     elif actualizacion == 'registrado':
+                        update_global_dni(dni)
                         emit('actualizacion_bd', {'status': 'success', 'actualizacion': actualizacion})
                     elif actualizacion == 'nomach':
+                        update_global_dni(0)
                         emit('actualizacion_bd', {'status': 'denied', 'actualizacion': actualizacion})  
                     return
                 # Si no se encuentra ninguna coincidencia
