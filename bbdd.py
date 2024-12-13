@@ -10,6 +10,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(me
 
 def actualizar_bd(db, cuil):
     estado = ''
+    ref = db.reference(f'Employees/{cuil}')
     # Obtener la fecha actual
     current_date = datetime.now().strftime("%Y-%m-%d")
     # Obtener el último tiempo de asistencia de la base de datos
@@ -25,7 +26,6 @@ def actualizar_bd(db, cuil):
             logging.info("Ya se registró la asistencia para hoy.")
         else:
             # Registrar la nueva asistencia
-            ref = db.reference(f'Employees/{cuil}')
             ref.child('last_attendance_time').set(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             nro_orden = ref.child('order_general_food').get()
             ref.child('order_general_food').set(nro_orden + 1)
