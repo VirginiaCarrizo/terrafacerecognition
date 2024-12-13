@@ -73,12 +73,7 @@ def configure_routes(app, socketio, db, bucket):
     @routes.route('/get_dni', methods=['GET'])
     def get_dni():
         dni = submit_dni(dni_lock)
-
-        if dni != 0:
-            return jsonify({"status": "success", "dni": dni}), 200
-        else:
-            return jsonify({"status": "error", "message": "Error processing request"}), 500
-        
+        return jsonify({"status": "success", "dni": dni}), 200
         
 
     # ENDOPOINTS PARA INTERACTUAR CON LA BASE DE DATOS FIREBASE

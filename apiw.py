@@ -37,16 +37,16 @@ def fetch_dni(max_retries=FETCH_DNI_MAX_RETRIES, retry_interval=RETRY_INTERVAL):
 
                 if status == 'success':
                     dni = data.get('dni')
-                    if dni:
+                    if dni != 0:
                         logging.info(f"Received DNI: {dni}")
                         return dni
                     else:
                         logging.warning("DNI not found in response.")
                         return None
-                else:
-                    logging.info("Status not successful, retrying...")
-            else:
-                logging.warning(f"Server returned status code {response.status_code}, retrying...")
+                # else:
+                #     logging.info("Status not successful, retrying...")
+            # else:
+            #     logging.warning(f"Server returned status code {response.status_code}, retrying...")
         except requests.exceptions.RequestException as e:
             logging.error(f"Request failed: {e}")
 
