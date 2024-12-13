@@ -68,7 +68,7 @@ function openAndHandlePrint(url) {
 }
 
 // El servidor indica que el DNI está pendiente de confirmación.
-socket.once('confirm_dni', function(confirmData) {
+socket.emit('confirm_dni', function(confirmData) {
     console.log('llegue al confirm dni')
     const dni = confirmData.dni;
     const cuil = confirmData.employeeInfoCompletaBD['cuil'];
