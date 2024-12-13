@@ -80,8 +80,10 @@ socket.once('confirm_dni', function(confirmData) {
         // Si el usuario confirma, envía la respuesta positiva al servidor para actualizar la base de datos
         socket.emit('confirm_dni_response', { cuil: cuil, confirmed: true });
     } else {
-        // Si el usuario cancela, pide que ingrese el DNI manualmente y abre la web
-        const dni = prompt("Por favor, ingrese el DNI manualmente.");
+        do {
+            // Si el usuario cancela, pide que ingrese el DNI manualmente y abre la web
+            const dni = prompt("Por favor, ingrese el DNI manualmente.");
+        } while (dni === null || dni.trim() === "");
         socket.emit('update_db', dni);
     }
 });
