@@ -7,6 +7,7 @@ from facerecognition import facerec, submit_dni, get_global_dni, update_global_d
 import logging
 from threading import Lock
 from globals import global_dni
+import time
 
 # Configuración básica para el logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
@@ -49,13 +50,6 @@ def configure_routes(app, socketio, db, bucket):
     @role_required('admin', 'generalfood')
     def camara():
         return render_template('camara.html')
-    
-    @routes.route('/terrarrhh/submit_cuil', methods=['POST'])
-    def submit_cuil():
-        global cuil_value
-        cuil_value = request.json.get('cuil')
-        socketio.emit('cuil_received', {'cuil': cuil_value})
-        return jsonify({'status': 'success'})
 
     # ENDPOINT PARA EL RECONOCIMIENTO FACIAL
     @routes.route('/terrarrhh/submit_image', methods=['POST'])
@@ -72,6 +66,7 @@ def configure_routes(app, socketio, db, bucket):
     # ENDPOINT PARA EL SCRIPT LOCAL
     @routes.route('/get_dni', methods=['GET'])
     def get_dni():
+        time.sleep(5)
         dni = submit_dni(dni_lock)
         return jsonify({"status": "success", "dni": dni}), 200
         
