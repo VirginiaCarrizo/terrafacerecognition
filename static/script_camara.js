@@ -63,7 +63,27 @@ socket.once('confirm_dni', function(confirmData) {
 captureButton.addEventListener('click', function() {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     const imageData = canvas.toDataURL('image/png');
+    const loadingElement = document.createElement('div');
+    loadingElement.id = 'loading';
+    loadingElement.style.position = 'fixed';
+    loadingElement.style.top = '0';
+    loadingElement.style.left = '0';
+    loadingElement.style.width = '100%';
+    loadingElement.style.height = '100%';
+    loadingElement.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+    loadingElement.style.display = 'flex';
+    loadingElement.style.alignItems = 'center';
+    loadingElement.style.justifyContent = 'center';
+    loadingElement.style.fontSize = '20px';
+    loadingElement.style.zIndex = '9999';
+    loadingElement.textContent = 'Cargando...';
+    
+    document.body.appendChild(loadingElement);
 
+    // Simula una acción o espera antes de quitar el indicador de carga
+    setTimeout(() => {
+        document.body.removeChild(loadingElement);
+    }, 3000); // Simula 3 segundos de carga
     // Enviar la imagen al servidor para realizar el reconocimiento facial
     fetch('/terrarrhh/submit_image', {
         method: 'POST',
