@@ -143,6 +143,6 @@ socket.on('alertas', function(data) {
     } else if (data.actualizacion === 'nomach'){
         alert('No se encuentra en la base de datos. Contáctese con el administrador')
     } else if (data.actualizacion === ''){
-        alert('DNI no confirmado. Cierre y vuelva a iniciar el programa')
+        alert('DNI no confirmado. Intente nuevamente')
     }
 });
