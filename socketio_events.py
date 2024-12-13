@@ -19,7 +19,6 @@ def configure_socketio_events(socketio, db):
     def confirm_dni_response(data):
         confirmed = data['confirmed']
         cuil = data['cuil']
-        logging.info(f'dni desde confirm dni response {dni}')
         actualizacion=''
         if confirmed:
             actualizacion = actualizar_bd(db, cuil)
