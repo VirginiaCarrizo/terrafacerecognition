@@ -80,12 +80,10 @@ socket.once('confirm_dni', function(confirmData) {
         // Si el usuario confirma, envía la respuesta positiva al servidor para actualizar la base de datos
         socket.emit('confirm_dni_response', { cuil: cuil, confirmed: true });
     } else {
-        let dni;
-        do {
-            // Si el usuario cancela, pide que ingrese el DNI manualmente y abre la web
-            const dni = prompt("Por favor, ingrese el DNI manualmente.");
-        } while (dni === null || dni.trim() === "");
-        socket.emit('update_db', dni);
+        dni = prompt("Por favor, ingrese el DNI manualmente.");
+        if (dni !== null){
+            socket.emit('update_db', dni);
+        }
     }
 });
 
@@ -106,11 +104,11 @@ captureButton.addEventListener('click', function() {
         console.log(data.status)
         if (data.status === 'no_match') {
             const dni = prompt("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
-            socket.emit('update_db', dni);
+            if (dni !== null){
+                socket.emit('update_db', dni);
+            }
 
-        } else if (data.status === 'confirmation_pending') {
-            console.log("Esperando confirmación...");
-        }
+        } 
     })
     .catch(error => {
         console.error("Error en el reconocimiento facial:", error);
