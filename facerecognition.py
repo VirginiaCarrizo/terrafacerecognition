@@ -35,7 +35,9 @@ def get_global_dni():
     
 # FUNCION DEL RECONOCIMIENTO FACIAL
 def facerec(db, socketio):
-    global dni
+    dni = None  
+    cuil_str = None 
+    employeeInfoCompletaBD = None
     try:
         data = request.json['image']
         image_data = data.split(',')[1]
@@ -46,10 +48,6 @@ def facerec(db, socketio):
 
         faceCurFrame = face_recognition.face_locations(imgS)
         encodeCurFrame = face_recognition.face_encodings(imgS, faceCurFrame)
-
-        dni = None  
-        cuil_str = None 
-        employeeInfoCompletaBD = None
 
         #verifica si encuentra cara
         if faceCurFrame:
@@ -86,7 +84,7 @@ def facerec(db, socketio):
             
     except Exception as e:
         logging.info(f"No se encontró un rostro: {e}")
-        return jsonify({"status": "error", "message": "Ocurrió un error en el servidor"}), 500
+        return cuil_str, dni, employeeInfoCompletaBD
 
 # FUNCION QUE ENVIA EL DNI AL SCRIPT LOCAL   
 def submit_dni(dni_lock):
