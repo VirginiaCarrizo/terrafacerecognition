@@ -19,19 +19,22 @@ def configure_socketio_events(socketio, db):
     def confirm_dni_response(data):
         confirmed = data['confirmed']
         cuil = data['cuil']
-        update_global_dni(str(cuil)[2:-1])
-        dni = get_global_dni()
         logging.info(f'dni desde confirm dni response {dni}')
         actualizacion=''
         if confirmed:
             actualizacion = actualizar_bd(db, cuil)
             if actualizacion == 'pedido':
+                update_global_dni(0)
                 emit('actualizacion_bd', {'status': 'denied', 'actualizacion': actualizacion})
             elif actualizacion == 'registrado':
+                update_global_dni(str(cuil)[2:-1])
+                dni = get_global_dni()
                 emit('actualizacion_bd', {'status': 'success', 'actualizacion': actualizacion})
             elif actualizacion == 'nomach':
+                update_global_dni(0)
                 emit('actualizacion_bd', {'status': 'denied', 'actualizacion': actualizacion})
         else:
+            update_global_dni(0)
             emit('actualizacion_bd', {'status': 'denied', 'actualizacion': actualizacion})
 
     @socketio.on('update_db')
