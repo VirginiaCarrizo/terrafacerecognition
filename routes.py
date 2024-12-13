@@ -55,13 +55,13 @@ def configure_routes(app, socketio, db, bucket):
     @routes.route('/terrarrhh/submit_image', methods=['POST'])
     def submit_image():
             cuil_str, dni, employeeInfoCompletaBD = facerec(db, socketio)
-            logging.info(f'cuil_str {cuil_str} dni {dni} employeeInfoCompletaBD {employeeInfoCompletaBD}')
             if dni and cuil_str and employeeInfoCompletaBD:
-                socketio.emit('confirm_dni', {'dni': dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
-
+                logging.info(f'cuil_str {cuil_str} dni {dni} employeeInfoCompletaBD {employeeInfoCompletaBD}')
+                # socketio.emit('confirm_dni', {'dni': dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
+                return jsonify({"status": "success", 'dni': dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
             else:
                 logging.info("No se encontró coincidencia, se solicita ingreso manual del DNI.")
-                return jsonify({"status": "no_match"})
+                return jsonify({"status": "no_match", 'dni': dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
 
     # ENDPOINT PARA EL SCRIPT LOCAL
     @routes.route('/get_dni', methods=['GET'])

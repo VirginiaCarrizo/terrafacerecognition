@@ -196,6 +196,11 @@ def navigate_and_fill_dni(driver, dni):
             continue
         else:
             time.sleep(1)
+            print('HOLAAA')
+            # Simula presionar la tecla "Enter"
+            actions = ActionChains(driver)
+            actions.send_keys(Keys.RETURN).perform()
+
             break
 
 
@@ -219,7 +224,6 @@ def main_loop():
     logging.info("Waiting for user capture step...")
     while True:
         dni = wait_for_user_capture(driver)
-        print(dni)
         if dni == None:
             continue
         else:
