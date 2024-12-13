@@ -9,6 +9,29 @@ socket.on('connect', function() {
     socket.emit('mi_evento', {data: 'Hola servidor'});
 });
 
+function spinner(){
+    const loadingElement = document.createElement('div');
+    loadingElement.id = 'loading';
+    loadingElement.style.position = 'fixed';
+    loadingElement.style.top = '0';
+    loadingElement.style.left = '0';
+    loadingElement.style.width = '100%';
+    loadingElement.style.height = '100%';
+    loadingElement.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+    loadingElement.style.display = 'flex';
+    loadingElement.style.alignItems = 'center';
+    loadingElement.style.justifyContent = 'center';
+    loadingElement.style.fontSize = '20px';
+    loadingElement.style.zIndex = '9999';
+    loadingElement.textContent = 'Cargando...';
+    
+    document.body.appendChild(loadingElement);
+
+    // Simula una acción o espera antes de quitar el indicador de carga
+    setTimeout(() => {
+        document.body.removeChild(loadingElement);
+    }, 3000); // Simula 3 segundos de carga
+}
 // Función para activar una cámara específica
 function activateCamera(deviceId) {
     const constraints = {
@@ -63,27 +86,7 @@ socket.once('confirm_dni', function(confirmData) {
 captureButton.addEventListener('click', function() {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     const imageData = canvas.toDataURL('image/png');
-    const loadingElement = document.createElement('div');
-    loadingElement.id = 'loading';
-    loadingElement.style.position = 'fixed';
-    loadingElement.style.top = '0';
-    loadingElement.style.left = '0';
-    loadingElement.style.width = '100%';
-    loadingElement.style.height = '100%';
-    loadingElement.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
-    loadingElement.style.display = 'flex';
-    loadingElement.style.alignItems = 'center';
-    loadingElement.style.justifyContent = 'center';
-    loadingElement.style.fontSize = '20px';
-    loadingElement.style.zIndex = '9999';
-    loadingElement.textContent = 'Cargando...';
-    
-    document.body.appendChild(loadingElement);
-
-    // Simula una acción o espera antes de quitar el indicador de carga
-    setTimeout(() => {
-        document.body.removeChild(loadingElement);
-    }, 3000); // Simula 3 segundos de carga
+    spinner()
     // Enviar la imagen al servidor para realizar el reconocimiento facial
     fetch('/terrarrhh/submit_image', {
         method: 'POST',
@@ -110,33 +113,12 @@ captureButton.addEventListener('click', function() {
 });
 
 
-// Espera el evento de la impresion
-socket.on('actualizacion_bd', function(data) {
+
+socket.on('alertas', function(data) {
     if (data.actualizacion === 'pedido') {
         alert('Ya pidió menú el día de hoy')
     } else if (data.actualizacion === 'registrado'){
-        // Mostrar el indicador de carga
-        const loadingElement = document.createElement('div');
-        loadingElement.id = 'loading';
-        loadingElement.style.position = 'fixed';
-        loadingElement.style.top = '0';
-        loadingElement.style.left = '0';
-        loadingElement.style.width = '100%';
-        loadingElement.style.height = '100%';
-        loadingElement.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
-        loadingElement.style.display = 'flex';
-        loadingElement.style.alignItems = 'center';
-        loadingElement.style.justifyContent = 'center';
-        loadingElement.style.fontSize = '20px';
-        loadingElement.style.zIndex = '9999';
-        loadingElement.textContent = 'Cargando...';
-        
-        document.body.appendChild(loadingElement);
-
-        // Simula una acción o espera antes de quitar el indicador de carga
-        setTimeout(() => {
-            document.body.removeChild(loadingElement);
-        }, 3000); // Simula 3 segundos de carga
+        spinner()
     } else if (data.actualizacion === 'nomach'){
         alert('No se encuentra en la base de datos. Contáctese con el administrador')
     } else if (data.actualizacion === ''){
