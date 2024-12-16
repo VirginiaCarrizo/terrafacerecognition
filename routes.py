@@ -57,7 +57,6 @@ def configure_routes(app, socketio, db, bucket):
             cuil_str, dni, employeeInfoCompletaBD = facerec(db, socketio)
             if dni and cuil_str and employeeInfoCompletaBD:
                 logging.info(f'cuil_str {cuil_str} dni {dni} employeeInfoCompletaBD {employeeInfoCompletaBD}')
-                # socketio.emit('confirm_dni', {'dni': dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
                 return jsonify({"status": "success", 'dni': dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
             else:
                 logging.info("No se encontró coincidencia, se solicita ingreso manual del DNI.")

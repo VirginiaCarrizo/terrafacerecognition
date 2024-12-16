@@ -58,30 +58,6 @@ navigator.mediaDevices.enumerateDevices()
         console.error("Error al enumerar dispositivos:", error);
     });
 
-// El servidor indica que el DNI está pendiente de confirmación.
-// socket.once('confirm_dni', function(confirmData) {
-//     console.log('llegue al confirm dni')
-//     let dni = confirmData.dni;
-//     const cuil = confirmData.employeeInfoCompletaBD['cuil'];
-//     const nombre_completo = confirmData.employeeInfoCompletaBD['nombre_apellido'];
-    
-//     const confirmed = window.confirm(`DNI detectado: ${dni} para ${nombre_completo}\n¿Es correcto?`);
-
-//     if (confirmed) {
-//         // Si el usuario confirma, envía la respuesta positiva al servidor para actualizar la base de datos
-//         socket.emit('confirm_dni_response', { cuil: cuil, confirmed: true });
-//     } else {
-//         dni = prompt("Por favor, ingrese el DNI manualmente.");
-//         console.log('dni script camara:')
-//         console.log(dni)
-//         if (dni !== null){
-//             socket.emit('update_db', dni);
-//         } else {
-//             socket.emit('update_dni_global', 0)
-//         }
-//     }
-// });
-
 // Capturar la imagen
 captureButton.addEventListener('click', function() {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -138,11 +114,14 @@ captureButton.addEventListener('click', function() {
 socket.on('alertas', function(data) {
     if (data.actualizacion === 'pedido') {
         alert('Ya pidió menú el día de hoy')
+        location.reload();
     } else if (data.actualizacion === 'registrado'){
         spinner()
     } else if (data.actualizacion === 'nomach'){
         alert('No se encuentra en la base de datos. Contáctese con el administrador')
+        location.reload();
     } else if (data.actualizacion === ''){
         alert('DNI no confirmado. Intente nuevamente')
+        location.reload();
     }
 });
