@@ -5,6 +5,7 @@ import pickle
 import firebase_admin
 from firebase_admin import credentials, storage
 from dotenv import load_dotenv
+import os
 
 # Cargar las variables de entorno desde el archivo .env
 load_dotenv()
@@ -31,44 +32,48 @@ firebase_admin.initialize_app(cred, {
     'storageBucket': f"{firebase_config['project_id']}.appspot.com"
 })
 
-# Ruta de la imagen específica
-imagePath = r'C:\Users\virginia.carrizo\Desktop\face_recognition\generalfood-docker\fotos_empleados\acomodadas\CORBA ORNELA.png'
+path = r'C:\Users\virginia.carrizo\Desktop\face_recognition\proyecto_en_git_completo\fotos_empleados\nuevas_ornela\subir/'
+files = os.listdir(path)
 
-# Archivo de encodings existente
-encodeFilePath = "EncodeFile.p"
-try:
-    with open(encodeFilePath, 'rb') as file:
-        encodeListKnownWithIds = pickle.load(file)
-    encodeListKnown, studentIds = encodeListKnownWithIds
-    print("Archivo de encodings cargado.")
-except FileNotFoundError:
-    encodeListKnown = []
-    studentIds = []
-    print("No se encontró un archivo de encodings existente. Se creará uno nuevo.")
+for file in files:
+    # Ruta de la imagen específica
+    imagePath = path+file
 
-# Procesar la imagen específica
-img = cv2.imread(imagePath)
-img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    # Archivo de encodings existente
+    encodeFilePath = "EncodeFile.p"
+    try:
+        with open(encodeFilePath, 'rb') as file:
+            encodeListKnownWithIds = pickle.load(file)
+        encodeListKnown, studentIds = encodeListKnownWithIds
+        print("Archivo de encodings cargado.")
+    except FileNotFoundError:
+        encodeListKnown = []
+        studentIds = []
+        print("No se encontró un archivo de encodings existente. Se creará uno nuevo.")
 
-try:
-    encode = face_recognition.face_encodings(img_rgb)[0]
-    studentId = os.path.splitext(os.path.basename(imagePath))[0]
+    # Procesar la imagen específica
+    img = cv2.imread(imagePath)
+    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-    # Agregar nuevo encoding e ID al archivo existente
-    encodeListKnown.append(encode)
-    studentIds.append(studentId)
+    try:
+        encode = face_recognition.face_encodings(img_rgb)[0]
+        studentId = os.path.splitext(os.path.basename(imagePath))[0]
 
-    # Subir la imagen a Firebase Storage
-    bucket = storage.bucket()
-    blob = bucket.blob(f'Images/{os.path.basename(imagePath)}')
-    blob.upload_from_filename(imagePath)
+        # Agregar nuevo encoding e ID al archivo existente
+        encodeListKnown.append(encode)
+        studentIds.append(studentId)
 
-    print(f"Procesado y subido: {os.path.basename(imagePath)}")
+        # Subir la imagen a Firebase Storage
+        bucket = storage.bucket()
+        blob = bucket.blob(f'Images/{os.path.basename(imagePath)}')
+        blob.upload_from_filename(imagePath)
 
-    # Guardar el archivo actualizado
-    with open(encodeFilePath, 'wb') as file:
-        pickle.dump([encodeListKnown, studentIds], file)
+        print(f"Procesado y subido: {os.path.basename(imagePath)}")
 
-    print("Archivo de encodings actualizado y guardado.")
-except IndexError:
-    print(f"No se detectó una cara en la imagen: {os.path.basename(imagePath)}")
+        # Guardar el archivo actualizado
+        with open(encodeFilePath, 'wb') as file:
+            pickle.dump([encodeListKnown, studentIds], file)
+
+        print("Archivo de encodings actualizado y guardado.")
+    except IndexError:
+        print(f"No se detectó una cara en la imagen: {os.path.basename(imagePath)}")

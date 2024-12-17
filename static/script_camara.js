@@ -114,14 +114,14 @@ captureButton.addEventListener('click', function() {
 socket.on('alertas', function(data) {
     if (data.actualizacion === 'pedido') {
         alert('Ya pidió menú el día de hoy')
-        location.reload();
+        // location.reload();
     } else if (data.actualizacion === 'registrado'){
         spinner()
     } else if (data.actualizacion === 'nomach'){
         alert('No se encuentra en la base de datos. Contáctese con el administrador')
-        location.reload();
+        // location.reload();
     } else if (data.actualizacion === ''){
         alert('DNI no confirmado. Intente nuevamente')
-        location.reload();
+        // location.reload();
     }
 });
