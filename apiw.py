@@ -1,6 +1,7 @@
 import time
 import logging
 import requests
+import keyboard
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -19,6 +20,15 @@ EC2_REQUEST_TIMEOUT = 10  # Timeout for EC2 requests
 FETCH_DNI_MAX_RETRIES = 20
 
 EC2_SERVER_URL = "http://54.81.210.167/get_dni"
+
+decision_espacio = None
+
+def on_space_press(event):
+    global decision_espacio
+    if event.name == "space":
+        
+        decision_espacio = "Volver"  # SI EL USUARIO APRIETA LA BARRA ESPACIADORA POR SI SE ARREPIENTO DE PEDIR
+        keyboard.unhook_all()
 
 
 def fetch_dni(max_retries=FETCH_DNI_MAX_RETRIES, retry_interval=RETRY_INTERVAL):
@@ -113,7 +123,7 @@ def wait_for_user_capture(driver):
     try:
         # logging.info("Waiting for JS alert to appear (up to 10 minutes)...")
         # Long timeout for user interaction, e.g., 600 seconds
-        WebDriverWait(driver, 600).until(EC.alert_is_present())
+        WebDriverWait(driver, timeout=None).until(EC.alert_is_present())
         alert = driver.switch_to.alert
         alert_text = alert.text
         # logging.info(f"JS alert detected: {alert_text}")
@@ -124,6 +134,7 @@ def wait_for_user_capture(driver):
             logging.info("Confirm scenario detected. Waiting for user confirmation (manual accept).")
 
         # Fetch DNI after user interaction with the alert
+
         dni = fetch_dni()
         
         print(dni)
@@ -154,7 +165,7 @@ def fill_terragene_in_movizen(driver):
 
     ion_input = driver.find_element(By.CSS_SELECTOR, "input[id^='ion-input-']")
     # logging.info("Clearing and filling 'terragene' into ion-input-0.")
-    ion_input.clear()
+    # ion_input.clear()
     ion_input.send_keys("terragene")
     ion_input.send_keys(Keys.ENTER)
     current_url = driver.current_url
@@ -167,8 +178,9 @@ def fill_terragene_in_movizen(driver):
 
 def navigate_and_fill_dni(driver, dni):
     # logging.info("Navigating to /pwa/inicio page.")
-    driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
+    # driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
 
+    driver.refresh()
     # logging.info("Waiting for ion-input-0 on /pwa/inicio page.")
     WebDriverWait(driver, TIMEOUT).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, "input[id^='ion-input-']"))
@@ -177,36 +189,105 @@ def navigate_and_fill_dni(driver, dni):
     ion_input = driver.find_element(By.CSS_SELECTOR, "input[id^='ion-input-']")
 
 
+    
     # logging.info(f"Filling DNI '{dni}' into ion-input-0.")
     ion_input.clear()
     ion_input.send_keys(int(dni))
     ion_input.send_keys(Keys.ENTER)
+    
     # logging.info("DNI submitted successfully.")
  
     # Wait for the URL to change after submission, applying timeouts
     
-    current_url = driver.current_url
+    
+    # time.sleep(5)
+    # WebDriverWait(driver, 5).until(EC.url_changes(current_url))
+    # current_url = driver.current_url
     # logging.info(f"Current URL before submit: {current_url}")
-    # time.sleep(1000)
-    WebDriverWait(driver, TIMEOUT).until(EC.url_changes(current_url))
 
-    current_url = driver.current_url
-  
+    # if current_url == 'https://generalfoodargentina.movizen.com/pwa/inicio':
+    #     return
+
+    # WebDriverWait(driver, TIMEOUT).until(EC.url_changes('https://generalfoodargentina.movizen.com/pwa/pedido-web-print'))
+    # current_url = driver.current_url
+    
+    # devtools = driver.execute_cdp_cmd
+    # devtools("Network.enable", {})
+    last_url = driver.current_url
+    inicio = time.time()
+    keyboard.on_press(on_space_press)
+    global decision_espacio
     while True:
-
-        current_url = driver.current_url
-        if current_url == 'https://generalfoodargentina.movizen.com/pwa/pedido-pc':
-            # logging.info(f"ESTOY EN PEDIDO-PC")
+        
+        # time.sleep(4)             
+        # print(str(current_url) == 'https://generalfoodargentina.movizen.com/pwa/pedido-pc')
+        # print(current_url)
+        current_url = str(driver.current_url)
+        if last_url == 'https://generalfoodargentina.movizen.com/pwa/inicio':
+            last_url = driver.current_url
+            print(time.time() - inicio)
+            if time.time() - inicio > 2:
+                break 
             continue
-        else:
-            time.sleep(1)
-            print('HOLAAA')
-            # Simula presionar la tecla "Enter"
-            actions = ActionChains(driver)
-            actions.send_keys(Keys.RETURN).perform()
 
+
+        elif current_url == 'https://generalfoodargentina.movizen.com/pwa/pedido-pc':
+            
+            
+            if decision_espacio == 'Volver':
+                decision_espacio = None
+                break
+            
+            continue
+        
+
+        elif last_url == 'https://generalfoodargentina.movizen.com/pwa/pedido-web-print':
             break
 
+        elif current_url == 'https://generalfoodargentina.movizen.com/pwa/pedido-web-print':
+           
+            driver.get("https://generalfoodargentina.movizen.com/pwa/pedido-web-print")
+            last_url = "https://generalfoodargentina.movizen.com/pwa/pedido-web-print"
+            time.sleep(3)
+            keyboard.press_and_release('enter')
+            
+
+
+
+
+
+
+
+
+
+
+
+        
+
+        # elif current_url == "https://generalfoodargentina.movizen.com/pwa/inicio":
+        #     driver.get("https://generalfoodargentina.movizen.com/pwa/pedido-web-print")
+        #     last_url = None
+        #     # time.sleep(4)
+        #     continue
+            
+
+        
+
+
+        
+
+        
+
+
+        # else:
+        #     time.sleep(1)
+        #     print('HOLAAA')
+        #     # print((driver.current_url))
+        #     # Simula presionar la tecla "Enter"
+        #     actions = ActionChains(driver)
+        #     actions.send_keys(Keys.RETURN).perform()
+
+        #     break
 
         # AGREGAR MENSAJES DE ESPERA
         # AGREGAR EL CLICK EN IMPRIMIR
