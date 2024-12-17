@@ -26,15 +26,16 @@ def configure_socketio_events(socketio, db):
         actualizacion=''
         if confirmed:
             actualizacion = actualizar_bd(db, cuil)
+            
             logging.info(f'actualizacion: {actualizacion}')
-            if actualizacion == 'pedido':
-                update_global_dni(0)
-                emit('alertas', {'status': 'denied', 'actualizacion': actualizacion})
-            elif actualizacion == 'registrado':
+            # if actualizacion == 'pedido':
+            #     update_global_dni(0)
+            #     emit('alertas', {'status': 'denied', 'actualizacion': actualizacion}) 
+            if actualizacion == 'registrado' or actualizacion == 'pedido':
                 update_global_dni(str(cuil)[2:-1])
                 dni = get_global_dni()
                 logging.info(f'dni: {dni}')
-                emit('alertas', {'status': 'success', 'actualizacion': actualizacion})
+                emit('alertas', {'status': 'success', 'actualizacion': 'registrado'})
             elif actualizacion == 'nomach':
                 update_global_dni(0)
                 emit('alertas', {'status': 'denied', 'actualizacion': actualizacion})
