@@ -33,18 +33,19 @@ def fetch_dni(max_retries=FETCH_DNI_MAX_RETRIES, retry_interval=RETRY_INTERVAL):
             if response.status_code == 200:
                 data = response.json()
                 status = data.get('status')
-                # logging.info(f"Server response status: {status}")
+                logging.info(f"Server response status: {status}")
 
                 if status == 'success':
                     dni = data.get('dni')
+                    print(dni)
                     if dni != 0:
                         # logging.info(f"Received DNI: {dni}")
                         return dni
                     else:
                         logging.warning("DNI not found in response.")
                         return None
-                # else:
-                #     # logging.info("Status not successful, retrying...")
+                else:
+                    logging.info("Status not successful, retrying...")
             # else:
             #     logging.warning(f"Server returned status code {response.status_code}, retrying...")
         except requests.exceptions.RequestException as e:
@@ -124,7 +125,8 @@ def wait_for_user_capture(driver):
 
         # Fetch DNI after user interaction with the alert
         dni = fetch_dni()
-
+        
+        print(dni)
         if not dni:
             logging.warning("DNI could not be fetched or was empty.")
         else:
