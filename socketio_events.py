@@ -43,7 +43,7 @@ def configure_socketio_events(socketio, db):
     @socketio.on('update_db')
     def update_db(dni):
         actualizacion = actualizar_bd_dni(db, dni)
-        if actualizacion != '':
+        if actualizacion == 'registrado' or actualizacion == 'pedido':
             # if actualizacion == 'pedido':
             #     update_global_dni(0)
             #     emit('alertas', {'status': 'denied', 'actualizacion': actualizacion})
