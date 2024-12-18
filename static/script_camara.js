@@ -73,15 +73,7 @@ captureButton.addEventListener('click', function() {
     .then(data => {
         console.log('llegue al fetch')
         console.log(data.status)
-        if (data.status === 'no_match') {
-            const dni = prompt("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
-            if (dni !== null){
-                socket.emit('update_db', dni);
-            } else {
-                socket.emit('update_dni_global', 0)
-            }
-
-        } else if (data.status === 'success') {
+        if (data.status === 'success') {
             let dni = data.dni;
             const cuil = data.employeeInfoCompletaBD['cuil'];
             const nombre_completo = data.employeeInfoCompletaBD['nombre_apellido'];
@@ -98,6 +90,14 @@ captureButton.addEventListener('click', function() {
                     socket.emit('confirm_dni_response', { dni: 0, confirmed: False })
                 }
             }
+        } else if (data.status === 'no_match') {
+            const dni = prompt("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
+            if (dni !== null){
+                socket.emit('confirm_dni_response', { dni: dni, confirmed: True });
+            } else {
+                socket.emit('confirm_dni_response', { dni: 0, confirmed: False })
+            }
+
         }
     })
     .catch(error => {
