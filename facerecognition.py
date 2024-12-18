@@ -94,7 +94,7 @@ def submit_dni(dni_lock):
     try:
         with dni_lock:
             logging.info(f"new_dni: {new_dni}, dni_log: {dni_log}, comprobacion: {dni_log==new_dni}")
-            if new_dni==0 or dni_log==new_dni:
+            if new_dni==0: #or dni_log==new_dni: SE DESACTIVA SI EL USUARIO QUE INGRESO ES EL MISMO
             # if new_dni==0 :
                 return 0
             # Retrieve the first DNI in the list

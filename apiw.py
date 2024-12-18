@@ -1,6 +1,7 @@
 import time
 import logging
 import requests
+import keyboard
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -20,6 +21,15 @@ FETCH_DNI_MAX_RETRIES = 20
 
 EC2_SERVER_URL = "http://54.81.210.167/get_dni"
 
+decision_espacio = None
+
+def on_space_press(event):
+    global decision_espacio
+    if event.name == "space":
+        
+        decision_espacio = "Volver"  # SI EL USUARIO APRIETA LA BARRA ESPACIADORA POR SI SE ARREPIENTO DE PEDIR
+        keyboard.unhook_all()
+
 
 def fetch_dni(max_retries=FETCH_DNI_MAX_RETRIES, retry_interval=RETRY_INTERVAL):
     """
@@ -35,18 +45,19 @@ def fetch_dni(max_retries=FETCH_DNI_MAX_RETRIES, retry_interval=RETRY_INTERVAL):
             if response.status_code == 200:
                 data = response.json()
                 status = data.get('status')
-                # logging.info(f"Server response status: {status}")
+                logging.info(f"Server response status: {status}")
 
                 if status == 'success':
                     dni = data.get('dni')
+                    print(dni)
                     if dni != 0:
                         # logging.info(f"Received DNI: {dni}")
                         return dni
                     else:
                         logging.warning("DNI not found in response.")
                         return None
-                # else:
-                #     # logging.info("Status not successful, retrying...")
+                else:
+                    logging.info("Status not successful, retrying...")
             # else:
             #     logging.warning(f"Server returned status code {response.status_code}, retrying...")
         except requests.exceptions.RequestException as e:
@@ -74,6 +85,11 @@ def setup_driver():
     chrome_options.add_argument("--ignore-certificate-errors")  
     chrome_options.add_argument("--disable-web-security")
     chrome_options.add_argument("--disable-logging")
+    chrome_options.add_argument('--kiosk-printing')
+    chrome_options.add_experimental_option('prefs', {
+    'printing.print_preview_sticky_settings.appState': '{"recentDestinations":[{"id":"Save as PDF","origin":"local","account":""}],"selectedDestinationId":"Save as PDF","version":2}',
+    'savefile.default_directory': r'C:\Users\juan.sanchez\Desktop\pedidos/'  # Ruta para guardar PDFs automáticamente
+    })
 
     try:
         driver = webdriver.Chrome(options=chrome_options)
@@ -114,9 +130,7 @@ def wait_for_user_capture(driver):
     try:
         # logging.info("Waiting for JS alert to appear (up to 10 minutes)...")
         # Long timeout for user interaction, e.g., 600 seconds
-        
-        WebDriverWait(driver, 5).until(EC.alert_is_present())
-        
+        WebDriverWait(driver, timeout=9999999).until(EC.alert_is_present())
         alert = driver.switch_to.alert
         alert_text = alert.text
         # logging.info(f"JS alert detected: {alert_text}")
@@ -127,8 +141,10 @@ def wait_for_user_capture(driver):
             logging.info("Confirm scenario detected. Waiting for user confirmation (manual accept).")
         
         # Fetch DNI after user interaction with the alert
+        # time.sleep(5)
         dni = fetch_dni()
         
+        print(dni)
         if not dni:
             logging.warning("DNI could not be fetched or was empty.")
         else:
@@ -155,8 +171,7 @@ def fill_terragene_in_movizen(driver):
     )
 
     ion_input = driver.find_element(By.CSS_SELECTOR, "input[id^='ion-input-']")
-    # logging.info("Clearing and filling 'terragene' into ion-input-0.")
-    ion_input.clear()
+    time.sleep(1)
     ion_input.send_keys("terragene")
     ion_input.send_keys(Keys.ENTER)
     current_url = driver.current_url
@@ -171,6 +186,7 @@ def navigate_and_fill_dni(driver, dni):
     # logging.info("Navigating to /pwa/inicio page.")
     driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
 
+    # driver.refresh()
     # logging.info("Waiting for ion-input-0 on /pwa/inicio page.")
     WebDriverWait(driver, TIMEOUT).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, "input[id^='ion-input-']"))
@@ -179,41 +195,60 @@ def navigate_and_fill_dni(driver, dni):
     ion_input = driver.find_element(By.CSS_SELECTOR, "input[id^='ion-input-']")
 
 
-    # logging.info(f"Filling DNI '{dni}' into ion-input-0.")
+ 
     ion_input.clear()
     ion_input.send_keys(int(dni))
     ion_input.send_keys(Keys.ENTER)
-    # logging.info("DNI submitted successfully.")
- 
-    # Wait for the URL to change after submission, applying timeouts
-    
-    current_url = driver.current_url
-    # logging.info(f"Current URL before submit: {current_url}")
-    # time.sleep(1000)
-    WebDriverWait(driver, TIMEOUT).until(EC.url_changes(current_url))
 
-    current_url = driver.current_url
-  
+
+
+    inicio = time.time()
+    segunda_fase = True
     while True:
+        current_url = str(driver.current_url)
 
-        current_url = driver.current_url
-        if current_url == 'https://generalfoodargentina.movizen.com/pwa/pedido-pc':
-            # logging.info(f"ESTOY EN PEDIDO-PC")
-            continue
-        else:
+
+        if current_url == 'https://generalfoodargentina.movizen.com/pwa/inicio':
+            if time.time() - inicio > 2:
+                break 
+
+        elif current_url == 'https://generalfoodargentina.movizen.com/pwa/pedido-pc':
+           
+            script = """
+            window.onbeforeprint = function() {
+                // Bloqueo silencioso
+            };
+
+            window.print = function() {
+                // Bloqueo silencioso
+            };
+            """
+            driver.execute_script(script)
+            # Abrir una nueva pestaña
+            # driver.close() 
+            WebDriverWait(driver, 99999).until(EC.url_changes('https://generalfoodargentina.movizen.com/pwa/pedido-pc'))
+            driver.execute_script("window.open('about:blank', '_blank');")
             time.sleep(1)
-            print('HOLAAA')
-            # Simula presionar la tecla "Enter"
-            actions = ActionChains(driver)
-            actions.send_keys(Keys.RETURN).perform()
+            driver.close()
+                        # Script para habilitar la impresión
+            # Cambiar al contexto de la nueva pestaña
+            driver.switch_to.window(driver.window_handles[-1])
 
+            # Navegar a la URL deseada en la nueva pestaña
+            new_url = "https://generalfoodargentina.movizen.com/pwa/pedido-web-print"
+            driver.get(new_url)
+         
+            #ACA SE TIENEN QUE GUARDAR LOS DATOS DEL PEDIDO
+
+
+            
+            time.sleep(4)
+       
             break
 
 
-        # AGREGAR MENSAJES DE ESPERA
-        # AGREGAR EL CLICK EN IMPRIMIR
-        # TRATAR DE ROMPERLO
-     
+
+        
 
 
 def main_loop():

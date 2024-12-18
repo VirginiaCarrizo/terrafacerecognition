@@ -65,7 +65,7 @@ def configure_routes(app, socketio, db, bucket):
     # ENDPOINT PARA EL SCRIPT LOCAL
     @routes.route('/get_dni', methods=['GET'])
     def get_dni():
-        time.sleep(5)
+        time.sleep(8)
         dni = submit_dni(dni_lock)
         return jsonify({"status": "success", "dni": dni}), 200
         
