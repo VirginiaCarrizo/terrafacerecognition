@@ -81,21 +81,21 @@ captureButton.addEventListener('click', function() {
             const confirmed = window.confirm(`DNI detectado: ${dni} para ${nombre_completo}\n¿Es correcto?`);
 
             if (confirmed) {
-                socket.emit('confirm_dni_response', { cuil: cuil, confirmed: true });
+                socket.emit('confirm_dni_response', { cuil: cuil, dni: None, confirmed: true });
             } else {
                 dni = prompt("Por favor, ingrese el DNI manualmente.");
                 if (dni !== null){
-                    socket.emit('confirm_dni_response', { dni: dni, confirmed: true });
+                    socket.emit('confirm_dni_response', { cuil: None, dni: dni, confirmed: true });
                 } else {
-                    socket.emit('confirm_dni_response', { dni: 0, confirmed: false })
+                    socket.emit('confirm_dni_response', { cuil: None, dni: 0, confirmed: false })
                 }
             }
         } else if (data.status === 'no_match') {
             const dni = prompt("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
             if (dni !== null){
-                socket.emit('confirm_dni_response', { dni: dni, confirmed: true });
+                socket.emit('confirm_dni_response', { cuil: None, dni: dni, confirmed: true });
             } else {
-                socket.emit('confirm_dni_response', { dni: 0, confirmed: false })
+                socket.emit('confirm_dni_response', { cuil: None, dni: 0, confirmed: false })
             }
 
         }
