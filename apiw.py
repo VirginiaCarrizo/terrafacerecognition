@@ -29,7 +29,9 @@ def fetch_dni(max_retries=FETCH_DNI_MAX_RETRIES, retry_interval=RETRY_INTERVAL):
     while retries < max_retries:
         try:
             # logging.info("Attempting to fetch DNI from server...")
+
             response = requests.get(EC2_SERVER_URL, timeout=EC2_REQUEST_TIMEOUT)
+
             if response.status_code == 200:
                 data = response.json()
                 status = data.get('status')
@@ -112,7 +114,9 @@ def wait_for_user_capture(driver):
     try:
         # logging.info("Waiting for JS alert to appear (up to 10 minutes)...")
         # Long timeout for user interaction, e.g., 600 seconds
-        WebDriverWait(driver, 600).until(EC.alert_is_present())
+        
+        WebDriverWait(driver, 5).until(EC.alert_is_present())
+        
         alert = driver.switch_to.alert
         alert_text = alert.text
         # logging.info(f"JS alert detected: {alert_text}")
@@ -121,10 +125,10 @@ def wait_for_user_capture(driver):
             logging.info("Prompt scenario detected. Waiting for user to input DNI and manually accept the prompt.")
         else:
             logging.info("Confirm scenario detected. Waiting for user confirmation (manual accept).")
-
+        
         # Fetch DNI after user interaction with the alert
         dni = fetch_dni()
-
+        
         if not dni:
             logging.warning("DNI could not be fetched or was empty.")
         else:
@@ -132,7 +136,7 @@ def wait_for_user_capture(driver):
 
         # Wait for alert to disappear
         # logging.info("Waiting for alert to be dismissed (up to 5 minutes)...")
-        WebDriverWait(driver, 300).until_not(EC.alert_is_present())
+        WebDriverWait(driver, 10).until_not(EC.alert_is_present())
         # logging.info("Alert dismissed by the user.")
 
         return dni
