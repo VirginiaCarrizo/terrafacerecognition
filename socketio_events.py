@@ -19,7 +19,12 @@ def configure_socketio_events(socketio, db, bucket):
     @socketio.on('confirm_dni_response')
     def confirm_dni_response(data):
         confirmed = data['confirmed']
-        cuil = data['cuil']
+        
+        if data['cuil']:
+            cuil = data['cuil']
+        elif data['dni']:
+            cuil = data['dni']
+
         if confirmed:
             macht = buscar_empleados(cuil, db, bucket)
             if macht:
