@@ -50,7 +50,7 @@ def actualizar_bd_dni(db, dni):
             
             # Comparar con el DNI proporcionado
             if segmento_cuil == str(dni):
-                return actualizar_bd_cuil(cuil)
+                return actualizar_bd_cuil(db, cuil)
             
 def agregar_empleado(data, db, bucket, foto=None):
     """Agrega un registro de empleado en Firebase."""
