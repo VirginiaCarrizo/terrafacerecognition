@@ -83,6 +83,11 @@ def setup_driver():
     chrome_options.add_argument("--ignore-certificate-errors")  
     chrome_options.add_argument("--disable-web-security")
     chrome_options.add_argument("--disable-logging")
+    chrome_options.add_argument('--kiosk-printing')
+    chrome_options.add_experimental_option('prefs', {
+    'printing.print_preview_sticky_settings.appState': '{"recentDestinations":[{"id":"Save as PDF","origin":"local","account":""}],"selectedDestinationId":"Save as PDF","version":2}',
+    'savefile.default_directory': r'C:\Users\juan.sanchez\Desktop\pedidos/'  # Ruta para guardar PDFs automáticamente
+    })
 
     try:
         driver = webdriver.Chrome(options=chrome_options)
@@ -123,7 +128,7 @@ def wait_for_user_capture(driver):
     try:
         # logging.info("Waiting for JS alert to appear (up to 10 minutes)...")
         # Long timeout for user interaction, e.g., 600 seconds
-        WebDriverWait(driver, timeout=None).until(EC.alert_is_present())
+        WebDriverWait(driver, timeout=9999999).until(EC.alert_is_present())
         alert = driver.switch_to.alert
         alert_text = alert.text
         # logging.info(f"JS alert detected: {alert_text}")
@@ -134,7 +139,7 @@ def wait_for_user_capture(driver):
             logging.info("Confirm scenario detected. Waiting for user confirmation (manual accept).")
 
         # Fetch DNI after user interaction with the alert
-
+        # time.sleep(5)
         dni = fetch_dni()
         
         print(dni)
@@ -164,8 +169,7 @@ def fill_terragene_in_movizen(driver):
     )
 
     ion_input = driver.find_element(By.CSS_SELECTOR, "input[id^='ion-input-']")
-    # logging.info("Clearing and filling 'terragene' into ion-input-0.")
-    # ion_input.clear()
+    time.sleep(1)
     ion_input.send_keys("terragene")
     ion_input.send_keys(Keys.ENTER)
     current_url = driver.current_url
@@ -178,9 +182,9 @@ def fill_terragene_in_movizen(driver):
 
 def navigate_and_fill_dni(driver, dni):
     # logging.info("Navigating to /pwa/inicio page.")
-    # driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
+    driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
 
-    driver.refresh()
+    # driver.refresh()
     # logging.info("Waiting for ion-input-0 on /pwa/inicio page.")
     WebDriverWait(driver, TIMEOUT).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, "input[id^='ion-input-']"))
@@ -189,110 +193,60 @@ def navigate_and_fill_dni(driver, dni):
     ion_input = driver.find_element(By.CSS_SELECTOR, "input[id^='ion-input-']")
 
 
-    
-    # logging.info(f"Filling DNI '{dni}' into ion-input-0.")
+ 
     ion_input.clear()
     ion_input.send_keys(int(dni))
     ion_input.send_keys(Keys.ENTER)
-    
-    # logging.info("DNI submitted successfully.")
- 
-    # Wait for the URL to change after submission, applying timeouts
-    
-    
-    # time.sleep(5)
-    # WebDriverWait(driver, 5).until(EC.url_changes(current_url))
-    # current_url = driver.current_url
-    # logging.info(f"Current URL before submit: {current_url}")
 
-    # if current_url == 'https://generalfoodargentina.movizen.com/pwa/inicio':
-    #     return
 
-    # WebDriverWait(driver, TIMEOUT).until(EC.url_changes('https://generalfoodargentina.movizen.com/pwa/pedido-web-print'))
-    # current_url = driver.current_url
-    
-    # devtools = driver.execute_cdp_cmd
-    # devtools("Network.enable", {})
-    last_url = driver.current_url
+
     inicio = time.time()
-    keyboard.on_press(on_space_press)
-    global decision_espacio
+    segunda_fase = True
     while True:
-        
-        # time.sleep(4)             
-        # print(str(current_url) == 'https://generalfoodargentina.movizen.com/pwa/pedido-pc')
-        # print(current_url)
         current_url = str(driver.current_url)
-        if last_url == 'https://generalfoodargentina.movizen.com/pwa/inicio':
-            last_url = driver.current_url
-            print(time.time() - inicio)
+
+
+        if current_url == 'https://generalfoodargentina.movizen.com/pwa/inicio':
             if time.time() - inicio > 2:
                 break 
-            continue
-
 
         elif current_url == 'https://generalfoodargentina.movizen.com/pwa/pedido-pc':
-            
-            
-            if decision_espacio == 'Volver':
-                decision_espacio = None
-                break
-            
-            continue
-        
+           
+            script = """
+            window.onbeforeprint = function() {
+                // Bloqueo silencioso
+            };
 
-        elif last_url == 'https://generalfoodargentina.movizen.com/pwa/pedido-web-print':
+            window.print = function() {
+                // Bloqueo silencioso
+            };
+            """
+            driver.execute_script(script)
+            # Abrir una nueva pestaña
+            # driver.close() 
+            WebDriverWait(driver, 99999).until(EC.url_changes('https://generalfoodargentina.movizen.com/pwa/pedido-pc'))
+            driver.execute_script("window.open('about:blank', '_blank');")
+            time.sleep(1)
+            driver.close()
+                        # Script para habilitar la impresión
+            # Cambiar al contexto de la nueva pestaña
+            driver.switch_to.window(driver.window_handles[-1])
+
+            # Navegar a la URL deseada en la nueva pestaña
+            new_url = "https://generalfoodargentina.movizen.com/pwa/pedido-web-print"
+            driver.get(new_url)
+         
+            #ACA SE TIENEN QUE GUARDAR LOS DATOS DEL PEDIDO
+
+
+            
+            time.sleep(4)
+       
             break
 
-        elif current_url == 'https://generalfoodargentina.movizen.com/pwa/pedido-web-print':
-           
-            driver.get("https://generalfoodargentina.movizen.com/pwa/pedido-web-print")
-            last_url = "https://generalfoodargentina.movizen.com/pwa/pedido-web-print"
-            time.sleep(3)
-            keyboard.press_and_release('enter')
-            
-
-
-
-
-
-
-
-
-
 
 
         
-
-        # elif current_url == "https://generalfoodargentina.movizen.com/pwa/inicio":
-        #     driver.get("https://generalfoodargentina.movizen.com/pwa/pedido-web-print")
-        #     last_url = None
-        #     # time.sleep(4)
-        #     continue
-            
-
-        
-
-
-        
-
-        
-
-
-        # else:
-        #     time.sleep(1)
-        #     print('HOLAAA')
-        #     # print((driver.current_url))
-        #     # Simula presionar la tecla "Enter"
-        #     actions = ActionChains(driver)
-        #     actions.send_keys(Keys.RETURN).perform()
-
-        #     break
-
-        # AGREGAR MENSAJES DE ESPERA
-        # AGREGAR EL CLICK EN IMPRIMIR
-        # TRATAR DE ROMPERLO
-     
 
 
 def main_loop():
