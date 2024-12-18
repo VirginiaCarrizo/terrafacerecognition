@@ -3,7 +3,7 @@ from flask_socketio import SocketIO
 from flask_login import LoginManager
 from login import configure_login
 from routes import configure_routes
-from bbdd_conection import initialize_firebase  # Configuración de Firebase
+from base_de_datos.bbdd_conection import initialize_firebase  # Configuración de Firebase
 from socketio_events import configure_socketio_events # Importar configuración de eventos
 from user import users
 

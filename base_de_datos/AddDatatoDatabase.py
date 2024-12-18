@@ -9,7 +9,7 @@ firebase_admin.initialize_app(cred, {
 })
 
 # Lee el archivo Excel
-df = pd.read_excel(r'C:\Users\virginia.carrizo\Desktop\face_recognition\general_food\Datos IA.xlsx')
+df = pd.read_excel(r'C:\Users\virginia.carrizo\Desktop\face_recognition\general_food\utils\Datos IA.xlsx')
 
 # Convertir la columna de FECHA DE NACIMIENTO a string si contiene datos de tipo Timestamp
 df['FECHA DE NAC'] = df['FECHA DE NAC'].astype(str)

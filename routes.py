@@ -2,11 +2,10 @@ from flask import Blueprint, render_template, request, jsonify, abort
 from flask_login import login_required, current_user
 from functools import wraps
 from user import users
-from bbdd import agregar_empleado, buscar_empleados, modificar_empleado, eliminar_empleado
-from facerecognition import facerec, submit_dni, get_global_dni, update_global_dni
+from base_de_datos.bbdd import agregar_empleado, buscar_empleados, modificar_empleado, eliminar_empleado
+from facerecognition import facerec, submit_dni
 import logging
 from threading import Lock
-from globals import global_dni
 import time
 
 # Configuración básica para el logger

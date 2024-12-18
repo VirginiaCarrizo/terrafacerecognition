@@ -32,7 +32,7 @@ firebase_admin.initialize_app(cred, {
     'storageBucket': f"{firebase_config['project_id']}.appspot.com"
 })
 
-path = r'C:\Users\virginia.carrizo\Desktop\face_recognition\proyecto_en_git_completo\fotos_empleados\nuevas_ornela\subir/'
+path = r'C:\Users\virginia.carrizo\Desktop\face_recognition\proyecto_en_git_completo\static\fotos_empleados\nuevas_ornela\subir/'
 files = os.listdir(path)
 
 for file in files:

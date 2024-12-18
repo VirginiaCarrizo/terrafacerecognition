@@ -1,6 +1,5 @@
-from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort
+from flask import request
 import pickle
-from datetime import datetime
 import base64
 import face_recognition
 import cv2
@@ -10,10 +9,9 @@ from threading import Lock
 from globals import global_dni
 
 global_dni_lock = Lock()
-dni_log = 0
 
 # IMPORTACION DE LA CODIFICACIÓN DE LAS IMAGENES PARA EL RECONOCIMIENTO FACIAL
-with open('EncodeFile.p', 'rb') as file:
+with open('base_de_datos/EncodeFile.p', 'rb') as file:
     encodeListKnownWithIds = pickle.load(file)
 encodeListKnown, employeesApellidoNombre = encodeListKnownWithIds
 
@@ -60,10 +58,7 @@ def facerec(db, socketio):
 
                 #si encuentra una coincidencia, procede con la actualización en la base de datos
                 if matches[matchIndex]:
-                    logging.info(f'macheo')
                     nombre_completo = employeesApellidoNombre[matchIndex]
-                    logging.info(f'nombre_completo {nombre_completo}')
-
                     employeesDatosCompletosBD = db.reference(f'Employees').get()
                     employeeInfoCompletaBD = None
                     for cuil, infoCompletaBD in employeesDatosCompletosBD.items():
@@ -77,7 +72,6 @@ def facerec(db, socketio):
                     cuil_str = str(cuil)
                     dni = cuil_str[2:-1]
                     
-
                     return cuil_str, dni, employeeInfoCompletaBD
         
         return cuil_str, dni, employeeInfoCompletaBD
@@ -88,18 +82,14 @@ def facerec(db, socketio):
 
 # FUNCION QUE ENVIA EL DNI AL SCRIPT LOCAL   
 def submit_dni(dni_lock):
-    global dni_log
     new_dni = get_global_dni()
 
     try:
         with dni_lock:
-            logging.info(f"new_dni: {new_dni}, dni_log: {dni_log}, comprobacion: {dni_log==new_dni}")
-            if new_dni==0: #or dni_log==new_dni: SE DESACTIVA SI EL USUARIO QUE INGRESO ES EL MISMO
-            # if new_dni==0 :
+            if new_dni==0: 
                 return 0
             # Retrieve the first DNI in the list
         logging.info(f"Sending DNI to PC: {new_dni}")
-        dni_log = new_dni
         return new_dni
     except Exception as e:
         logging.error(f"Error in /get_dni: {e}")

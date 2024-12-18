@@ -7,8 +7,8 @@ from datetime import datetime
 
 # Configuración básica del logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
-
-def actualizar_bd(db, cuil):
+            
+def actualizar_bd_cuil(db, cuil):
     estado = ''
     ref = db.reference(f'Employees/{cuil}')
     # Obtener la fecha actual
@@ -36,6 +36,23 @@ def actualizar_bd(db, cuil):
 
     return estado
 
+def actualizar_bd_dni(db, dni):
+    employees_ref = db.reference(f'Employees/')
+    employees = employees_ref.get()
+    actualizacion=''
+    if not employees:
+        return None
+
+    for cuil, datos in employees.items():
+        # Asegurarse de que el CUIL tenga al menos 11 caracteres
+        if len(cuil) >= 11:
+            # Extraer los dígitos desde el tercer hasta el anteúltimo
+            segmento_cuil = cuil[2:-1]
+            
+            # Comparar con el DNI proporcionado
+            if segmento_cuil == str(dni):
+                return actualizar_bd_cuil(cuil)
+            
 def agregar_empleado(data, db, bucket, foto=None):
     """Agrega un registro de empleado en Firebase."""
     try:
