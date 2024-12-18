@@ -113,7 +113,7 @@ captureButton.addEventListener('click', function() {
 
 socket.on('alertas', function(data) {
     if (data.actualizacion === 'pedido') {
-        alert('Ya pidió menú el día de hoy')
+        spinner()
         // location.reload();
     } else if (data.actualizacion === 'registrado'){
         spinner()
