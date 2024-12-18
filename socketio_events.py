@@ -47,9 +47,8 @@ def configure_socketio_events(socketio, db):
             # if actualizacion == 'pedido':
             #     update_global_dni(0)
             #     emit('alertas', {'status': 'denied', 'actualizacion': actualizacion})
-            if actualizacion == 'registrado' or actualizacion == 'pedido':
-                update_global_dni(dni)
-                emit('alertas', {'status': 'success', 'actualizacion': actualizacion})
+            update_global_dni(dni)
+            emit('alertas', {'status': 'success', 'actualizacion': actualizacion})
         elif actualizacion == 'nomach':
             update_global_dni(0)
             logging.info('NO SE ENCONTRO COINCIDENCIA EN LA BASE DE DATOS')
