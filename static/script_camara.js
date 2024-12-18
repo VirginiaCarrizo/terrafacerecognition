@@ -85,17 +85,17 @@ captureButton.addEventListener('click', function() {
             } else {
                 dni = prompt("Por favor, ingrese el DNI manualmente.");
                 if (dni !== null){
-                    socket.emit('confirm_dni_response', { dni: dni, confirmed: True });
+                    socket.emit('confirm_dni_response', { dni: dni, confirmed: true });
                 } else {
-                    socket.emit('confirm_dni_response', { dni: 0, confirmed: False })
+                    socket.emit('confirm_dni_response', { dni: 0, confirmed: false })
                 }
             }
         } else if (data.status === 'no_match') {
             const dni = prompt("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
             if (dni !== null){
-                socket.emit('confirm_dni_response', { dni: dni, confirmed: True });
+                socket.emit('confirm_dni_response', { dni: dni, confirmed: true });
             } else {
-                socket.emit('confirm_dni_response', { dni: 0, confirmed: False })
+                socket.emit('confirm_dni_response', { dni: 0, confirmed: false })
             }
 
         }
