@@ -59,7 +59,7 @@ def configure_routes(app, socketio, db, bucket):
                 return jsonify({"status": "success", 'dni': dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
             else:
                 logging.info("No se encontró coincidencia, se solicita ingreso manual del DNI.")
-                return jsonify({"status": "no_match", 'dni': dni, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
+                return jsonify({"status": "no_match", 'dni': None, 'employeeInfoCompletaBD': employeeInfoCompletaBD})
 
     # ENDPOINT PARA EL SCRIPT LOCAL
     @routes.route('/get_dni', methods=['GET'])
