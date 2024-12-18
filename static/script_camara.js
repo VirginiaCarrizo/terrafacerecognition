@@ -82,7 +82,6 @@ captureButton.addEventListener('click', function() {
             }
 
         } else if (data.status === 'success') {
-            console.log('llegue al confirm dni')
             let dni = data.dni;
             const cuil = data.employeeInfoCompletaBD['cuil'];
             const nombre_completo = data.employeeInfoCompletaBD['nombre_apellido'];
@@ -90,16 +89,13 @@ captureButton.addEventListener('click', function() {
             const confirmed = window.confirm(`DNI detectado: ${dni} para ${nombre_completo}\n¿Es correcto?`);
 
             if (confirmed) {
-                // Si el usuario confirma, envía la respuesta positiva al servidor para actualizar la base de datos
                 socket.emit('confirm_dni_response', { cuil: cuil, confirmed: true });
             } else {
                 dni = prompt("Por favor, ingrese el DNI manualmente.");
-                console.log('dni script camara:')
-                console.log(dni)
                 if (dni !== null){
-                    socket.emit('update_db', dni);
+                    socket.emit('confirm_dni_response', { dni: dni, confirmed: True });
                 } else {
-                    socket.emit('update_dni_global', 0)
+                    socket.emit('confirm_dni_response', { dni: 0, confirmed: False })
                 }
             }
         }

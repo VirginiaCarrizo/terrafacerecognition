@@ -18,7 +18,7 @@ db, bucket = initialize_firebase()
 configure_routes(app, socketio, db, bucket)
 
 # Configurar eventos de SocketIO
-configure_socketio_events(socketio, db)
+configure_socketio_events(socketio, db, bucket)
 
 # Configurar LoginManager
 login_manager = LoginManager()

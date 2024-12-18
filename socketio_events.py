@@ -1,12 +1,12 @@
 import logging
 from flask_socketio import emit
 from facerecognition import get_global_dni, update_global_dni
-from base_de_datos.bbdd import actualizar_bd_dni, actualizar_bd_cuil
+from base_de_datos.bbdd import actualizar_bd_dni, buscar_empleados
 
 # Configuración básica del logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 
-def configure_socketio_events(socketio, db):
+def configure_socketio_events(socketio, db, bucket):
     """Configura los eventos de SocketIO."""
     @socketio.on('connect')
     def handle_connect():
@@ -20,40 +20,34 @@ def configure_socketio_events(socketio, db):
     def confirm_dni_response(data):
         confirmed = data['confirmed']
         cuil = data['cuil']
-        actualizacion=''
         if confirmed:
-            actualizacion = actualizar_bd_cuil(db, cuil)
-            
-            logging.info(f'actualizacion: {actualizacion}')
-            # if actualizacion == 'pedido':
-            #     update_global_dni(0)
-            #     emit('alertas', {'status': 'denied', 'actualizacion': actualizacion}) 
-            if actualizacion == 'registrado' or actualizacion == 'pedido':
+            macht = buscar_empleados(cuil, db, bucket)
+            if macht:
                 update_global_dni(str(cuil)[2:-1])
                 dni = get_global_dni()
                 logging.info(f'dni: {dni}')
                 emit('alertas', {'status': 'success', 'actualizacion': 'registrado'})
-            elif actualizacion == 'nomach':
+            else:
                 update_global_dni(0)
-                emit('alertas', {'status': 'denied', 'actualizacion': actualizacion})
+                emit('alertas', {'status': 'denied', 'actualizacion': 'nomacht'})
         else:
             update_global_dni(0)
-            emit('alertas', {'status': 'denied', 'actualizacion': actualizacion})
+            emit('alertas', {'status': 'denied', 'actualizacion': 'noconfirm'})
 
-    @socketio.on('update_db')
-    def update_db(dni):
-        actualizacion = actualizar_bd_dni(db, dni)
-        if actualizacion == 'registrado' or actualizacion == 'pedido':
-            # if actualizacion == 'pedido':
-            #     update_global_dni(0)
-            #     emit('alertas', {'status': 'denied', 'actualizacion': actualizacion})
-            update_global_dni(dni)
-            emit('alertas', {'status': 'success', 'actualizacion': actualizacion})
-        elif actualizacion == 'nomach':
-            update_global_dni(0)
-            logging.info('NO SE ENCONTRO COINCIDENCIA EN LA BASE DE DATOS')
-            emit('alertas', {'status': 'denied', 'actualizacion': actualizacion})  
-            return
+    # @socketio.on('update_db')
+    # def update_db(dni):
+    #     actualizacion = actualizar_bd_dni(db, dni)
+    #     if actualizacion == 'registrado' or actualizacion == 'pedido':
+    #         # if actualizacion == 'pedido':
+    #         #     update_global_dni(0)
+    #         #     emit('alertas', {'status': 'denied', 'actualizacion': actualizacion})
+    #         update_global_dni(dni)
+    #         emit('alertas', {'status': 'success', 'actualizacion': actualizacion})
+    #     elif actualizacion == 'nomach':
+    #         update_global_dni(0)
+    #         logging.info('NO SE ENCONTRO COINCIDENCIA EN LA BASE DE DATOS')
+    #         emit('alertas', {'status': 'denied', 'actualizacion': actualizacion})  
+    #         return
 
 
 
