@@ -21,7 +21,7 @@ def configure_socketio_events(socketio, db, bucket):
         confirmed = data['confirmed']
         cuil = data['cuil']
         dni = data['dni']
-
+        logging.info(f"data de DNI recibida: {data}")
         if confirmed:
             if cuil != None and dni == None:
                 macht = buscar_empleados(cuil, db, bucket)
