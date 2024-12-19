@@ -93,6 +93,9 @@ def buscar_empleados(search_term, db, bucket):
 
         resultados = []
         search_term_str = str(search_term)
+        logging.info(f"search_term: {search_term}")
+        logging.info(f"search_term_str: {search_term_str}")
+
         for key, value in registros.items():
             nombre_completo = value.get('nombre_apellido', '').lower()
             cuil = str(value.get('cuil', ''))
