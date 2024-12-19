@@ -131,6 +131,8 @@ def wait_for_user_capture(driver):
     We apply a long wait timeout here as this likely involves user interaction.
     """
     try:
+        
+        WebDriverWait(driver, timeout=9999999).until(EC.visibility_of_element_located((By.ID, "custom-confirm")))  # Cambia ID según tu selector
         # logging.info("Waiting for JS alert to appear (up to 10 minutes)...")
         # Long timeout for user interaction, e.g., 600 seconds
         WebDriverWait(driver, timeout=9999999).until(EC.invisibility_of_element((By.ID, "custom-confirm")))
