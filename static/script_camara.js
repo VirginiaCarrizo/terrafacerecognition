@@ -9,7 +9,7 @@ socket.on('connect', function() {
     socket.emit('mi_evento', {data: 'Hola servidor'});
 });
 
-function spinner(){
+function spinner(time){
     const loadingElement = document.createElement('div');
     loadingElement.id = 'loading';
     loadingElement.style.position = 'fixed';
@@ -30,7 +30,7 @@ function spinner(){
     // Simula una acción o espera antes de quitar el indicador de carga
     setTimeout(() => {
         document.body.removeChild(loadingElement);
-    }, 3000); // Simula 3 segundos de carga
+    }, time); // Simula 3 segundos de carga
 }
 // Función para activar una cámara específica
 function activateCamera(deviceId) {
@@ -62,7 +62,7 @@ navigator.mediaDevices.enumerateDevices()
 captureButton.addEventListener('click', function() {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     const imageData = canvas.toDataURL('image/png');
-    spinner()
+    spinner(3000)
     // Enviar la imagen al servidor para realizar el reconocimiento facial
     fetch('/terrarrhh/submit_image', {
         method: 'POST',
@@ -109,10 +109,10 @@ captureButton.addEventListener('click', function() {
 
 socket.on('alertas', function(data) {
     if (data.actualizacion === 'pedido') {
-        spinner()
+        spinner(5000)
         // location.reload();
     } else if (data.actualizacion === 'registrado'){
-        spinner()
+        spinner(5000)
     } else if (data.actualizacion === 'nomach'){
         alert('No se encuentra en la base de datos. Contáctese con el administrador')
         // location.reload();
