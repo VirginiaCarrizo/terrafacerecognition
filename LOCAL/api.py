@@ -41,7 +41,7 @@ def fetch_dni(max_retries=FETCH_DNI_MAX_RETRIES, retry_interval=RETRY_INTERVAL):
     retries = 0
     while retries < max_retries:
         try:
-            # logging.info("Attempting to fetch DNI from server...")
+    
 
             response = requests.get(EC2_SERVER_URL, timeout=EC2_REQUEST_TIMEOUT)
 
@@ -54,7 +54,7 @@ def fetch_dni(max_retries=FETCH_DNI_MAX_RETRIES, retry_interval=RETRY_INTERVAL):
                     dni = data.get('dni')
                     print(dni)
                     if dni != 0:
-                        # logging.info(f"Received DNI: {dni}")
+                
                         return dni
                     else:
                         logging.warning("DNI not found in response.")
@@ -67,7 +67,7 @@ def fetch_dni(max_retries=FETCH_DNI_MAX_RETRIES, retry_interval=RETRY_INTERVAL):
             logging.error(f"Request failed: {e}")
 
         retries += 1
-        # logging.info(f"Retrying... ({retries}/{max_retries})")
+
         time.sleep(retry_interval)
 
     logging.error("Max retries reached. Could not fetch DNI.")
@@ -75,7 +75,6 @@ def fetch_dni(max_retries=FETCH_DNI_MAX_RETRIES, retry_interval=RETRY_INTERVAL):
 
 
 def setup_driver():
-    # logging.info("Setting up the WebDriver with camera and mic permissions.")
     chrome_options = Options()
     chrome_options.add_experimental_option("prefs", {
         "profile.default_content_setting_values.media_stream_camera": 1,
@@ -97,7 +96,7 @@ def setup_driver():
     try:
         driver = webdriver.Chrome(options=chrome_options)
         driver.maximize_window()
-        # logging.info("WebDriver setup completed successfully.")
+
         return driver
     except Exception as e:
         logging.error(f"Failed to initialize WebDriver: {e}")
@@ -105,21 +104,17 @@ def setup_driver():
 
 
 def login_to_terragene(driver):
-    # logging.info("Navigating to terragene login page.")
     driver.get("https://terragene.life/terrarrhh/camara")
 
     # Wait for username and password fields (Timeout applied)
-    # logging.info("Waiting for username and password fields to appear.")
     WebDriverWait(driver, TIMEOUT).until(EC.visibility_of_element_located((By.ID, "username")))
 
     username_input = driver.find_element(By.ID, "username")
     password_input = driver.find_element(By.ID, "password")
 
-    # logging.info("Filling username and password.")
     username_input.send_keys("generalfood")
     password_input.send_keys("generalfood")
 
-    # logging.info("Clicking login button.")
     login_button = driver.find_element(By.CSS_SELECTOR, "button.btn")
     login_button.click()
 
@@ -131,12 +126,11 @@ def wait_for_user_capture(driver):
     We apply a long wait timeout here as this likely involves user interaction.
     """
     try:
-        
-        WebDriverWait(driver, timeout=9999999).until(EC.visibility_of_element_located((By.ID, "custom-confirm")))  # Cambia ID según tu selector
-        # logging.info("Waiting for JS alert to appear (up to 10 minutes)...")
+        WebDriverWait(driver, timeout=30).until(lambda d: d.find_element(By.ID, "custom-confirm").is_displayed() or d.find_element(By.ID, "custom-prompt").is_displayed())
+
         # Long timeout for user interaction, e.g., 600 seconds
-        WebDriverWait(driver, timeout=9999999).until(EC.invisibility_of_element((By.ID, "custom-confirm")))
-        # logging.info(f"JS alert detected: {alert_text}")
+        WebDriverWait(driver, timeout=9999999).until(lambda d: EC.invisibility_of_element((By.ID, "custom-confirm"))(d) and EC.invisibility_of_element((By.ID, "custom-prompt"))(d))
+
         # Después de que se cierra el popup, puedes continuar con tu flujo
         print("El popup personalizado se cerró.")
         
@@ -151,9 +145,9 @@ def wait_for_user_capture(driver):
             logging.info(f"Fetched DNI: {dni}")
 
         # Wait for alert to disappear
-        # logging.info("Waiting for alert to be dismissed (up to 5 minutes)...")
+
         WebDriverWait(driver, 10).until_not(EC.alert_is_present())
-        # logging.info("Alert dismissed by the user.")
+
 
         return dni
     except Exception as e:
@@ -162,10 +156,8 @@ def wait_for_user_capture(driver):
 
 
 def fill_terragene_in_movizen(driver):
-    # logging.info("Navigating to Movizen PWA to fill 'terragene'.")
     driver.get("https://generalfoodargentina.movizen.com/pwa/")
 
-    # logging.info("Waiting for ion-input-0 element on Movizen page.")
     WebDriverWait(driver, TIMEOUT).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, "input[id^='ion-input-']"))
     )
@@ -176,7 +168,6 @@ def fill_terragene_in_movizen(driver):
     ion_input.send_keys(Keys.ENTER)
     current_url = driver.current_url
     WebDriverWait(driver, TIMEOUT).until(EC.url_changes(current_url))
-    # logging.info("'terragene' submitted successfully.")
 
 
     time.sleep(1)

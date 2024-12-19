@@ -85,6 +85,43 @@ function customConfirm(message) {
     });
 }
 
+function customPrompt(message) {
+    return new Promise((resolve) => {
+        const modal = document.getElementById('custom-prompt');
+        const messageElement = document.getElementById('custom-prompt-message');
+        const inputElement = document.getElementById('custom-prompt-input');
+        const okButton = document.getElementById('custom-prompt-ok');
+        const cancelButton = document.getElementById('custom-prompt-cancel');
+
+        // Configurar el mensaje y mostrar el modal
+        messageElement.textContent = message;
+        modal.classList.remove('hidden');
+
+        // Limpiar el input
+        inputElement.value = '';
+
+        // Manejar clic en "Aceptar"
+        okButton.onclick = () => {
+            const inputValue = inputElement.value;
+            modal.classList.add('hidden');
+            resolve(inputValue); // Resuelve con el valor ingresado
+        };
+
+        // Manejar clic en "Cancelar"
+        cancelButton.onclick = () => {
+            modal.classList.add('hidden');
+            resolve(null); // Resuelve con null si se cancela
+        };
+
+        // Manejar "Enter" dentro del input
+        inputElement.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                okButton.click();
+            }
+        });
+    });
+}
+
 // Capturar la imagen
 captureButton.addEventListener('click', function() {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -110,7 +147,7 @@ captureButton.addEventListener('click', function() {
             if (confirmed) {
                 socket.emit('confirm_dni_response', { cuil: cuil, dni: null, confirmed: true });
             } else {
-                dni = prompt("Por favor, ingrese el DNI manualmente.");
+                const dni = await customPrompt("Por favor, ingrese el DNI manualmente.");
                 if (dni !== null){
                     socket.emit('confirm_dni_response', { cuil: null, dni: dni, confirmed: true });
                 } else {
@@ -118,7 +155,7 @@ captureButton.addEventListener('click', function() {
                 }
             }
         } else if (data.status === 'no_match') {
-            const dni = prompt("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
+            const dni = await customPrompt("Por favor, ingrese el DNI manualmente.");
             if (dni !== null){
                 socket.emit('confirm_dni_response', { cuil: null, dni: dni, confirmed: true });
             } else {
