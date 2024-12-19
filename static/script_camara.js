@@ -81,7 +81,7 @@ captureButton.addEventListener('click', function() {
             const confirmed = window.confirm(`DNI detectado: ${dni} para ${nombre_completo}\n¿Es correcto?`);
 
             if (confirmed) {
-                socket.emit('confirm_dni_response', { cuil: cuil, dni: None, confirmed: true });
+                socket.emit('confirm_dni_response', { cuil: cuil, dni: null, confirmed: true });
             } else {
                 dni = prompt("Por favor, ingrese el DNI manualmente.");
                 if (dni !== null){
