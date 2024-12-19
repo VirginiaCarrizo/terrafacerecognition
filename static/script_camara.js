@@ -97,14 +97,15 @@ function customPrompt(message) {
         messageElement.textContent = message;
         modal.classList.remove('hidden');
 
-        // Limpiar el input
+        // Limpiar el input y enfocarlo automáticamente
         inputElement.value = '';
+        inputElement.focus();
 
         // Manejar clic en "Aceptar"
         okButton.onclick = () => {
-            const inputValue = inputElement.value;
+            const inputValue = inputElement.value.trim(); // Elimina espacios adicionales
             modal.classList.add('hidden');
-            resolve(inputValue); // Resuelve con el valor ingresado
+            resolve(inputValue || null); // Si el campo está vacío, resolver con null
         };
 
         // Manejar clic en "Cancelar"
@@ -114,13 +115,26 @@ function customPrompt(message) {
         };
 
         // Manejar "Enter" dentro del input
-        inputElement.addEventListener('keypress', (event) => {
+        const onKeyPress = (event) => {
             if (event.key === 'Enter') {
                 okButton.click();
             }
-        });
+        };
+
+        inputElement.addEventListener('keypress', onKeyPress);
+
+        // Limpiar eventos al cerrar el modal
+        const cleanup = () => {
+            okButton.onclick = null;
+            cancelButton.onclick = null;
+            inputElement.removeEventListener('keypress', onKeyPress);
+        };
+
+        // Agregar cleanup cuando el modal se oculta
+        modal.addEventListener('transitionend', cleanup, { once: true });
     });
 }
+
 
 // Capturar la imagen
 captureButton.addEventListener('click', function() {
