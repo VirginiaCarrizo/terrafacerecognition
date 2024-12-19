@@ -89,7 +89,7 @@ function customConfirm(message) {
 captureButton.addEventListener('click', function() {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     const imageData = canvas.toDataURL('image/png');
-    spinner(3000)
+    spinner(1500)
     // Enviar la imagen al servidor para realizar el reconocimiento facial
     fetch('/terrarrhh/submit_image', {
         method: 'POST',
