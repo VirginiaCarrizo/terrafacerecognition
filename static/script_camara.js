@@ -110,11 +110,11 @@ captureButton.addEventListener('click', function() {
 socket.on('alertas', function(data) {
     if (data.actualizacion === 'pedido') {
         console.log('pedido')
-        spinner(4000)
+        spinner(6000)
         // location.reload();
     } else if (data.actualizacion === 'registrado'){
         console.log('registrado')
-        spinner(4000)
+        spinner(6000)
     } else if (data.actualizacion === 'nomach'){
         alert('No se encuentra en la base de datos. Contáctese con el administrador')
         // location.reload();
