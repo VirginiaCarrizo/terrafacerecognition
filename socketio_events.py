@@ -26,7 +26,11 @@ def configure_socketio_events(socketio, db, bucket):
 
         if confirmed:
             logging.info('llegue al confirmed')
-            macht = buscar_empleados(cuil, db, bucket)
+            if cuil != None and dni == None:
+                macht = buscar_empleados(cuil, db, bucket)
+            else:
+                macht = buscar_empleados(dni, db, bucket)
+                
             logging.info(f'macht: {macht}')
             if macht:
                 logging.info('llegue al macht')
