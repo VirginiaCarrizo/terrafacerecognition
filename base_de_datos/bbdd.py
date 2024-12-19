@@ -92,12 +92,12 @@ def buscar_empleados(search_term, db, bucket):
             return jsonify([])
 
         resultados = []
-
+        search_term_str = str(search_term)
         for key, value in registros.items():
             nombre_completo = value.get('nombre_apellido', '').lower()
             cuil = str(value.get('cuil', ''))
 
-            if search_term in nombre_completo or search_term in cuil:
+            if search_term_str in nombre_completo or search_term_str in cuil:
                 blob = bucket.blob(f'Images/{nombre_completo.upper()}.png')
                 if blob.exists():
                     array = np.frombuffer(blob.download_as_string(), np.uint8)
