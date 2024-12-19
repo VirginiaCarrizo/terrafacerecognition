@@ -226,7 +226,8 @@ def navigate_and_fill_dni(driver, dni):
 
             new_url = "https://generalfoodargentina.movizen.com/pwa/pedido-web-print"
             driver.get(new_url)
-         
+
+            logging.info(len(dni))
             actualizar_bd_dni(db, int(dni))
 
             time.sleep(4)

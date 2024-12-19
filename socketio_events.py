@@ -18,31 +18,27 @@ def configure_socketio_events(socketio, db, bucket):
 
     @socketio.on('confirm_dni_response')
     def confirm_dni_response(data):
-        logging.info('llegue al confirm dni response')
-        logging.info(f'data: {data}')
         confirmed = data['confirmed']
         cuil = data['cuil']
         dni = data['dni']
 
         if confirmed:
-            logging.info('llegue al confirmed')
             if cuil != None and dni == None:
                 macht = buscar_empleados(cuil, db, bucket)
+                if macht:
+                    update_global_dni(str(cuil)[2:-1])
+                    emit('alertas', {'status': 'success', 'actualizacion': 'registrado'})
+                else:
+                    update_global_dni(0)
+                    emit('alertas', {'status': 'denied', 'actualizacion': 'nomacht'})
             else:
                 macht = buscar_empleados(dni, db, bucket)
-                
-            logging.info(f'macht: {macht}')
-            if macht:
-                logging.info('llegue al macht')
-                if cuil != None:
-                    update_global_dni(str(cuil)[2:-1])
-                else:
+                if macht:
                     update_global_dni(dni)
-                logging.info(f'dni: {dni}')
-                emit('alertas', {'status': 'success', 'actualizacion': 'registrado'})
-            else:
-                update_global_dni(0)
-                emit('alertas', {'status': 'denied', 'actualizacion': 'nomacht'})
+                    emit('alertas', {'status': 'success', 'actualizacion': 'registrado'})
+                else:
+                    update_global_dni(0)
+                    emit('alertas', {'status': 'denied', 'actualizacion': 'nomacht'})
         else:
             update_global_dni(0)
             emit('alertas', {'status': 'denied', 'actualizacion': 'noconfirm'})
