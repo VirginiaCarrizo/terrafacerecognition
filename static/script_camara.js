@@ -88,14 +88,14 @@ function customConfirm(message) {
 function customPrompt(message) {
     return new Promise((resolve) => {
         const modal = document.getElementById('custom-prompt');
-        const messageElement = document.getElementById('custom-prompt-message');
+        const messageElement = document.getElementById('custom-prompt-message'); // Este ID debe estar en el HTML
         const inputElement = document.getElementById('custom-prompt-input');
         const okButton = document.getElementById('custom-prompt-ok');
         const cancelButton = document.getElementById('custom-prompt-cancel');
 
         // Configurar el mensaje y mostrar el modal
         messageElement.textContent = message;
-        modal.classList.remove('hidden');
+        modal.classList.remove('hidden'); // Mostrar el modal
 
         // Limpiar el input y enfocarlo automáticamente
         inputElement.value = '';
@@ -103,15 +103,15 @@ function customPrompt(message) {
 
         // Manejar clic en "Aceptar"
         okButton.onclick = () => {
-            const inputValue = inputElement.value.trim(); // Elimina espacios adicionales
-            modal.classList.add('hidden');
-            resolve(inputValue || null); // Si el campo está vacío, resolver con null
+            const inputValue = inputElement.value.trim();
+            modal.classList.add('hidden'); // Ocultar el modal
+            resolve(inputValue || null); // Resolver con el valor ingresado o null
         };
 
         // Manejar clic en "Cancelar"
         cancelButton.onclick = () => {
-            modal.classList.add('hidden');
-            resolve(null); // Resuelve con null si se cancela
+            modal.classList.add('hidden'); // Ocultar el modal
+            resolve(null); // Resolver con null
         };
 
         // Manejar "Enter" dentro del input
@@ -130,7 +130,6 @@ function customPrompt(message) {
             inputElement.removeEventListener('keypress', onKeyPress);
         };
 
-        // Agregar cleanup cuando el modal se oculta
         modal.addEventListener('transitionend', cleanup, { once: true });
     });
 }

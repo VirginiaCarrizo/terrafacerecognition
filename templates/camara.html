@@ -23,7 +23,7 @@
             </div>
             <div id="custom-prompt" class="modal hidden">
                 <div class="modal-content">
-                    <p>Por favor, ingrese el DNI manualmente.</p>
+                    <p id="custom-prompt-message">Por favor, ingrese el DNI manualmente.</p>
                     <input type="text" id="custom-prompt-input" placeholder="Ingrese el DNI">
                     <div class="button-container">
                         <button id="custom-prompt-ok">Aceptar</button>
@@ -42,7 +42,7 @@
         </main>
 
         <footer>
-            © 2024, Mi Aplicación
+            © 2024, Terragene
         </footer>
 
         <script src="{{ url_for('static', filename='script_camara.js') }}"></script> <!-- Enlace al archivo de JavaScript -->
