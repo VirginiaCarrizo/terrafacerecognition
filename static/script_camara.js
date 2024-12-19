@@ -88,7 +88,7 @@ function customConfirm(message) {
 function customPrompt(message) {
     return new Promise((resolve) => {
         const modal = document.getElementById('custom-prompt');
-        const messageElement = document.getElementById('custom-prompt-message'); // Este ID debe estar en el HTML
+        const messageElement = document.getElementById('custom-prompt-message');
         const inputElement = document.getElementById('custom-prompt-input');
         const okButton = document.getElementById('custom-prompt-ok');
         const cancelButton = document.getElementById('custom-prompt-cancel');
@@ -102,38 +102,39 @@ function customPrompt(message) {
         inputElement.focus();
 
         // Manejar clic en "Aceptar"
-        okButton.onclick = () => {
+        const handleOk = () => {
             const inputValue = inputElement.value.trim();
-            modal.classList.add('hidden'); // Ocultar el modal
+            modal.classList.add('hidden'); // Ocultar modal
+            cleanup(); // Limpiar eventos
             resolve(inputValue || null); // Resolver con el valor ingresado o null
         };
 
         // Manejar clic en "Cancelar"
-        cancelButton.onclick = () => {
-            modal.classList.add('hidden'); // Ocultar el modal
+        const handleCancel = () => {
+            modal.classList.add('hidden'); // Ocultar modal
+            cleanup(); // Limpiar eventos
             resolve(null); // Resolver con null
         };
 
         // Manejar "Enter" dentro del input
-        const onKeyPress = (event) => {
+        const handleKeyPress = (event) => {
             if (event.key === 'Enter') {
-                okButton.click();
+                handleOk();
             }
         };
 
-        inputElement.addEventListener('keypress', onKeyPress);
-
-        // Limpiar eventos al cerrar el modal
+        // Limpieza de eventos
         const cleanup = () => {
-            okButton.onclick = null;
-            cancelButton.onclick = null;
-            inputElement.removeEventListener('keypress', onKeyPress);
+            okButton.removeEventListener('click', handleOk);
+            cancelButton.removeEventListener('click', handleCancel);
+            inputElement.removeEventListener('keypress', handleKeyPress);
         };
 
-        modal.addEventListener('transitionend', cleanup, { once: true });
+        okButton.addEventListener('click', handleOk);
+        cancelButton.addEventListener('click', handleCancel);
+        inputElement.addEventListener('keypress', handleKeyPress);
     });
 }
-
 
 // Capturar la imagen
 captureButton.addEventListener('click', function() {
