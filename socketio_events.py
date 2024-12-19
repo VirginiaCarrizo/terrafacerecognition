@@ -21,15 +21,13 @@ def configure_socketio_events(socketio, db, bucket):
         confirmed = data['confirmed']
         cuil = data['cuil']
         dni = data['dni']
-        logging.info(f"data de DNI recibida: {data}")
         if confirmed:
-            logging.info("dentro del confirmed")
             if cuil != None and dni == None:
-                logging.info("dentro del if")
                 macht = buscar_empleados(cuil, db, bucket)
-                logging.info(f"macht: {macht}")
                 if macht:
+                    logging.info(f"macht: {macht}")
                     update_global_dni(str(cuil)[2:-1])
+                    logging.info(get_global_dni())
                     emit('alertas', {'status': 'success', 'actualizacion': 'registrado'})
                 else:
                     update_global_dni(0)
