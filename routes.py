@@ -66,6 +66,7 @@ def configure_routes(app, socketio, db, bucket):
     def get_dni():
         time.sleep(8)
         dni = submit_dni(dni_lock)
+        logging.info(f'dni desde get dni: {dni}')
         return jsonify({"status": "success", "dni": dni}), 200
         
 

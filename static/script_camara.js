@@ -92,7 +92,6 @@ captureButton.addEventListener('click', function() {
             }
         } else if (data.status === 'no_match') {
             const dni = prompt("No se ha reconocido a la persona. Por favor, ingrese el DNI manualmente.");
-            console.log(dni)
             if (dni !== null){
                 socket.emit('confirm_dni_response', { cuil: null, dni: dni, confirmed: true });
             } else {
