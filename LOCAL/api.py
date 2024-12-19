@@ -229,10 +229,8 @@ def navigate_and_fill_dni(driver, dni):
 
             logging.info(dni)
             logging.info(len(dni))
-            if len(dni) <= 8:
-                actualizar_bd_dni(db, int(dni))
-            else:
-                actualizar_bd_cuil(db, int(dni))
+
+            actualizar_bd_dni(db, int(dni))
 
             time.sleep(4)
        
