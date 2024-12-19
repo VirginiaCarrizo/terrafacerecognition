@@ -25,9 +25,7 @@ def configure_socketio_events(socketio, db, bucket):
             if cuil != None and dni == None:
                 macht = buscar_empleados(cuil, db, bucket)
                 if macht:
-                    logging.info(f"macht: {macht}")
                     update_global_dni(str(cuil)[2:-1])
-                    logging.info(get_global_dni())
                     emit('alertas', {'status': 'success', 'actualizacion': 'registrado'})
                 else:
                     update_global_dni(0)

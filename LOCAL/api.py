@@ -133,15 +133,10 @@ def wait_for_user_capture(driver):
     try:
         # logging.info("Waiting for JS alert to appear (up to 10 minutes)...")
         # Long timeout for user interaction, e.g., 600 seconds
-        WebDriverWait(driver, timeout=9999999).until(EC.alert_is_present())
-        alert = driver.switch_to.alert
-        alert_text = alert.text
+        WebDriverWait(driver, timeout=9999999).until(EC.invisibility_of_element((By.ID, "custom-confirm")))
         # logging.info(f"JS alert detected: {alert_text}")
-
-        if "No se ha reconocido a la persona" in alert_text:
-            logging.info("Prompt scenario detected. Waiting for user to input DNI and manually accept the prompt.")
-        else:
-            logging.info("Confirm scenario detected. Waiting for user confirmation (manual accept).")
+        # Después de que se cierra el popup, puedes continuar con tu flujo
+        print("El popup personalizado se cerró.")
         
         # Fetch DNI after user interaction with the alert
         # time.sleep(5)

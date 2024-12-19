@@ -106,6 +106,7 @@ captureButton.addEventListener('click', function() {
             const nombre_completo = data.employeeInfoCompletaBD['nombre_apellido'];
             
             const confirmed = await customConfirm(`DNI detectado: ${dni} para ${nombre_completo}\n¿Es correcto?`);
+
             if (confirmed) {
                 socket.emit('confirm_dni_response', { cuil: cuil, dni: null, confirmed: true });
             } else {
