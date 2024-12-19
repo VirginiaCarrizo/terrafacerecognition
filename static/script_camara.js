@@ -58,6 +58,33 @@ navigator.mediaDevices.enumerateDevices()
         console.error("Error al enumerar dispositivos:", error);
     });
 
+function customConfirm(message) {
+    return new Promise((resolve) => {
+        const modal = document.getElementById('custom-confirm');
+        const messageElement = document.getElementById('custom-confirm-message');
+        const yesButton = document.getElementById('custom-confirm-yes');
+        const noButton = document.getElementById('custom-confirm-no');
+
+        // Configurar el mensaje
+        messageElement.textContent = message;
+
+        // Mostrar el modal
+        modal.classList.remove('hidden');
+
+        // Manejar clic en "Sí"
+        yesButton.onclick = () => {
+            modal.classList.add('hidden');
+            resolve(true); // Resuelve con `true` si el usuario acepta
+        };
+
+        // Manejar clic en "No"
+        noButton.onclick = () => {
+            modal.classList.add('hidden');
+            resolve(false); // Resuelve con `false` si el usuario cancela
+        };
+    });
+}
+
 // Capturar la imagen
 captureButton.addEventListener('click', function() {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -70,7 +97,7 @@ captureButton.addEventListener('click', function() {
         headers: { 'Content-Type': 'application/json' }
     })
     .then(response => response.json())
-    .then(data => {
+    .then(async data => {
         console.log('llegue al fetch')
         console.log(data.status)
         if (data.status === 'success') {
@@ -78,7 +105,7 @@ captureButton.addEventListener('click', function() {
             const cuil = data.employeeInfoCompletaBD['cuil'];
             const nombre_completo = data.employeeInfoCompletaBD['nombre_apellido'];
             
-            const confirmed = window.confirm(`DNI detectado: ${dni} para ${nombre_completo}\n¿Es correcto?`);
+            const confirmed = await customConfirm(`DNI detectado: ${dni} para ${nombre_completo}\n¿Es correcto?`);
 
             if (confirmed) {
                 socket.emit('confirm_dni_response', { cuil: cuil, dni: null, confirmed: true });
