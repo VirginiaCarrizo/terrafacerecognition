@@ -206,14 +206,14 @@ captureButton.addEventListener('click', function() {
 
 
 socket.on('alertas', function(data) {
-    const removeSpinner = spinner(); // Mostrar spinner al inicio de la interacción
+    const removeSpinner2 = spinner(); // Mostrar spinner al inicio de la interacción
     if (data.actualizacion === 'pedido') {
         console.log('pedido')
-        removeSpinner()
+        removeSpinner2()
         // location.reload();
     } else if (data.actualizacion === 'registrado'){
         console.log('registrado')
-        removeSpinner()
+        removeSpinner2()
     } else if (data.actualizacion === 'nomach'){
         alert('No se encuentra en la base de datos. Contáctese con el administrador')
         // location.reload();
