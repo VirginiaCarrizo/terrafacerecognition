@@ -159,12 +159,15 @@ captureButton.addEventListener('click', function() {
             let dni = data.dni;
             const cuil = data.employeeInfoCompletaBD['cuil'];
             const nombre_completo = data.employeeInfoCompletaBD['nombre_apellido'];
-            
+            // Quitar el spinner antes de mostrar el popup
+            removeSpinner();
             const confirmed = await customConfirm(`DNI detectado: ${dni} para ${nombre_completo}\n¿Es correcto?`);
 
             if (confirmed) {
                 socket.emit('confirm_dni_response', { cuil: cuil, dni: null, confirmed: true });
             } else {
+                // Quitar el spinner antes de mostrar el popup
+                removeSpinner();
                 const dni = await customPrompt("Por favor, ingrese el DNI manualmente.");
                 if (dni !== null){
                     socket.emit('confirm_dni_response', { cuil: null, dni: dni, confirmed: true });
@@ -173,6 +176,8 @@ captureButton.addEventListener('click', function() {
                 }
             }
         } else if (data.status === 'no_match') {
+            // Quitar el spinner antes de mostrar el popup
+            removeSpinner();
             const dni = await customPrompt("Por favor, ingrese el DNI manualmente.");
             if (dni !== null){
                 socket.emit('confirm_dni_response', { cuil: null, dni: dni, confirmed: true });
