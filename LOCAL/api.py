@@ -126,7 +126,6 @@ def wait_for_user_capture(driver):
 
     We apply a long wait timeout here as this likely involves user interaction.
     """
-    global raton_listener
     try:
         # Webdriver espera a que aparezca el alert
         WebDriverWait(driver, timeout=30).until(lambda d: d.find_element(By.ID, "custom-confirm").is_displayed() or d.find_element(By.ID, "custom-prompt").is_displayed())

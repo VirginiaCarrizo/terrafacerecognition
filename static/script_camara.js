@@ -162,13 +162,14 @@ captureButton.addEventListener('click', function() {
             // Quitar el spinner antes de mostrar el popup
             removeSpinner();
             const confirmed = await customConfirm(`DNI detectado: ${dni} para ${nombre_completo}\n¿Es correcto?`);
-
             if (confirmed) {
+                const removeSpinner = spinner(); // Mostrar spinner al inicio de la interacción
                 socket.emit('confirm_dni_response', { cuil: cuil, dni: null, confirmed: true });
             } else {
                 // Quitar el spinner antes de mostrar el popup
                 removeSpinner();
                 const dni = await customPrompt("Por favor, ingrese el DNI manualmente.");
+                const removeSpinner = spinner(); // Mostrar spinner al inicio de la interacción
                 if (dni !== null){
                     socket.emit('confirm_dni_response', { cuil: null, dni: dni, confirmed: true });
                 } else {
@@ -179,6 +180,7 @@ captureButton.addEventListener('click', function() {
             // Quitar el spinner antes de mostrar el popup
             removeSpinner();
             const dni = await customPrompt("Por favor, ingrese el DNI manualmente.");
+            const removeSpinner = spinner(); // Mostrar spinner al inicio de la interacción
             if (dni !== null){
                 socket.emit('confirm_dni_response', { cuil: null, dni: dni, confirmed: true });
             } else {
