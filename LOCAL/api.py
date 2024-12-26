@@ -26,6 +26,7 @@ db, bucket = initialize_firebase()
 
 decision_espacio = None
 
+
 def on_space_press(event):
     global decision_espacio
     if event.name == "space":
@@ -125,17 +126,20 @@ def wait_for_user_capture(driver):
 
     We apply a long wait timeout here as this likely involves user interaction.
     """
+    global raton_listener
     try:
+        # Webdriver espera a que aparezca el alert
         WebDriverWait(driver, timeout=30).until(lambda d: d.find_element(By.ID, "custom-confirm").is_displayed() or d.find_element(By.ID, "custom-prompt").is_displayed())
-
-        # Long timeout for user interaction, e.g., 600 seconds
-        WebDriverWait(driver, timeout=9999999).until(lambda d: EC.invisibility_of_element((By.ID, "custom-confirm"))(d) and EC.invisibility_of_element((By.ID, "custom-prompt"))(d))
-
-        # Después de que se cierra el popup, puedes continuar con tu flujo
-        print("El popup personalizado se cerró.")
         
-        # Fetch DNI after user interaction with the alert
-        # time.sleep(5)
+        # Bloquear ratón
+        button = driver.find_element(By.ID, "capture")
+        driver.execute_script("arguments[0].disabled = true;", button)
+
+        # Webdriver espera a que desaparezca el alert
+        WebDriverWait(driver, timeout=9999999).until(lambda d: EC.invisibility_of_element((By.ID, "custom-confirm"))(d) and EC.invisibility_of_element((By.ID, "custom-prompt"))(d))
+        keyboard.block_key('*')  # Bloquea todas las teclas
+        logging.info("Teclado y ratón bloqueados.")
+
         dni = fetch_dni()
         
         print(dni)
@@ -224,9 +228,8 @@ def navigate_and_fill_dni(driver, dni):
        
             break
 
-
 def main_loop():
-
+    global raton_listener
     driver = setup_driver()
     login_to_terragene(driver)
     while True:
@@ -248,6 +251,12 @@ def main_loop():
             continue
 
         navigate_and_fill_dni(driver, new_dni)
+        # Desbloquear teclado y ratón al salir
+        keyboard.unblock_key('*')  # Desbloquea todas las teclas
+        # Desbloquear ratón
+        button = driver.find_element(By.ID, "capture")
+        driver.execute_script("arguments[0].disabled = false;", button)
+        logging.info("Teclado y ratón desbloqueados.")
 
 
 if __name__ == "__main__":

@@ -27,10 +27,13 @@ function spinner(time){
     
     document.body.appendChild(loadingElement);
 
-    // Simula una acción o espera antes de quitar el indicador de carga
-    setTimeout(() => {
-        document.body.removeChild(loadingElement);
-    }, time); // Simula 3 segundos de carga
+     // Devuelve una función para quitar el spinner
+     return function removeSpinner() {
+        const element = document.getElementById('loading');
+        if (element) {
+            document.body.removeChild(element);
+        }
+    };
 }
 // Función para activar una cámara específica
 function activateCamera(deviceId) {
@@ -140,7 +143,8 @@ function customPrompt(message) {
 captureButton.addEventListener('click', function() {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     const imageData = canvas.toDataURL('image/png');
-    spinner(1500)
+    // Mostrar spinner
+    const removeSpinner = spinner();
     // Enviar la imagen al servidor para realizar el reconocimiento facial
     fetch('/terrarrhh/submit_image', {
         method: 'POST',
@@ -180,19 +184,24 @@ captureButton.addEventListener('click', function() {
     })
     .catch(error => {
         console.error("Error en el reconocimiento facial:", error);
+    })
+    .finally(() => {
+        // Quitar el spinner al finalizar la interacción
+        removeSpinner();
     });
 });
 
 
 
 socket.on('alertas', function(data) {
+    const removeSpinner = spinner(); // Mostrar spinner al inicio de la interacción
     if (data.actualizacion === 'pedido') {
         console.log('pedido')
-        spinner(7000)
+        removeSpinner()
         // location.reload();
     } else if (data.actualizacion === 'registrado'){
         console.log('registrado')
-        spinner(7000)
+        removeSpinner()
     } else if (data.actualizacion === 'nomach'){
         alert('No se encuentra en la base de datos. Contáctese con el administrador')
         // location.reload();
