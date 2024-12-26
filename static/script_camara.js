@@ -155,36 +155,41 @@ captureButton.addEventListener('click', function() {
     .then(async data => {
         console.log('llegue al fetch')
         console.log(data.status)
+        removeSpinner();
         if (data.status === 'success') {
             let dni = data.dni;
             const cuil = data.employeeInfoCompletaBD['cuil'];
             const nombre_completo = data.employeeInfoCompletaBD['nombre_apellido'];
             // Quitar el spinner antes de mostrar el popup
-            removeSpinner();
+            
             const confirmed = await customConfirm(`DNI detectado: ${dni} para ${nombre_completo}\n¿Es correcto?`);
             if (confirmed) {
-                const removeSpinner = spinner(); // Mostrar spinner al inicio de la interacción
+                // Mostrar spinner nuevamente mientras se procesa la confirmación
+                const removeSpinnerConfirm = spinner();
                 socket.emit('confirm_dni_response', { cuil: cuil, dni: null, confirmed: true });
+                removeSpinnerConfirm(); // Quitar el spinner después de la confirmación
             } else {
-                // Quitar el spinner antes de mostrar el popup
-                removeSpinner();
                 const dni = await customPrompt("Por favor, ingrese el DNI manualmente.");
-                const removeSpinner = spinner(); // Mostrar spinner al inicio de la interacción
                 if (dni !== null){
+                    // Mostrar spinner nuevamente mientras se procesa el nuevo DNI
+                    const removeSpinnerManual = spinner();
                     socket.emit('confirm_dni_response', { cuil: null, dni: dni, confirmed: true });
+                    removeSpinnerManual(); // Quitar el spinner después de procesar el DNI manual
                 } else {
                     socket.emit('confirm_dni_response', { cuil: null, dni: 0, confirmed: false })
                 }
             }
         } else if (data.status === 'no_match') {
-            // Quitar el spinner antes de mostrar el popup
-            removeSpinner();
+            // Mostrar popup para ingresar DNI manualmente
             const dni = await customPrompt("Por favor, ingrese el DNI manualmente.");
-            const removeSpinner = spinner(); // Mostrar spinner al inicio de la interacción
-            if (dni !== null){
+
+            if (dni !== null) {
+                // Mostrar spinner nuevamente mientras se procesa el nuevo DNI
+                const removeSpinnerNoMatch = spinner();
                 socket.emit('confirm_dni_response', { cuil: null, dni: dni, confirmed: true });
+                removeSpinnerNoMatch(); // Quitar el spinner después de procesar el DNI manual
             } else {
-                socket.emit('confirm_dni_response', { cuil: null, dni: 0, confirmed: false })
+                socket.emit('confirm_dni_response', { cuil: null, dni: 0, confirmed: false });
             }
 
         }
