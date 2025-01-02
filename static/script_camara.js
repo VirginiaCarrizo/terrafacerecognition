@@ -9,29 +9,33 @@ socket.on('connect', function() {
     socket.emit('mi_evento', {data: 'Hola servidor'});
 });
 
-function spinner(time){
-    const loadingElement = document.createElement('div');
-    loadingElement.id = 'loading';
-    loadingElement.style.position = 'fixed';
-    loadingElement.style.top = '0';
-    loadingElement.style.left = '0';
-    loadingElement.style.width = '100%';
-    loadingElement.style.height = '100%';
-    loadingElement.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
-    loadingElement.style.display = 'flex';
-    loadingElement.style.alignItems = 'center';
-    loadingElement.style.justifyContent = 'center';
-    loadingElement.style.fontSize = '20px';
-    loadingElement.style.zIndex = '9999';
-    loadingElement.textContent = 'Cargando...';
-    
-    document.body.appendChild(loadingElement);
+let activeSpinner = null;
 
-     // Devuelve una función para quitar el spinner
-     return function removeSpinner() {
-        const element = document.getElementById('loading');
-        if (element) {
-            document.body.removeChild(element);
+function spinner(){
+    if (!activeSpinner) {
+        activeSpinner = document.createElement('div');
+        activeSpinner.id = 'loading';
+        activeSpinner.style.position = 'fixed';
+        activeSpinner.style.top = '0';
+        activeSpinner.style.left = '0';
+        activeSpinner.style.width = '100%';
+        activeSpinner.style.height = '100%';
+        activeSpinner.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+        activeSpinner.style.display = 'flex';
+        activeSpinner.style.alignItems = 'center';
+        activeSpinner.style.justifyContent = 'center';
+        activeSpinner.style.fontSize = '20px';
+        activeSpinner.style.zIndex = '9999';
+        activeSpinner.textContent = 'Cargando...';
+
+        document.body.appendChild(activeSpinner);
+    }
+
+    // Devuelve una función para quitar el spinner
+    return function removeSpinner() {
+        if (activeSpinner) {
+            document.body.removeChild(activeSpinner);
+            activeSpinner = null; // Resetear el spinner
         }
     };
 }
@@ -144,7 +148,8 @@ captureButton.addEventListener('click', function() {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     const imageData = canvas.toDataURL('image/png');
     // Mostrar spinner
-    const removeSpinner = spinner();
+    const removeSpinner1 = spinner();
+    console.log('mostrar spinner 1')
     // Enviar la imagen al servidor para realizar el reconocimiento facial
     fetch('/terrarrhh/submit_image', {
         method: 'POST',
@@ -153,28 +158,30 @@ captureButton.addEventListener('click', function() {
     })
     .then(response => response.json())
     .then(async data => {
-        console.log('llegue al fetch')
         console.log(data.status)
-        removeSpinner();
+        removeSpinner1();
+        console.log('remover spinner 1')
         if (data.status === 'success') {
             let dni = data.dni;
             const cuil = data.employeeInfoCompletaBD['cuil'];
-            const nombre_completo = data.employeeInfoCompletaBD['nombre_apellido'];
-            // Quitar el spinner antes de mostrar el popup
-            
+            const nombre_completo = data.employeeInfoCompletaBD['nombre_apellido'];    
             const confirmed = await customConfirm(`DNI detectado: ${dni} para ${nombre_completo}\n¿Es correcto?`);
             if (confirmed) {
                 // Mostrar spinner nuevamente mientras se procesa la confirmación
-                const removeSpinnerConfirm = spinner();
+                const removeSpinner2 = spinner();
+                console.log('mostrar spinner 2')
                 socket.emit('confirm_dni_response', { cuil: cuil, dni: null, confirmed: true });
-                removeSpinnerConfirm(); // Quitar el spinner después de la confirmación
+                removeSpinner2(); // Quitar el spinner después de la confirmación
+                console.log('remover spinner 2')
             } else {
                 const dni = await customPrompt("Por favor, ingrese el DNI manualmente.");
                 if (dni !== null){
                     // Mostrar spinner nuevamente mientras se procesa el nuevo DNI
-                    const removeSpinnerManual = spinner();
+                    const removeSpinner3 = spinner();
+                    console.log('mostrar spinner 3')
                     socket.emit('confirm_dni_response', { cuil: null, dni: dni, confirmed: true });
-                    removeSpinnerManual(); // Quitar el spinner después de procesar el DNI manual
+                    removeSpinner3(); // Quitar el spinner después de procesar el DNI manual
+                    console.log('remover spinner 3')
                 } else {
                     socket.emit('confirm_dni_response', { cuil: null, dni: 0, confirmed: false })
                 }
@@ -182,38 +189,39 @@ captureButton.addEventListener('click', function() {
         } else if (data.status === 'no_match') {
             // Mostrar popup para ingresar DNI manualmente
             const dni = await customPrompt("Por favor, ingrese el DNI manualmente.");
-
+            
             if (dni !== null) {
                 // Mostrar spinner nuevamente mientras se procesa el nuevo DNI
-                const removeSpinnerNoMatch = spinner();
+                const removeSpinner4 = spinner();
+                console.log('mostrar spinner 4')
                 socket.emit('confirm_dni_response', { cuil: null, dni: dni, confirmed: true });
-                removeSpinnerNoMatch(); // Quitar el spinner después de procesar el DNI manual
+                removeSpinner4(); // Quitar el spinner después de procesar el DNI manual
+                console.log('remover spinner 4')
             } else {
                 socket.emit('confirm_dni_response', { cuil: null, dni: 0, confirmed: false });
             }
-
+            
         }
     })
     .catch(error => {
         console.error("Error en el reconocimiento facial:", error);
     })
-    .finally(() => {
-        // Quitar el spinner al finalizar la interacción
-        removeSpinner();
-    });
 });
 
 
 
 socket.on('alertas', function(data) {
-    const removeSpinner2 = spinner(); // Mostrar spinner al inicio de la interacción
+    const removeSpinner5 = spinner(); // Mostrar spinner al inicio de la interacción
+    console.log('mostrar spinner 5')
     if (data.actualizacion === 'pedido') {
         console.log('pedido')
-        removeSpinner2()
+        removeSpinner5()
+        console.log('remover spinner 5')
         // location.reload();
     } else if (data.actualizacion === 'registrado'){
         console.log('registrado')
-        removeSpinner2()
+        removeSpinner5()
+        console.log('remover spinner 5 bis')
     } else if (data.actualizacion === 'nomach'){
         alert('No se encuentra en la base de datos. Contáctese con el administrador')
         // location.reload();
