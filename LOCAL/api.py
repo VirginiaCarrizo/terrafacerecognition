@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bbdd_conection import initialize_firebase  # Configuración de Firebase
-from bbdd import actualizar_bd_dni, actualizar_bd_cuil
+from bbdd import actualizar_bd_dni
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -34,36 +34,6 @@ def on_space_press(event):
         decision_espacio = "Volver"  # SI EL USUARIO APRIETA LA BARRA ESPACIADORA POR SI SE ARREPIENTO DE PEDIR
         keyboard.unhook_all()
 
-def bloquear_controles(driver):
-    """
-    Bloquea el teclado y el botón "capture".
-    """
-    keyboard.block_key('*')  # Bloquea todas las teclas
-    try:
-        button = driver.find_element(By.ID, "capture")
-        driver.execute_script("arguments[0].disabled = true;", button)
-        logging.info("Teclado y botón 'capture' bloqueados.")
-    except Exception as e:
-        logging.warning(f"No se pudo bloquear el botón 'capture': {e}")
-
-def desbloquear_controles(driver):
-    """
-    Desbloquea el teclado y el botón "capture".
-    """
-    keyboard.unblock_key('*')  # Desbloquea todas las teclas
-    try:
-        button = driver.find_element(By.ID, "capture")
-        driver.execute_script("arguments[0].disabled = false;", button)
-        logging.info("Teclado y botón 'capture' desbloqueados.")
-    except Exception as e:
-        logging.warning(f"No se pudo desbloquear el botón 'capture': {e}")
-
-def esta_en_url_camara(driver):
-    """
-    Verifica si la URL actual es la de la cámara.
-    """
-    return driver.current_url == "https://terragene.life/terrarrhh/camara"
-
 def fetch_dni(max_retries=FETCH_DNI_MAX_RETRIES, retry_interval=RETRY_INTERVAL):
     """
     Fetches the DNI from the EC2 server within specified timeouts and retry logic.
@@ -71,8 +41,6 @@ def fetch_dni(max_retries=FETCH_DNI_MAX_RETRIES, retry_interval=RETRY_INTERVAL):
     retries = 0
     while retries < max_retries:
         try:
-    
-
             response = requests.get(EC2_SERVER_URL, timeout=EC2_REQUEST_TIMEOUT)
 
             if response.status_code == 200:
@@ -82,17 +50,13 @@ def fetch_dni(max_retries=FETCH_DNI_MAX_RETRIES, retry_interval=RETRY_INTERVAL):
 
                 if status == 'success':
                     dni = data.get('dni')
-                    print(dni)
                     if dni != 0:
-                
                         return dni
                     else:
                         logging.warning("DNI not found in response.")
                         return None
                 else:
                     logging.info("Status not successful, retrying...")
-            # else:
-            #     logging.warning(f"Server returned status code {response.status_code}, retrying...")
         except requests.exceptions.RequestException as e:
             logging.error(f"Request failed: {e}")
 
@@ -132,7 +96,6 @@ def setup_driver():
         logging.error(f"Failed to initialize WebDriver: {e}")
         raise
 
-
 def login_to_terragene(driver):
     driver.get("https://terragene.life/terrarrhh/camara")
 
@@ -147,7 +110,6 @@ def login_to_terragene(driver):
 
     login_button = driver.find_element(By.CSS_SELECTOR, "button.btn")
     login_button.click()
-
 
 def wait_for_user_capture(driver):
     """
@@ -169,29 +131,71 @@ def wait_for_user_capture(driver):
         else:
             logging.info(f"Fetched DNI: {dni}")
 
-        # Wait for alert to disappear
-
-        WebDriverWait(driver, 10).until_not(EC.alert_is_present())
-
-
         return dni
     except Exception as e:
         logging.error(f"An error occurred during wait_for_user_capture: {e}")
         return None
 
 
+def bloquear_input_eventos(driver):
+    """
+    Bloquea el input interceptando eventos de teclado y pegado.
+    """
+    try:
+        script = """
+        var input = document.querySelector("input[id^='ion-input-']");
+        if (input) {
+            input.addEventListener('keydown', function(event) {
+                event.preventDefault();
+            });
+            input.addEventListener('keypress', function(event) {
+                event.preventDefault();
+            });
+            input.addEventListener('keyup', function(event) {
+                event.preventDefault();
+            });
+            input.addEventListener('paste', function(event) {
+                event.preventDefault();
+            });
+            // Opcional: Cambiar el cursor para indicar que el campo no es editable
+            input.style.cursor = 'not-allowed';
+        }
+        """
+        driver.execute_script(script)
+        logging.info("Input bloqueado mediante interceptación de eventos.")
+    except Exception as e:
+        logging.error(f"No se pudo bloquear el input mediante eventos: {e}")
+
+def set_input_value(driver, selector, value):
+    """
+    Establece el valor del input y dispara eventos para que la página lo reconozca.
+    """
+    try:
+        element = driver.find_element(By.CSS_SELECTOR, selector)
+        driver.execute_script("""
+            arguments[0].value = arguments[1];
+            arguments[0].dispatchEvent(new Event('input', { bubbles: true }));
+            arguments[0].dispatchEvent(new Event('change', { bubbles: true }));
+        """, element, value)
+        logging.info(f"Input establecido a '{value}' mediante JavaScript.")
+    except Exception as e:
+        logging.error(f"Error al establecer el valor del input: {e}")
+
+
 def fill_terragene_in_movizen(driver):
-    bloquear_controles(driver)  # Bloquea controles al inicio
 
     driver.get("https://generalfoodargentina.movizen.com/pwa/")
 
     WebDriverWait(driver, TIMEOUT).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, "input[id^='ion-input-']"))
     )
-
+    bloquear_input_eventos(driver)  # Bloquear la entrada manual
+    
+    set_input_value(driver, "input[id^='ion-input-']", 'terragene')  # Establecer el DNI automáticamente
+    
     ion_input = driver.find_element(By.CSS_SELECTOR, "input[id^='ion-input-']")
     time.sleep(1)
-    ion_input.send_keys("terragene")
+    # ion_input.send_keys("terragene")
     ion_input.send_keys(Keys.ENTER)
     current_url = driver.current_url
     WebDriverWait(driver, TIMEOUT).until(EC.url_changes(current_url))
@@ -204,10 +208,12 @@ def navigate_and_fill_dni(driver, dni):
     driver.get("https://generalfoodargentina.movizen.com/pwa/inicio")
     
     WebDriverWait(driver, TIMEOUT).until(EC.visibility_of_element_located((By.CSS_SELECTOR, "input[id^='ion-input-']")))
+    bloquear_input_eventos(driver)  # Bloquear la entrada manual
     
+    set_input_value(driver, "input[id^='ion-input-']", dni)  # Establecer el DNI automáticamente
+
     ion_input = driver.find_element(By.CSS_SELECTOR, "input[id^='ion-input-']")
-    ion_input.clear()
-    ion_input.send_keys(int(dni))
+    # ion_input.send_keys(int(dni))
     ion_input.send_keys(Keys.ENTER)
 
     inicio = time.time()
@@ -261,9 +267,6 @@ def main_loop():
     navigate_and_fill_dni(driver, dni)
     while True:
         driver.get("https://terragene.life/terrarrhh/camara")
-
-        desbloquear_controles(driver)  # Vuelve a bloquear controles al procesar
-        logging.info('CONTROLES DEEEEEEEEEESBLOQUEADOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS')
         new_dni = wait_for_user_capture(driver)
 
         if not new_dni:

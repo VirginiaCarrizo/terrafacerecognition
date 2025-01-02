@@ -167,13 +167,13 @@ captureButton.addEventListener('click', function() {
             const confirmed = await customConfirm(`DNI detectado: ${dni} para ${nombre_completo}\n¿Es correcto?`);
             if (confirmed) {
                 // Mostrar spinner nuevamente mientras se procesa la confirmación
-                const removeSpinner2 = spinner('Aguarde hasta la selección del menú o impresión del ticket.');
+                const removeSpinner2 = spinner('Procesando los datos. Aguarde...');
                 socket.emit('confirm_dni_response', { cuil: cuil, dni: null, confirmed: true });
             } else {
                 const dni = await customPrompt("Por favor, ingrese el DNI manualmente.");
                 if (dni !== null){
                     // Mostrar spinner nuevamente mientras se procesa el nuevo DNI
-                    const removeSpinner3 = spinner('Aguarde hasta la selección del menú o impresión del ticket.');
+                    const removeSpinner3 = spinner('Procesando los datos. Aguarde...');
                     socket.emit('confirm_dni_response', { cuil: null, dni: dni, confirmed: true });
                 } else {
                     socket.emit('confirm_dni_response', { cuil: null, dni: 0, confirmed: false })
@@ -185,7 +185,7 @@ captureButton.addEventListener('click', function() {
             
             if (dni !== null) {
                 // Mostrar spinner nuevamente mientras se procesa el nuevo DNI
-                const removeSpinner4 = spinner('Aguarde hasta la selección del menú o impresión del ticket.');
+                const removeSpinner4 = spinner('Procesando los datos. Aguarde...');
                 socket.emit('confirm_dni_response', { cuil: null, dni: dni, confirmed: true });
             } else {
                 socket.emit('confirm_dni_response', { cuil: null, dni: 0, confirmed: false });
