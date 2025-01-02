@@ -152,7 +152,6 @@ captureButton.addEventListener('click', function() {
     const imageData = canvas.toDataURL('image/png');
     // Mostrar spinner
     const removeSpinner1 = spinner();
-    console.log('mostrar spinner 1')
     // Enviar la imagen al servidor para realizar el reconocimiento facial
     fetch('/terrarrhh/submit_image', {
         method: 'POST',
@@ -162,8 +161,7 @@ captureButton.addEventListener('click', function() {
     .then(response => response.json())
     .then(async data => {
         console.log(data.status)
-        removeSpinner1();
-        console.log('remover spinner 1')
+        removeSpinner1(); // Ocultar spinner
         if (data.status === 'success') {
             let dni = data.dni;
             const cuil = data.employeeInfoCompletaBD['cuil'];
@@ -172,19 +170,13 @@ captureButton.addEventListener('click', function() {
             if (confirmed) {
                 // Mostrar spinner nuevamente mientras se procesa la confirmación
                 const removeSpinner2 = spinner();
-                console.log('mostrar spinner 2')
                 socket.emit('confirm_dni_response', { cuil: cuil, dni: null, confirmed: true });
-                // removeSpinner2(); // Quitar el spinner después de la confirmación
-                // console.log('remover spinner 2')
             } else {
                 const dni = await customPrompt("Por favor, ingrese el DNI manualmente.");
                 if (dni !== null){
                     // Mostrar spinner nuevamente mientras se procesa el nuevo DNI
                     const removeSpinner3 = spinner();
-                    console.log('mostrar spinner 3')
                     socket.emit('confirm_dni_response', { cuil: null, dni: dni, confirmed: true });
-                    removeSpinner3(); // Quitar el spinner después de procesar el DNI manual
-                    console.log('remover spinner 3')
                 } else {
                     socket.emit('confirm_dni_response', { cuil: null, dni: 0, confirmed: false })
                 }
@@ -196,10 +188,7 @@ captureButton.addEventListener('click', function() {
             if (dni !== null) {
                 // Mostrar spinner nuevamente mientras se procesa el nuevo DNI
                 const removeSpinner4 = spinner();
-                console.log('mostrar spinner 4')
                 socket.emit('confirm_dni_response', { cuil: null, dni: dni, confirmed: true });
-                removeSpinner4(); // Quitar el spinner después de procesar el DNI manual
-                console.log('remover spinner 4')
             } else {
                 socket.emit('confirm_dni_response', { cuil: null, dni: 0, confirmed: false });
             }
