@@ -18,6 +18,7 @@ def configure_socketio_events(socketio, db, bucket):
 
     @socketio.on('confirm_dni_response')
     def confirm_dni_response(data):
+        logging.info("HOLA DESDE CONFIRM_DNI_RESPONSEEEEEEEEEEEEEEEEEEE")
         confirmed = data['confirmed']
         cuil = data['cuil']
         dni = data['dni']
