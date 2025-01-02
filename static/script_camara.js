@@ -9,38 +9,36 @@ socket.on('connect', function() {
     socket.emit('mi_evento', {data: 'Hola servidor'});
 });
 
-let activeSpinner = null;
 let spinnerCounter = 0;
 
 function spinner(){
     spinnerCounter++;
-    console.log('entre a spinner')
     const spinnerId = `loading-${spinnerCounter}`;
-    if (!activeSpinner) {
-        console.log('entre a activeSpinner')
-        activeSpinner = document.createElement('div');
-        activeSpinner.id = spinnerId;
-        activeSpinner.style.position = 'fixed';
-        activeSpinner.style.top = '0';
-        activeSpinner.style.left = '0';
-        activeSpinner.style.width = '100%';
-        activeSpinner.style.height = '100%';
-        activeSpinner.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
-        activeSpinner.style.display = 'flex';
-        activeSpinner.style.alignItems = 'center';
-        activeSpinner.style.justifyContent = 'center';
-        activeSpinner.style.fontSize = '20px';
-        activeSpinner.style.zIndex = '9999';
-        activeSpinner.textContent = 'Cargando...';
+    console.log('entre a spinner', spinnerId);
 
-        document.body.appendChild(activeSpinner);
-    }
+    activeSpinner = document.createElement('div');
+    activeSpinner.id = spinnerId;
+    activeSpinner.style.position = 'fixed';
+    activeSpinner.style.top = '0';
+    activeSpinner.style.left = '0';
+    activeSpinner.style.width = '100%';
+    activeSpinner.style.height = '100%';
+    activeSpinner.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+    activeSpinner.style.display = 'flex';
+    activeSpinner.style.alignItems = 'center';
+    activeSpinner.style.justifyContent = 'center';
+    activeSpinner.style.fontSize = '20px';
+    activeSpinner.style.zIndex = '9999';
+    activeSpinner.textContent = 'Cargando...';
+
+    document.body.appendChild(activeSpinner);
 
     // Devuelve una función para quitar el spinner
     return function removeSpinner() {
-        if (activeSpinner) {
-            document.body.removeChild(activeSpinner);
-            activeSpinner = null; // Resetear el spinner
+        const element = document.getElementById(spinnerId);
+        if (element) {
+            document.body.removeChild(element);
+            console.log('removiendo spinner', spinnerId);
         }
     };
 }
