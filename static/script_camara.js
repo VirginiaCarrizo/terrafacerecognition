@@ -20,18 +20,18 @@ function spinner(){
         console.log('entre a activeSpinner')
         activeSpinner = document.createElement('div');
         activeSpinner.id = spinnerId;
-        loadingElement.style.position = 'fixed';
-        loadingElement.style.top = '0';
-        loadingElement.style.left = '0';
-        loadingElement.style.width = '100%';
-        loadingElement.style.height = '100%';
-        loadingElement.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
-        loadingElement.style.display = 'flex';
-        loadingElement.style.alignItems = 'center';
-        loadingElement.style.justifyContent = 'center';
-        loadingElement.style.fontSize = '20px';
-        loadingElement.style.zIndex = '9999';
-        loadingElement.textContent = 'Cargando...';
+        activeSpinner.style.position = 'fixed';
+        activeSpinner.style.top = '0';
+        activeSpinner.style.left = '0';
+        activeSpinner.style.width = '100%';
+        activeSpinner.style.height = '100%';
+        activeSpinner.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+        activeSpinner.style.display = 'flex';
+        activeSpinner.style.alignItems = 'center';
+        activeSpinner.style.justifyContent = 'center';
+        activeSpinner.style.fontSize = '20px';
+        activeSpinner.style.zIndex = '9999';
+        activeSpinner.textContent = 'Cargando...';
 
         document.body.appendChild(activeSpinner);
     }
