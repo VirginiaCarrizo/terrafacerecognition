@@ -26,20 +26,19 @@ def configure_socketio_events(socketio, db, bucket):
                 macht = buscar_empleados(cuil, db, bucket)
                 if macht:
                     update_global_dni(str(cuil)[2:-1])
-                    logging.info('HOLA DESDE ABAJO DE UPDATE!!!!!!!!!!!!!!!!!')
-                    emit('alertas', {'status': 'success', 'actualizacion': 'registrado'})
+                    # emit('alertas', {'status': 'success', 'actualizacion': 'registrado'})
                 else:
                     update_global_dni(0)
-                    emit('alertas', {'status': 'denied', 'actualizacion': 'nomacht'})
+                    # emit('alertas', {'status': 'denied', 'actualizacion': 'nomacht'})
             else:
                 macht = buscar_empleados(dni, db, bucket)
                 if macht:
                     update_global_dni(dni)
-                    emit('alertas', {'status': 'success', 'actualizacion': 'registrado'})
+                    # emit('alertas', {'status': 'success', 'actualizacion': 'registrado'})
                 else:
                     update_global_dni(0)
-                    emit('alertas', {'status': 'denied', 'actualizacion': 'nomacht'})
+                    # emit('alertas', {'status': 'denied', 'actualizacion': 'nomacht'})
         else:
             update_global_dni(0)
-            emit('alertas', {'status': 'denied', 'actualizacion': 'noconfirm'})
+            # emit('alertas', {'status': 'denied', 'actualizacion': 'noconfirm'})
 

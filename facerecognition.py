@@ -21,6 +21,7 @@ def update_global_dni(new_dni):
     """
     global global_dni
     with global_dni_lock:  # Asegura que solo un hilo pueda modificar la variable a la vez
+        logging.info('HOLA DESDE DENTRO DEL WITHHHHHHHHHHHHHHHHH')
         global_dni = new_dni
 
 
