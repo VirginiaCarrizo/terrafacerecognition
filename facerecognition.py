@@ -21,7 +21,6 @@ def update_global_dni(new_dni):
     """
     global global_dni
     with global_dni_lock:  # Asegura que solo un hilo pueda modificar la variable a la vez
-        logging.info('HOLA DESDE DENTRO DEL WITHHHHHHHHHHHHHHHHH')
         global_dni = new_dni
 
 
@@ -84,9 +83,10 @@ def facerec(db, socketio):
 # FUNCION QUE ENVIA EL DNI AL SCRIPT LOCAL   
 def submit_dni(dni_lock):
     new_dni = get_global_dni()
-
+    logging.info('HOLA DESDE DENTRO DEL submit_dni')
     try:
         with dni_lock:
+            logging.info('HOLA DESDE DENTRO DEL WITHHHHHHHH')
             if new_dni==0: 
                 return 0
             # Retrieve the first DNI in the list
