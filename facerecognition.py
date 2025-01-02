@@ -83,10 +83,8 @@ def facerec(db, socketio):
 # FUNCION QUE ENVIA EL DNI AL SCRIPT LOCAL   
 def submit_dni(dni_lock):
     new_dni = get_global_dni()
-    logging.info('HOLA DESDE DENTRO DEL submit_dni')
     try:
         with dni_lock:
-            logging.info('HOLA DESDE DENTRO DEL WITHHHHHHHH')
             if new_dni==0: 
                 return 0
             # Retrieve the first DNI in the list

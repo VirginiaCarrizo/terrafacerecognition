@@ -71,9 +71,9 @@ def configure_routes(app, socketio, db, bucket):
         logging.info(f'global_dni: {dni_global}')
         while old_dni != dni_global:
             dni = submit_dni(dni_lock)
-            logging.info(f'dni desde get dni: {dni}')
             old_dni = dni_global
             return jsonify({"status": "success", "dni": dni}), 200
+        old_dni = dni_global
         return jsonify({"status": "no_change", "dni": None}), 200
         
 
