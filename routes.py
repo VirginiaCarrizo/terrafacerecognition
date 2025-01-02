@@ -72,6 +72,7 @@ def configure_routes(app, socketio, db, bucket):
             logging.info(f'dni desde get dni: {dni}')
             old_dni = global_dni
             return jsonify({"status": "success", "dni": dni}), 200
+        return jsonify({"status": "no_change", "dni": None}), 200
         
 
     # ENDOPOINTS PARA INTERACTUAR CON LA BASE DE DATOS FIREBASE
