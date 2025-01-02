@@ -174,8 +174,8 @@ captureButton.addEventListener('click', function() {
                 const removeSpinner2 = spinner();
                 console.log('mostrar spinner 2')
                 socket.emit('confirm_dni_response', { cuil: cuil, dni: null, confirmed: true });
-                removeSpinner2(); // Quitar el spinner después de la confirmación
-                console.log('remover spinner 2')
+                // removeSpinner2(); // Quitar el spinner después de la confirmación
+                // console.log('remover spinner 2')
             } else {
                 const dni = await customPrompt("Por favor, ingrese el DNI manualmente.");
                 if (dni !== null){
