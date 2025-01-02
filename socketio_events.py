@@ -18,7 +18,6 @@ def configure_socketio_events(socketio, db, bucket):
 
     @socketio.on('confirm_dni_response')
     def confirm_dni_response(data):
-        logging.info("HOLA DESDE CONFIRM_DNI_RESPONSEEEEEEEEEEEEEEEEEEE")
         confirmed = data['confirmed']
         cuil = data['cuil']
         dni = data['dni']
@@ -27,6 +26,7 @@ def configure_socketio_events(socketio, db, bucket):
                 macht = buscar_empleados(cuil, db, bucket)
                 if macht:
                     update_global_dni(str(cuil)[2:-1])
+                    logging.info('HOLA DESDE ABAJO DE UPDATE!!!!!!!!!!!!!!!!!')
                     emit('alertas', {'status': 'success', 'actualizacion': 'registrado'})
                 else:
                     update_global_dni(0)
