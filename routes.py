@@ -6,6 +6,7 @@ from base_de_datos.bbdd import agregar_empleado, buscar_empleados, modificar_emp
 from facerecognition import facerec, submit_dni
 import logging
 from threading import Lock
+from globals import global_dni
 import time
 
 # Configuración básica para el logger
@@ -14,6 +15,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(me
 routes = Blueprint('routes', __name__)  # Crear un Blueprint para las rutas
 
 dni_lock = Lock()
+old_dni = 0
 
 cuil_value=''
 # DECORADOR PARA VERIFICAR LOS ROLES
@@ -64,10 +66,12 @@ def configure_routes(app, socketio, db, bucket):
     # ENDPOINT PARA EL SCRIPT LOCAL
     @routes.route('/get_dni', methods=['GET'])
     def get_dni():
-        time.sleep(8)
-        dni = submit_dni(dni_lock)
-        logging.info(f'dni desde get dni: {dni}')
-        return jsonify({"status": "success", "dni": dni}), 200
+        global old_dni
+        while old_dni != global_dni:
+            dni = submit_dni(dni_lock)
+            logging.info(f'dni desde get dni: {dni}')
+            old_dni = global_dni
+            return jsonify({"status": "success", "dni": dni}), 200
         
 
     # ENDOPOINTS PARA INTERACTUAR CON LA BASE DE DATOS FIREBASE
