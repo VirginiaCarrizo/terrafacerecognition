@@ -214,17 +214,17 @@ captureButton.addEventListener('click', function() {
 
 
 socket.on('alertas', function(data) {
-    const removeSpinner5 = spinner(); // Mostrar spinner al inicio de la interacción
-    console.log('mostrar spinner 5')
+    // const removeSpinner5 = spinner(); // Mostrar spinner al inicio de la interacción
+    // console.log('mostrar spinner 5')
     if (data.actualizacion === 'pedido') {
         console.log('pedido')
-        removeSpinner5()
-        console.log('remover spinner 5')
+        // removeSpinner5()
+        // console.log('remover spinner 5')
         // location.reload();
     } else if (data.actualizacion === 'registrado'){
         console.log('registrado')
-        removeSpinner5()
-        console.log('remover spinner 5 bis')
+        // removeSpinner5()
+        // console.log('remover spinner 5 bis')
     } else if (data.actualizacion === 'nomach'){
         alert('No se encuentra en la base de datos. Contáctese con el administrador')
         // location.reload();
