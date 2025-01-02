@@ -3,10 +3,9 @@ from flask_login import login_required, current_user
 from functools import wraps
 from user import users
 from base_de_datos.bbdd import agregar_empleado, buscar_empleados, modificar_empleado, eliminar_empleado
-from facerecognition import facerec, submit_dni
+from facerecognition import facerec, submit_dni, get_global_dni
 import logging
 from threading import Lock
-from globals import global_dni
 import time
 
 # Configuración básica para el logger
@@ -67,10 +66,13 @@ def configure_routes(app, socketio, db, bucket):
     @routes.route('/get_dni', methods=['GET'])
     def get_dni():
         global old_dni
-        while old_dni != global_dni:
+        dni_global = get_global_dni()
+        logging.info(f'old_dni: {old_dni}')
+        logging.info(f'global_dni: {dni_global}')
+        while old_dni != dni_global:
             dni = submit_dni(dni_lock)
             logging.info(f'dni desde get dni: {dni}')
-            old_dni = global_dni
+            old_dni = dni_global
             return jsonify({"status": "success", "dni": dni}), 200
         return jsonify({"status": "no_change", "dni": None}), 200
         
