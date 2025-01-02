@@ -34,6 +34,35 @@ def on_space_press(event):
         decision_espacio = "Volver"  # SI EL USUARIO APRIETA LA BARRA ESPACIADORA POR SI SE ARREPIENTO DE PEDIR
         keyboard.unhook_all()
 
+def bloquear_controles(driver):
+    """
+    Bloquea el teclado y el botón "capture".
+    """
+    keyboard.block_key('*')  # Bloquea todas las teclas
+    try:
+        button = driver.find_element(By.ID, "capture")
+        driver.execute_script("arguments[0].disabled = true;", button)
+        logging.info("Teclado y botón 'capture' bloqueados.")
+    except Exception as e:
+        logging.warning(f"No se pudo bloquear el botón 'capture': {e}")
+
+def desbloquear_controles(driver):
+    """
+    Desbloquea el teclado y el botón "capture".
+    """
+    keyboard.unblock_key('*')  # Desbloquea todas las teclas
+    try:
+        button = driver.find_element(By.ID, "capture")
+        driver.execute_script("arguments[0].disabled = false;", button)
+        logging.info("Teclado y botón 'capture' desbloqueados.")
+    except Exception as e:
+        logging.warning(f"No se pudo desbloquear el botón 'capture': {e}")
+
+def esta_en_url_camara(driver):
+    """
+    Verifica si la URL actual es la de la cámara.
+    """
+    return driver.current_url == "https://terragene.life/terrarrhh/camara"
 
 def fetch_dni(max_retries=FETCH_DNI_MAX_RETRIES, retry_interval=RETRY_INTERVAL):
     """
@@ -129,19 +158,12 @@ def wait_for_user_capture(driver):
     try:
         # Webdriver espera a que aparezca el alert
         WebDriverWait(driver, timeout=30).until(lambda d: d.find_element(By.ID, "custom-confirm").is_displayed() or d.find_element(By.ID, "custom-prompt").is_displayed())
-        
-        # Bloquear ratón
-        button = driver.find_element(By.ID, "capture")
-        driver.execute_script("arguments[0].disabled = true;", button)
 
         # Webdriver espera a que desaparezca el alert
         WebDriverWait(driver, timeout=9999999).until(lambda d: EC.invisibility_of_element((By.ID, "custom-confirm"))(d) and EC.invisibility_of_element((By.ID, "custom-prompt"))(d))
-        keyboard.block_key('*')  # Bloquea todas las teclas
-        logging.info("Teclado y ratón bloqueados.")
 
         dni = fetch_dni()
-        
-        print(dni)
+
         if not dni:
             logging.warning("DNI could not be fetched or was empty.")
         else:
@@ -159,6 +181,8 @@ def wait_for_user_capture(driver):
 
 
 def fill_terragene_in_movizen(driver):
+    bloquear_controles(driver)  # Bloquea controles al inicio
+
     driver.get("https://generalfoodargentina.movizen.com/pwa/")
 
     WebDriverWait(driver, TIMEOUT).until(
@@ -210,7 +234,7 @@ def navigate_and_fill_dni(driver, dni):
 
             WebDriverWait(driver, 99999).until(EC.url_changes('https://generalfoodargentina.movizen.com/pwa/pedido-pc'))
             driver.execute_script("window.open('about:blank', '_blank');")
-            time.sleep(1)
+            time.sleep(2)
             driver.close()
 
             driver.switch_to.window(driver.window_handles[-1])
@@ -218,17 +242,12 @@ def navigate_and_fill_dni(driver, dni):
             new_url = "https://generalfoodargentina.movizen.com/pwa/pedido-web-print"
             driver.get(new_url)
 
-            logging.info(dni)
-            logging.info(len(dni))
-
             actualizar_bd_dni(db, int(dni))
-
             time.sleep(4)
        
             break
 
 def main_loop():
-    global raton_listener
     driver = setup_driver()
     login_to_terragene(driver)
     while True:
@@ -243,19 +262,15 @@ def main_loop():
     while True:
         driver.get("https://terragene.life/terrarrhh/camara")
 
+        desbloquear_controles(driver)  # Vuelve a bloquear controles al procesar
+        logging.info('CONTROLES DEEEEEEEEEESBLOQUEADOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS')
         new_dni = wait_for_user_capture(driver)
+
         if not new_dni:
             logging.error("No DNI retrieved in loop. Will wait and retry.")
             time.sleep(RETRY_INTERVAL)
             continue
-
         navigate_and_fill_dni(driver, new_dni)
-        # Desbloquear teclado y ratón al salir
-        keyboard.unblock_key('*')  # Desbloquea todas las teclas
-        # Desbloquear ratón
-        button = driver.find_element(By.ID, "capture")
-        driver.execute_script("arguments[0].disabled = false;", button)
-        logging.info("Teclado y ratón desbloqueados.")
 
 
 if __name__ == "__main__":
