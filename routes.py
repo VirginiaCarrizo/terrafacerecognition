@@ -73,6 +73,7 @@ def configure_routes(app, socketio, db, bucket):
             dni = submit_dni(dni_lock)
             old_dni = dni_global
             return jsonify({"status": "success", "dni": dni}), 200
+        dni_global = 0
         old_dni = dni_global
         return jsonify({"status": "no_change", "dni": None}), 200
         
