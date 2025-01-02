@@ -12,7 +12,9 @@ socket.on('connect', function() {
 let activeSpinner = null;
 
 function spinner(){
+    console.log('entre a spinner')
     if (!activeSpinner) {
+        console.log('entre a activeSpinner')
         activeSpinner = document.createElement('div');
         activeSpinner.id = 'loading';
         activeSpinner.style.position = 'fixed';
